@@ -1,9 +1,11 @@
 import type { APIRoute } from "astro";
-import { render } from "@react-email/render";
+import {
+  renderContactAutoReplyEmail,
+  renderContactInquiryEmail,
+} from "@hotelreynard/email";
 import { Resend } from "resend";
 
-import ContactAutoReply from "../../emails/ContactAutoReply";
-import ContactInquiryEmail from "../../emails/ContactInquiryEmail";
+import { getEmailTemplateByKey } from "../../utils/sanity";
 
 const resendApiKey = import.meta.env.RESEND_API_KEY;
 const resendAudienceId = import.meta.env.RESEND_AUDIENCE_ID;
@@ -54,6 +56,19 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const resend = new Resend(resendApiKey);
+    const [internalTemplate, autoReplyTemplate] = await Promise.all([
+      getEmailTemplateByKey("contact-internal-inquiry"),
+      getEmailTemplateByKey("contact-auto-reply"),
+    ]);
+    const tokens = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      contactReason,
+      message,
+      hotelName: "Hotel Reynard",
+    };
 
     if (resendAudienceId) {
       const contactResult = await resend.contacts.create({
@@ -69,37 +84,24 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    const inquiryHtml = await render(
-      ContactInquiryEmail({
-        firstName,
-        lastName,
-        email,
-        phone,
-        contactReason,
-        message,
-      })
-    );
-
-    const autoReplyHtml = await render(
-      ContactAutoReply({
-        firstName,
-        contactReason,
-      })
-    );
+    const [inquiryEmail, autoReplyEmail] = await Promise.all([
+      renderContactInquiryEmail(internalTemplate, tokens),
+      renderContactAutoReplyEmail(autoReplyTemplate, tokens),
+    ]);
 
     const [inquiryResult, autoReplyResult] = await Promise.all([
       resend.emails.send({
         from: fromEmail,
         to: contactToEmail,
         replyTo: email,
-        subject: `Hotel Reynard inquiry: ${contactReason}`,
-        html: inquiryHtml,
+        subject: inquiryEmail.subject,
+        html: inquiryEmail.html,
       }),
       resend.emails.send({
         from: fromEmail,
         to: email,
-        subject: "We received your Hotel Reynard inquiry",
-        html: autoReplyHtml,
+        subject: autoReplyEmail.subject,
+        html: autoReplyEmail.html,
       }),
     ]);
 

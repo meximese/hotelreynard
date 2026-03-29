@@ -2,6 +2,7 @@ import { sanityClient } from "sanity:client";
 import type { PortableTextBlock } from "@portabletext/types";
 import type { Image, Slug } from "@sanity/types";
 import groq from "groq";
+import type { EmailTemplateContent, ManagedEmailTemplateKey } from "@hotelreynard/email";
 
 export async function getRooms(): Promise<Room[]> {
   return sanityClient.fetch(
@@ -72,6 +73,23 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
       body
     }`,
     { slug }
+  );
+}
+
+export async function getEmailTemplateByKey(
+  key: ManagedEmailTemplateKey,
+): Promise<EmailTemplateContent | null> {
+  return sanityClient.fetch(
+    groq`*[_type == "emailTemplate" && key == $key] | order(_updatedAt desc)[0] {
+      key,
+      "title": emailTitle,
+      subject,
+      previewText,
+      intro,
+      body,
+      outro
+    }`,
+    { key }
   );
 }
 

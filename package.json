@@ -18,7 +18,8 @@
   "homepage": "https://github.com/sanity-io/sanity-template-astro-clean#readme",
   "workspaces": [
     "studio",
-    "web"
+    "web",
+    "packages/*"
   ],
   "devDependencies": {
     "concurrently": "^9.2.1"

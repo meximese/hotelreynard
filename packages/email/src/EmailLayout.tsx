@@ -46,11 +46,6 @@ const styles = {
     lineHeight: "1.7",
     margin: "0 0 18px",
   },
-  text: {
-    fontSize: "15px",
-    lineHeight: "1.7",
-    margin: "0 0 14px",
-  },
   outro: {
     color: "#5e513f",
     fontSize: "13px",
@@ -59,7 +54,7 @@ const styles = {
   },
 };
 
-export default function EmailLayout({
+export function EmailLayout({
   previewText,
   title,
   intro,
@@ -75,7 +70,7 @@ export default function EmailLayout({
           <Section style={styles.card}>
             <Text style={styles.title}>{title}</Text>
             {intro ? <Text style={styles.intro}>{intro}</Text> : null}
-            <Section style={styles.text}>{children}</Section>
+            <Section>{children}</Section>
             {outro ? <Text style={styles.outro}>{outro}</Text> : null}
           </Section>
         </Container>
