@@ -5,9 +5,11 @@ import Layout from "../../layouts/Layout.astro";
 import RichTextSection from "../../components/RichTextSection.astro";
 import { urlFor } from "../../utils/image";
 import { getRoom } from "../../utils/sanity";
+import { getPreviewModeEnabled } from "../../utils/previewMode";
 
 const { slug } = Astro.params;
-const room = slug ? await getRoom(slug) : null;
+const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
+const room = slug ? await getRoom(slug, { visualEditingEnabled }) : null;
 
 if (!room) {
   return Astro.redirect("/");

@@ -8,11 +8,13 @@ import OfferCard from "../components/OfferCard.astro";
 import RichTextSection from "../components/RichTextSection.astro";
 import RoomCard from "../components/RoomCard.astro";
 import { getOffers, getPageBySlug, getRooms } from "../utils/sanity";
+import { getPreviewModeEnabled } from "../utils/previewMode";
 
+const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
 const [page, rooms, offers] = await Promise.all([
-  getPageBySlug("home"),
-  getRooms(),
-  getOffers(),
+  getPageBySlug("home", { visualEditingEnabled }),
+  getRooms({ visualEditingEnabled }),
+  getOffers({ visualEditingEnabled }),
 ]);
 ---
 
@@ -30,7 +32,7 @@ const [page, rooms, offers] = await Promise.all([
         <a class="button-link button-link--ghost" href="#rooms">Browse rooms</a>
       </div>
     </article>
-    <MewsWidgetButton />
+    <MewsWidgetButton enabled={!visualEditingEnabled} />
   </section>
 
   {page?.body?.length ? <RichTextSection title="From the journal" value={page.body} /> : null}

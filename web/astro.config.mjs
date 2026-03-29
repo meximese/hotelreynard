@@ -7,6 +7,7 @@ const {
   PUBLIC_SANITY_PROJECT_ID,
   PUBLIC_SANITY_DATASET,
   PUBLIC_SANITY_API_VERSION,
+  PUBLIC_SANITY_STUDIO_URL,
   PUBLIC_SANITY_USE_CDN,
 } = loadEnv(import.meta.env.MODE, process.cwd(), "");
 import { defineConfig } from "astro/config";
@@ -16,6 +17,7 @@ const projectId = PUBLIC_SANITY_STUDIO_PROJECT_ID || PUBLIC_SANITY_PROJECT_ID;
 const dataset = PUBLIC_SANITY_STUDIO_DATASET || PUBLIC_SANITY_DATASET;
 const apiVersion = PUBLIC_SANITY_API_VERSION || "2025-12-01";
 const useCdn = PUBLIC_SANITY_USE_CDN === "true";
+const studioUrl = PUBLIC_SANITY_STUDIO_URL || "http://localhost:3333";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
@@ -28,6 +30,25 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
   // Hybrid+adapter is required to support embedded Sanity Studio
   output: "hybrid",
+  vite: {
+    resolve: {
+      alias: [
+        // Sanity Visual Editing currently pulls `react/compiler-runtime` in a way
+        // that doesn't hydrate cleanly in Vite dev for this app. Pointing it at
+        // `react-compiler-runtime` gives the ESM export shape Sanity expects.
+        {
+          find: "react/compiler-runtime",
+          replacement: "react-compiler-runtime",
+        },
+        // Some Sanity runtime packages default-import lodash subpath modules.
+        // Redirect those to lodash-es so Vite can consume them as ESM in dev.
+        {
+          find: /^lodash\/(.*)\.js$/,
+          replacement: "lodash-es/$1.js",
+        },
+      ],
+    },
+  },
   adapter: vercel({
     runtime: "nodejs20.x",
   }),
@@ -35,10 +56,11 @@ export default defineConfig({
     sanity({
       projectId,
       dataset,
-      // studioBasePath: "/admin",
+      stega: {
+        studioUrl,
+      },
       useCdn: useCdn,
-      // `false` if you want to ensure fresh data
-      apiVersion: apiVersion, // Set to date of setup to use the latest API version
+      apiVersion,
     }),
     react(), // Required for Sanity Studio
   ],

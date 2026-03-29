@@ -5,14 +5,16 @@ import { PortableText } from "astro-portabletext";
 
 import Layout from "../layouts/Layout.astro";
 import { getPageBySlug } from "../utils/sanity";
+import { getPreviewModeEnabled } from "../utils/previewMode";
 
 const { slug } = Astro.params;
+const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
 
 if (!slug || slug === "rooms" || slug === "api") {
   throw new Error("Unsupported page slug.");
 }
 
-const page = await getPageBySlug(slug);
+const page = await getPageBySlug(slug, { visualEditingEnabled });
 
 if (!page) {
   return Astro.redirect("/");

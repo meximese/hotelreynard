@@ -7,7 +7,9 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "preview:dev": "email dev --dir src/previews --port 3040",
+    "preview:build": "tsc --project tsconfig.preview.json && node --experimental-specifier-resolution=node .preview-build/scripts/render-previews.js"
   },
   "dependencies": {
     "@portabletext/types": "^2.0.15",
@@ -17,8 +19,10 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@react-email/preview-server": "^5.2.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "react-email": "^5.2.5",
     "typescript": "^5.9.3"
   }
 }

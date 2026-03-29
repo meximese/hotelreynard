@@ -3,9 +3,9 @@ import { Hr, Text } from "@react-email/components";
 import { render } from "@react-email/render";
 import type { PortableTextBlock } from "@portabletext/types";
 
-import { EmailLayout } from "./EmailLayout";
-import { PortableTextEmail } from "./PortableTextEmail";
-import type { ContactEmailTokens, EmailTemplateContent, ManagedEmailTemplateKey } from "./types";
+import { EmailLayout } from "./EmailLayout.js";
+import { PortableTextEmail } from "./PortableTextEmail.js";
+import type { ContactEmailTokens, EmailTemplateContent, ManagedEmailTemplateKey } from "./types.js";
 
 const hotelName = "Hotel Reynard";
 
