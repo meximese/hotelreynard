@@ -1,0 +1,30 @@
+---
+import { urlFor } from "../utils/image";
+import type { Offer } from "../utils/sanity";
+
+interface Props {
+  offer: Offer;
+}
+
+const { offer } = Astro.props;
+---
+
+<article class="content-card content-card--compact">
+  {
+    offer.heroImage ? (
+      <img
+        alt={offer.heroImage.alt || offer.title}
+        class="content-card__image"
+        src={urlFor(offer.heroImage).width(960).height(720).url()}
+      />
+    ) : (
+      <div class="content-card__image content-card__image--empty"></div>
+    )
+  }
+  <div class="content-card__body">
+    <p class="content-card__eyebrow">Offer</p>
+    <h3>{offer.title}</h3>
+    {offer.description ? <p>{offer.description}</p> : null}
+    {offer.bookingCode ? <p class="content-card__meta">Booking code: {offer.bookingCode}</p> : null}
+  </div>
+</article>

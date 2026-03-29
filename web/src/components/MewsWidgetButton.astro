@@ -1,0 +1,107 @@
+---
+const configurationId = import.meta.env.PUBLIC_MEWS_CONFIGURATION_ID ?? "";
+const apiUrl = import.meta.env.PUBLIC_MEWS_API_URL ?? "https://api.mews-demo.com";
+const languageCode = import.meta.env.PUBLIC_MEWS_LANGUAGE_CODE ?? "en-US";
+const currencyCode = import.meta.env.PUBLIC_MEWS_CURRENCY_CODE ?? "USD";
+const enabled = Boolean(configurationId);
+---
+
+<div class="booking-widget">
+  <button
+    class="booking-widget__button"
+    data-mews-api-url={apiUrl}
+    data-mews-configuration-id={configurationId}
+    data-mews-currency-code={currencyCode}
+    data-mews-language-code={languageCode}
+    disabled={!enabled}
+    id="mews-widget-trigger"
+    type="button"
+  >
+    {enabled ? "Open Mews booking widget" : "Set PUBLIC_MEWS_CONFIGURATION_ID to enable booking"}
+  </button>
+  <p class="booking-widget__status" id="mews-widget-status">
+    {enabled ? "Live availability and checkout stay in Mews." : "Widget is not configured yet."}
+  </p>
+</div>
+
+<script>
+  interface MewsDistributorApi {
+    open: () => void;
+    setCurrencyCode: (currencyCode: string) => void;
+    setLanguageCode: (languageCode: string) => void;
+  }
+
+  interface MewsDistributorOptions {
+    configurationIds: string[];
+  }
+
+  interface MewsDistributorRuntimeOptions {
+    dataBaseUrl?: string;
+  }
+
+  interface WindowWithMews extends Window {
+    Mews?: {
+      Distributor: (
+        options: MewsDistributorOptions,
+        callback: (api: MewsDistributorApi) => void,
+        runtimeOptions?: MewsDistributorRuntimeOptions
+      ) => void;
+    };
+  }
+
+  const trigger = document.querySelector<HTMLButtonElement>("#mews-widget-trigger");
+  const status = document.querySelector<HTMLParagraphElement>("#mews-widget-status");
+
+  const setStatus = (message: string) => {
+    if (status) {
+      status.textContent = message;
+    }
+  };
+
+  const initializeWidget = () => {
+    if (!(trigger instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const configurationId = trigger.dataset.mewsConfigurationId;
+    const apiUrl = trigger.dataset.mewsApiUrl;
+    const languageCode = trigger.dataset.mewsLanguageCode;
+    const currencyCode = trigger.dataset.mewsCurrencyCode;
+
+    if (!configurationId) {
+      trigger.disabled = true;
+      return;
+    }
+
+    const distributor = (window as WindowWithMews).Mews?.Distributor;
+
+    if (!distributor) {
+      setStatus("Mews widget script is still loading.");
+      return;
+    }
+
+    distributor(
+      { configurationIds: [configurationId] },
+      (api: MewsDistributorApi) => {
+        if (languageCode) {
+          api.setLanguageCode(languageCode);
+        }
+
+        if (currencyCode) {
+          api.setCurrencyCode(currencyCode);
+        }
+
+        trigger.disabled = false;
+        trigger.addEventListener("click", () => api.open());
+        setStatus("Widget ready.");
+      },
+      apiUrl && apiUrl.includes("mews-demo.com") ? { dataBaseUrl: apiUrl } : undefined
+    );
+  };
+
+  if (document.readyState === "complete") {
+    initializeWidget();
+  } else {
+    window.addEventListener("load", initializeWidget, { once: true });
+  }
+</script>

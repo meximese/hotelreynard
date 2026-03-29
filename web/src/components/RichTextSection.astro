@@ -1,0 +1,18 @@
+---
+import { PortableText } from "astro-portabletext";
+import type { PortableTextBlock } from "@portabletext/types";
+
+interface Props {
+  title?: string;
+  value?: PortableTextBlock[];
+}
+
+const { title, value = [] } = Astro.props;
+---
+
+<section class="rich-text-section">
+  {title ? <h2>{title}</h2> : null}
+  <div class="rich-text-section__body">
+    <PortableText value={value} />
+  </div>
+</section>

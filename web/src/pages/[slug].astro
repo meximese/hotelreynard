@@ -1,0 +1,30 @@
+---
+export const prerender = false;
+
+import { PortableText } from "astro-portabletext";
+
+import Layout from "../layouts/Layout.astro";
+import { getPageBySlug } from "../utils/sanity";
+
+const { slug } = Astro.params;
+
+if (!slug || slug === "rooms" || slug === "api") {
+  throw new Error("Unsupported page slug.");
+}
+
+const page = await getPageBySlug(slug);
+
+if (!page) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout title={`${page.title} | Hotel Reynard`}>
+  <section class="rich-text-section">
+    <p class="section-eyebrow">Page</p>
+    <h1>{page.title}</h1>
+    <div class="rich-text-section__body">
+      <PortableText value={page.body || []} />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,69 @@
+---
+export const prerender = false;
+
+import ContactForm from "../components/ContactForm.astro";
+import Layout from "../layouts/Layout.astro";
+import MewsWidgetButton from "../components/MewsWidgetButton.astro";
+import OfferCard from "../components/OfferCard.astro";
+import RichTextSection from "../components/RichTextSection.astro";
+import RoomCard from "../components/RoomCard.astro";
+import { getOffers, getPageBySlug, getRooms } from "../utils/sanity";
+
+const [page, rooms, offers] = await Promise.all([
+  getPageBySlug("home"),
+  getRooms(),
+  getOffers(),
+]);
+---
+
+<Layout title="Hotel Reynard">
+  <section class="hero-grid">
+    <article class="hero-panel">
+      <p class="section-eyebrow">Columbia River hotel, tavern, and gathering place</p>
+      <h1>{page?.title || "Hotel Reynard opens a new chapter in Troutdale."}</h1>
+      <p class="lede">
+        A restored riverside address for overnight stays, long dinners, and
+        easy weekends just outside Portland.
+      </p>
+      <div class="hero-actions">
+        <a class="button-link" href="#contact">Start a conversation</a>
+        <a class="button-link button-link--ghost" href="#rooms">Browse rooms</a>
+      </div>
+    </article>
+    <MewsWidgetButton />
+  </section>
+
+  {page?.body?.length ? <RichTextSection title="From the journal" value={page.body} /> : null}
+
+  <section class="section-panel" id="rooms">
+    <p class="section-eyebrow">Rooms</p>
+    <h2>Guest rooms mapped to Sanity content and Mews inventory</h2>
+    <p class="lede">
+      The room collection now comes from the sly schema set, so editorial copy
+      and booking identifiers can live side by side.
+    </p>
+    <div class="card-grid">
+      {rooms.map((room) => <RoomCard room={room} />)}
+    </div>
+  </section>
+
+  <section class="section-panel" id="offers">
+    <p class="section-eyebrow">Offers</p>
+    <h2>Packages and promotional codes</h2>
+    <div class="card-grid">
+      {offers.length ? offers.map((offer) => <OfferCard offer={offer} />) : <p class="lede">Add offer documents in Sanity to populate this section.</p>}
+    </div>
+  </section>
+
+  <section class="section-grid" id="contact">
+    <article class="section-panel">
+      <p class="section-eyebrow">Contact</p>
+      <h2>Start the conversation</h2>
+      <p class="lede">
+        Reach out about stays, group bookings, events, or the tavern. Messages
+        are sent through Resend and can also add the guest to your audience.
+      </p>
+    </article>
+    <ContactForm />
+  </section>
+</Layout>

@@ -6,12 +6,16 @@ const {
   PUBLIC_SANITY_STUDIO_DATASET,
   PUBLIC_SANITY_PROJECT_ID,
   PUBLIC_SANITY_DATASET,
+  PUBLIC_SANITY_API_VERSION,
+  PUBLIC_SANITY_USE_CDN,
 } = loadEnv(import.meta.env.MODE, process.cwd(), "");
 import { defineConfig } from "astro/config";
 
 // Different environments use different variables
 const projectId = PUBLIC_SANITY_STUDIO_PROJECT_ID || PUBLIC_SANITY_PROJECT_ID;
 const dataset = PUBLIC_SANITY_STUDIO_DATASET || PUBLIC_SANITY_DATASET;
+const apiVersion = PUBLIC_SANITY_API_VERSION || "2025-12-01";
+const useCdn = PUBLIC_SANITY_USE_CDN === "true";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
@@ -32,9 +36,9 @@ export default defineConfig({
       projectId,
       dataset,
       // studioBasePath: "/admin",
-      useCdn: false,
+      useCdn: useCdn,
       // `false` if you want to ensure fresh data
-      apiVersion: "2024-12-08", // Set to date of setup to use the latest API version
+      apiVersion: apiVersion, // Set to date of setup to use the latest API version
     }),
     react(), // Required for Sanity Studio
   ],
