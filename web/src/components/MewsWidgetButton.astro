@@ -6,23 +6,18 @@ const currencyCode = import.meta.env.PUBLIC_MEWS_CURRENCY_CODE ?? "USD";
 const enabled = Boolean(configurationId);
 ---
 
-<div class="booking-widget">
-  <button
-    class="booking-widget__button"
-    data-mews-api-url={apiUrl}
-    data-mews-configuration-id={configurationId}
-    data-mews-currency-code={currencyCode}
-    data-mews-language-code={languageCode}
-    disabled={!enabled}
-    id="mews-widget-trigger"
-    type="button"
-  >
-    {enabled ? "Open Mews booking widget" : "Set PUBLIC_MEWS_CONFIGURATION_ID to enable booking"}
-  </button>
-  <p class="booking-widget__status" id="mews-widget-status">
-    {enabled ? "Live availability and checkout stay in Mews." : "Widget is not configured yet."}
-  </p>
-</div>
+<button
+  class="booking-widget__button"
+  data-mews-api-url={apiUrl}
+  data-mews-configuration-id={configurationId}
+  data-mews-currency-code={currencyCode}
+  data-mews-language-code={languageCode}
+  disabled={!enabled}
+  id="mews-widget-trigger"
+  type="button"
+>
+  {enabled ? "Open Mews booking widget" : "Set PUBLIC_MEWS_CONFIGURATION_ID to enable booking"}
+</button>
 
 <script>
   interface MewsDistributorApi {

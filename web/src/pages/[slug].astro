@@ -10,7 +10,7 @@ import { getPreviewModeEnabled } from "../utils/previewMode";
 const { slug } = Astro.params;
 const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
 
-if (!slug || slug === "rooms" || slug === "api") {
+if (!slug || slug === "api") {
   throw new Error("Unsupported page slug.");
 }
 

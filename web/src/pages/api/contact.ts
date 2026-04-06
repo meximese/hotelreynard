@@ -12,6 +12,10 @@ const resendAudienceId = import.meta.env.RESEND_AUDIENCE_ID;
 const fromEmail = import.meta.env.RESEND_FROM_EMAIL;
 const contactToEmail = import.meta.env.CONTACT_TO_EMAIL;
 
+// Hybrid Astro apps prerender routes by default. This endpoint handles live
+// form submissions, so it must stay server-rendered at request time.
+export const prerender = false;
+
 function jsonResponse(status: number, body: Record<string, unknown>) {
   return new Response(JSON.stringify(body), {
     status,

@@ -10,15 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@hotelreynard/email": "file:../packages/email",
     "@astrojs/check": "^0.9.8",
     "@astrojs/react": "^4.4.2",
     "@astrojs/vercel": "^7.8.2",
+    "@hotelreynard/email": "file:../packages/email",
     "@sanity/astro": "^3.3.1",
     "@sanity/image-url": "^1.2.0",
-    "astro": "^4.11.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "astro": "^4.11.3",
     "astro-portabletext": "^0.13.0",
     "autoprefixer": "^10.4.27",
     "groq": "^3.99.0",

@@ -1,5 +1,5 @@
-<form class="contact-form" id="contact-form">
-  <div class="contact-form__grid">
+<form class="form" id="contact-form">
+  <div class="form__grid">
     <label>
       <span>First name</span>
       <input autocomplete="given-name" name="firstName" required minlength="2" />
@@ -34,14 +34,14 @@
     <textarea name="message" required minlength="12" rows="6"></textarea>
   </label>
 
-  <label class="contact-form__consent">
+  <label class="form__consent">
     <input name="consent" required type="checkbox" value="yes" />
     <span>I agree to be contacted about this inquiry.</span>
   </label>
 
-  <div class="contact-form__actions">
+  <div class="form__actions">
     <button type="submit">Send inquiry</button>
-    <p class="contact-form__status" id="contact-form-status" hidden></p>
+    <p class="form__status" id="contact-form-status" hidden></p>
   </div>
 </form>
 

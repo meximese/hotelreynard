@@ -10,9 +10,7 @@ interface Props {
 const { title, value = [] } = Astro.props;
 ---
 
-<section class="rich-text-section">
-  {title ? <h2>{title}</h2> : null}
-  <div class="rich-text-section__body">
-    <PortableText value={value} />
-  </div>
-</section>
+{title ? <h2>{title}</h2> : null}
+<div class="rich-text-section__body">
+  <PortableText value={value} />
+</div>

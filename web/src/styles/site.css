@@ -1,13 +1,19 @@
 :root {
-  --bg: #efe7d8;
-  --bg-strong: #e3d5bf;
+  --brown: #783934;
+  --orange: #fca01c;
+  --white: #fffdef;
+  --blue: #bacbdf;
+  --green: #93b5ac;
+  --yellow: #fbf38f;
+  --bg: var(--white);
+  --bg-strong: var(--yellow);
   --surface: rgba(252, 248, 240, 0.82);
-  --surface-solid: #fbf8f1;
-  --ink: #1d180f;
+  --surface-solid: var(--yellow);
+  --ink: var(--brown);
   --muted: #5e513f;
   --line: rgba(73, 59, 35, 0.18);
-  --accent: #b4532a;
-  --accent-deep: #8d3e1b;
+  --accent: var(--blue);
+  --accent-deep: var(--green);
   --shadow: 0 24px 60px rgba(78, 50, 18, 0.12);
   --radius-lg: 28px;
   --radius-md: 20px;
@@ -19,7 +25,11 @@
 
 html {
   background:
-    radial-gradient(circle at top left, rgba(180, 83, 42, 0.12), transparent 32rem),
+    radial-gradient(
+      circle at top left,
+      rgba(180, 83, 42, 0.12),
+      transparent 32rem
+    ),
     linear-gradient(180deg, #f7efe0 0%, var(--bg) 44%, #eadfcb 100%);
   color: var(--ink);
   font-family: var(--font-body);
@@ -27,6 +37,8 @@ html {
 
 body {
   margin: 0;
+  background: url("/bg-stripes.png") repeat center top;
+  background-size: 50%;
 }
 
 a {
@@ -86,8 +98,11 @@ img {
 
 .site-header__nav {
   display: flex;
+  flex-flow: column nowrap;
   gap: 1rem;
-  flex-wrap: wrap;
+  min-width: max-content;
+  padding-right: 3rem;
+  padding-left: 1rem;
 }
 
 .site-header__nav a {
@@ -136,7 +151,7 @@ img {
 .rich-text-section,
 .detail-hero,
 .gallery-grid,
-.contact-form {
+.form {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--surface);
@@ -191,11 +206,15 @@ img {
 
 .button-link,
 .booking-widget__button,
-.contact-form button {
+.form button {
   appearance: none;
   border: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-deep) 100%
+  );
   color: white;
   cursor: pointer;
   display: inline-flex;
@@ -231,7 +250,11 @@ img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  background: linear-gradient(135deg, rgba(180, 83, 42, 0.2), rgba(29, 24, 15, 0.12));
+  background: linear-gradient(
+    135deg,
+    rgba(180, 83, 42, 0.2),
+    rgba(29, 24, 15, 0.12)
+  );
 }
 
 .content-card__body {
@@ -287,26 +310,26 @@ img {
   color: var(--accent-deep);
 }
 
-.contact-form {
+.form {
   padding: 1.25rem;
 }
 
-.contact-form__grid {
+.form__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
-.contact-form label {
+.form label {
   display: grid;
   gap: 0.45rem;
   margin-bottom: 1rem;
   color: var(--muted);
 }
 
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
+.form input,
+.form select,
+.form textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
@@ -317,39 +340,39 @@ img {
   box-sizing: border-box;
 }
 
-.contact-form textarea {
+.form textarea {
   resize: vertical;
 }
 
-.contact-form__consent {
+.form__consent {
   grid-template-columns: auto 1fr;
   align-items: start;
   gap: 0.8rem;
 }
 
-.contact-form__consent input {
+.form__consent input {
   width: 1.1rem;
   height: 1.1rem;
   margin-top: 0.2rem;
 }
 
-.contact-form__actions {
+.form__actions {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.contact-form__status {
+.form__status {
   margin: 0;
   color: var(--muted);
 }
 
-.contact-form__status[data-tone="success"] {
+.form__status[data-tone="success"] {
   color: #2f6a38;
 }
 
-.contact-form__status[data-tone="error"] {
+.form__status[data-tone="error"] {
   color: #9b2e22;
 }
 
@@ -376,7 +399,7 @@ img {
   .detail-hero,
   .card-grid,
   .gallery-grid,
-  .contact-form__grid {
+  .form__grid {
     grid-template-columns: 1fr;
   }
 
