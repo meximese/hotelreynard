@@ -1,0 +1,108 @@
+---
+import "../styles/home-scroll-scene.css";
+import flowerOrangeA from "../assets/svg/orange flower a.svg?url";
+import flowerOrangeB from "../assets/svg/orange flower b.svg?url";
+import flowerOrangeC from "../assets/svg/orange flower c.svg?url";
+import flowerOrangeD from "../assets/svg/orange flower d.svg?url";
+import flowerRedA from "../assets/svg/red flower a.svg?url";
+import flowerRedB from "../assets/svg/red flower b.svg?url";
+import flowerRedC from "../assets/svg/red flower c.svg?url";
+import flowerWhiteA from "../assets/svg/white flower a.svg?url";
+import flowerWhiteB from "../assets/svg/white flower b.svg?url";
+import flowerWhiteC from "../assets/svg/white flower c.svg?url";
+import leafGreenA from "../assets/svg/green leaf a.svg?url";
+import leafGreenB from "../assets/svg/green leaf b.svg?url";
+import leafGreenC from "../assets/svg/green leaf c.svg?url";
+import leafOrangeA from "../assets/svg/orange leaf a.svg?url";
+import leafRedA from "../assets/svg/red leaf a.svg?url";
+import letterA from "../assets/svg/reynard-a.svg?url";
+import letterD from "../assets/svg/reynard-d.svg?url";
+import letterE from "../assets/svg/reynard-e.svg?url";
+import letterN from "../assets/svg/reynard-n.svg?url";
+import letterR1 from "../assets/svg/reynard-r-1.svg?url";
+import letterR2 from "../assets/svg/reynard-r-2.svg?url";
+import letterY from "../assets/svg/reynard-y.svg?url";
+import groupedBotanicals from "../assets/svg/grouped-botanicals.svg?url";
+import homeScrollSceneScript from "../scripts/home-scroll-scene.ts?url";
+
+const showPoster = false;
+
+const bouquetItems = [
+  { id: "white-c", src: flowerWhiteC, width: 138.4, height: 134.6, centerX: 65.1, centerY: 305.6 },
+  { id: "white-b", src: flowerWhiteB, width: 139.3, height: 131.2, centerX: 335.5, centerY: 374.6 },
+  { id: "leaf-orange", src: leafOrangeA, width: 123.6, height: 94.4, centerX: 277.2, centerY: 318.7 },
+  { id: "leaf-green-c", src: leafGreenC, width: 133.4, height: 134.5, centerX: 409.2, centerY: 179.9 },
+  { id: "leaf-green-b", src: leafGreenB, width: 128.5, height: 121.4, centerX: 155.5, centerY: 121.2 },
+  { id: "leaf-green-a", src: leafGreenA, width: 130.5, height: 134.6, centerX: 335.7, centerY: 64.7 },
+  { id: "red-c", src: flowerRedC, width: 146.2, height: 119, centerX: 370.2, centerY: 296.1 },
+  { id: "red-a", src: flowerRedA, width: 128.3, height: 125.2, centerX: 75.6, centerY: 191.8 },
+  { id: "leaf-red", src: leafRedA, width: 149.4, height: 120.7, centerX: 146.6, centerY: 394.3 },
+  { id: "orange-d", src: flowerOrangeD, width: 126.8, height: 117.8, centerX: 174.3, centerY: 232.2 },
+  { id: "orange-c", src: flowerOrangeC, width: 146.1, height: 137.7, centerX: 251.2, centerY: 132 },
+  { id: "orange-b", src: flowerOrangeB, width: 157.3, height: 131.7, centerX: 474.6, centerY: 337.9 },
+  { id: "orange-a", src: flowerOrangeA, width: 123.6, height: 107.9, centerX: 452.1, centerY: 254.8 },
+  { id: "white-a", src: flowerWhiteA, width: 148, height: 135.5, centerX: 311.7, centerY: 222.9 },
+  { id: "red-b", src: flowerRedB, width: 133.1, height: 121.7, centerX: 189.3, centerY: 351.8 },
+];
+
+const letters = [
+  { id: "r1", label: "R", src: letterR1, width: 97, color: "orange" },
+  { id: "e", label: "E", src: letterE, width: 72, color: "blue" },
+  { id: "y", label: "Y", src: letterY, width: 85, color: "orange" },
+  { id: "n", label: "N", src: letterN, width: 90, color: "green" },
+  { id: "a", label: "A", src: letterA, width: 79, color: "orange" },
+  { id: "r2", label: "R", src: letterR2, width: 98, color: "blue" },
+  { id: "d", label: "D", src: letterD, width: 80, color: "green" },
+];
+---
+
+<section class="home-scroll" data-home-scroll data-show-poster={showPoster ? "true" : "false"}>
+  <div class="home-scroll__track">
+    <div class="home-scroll__sticky" data-stage>
+      <div class="home-scroll__wash"></div>
+
+      {showPoster && (
+        <div class="home-scroll__grouped-reference" aria-hidden="true">
+          <img src={groupedBotanicals} alt="" />
+        </div>
+      )}
+
+      <div class="home-scroll__bouquet" aria-hidden="true">
+        {bouquetItems.map((item) => (
+          <figure
+            class="home-scroll__botanical"
+            data-botanical={item.id}
+            data-center-x={item.centerX}
+            data-center-y={item.centerY}
+            data-width={item.width}
+            data-height={item.height}
+          >
+            <img src={item.src} alt="" loading="eager" />
+          </figure>
+        ))}
+      </div>
+
+      <div class="home-scroll__word-guide" aria-hidden="true">
+        {letters.map((letter) => (
+          <span class="home-scroll__slot" data-slot={letter.id}>
+            <img src={letter.src} alt="" style={`width:${letter.width}px;`} />
+          </span>
+        ))}
+      </div>
+
+      <div class="home-scroll__letters" aria-label="Animated REYNARD wordmark">
+        {letters.map((letter) => (
+          <figure class="home-scroll__letter" data-letter={letter.id} data-color={letter.color}>
+            <img src={letter.src} alt={letter.label} style={`width:${letter.width}px;`} />
+          </figure>
+        ))}
+      </div>
+
+      <div class="home-scroll__reduced" aria-hidden="true">
+        <img src={groupedBotanicals} alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline type="module" src={homeScrollSceneScript}></script>

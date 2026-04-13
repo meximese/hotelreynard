@@ -1,0 +1,181 @@
+.home-scroll {
+  margin: 0 auto;
+  position: relative;
+  width: 100vw;
+  top: calc(-1 * (var(--site-header-height, 86px) + 2.5rem));
+  overflow: visible;
+}
+
+.home-scroll__track {
+  min-height: 320vh;
+  position: relative;
+  z-index: 1;
+}
+
+.home-scroll {
+  --bouquet-translate-x: -75px;
+  --bouquet-translate-y: -100px;
+  --letters-translate-x: -30px;
+  --letters-translate-y: -66px;
+}
+
+.home-scroll__sticky {
+  display: grid;
+  isolation: isolate;
+  min-height: calc(100dvh + var(--site-header-height, 86px) + 2.5rem);
+  overflow: visible;
+  place-items: center;
+  position: sticky;
+  top: 0;
+  margin-top: calc(-1 * (var(--site-header-height) + 2.5rem));
+  background-color: var(--yellow);
+  overflow: visible;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 38px),
+    93% calc(100% - 18px),
+    84% calc(100% - 54px),
+    73% calc(100% - 20px),
+    61% calc(100% - 58px),
+    49% calc(100% - 14px),
+    37% calc(100% - 56px),
+    25% calc(100% - 18px),
+    13% calc(100% - 52px),
+    0 calc(100% - 24px)
+  );
+}
+
+.home-scroll__bouquet,
+.home-scroll__grouped-reference,
+.home-scroll__reduced {
+  inset: 0;
+  position: absolute;
+  transform: translate(var(--bouquet-translate-x), var(--bouquet-translate-y));
+}
+
+.home-scroll__letters,
+.home-scroll__word-guide {
+  inset: 0;
+  position: absolute;
+  transform: translate(var(--letters-translate-x), var(--letters-translate-y));
+}
+
+.home-scroll__grouped-reference {
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.home-scroll__grouped-reference img {
+  display: block;
+  filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.16));
+  width: min(72vw, 33rem);
+  will-change: opacity, transform;
+}
+
+.home-scroll__botanical,
+.home-scroll__letter {
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+}
+
+.home-scroll__botanical {
+  opacity: 0;
+  z-index: 1;
+}
+
+.home-scroll__botanical img,
+.home-scroll__letter img,
+.home-scroll__slot img,
+.home-scroll__reduced img {
+  display: block;
+  height: auto;
+  width: auto;
+}
+
+.home-scroll__botanical img {
+  filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.16));
+  width: 100%;
+}
+
+.home-scroll__word-guide {
+  align-items: center;
+  display: flex;
+  gap: clamp(0.45rem, 0.9vw, 0.92rem);
+  justify-content: center;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.home-scroll__letter {
+  opacity: 0;
+  z-index: 3;
+}
+
+.home-scroll__letter img {
+  filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.18));
+}
+
+.home-scroll__reduced {
+  display: none;
+  place-items: center;
+}
+
+.home-scroll__reduced img {
+  width: min(78vw, 34rem);
+}
+
+.home-scroll[data-reduced-motion="true"] .home-scroll__track {
+  min-height: auto;
+}
+
+.home-scroll[data-reduced-motion="true"] .home-scroll__sticky {
+  min-height: clamp(38rem, 92vh, 50rem);
+  position: relative;
+}
+
+.home-scroll[data-reduced-motion="true"] .home-scroll__bouquet,
+.home-scroll[data-reduced-motion="true"] .home-scroll__letters,
+.home-scroll[data-reduced-motion="true"] .home-scroll__word-guide,
+.home-scroll[data-reduced-motion="true"] .home-scroll__grouped-reference {
+  display: none;
+}
+
+.home-scroll[data-reduced-motion="true"] .home-scroll__reduced {
+  display: grid;
+}
+
+@media (max-width: 900px) {
+  .home-scroll {
+    --bouquet-translate-x: 0px;
+    --bouquet-translate-y: 0px;
+    --letters-translate-x: 0px;
+    --letters-translate-y: 0px;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 26px),
+      88% calc(100% - 12px),
+      71% calc(100% - 34px),
+      52% calc(100% - 10px),
+      31% calc(100% - 32px),
+      14% calc(100% - 12px),
+      0 calc(100% - 24px)
+    );
+  }
+
+  .home-scroll__track {
+    min-height: 280vh;
+  }
+}
+
+@media (max-width: 720px) {
+  .home-scroll__track {
+    min-height: 250vh;
+  }
+}

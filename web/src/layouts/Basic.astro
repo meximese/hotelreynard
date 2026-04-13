@@ -1,8 +1,12 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import { VisualEditing } from '@sanity/astro/visual-editing';
-import "../styles/site.css";
+import "../styles/basic.css";
 import { getPreviewModeEnabled } from "../utils/previewMode";
+import MewsWidgetButton from "../components/MewsWidgetButton.astro";
+import logoTypeHotel from "../assets/svg/word-hotel.svg?url";
+import logoTypeReynard from "../assets/svg/word-reynard.svg?url";
+import AmbientBotanicals from "../components/AmbientBotanicals.astro";
 import observeCssVarScript from "../scripts/observe-css-var.ts?url";
 
 interface Props {
@@ -30,30 +34,37 @@ const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
   </head>
   <body>
     <div class="site-shell">
-      <header class="site-header">
+      <AmbientBotanicals />
+      <div class="stripes">
+        <div class="bar bar-a"></div>
+        <div class="bar bar-b"></div>
+        <div class="bar bar-c"></div>
+        <div class="bar bar-a"></div>
+        <div class="bar bar-b"></div>
+        <div class="bar bar-c"></div>
+      </div>
+      <header>
         <div
-          class="site-header__bar"
           data-css-var-dimension="height"
           data-css-var-name="--site-header-height"
         >
-          <a class="site-header__brand" href="/">
-            <span class="site-header__brand-mark">Hotel</span>
-            <img class="site-header__brand-logo" src="/logo-multi.png" alt="Hotel Reynard logo" alt="Reynard"/>
+          <a href="/" class="site-logo">
+            <img src={logoTypeHotel} alt="Hotel" class="logo-hotel" width="50"/>
+            <img src={logoTypeReynard} alt="Reynard" class="logo-reynard" width="100"/>
           </a>
-          <nav class="site-header__nav" aria-label="Primary">
+          <nav aria-label="Primary">
             <a href="/tavern">Eat and Drink</a>
             <a href="/rooms">Rest and Relax</a>
             <a href="/events">Throw a Party</a>
-            <!-- <a href="/#rooms">Stay a While</a> -->
-            <!-- <a href="/#contact">Contact</a> -->
+            <MewsWidgetButton enabled={!visualEditingEnabled} />
           </nav>
         </div>
       </header>
-      <main class="site-main">
+      <main>
         <slot />
       </main>
-      <footer class="site-footer">
-        <div class="site-footer__panel">
+      <footer>
+        <div>
           <p>302 Historic Columbia River Highway</p>
           <p>Troutdale, OR 97060</p>
           <p><a href="tel:+15037555302">+1 (503) 755-5302</a></p>
