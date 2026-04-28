@@ -28,7 +28,6 @@
   position: sticky;
   top: 0;
   margin-top: calc(-1 * (var(--site-header-height) + 2.5rem));
-  background-color: var(--yellow);
   overflow: visible;
   clip-path: polygon(
     0 0,
@@ -44,6 +43,37 @@
     13% calc(100% - 52px),
     0 calc(100% - 24px)
   );
+}
+
+.home-scroll__stage-fill,
+.home-scroll__stage-stripes {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.home-scroll__stage-fill {
+  background: var(--yellow);
+  opacity: 0;
+  z-index: 0;
+}
+
+.home-scroll__stage-stripes {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 8.333vw;
+  z-index: 0;
+}
+
+.home-scroll__stage-bar {
+  flex: 0 0 8.333vw;
+  height: 100%;
+}
+
+.home-scroll__stage-bar--a,
+.home-scroll__stage-bar--b,
+.home-scroll__stage-bar--c {
+  background: rgba(238, 220, 77, 0.9);
 }
 
 .home-scroll__bouquet,
@@ -64,7 +94,7 @@
 .home-scroll__grouped-reference {
   display: grid;
   place-items: center;
-  z-index: 2;
+  z-index: 3;
 }
 
 .home-scroll__grouped-reference img {
@@ -86,7 +116,7 @@
 
 .home-scroll__botanical {
   opacity: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .home-scroll__botanical img,
@@ -114,7 +144,7 @@
 
 .home-scroll__letter {
   opacity: 0;
-  z-index: 3;
+  z-index: 4;
 }
 
 .home-scroll__letter img {

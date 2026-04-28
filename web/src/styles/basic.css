@@ -114,6 +114,24 @@ nav {
   flex-wrap: wrap;
   gap: 0.9rem 1.2rem;
   justify-content: flex-end;
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease,
+    visibility 260ms ease;
+}
+
+body:has([data-home-scroll]) nav[aria-label="Primary"]:not([data-home-scroll-nav-state="ready"]) {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.5rem);
+  visibility: hidden;
+}
+
+nav[data-home-scroll-nav-state="hidden"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.5rem);
+  visibility: hidden;
 }
 
 nav a {

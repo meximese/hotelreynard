@@ -10,6 +10,8 @@ const STAGE_BOUNDS = {
 // These are the main timing knobs to edit.
 // Each tuple is [startProgress, endProgress] on the overall scene scroll range.
 const PHASES = {
+  stageFill: [0.06, 0.38],
+  stripeRoll: [0.0, 0.42],
   bouquetBurst: [0.0, 0.54],
   letterFade: [0.1, 0.5],
   letterTravel: [0.1, 0.5],
@@ -84,6 +86,9 @@ const initHomeScrollScene = (scene: HTMLElement) => {
   const groupedReference = scene.querySelector<HTMLElement>(
     ".home-scroll__grouped-reference img",
   );
+  const stageFill = scene.querySelector<HTMLElement>(".home-scroll__stage-fill");
+  const stageStripes = scene.querySelector<HTMLElement>(".home-scroll__stage-stripes");
+  const primaryNav = document.querySelector<HTMLElement>('header nav[aria-label="Primary"]');
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   );
@@ -92,6 +97,9 @@ const initHomeScrollScene = (scene: HTMLElement) => {
   let botanicalAnimations: MotionController[] = [];
   let letterAnimations: MotionController[] = [];
   let posterAnimations: MotionController[] = [];
+  let stripeAnimations: MotionController[] = [];
+  let fillAnimations: MotionController[] = [];
+  let navUnlocked = false;
 
   const letterTargets = new Map<string, LetterTarget>();
   const botanicalLayouts = new Map<string, BotanicalLayout>();
@@ -99,10 +107,20 @@ const initHomeScrollScene = (scene: HTMLElement) => {
   const setReducedMotion = () => {
     scene.dataset.reducedMotion = "true";
     scene.style.setProperty("--scene-progress", "1");
+    navUnlocked = true;
 
     if (groupedReference) {
       groupedReference.style.opacity = showPoster ? "1" : "0";
       groupedReference.style.transform = "scale(1)";
+    }
+
+    if (stageFill) {
+      stageFill.style.opacity = "1";
+    }
+
+    if (stageStripes) {
+      stageStripes.style.opacity = "0";
+      stageStripes.style.transform = "translateY(-120px)";
     }
 
     botanicals.forEach((botanical) => {
@@ -113,6 +131,8 @@ const initHomeScrollScene = (scene: HTMLElement) => {
       letter.style.opacity = "1";
       letter.style.filter = "none";
     });
+
+    primaryNav?.setAttribute("data-home-scroll-nav-state", "ready");
   };
 
   const measure = () => {
@@ -270,9 +290,49 @@ const initHomeScrollScene = (scene: HTMLElement) => {
     );
   };
 
+  const createStageAnimations = () => {
+    stopAnimations(stripeAnimations);
+    stopAnimations(fillAnimations);
+    stripeAnimations = [];
+    fillAnimations = [];
+
+    if (stageStripes) {
+      stripeAnimations.push(
+        animate(
+          stageStripes,
+          {
+            y: [0, -180],
+            opacity: [1, 0],
+          },
+          {
+            duration: 1,
+            ease: "linear",
+            autoplay: false,
+          },
+        ),
+      );
+    }
+
+    if (stageFill) {
+      fillAnimations.push(
+        animate(
+          stageFill,
+          { opacity: [0, 1] },
+          {
+            duration: 1,
+            ease: "linear",
+            autoplay: false,
+          },
+        ),
+      );
+    }
+  };
+
   const applyProgress = (progress: number) => {
     scene.style.setProperty("--scene-progress", progress.toFixed(4));
 
+    const stageFillProgress = mapPhase(progress, PHASES.stageFill);
+    const stripeRollProgress = mapPhase(progress, PHASES.stripeRoll);
     const burstProgress = mapPhase(progress, PHASES.bouquetBurst);
     const letterFadeProgress = mapPhase(progress, PHASES.letterFade);
     const letterTravelProgress = mapPhase(progress, PHASES.letterTravel);
@@ -280,6 +340,14 @@ const initHomeScrollScene = (scene: HTMLElement) => {
     const posterProgress = showPoster
       ? mapPhase(progress, PHASES.posterHandoff)
       : 1;
+
+    for (const animation of fillAnimations) {
+      animation.time = stageFillProgress * animation.duration;
+    }
+
+    for (const animation of stripeAnimations) {
+      animation.time = stripeRollProgress * animation.duration;
+    }
 
     // Bouquet scrub: how quickly the flowers/leaves travel outward.
     for (const animation of botanicalAnimations) {
@@ -307,6 +375,11 @@ const initHomeScrollScene = (scene: HTMLElement) => {
     for (const animation of posterAnimations) {
       animation.time = posterProgress * animation.duration;
     }
+
+    primaryNav?.setAttribute(
+      "data-home-scroll-nav-state",
+      navUnlocked ? "ready" : "hidden",
+    );
   };
 
   const buildScene = () => {
@@ -316,7 +389,12 @@ const initHomeScrollScene = (scene: HTMLElement) => {
     }
 
     scene.dataset.reducedMotion = "false";
+    primaryNav?.setAttribute(
+      "data-home-scroll-nav-state",
+      navUnlocked ? "ready" : "hidden",
+    );
     measure();
+    createStageAnimations();
     createBotanicalAnimations();
     createLetterAnimations();
     createPosterAnimations();
@@ -333,6 +411,10 @@ const initHomeScrollScene = (scene: HTMLElement) => {
         0,
         1,
       );
+
+      if (!navUnlocked && progress >= 0.58) {
+        navUnlocked = true;
+      }
 
       applyProgress(progress);
     });
