@@ -118,7 +118,8 @@
 }
 
 .home-scroll__letter img {
-  filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.18));
+  /* filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.18)); */
+  /* filter: drop-shadow(3px 3px 0px rgba(230, 210, 60, 0.8)); */
 }
 
 .home-scroll__reduced {
