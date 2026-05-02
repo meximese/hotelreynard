@@ -21,6 +21,7 @@
   "workspaces": [
     "studio",
     "web",
+    "site",
     "packages/*"
   ],
   "devDependencies": {

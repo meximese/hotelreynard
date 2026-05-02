@@ -1,8 +1,8 @@
 import React from "react";
 
-import { EmailLayout } from "../EmailLayout.js";
-import { PortableTextEmail } from "../PortableTextEmail.js";
-import { getDefaultEmailTemplate } from "../render.js";
+import { EmailLayout } from "../EmailLayout";
+import { PortableTextEmail } from "../PortableTextEmail";
+import { getDefaultEmailTemplate } from "../render";
 
 export default function ContactAutoReplyPreview() {
   const template = getDefaultEmailTemplate("contact-auto-reply");

@@ -1,9 +1,9 @@
 import React from "react";
 import { Hr, Text } from "@react-email/components";
 
-import { EmailLayout } from "../EmailLayout.js";
-import { PortableTextEmail } from "../PortableTextEmail.js";
-import { getDefaultEmailTemplate } from "../render.js";
+import { EmailLayout } from "../EmailLayout";
+import { PortableTextEmail } from "../PortableTextEmail";
+import { getDefaultEmailTemplate } from "../render";
 
 export default function ContactInquiryPreview() {
   const template = getDefaultEmailTemplate("contact-internal-inquiry");
