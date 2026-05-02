@@ -1,13 +1,15 @@
 .home-scroll {
+  --home-header-offset: min(var(--site-header-height, 86px), 110px);
   margin: 0 auto;
   position: relative;
   width: 100vw;
-  top: calc(-1 * (var(--site-header-height, 86px) + 2.5rem));
+  top: calc(-1 * (var(--home-header-offset) + 2.5rem));
   overflow: visible;
+  z-index: 3;
 }
 
 .home-scroll__track {
-  min-height: 320vh;
+  min-height: 255vh;
   position: relative;
   z-index: 1;
 }
@@ -15,19 +17,17 @@
 .home-scroll {
   --bouquet-translate-x: -75px;
   --bouquet-translate-y: -100px;
-  --letters-translate-x: -30px;
-  --letters-translate-y: -66px;
 }
 
 .home-scroll__sticky {
   display: grid;
   isolation: isolate;
-  min-height: calc(100dvh + var(--site-header-height, 86px) + 2.5rem);
+  min-height: calc(100dvh + var(--home-header-offset) + 2.5rem);
   overflow: visible;
   place-items: center;
   position: sticky;
   top: 0;
-  margin-top: calc(-1 * (var(--site-header-height) + 2.5rem));
+  margin-top: calc(-1 * (var(--home-header-offset) + 2.5rem));
   overflow: visible;
   clip-path: polygon(
     0 0,
@@ -53,7 +53,7 @@
 }
 
 .home-scroll__stage-fill {
-  background: var(--yellow);
+  background: rgba(186, 203, 223, 0.94);
   opacity: 0;
   z-index: 0;
 }
@@ -77,6 +77,7 @@
 }
 
 .home-scroll__bouquet,
+.home-scroll__logo-layer,
 .home-scroll__grouped-reference,
 .home-scroll__reduced {
   inset: 0;
@@ -84,11 +85,36 @@
   transform: translate(var(--bouquet-translate-x), var(--bouquet-translate-y));
 }
 
-.home-scroll__letters,
-.home-scroll__word-guide {
-  inset: 0;
-  position: absolute;
-  transform: translate(var(--letters-translate-x), var(--letters-translate-y));
+.home-scroll__logo-layer {
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.home-scroll__logo-mark {
+  align-items: center;
+  color: var(--brown);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  opacity: 0.54;
+  transform: translateY(1.25rem) scale(1.06);
+  transform-origin: center;
+  width: min(80vw, 30rem);
+  will-change: opacity, transform;
+}
+
+.home-scroll__logo-hotel,
+.home-scroll__logo-reynard {
+  height: auto;
+}
+
+.home-scroll__logo-hotel {
+  width: 6rem;
+}
+
+.home-scroll__logo-reynard {
+  width: min(80vw, 25rem);
 }
 
 .home-scroll__grouped-reference {
@@ -104,8 +130,7 @@
   will-change: opacity, transform;
 }
 
-.home-scroll__botanical,
-.home-scroll__letter {
+.home-scroll__botanical {
   left: 50%;
   margin: 0;
   position: absolute;
@@ -116,12 +141,10 @@
 
 .home-scroll__botanical {
   opacity: 0;
-  z-index: 2;
+  z-index: 5;
 }
 
 .home-scroll__botanical img,
-.home-scroll__letter img,
-.home-scroll__slot img,
 .home-scroll__reduced img {
   display: block;
   height: auto;
@@ -131,25 +154,6 @@
 .home-scroll__botanical img {
   filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.16));
   width: 100%;
-}
-
-.home-scroll__word-guide {
-  align-items: center;
-  display: flex;
-  gap: clamp(0.45rem, 0.9vw, 0.92rem);
-  justify-content: center;
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.home-scroll__letter {
-  opacity: 0;
-  z-index: 4;
-}
-
-.home-scroll__letter img {
-  /* filter: drop-shadow(0 18px 28px rgba(120, 57, 52, 0.18)); */
-  /* filter: drop-shadow(3px 3px 0px rgba(230, 210, 60, 0.8)); */
 }
 
 .home-scroll__reduced {
@@ -170,9 +174,12 @@
   position: relative;
 }
 
+.home-scroll[data-reduced-motion="true"] .home-scroll__logo-mark {
+  opacity: 1;
+  transform: none;
+}
+
 .home-scroll[data-reduced-motion="true"] .home-scroll__bouquet,
-.home-scroll[data-reduced-motion="true"] .home-scroll__letters,
-.home-scroll[data-reduced-motion="true"] .home-scroll__word-guide,
 .home-scroll[data-reduced-motion="true"] .home-scroll__grouped-reference {
   display: none;
 }
@@ -185,8 +192,6 @@
   .home-scroll {
     --bouquet-translate-x: 0px;
     --bouquet-translate-y: 0px;
-    --letters-translate-x: 0px;
-    --letters-translate-y: 0px;
     clip-path: polygon(
       0 0,
       100% 0,
@@ -201,12 +206,12 @@
   }
 
   .home-scroll__track {
-    min-height: 280vh;
+    min-height: 220vh;
   }
 }
 
 @media (max-width: 720px) {
   .home-scroll__track {
-    min-height: 250vh;
+    min-height: 195vh;
   }
 }

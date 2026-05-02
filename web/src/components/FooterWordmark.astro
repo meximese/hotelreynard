@@ -1,0 +1,35 @@
+---
+import "../styles/footer-wordmark.css";
+import letterA from "../assets/svg/reynard-a.svg?url";
+import letterD from "../assets/svg/reynard-d.svg?url";
+import letterE from "../assets/svg/reynard-e.svg?url";
+import letterN from "../assets/svg/reynard-n.svg?url";
+import letterR1 from "../assets/svg/reynard-r-1.svg?url";
+import letterR2 from "../assets/svg/reynard-r-2.svg?url";
+import letterY from "../assets/svg/reynard-y.svg?url";
+import footerWordmarkScript from "../scripts/footer-wordmark.ts?url";
+
+const letters = [
+  { id: "r1", label: "R", src: letterR1, width: 97, pair: 0 },
+  { id: "e", label: "E", src: letterE, width: 72, pair: 0 },
+  { id: "y", label: "Y", src: letterY, width: 85, pair: 1 },
+  { id: "n", label: "N", src: letterN, width: 90, pair: 1 },
+  { id: "a", label: "A", src: letterA, width: 79, pair: 2 },
+  { id: "r2", label: "R", src: letterR2, width: 98, pair: 2 },
+  { id: "d", label: "D", src: letterD, width: 80, pair: 3 },
+];
+---
+
+<div class="footer-wordmark" data-footer-wordmark>
+  {letters.map((letter) => (
+    <span
+      class="footer-wordmark__letter"
+      data-pair={letter.pair}
+      aria-label={letter.label}
+    >
+      <img src={letter.src} alt="" style={`width:${letter.width}px;`} />
+    </span>
+  ))}
+</div>
+
+<script is:inline type="module" src={footerWordmarkScript}></script>

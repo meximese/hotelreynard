@@ -3,10 +3,10 @@ import { ViewTransitions } from 'astro:transitions';
 import { VisualEditing } from '@sanity/astro/visual-editing';
 import "../styles/basic.css";
 import { getPreviewModeEnabled } from "../utils/previewMode";
-import MewsWidgetButton from "../components/MewsWidgetButton.astro";
 import logoTypeHotel from "../assets/svg/word-hotel.svg?url";
 import logoTypeReynard from "../assets/svg/word-reynard.svg?url";
 import AmbientBotanicals from "../components/AmbientBotanicals.astro";
+import FooterWordmark from "../components/FooterWordmark.astro";
 import observeCssVarScript from "../scripts/observe-css-var.ts?url";
 
 interface Props {
@@ -45,18 +45,22 @@ const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
       </div>
       <header>
         <div
+          class="site-header__bar"
           data-css-var-dimension="height"
           data-css-var-name="--site-header-height"
+          data-home-scroll-nav-state="hidden"
         >
+          <nav class="site-header__nav site-header__nav--left" aria-label="Primary left">
+            <a href="/tavern">Eat and Drink</a>
+            <a href="/rooms">Rest and Relax</a>
+          </nav>
           <a href="/" class="site-logo">
             <img src={logoTypeHotel} alt="Hotel" class="logo-hotel" width="50"/>
             <img src={logoTypeReynard} alt="Reynard" class="logo-reynard" width="100"/>
           </a>
-          <nav aria-label="Primary">
-            <a href="/tavern">Eat and Drink</a>
-            <a href="/rooms">Rest and Relax</a>
+          <nav class="site-header__nav site-header__nav--right" aria-label="Primary right">
             <a href="/events">Throw a Party</a>
-            <MewsWidgetButton enabled={!visualEditingEnabled} />
+            <a href="/journal">Journal</a>
           </nav>
         </div>
       </header>
@@ -65,6 +69,7 @@ const visualEditingEnabled = getPreviewModeEnabled(Astro.cookies);
       </main>
       <footer>
         <div>
+          <FooterWordmark />
           <p>302 Historic Columbia River Highway</p>
           <p>Troutdale, OR 97060</p>
           <p><a href="tel:+15037555302">+1 (503) 755-5302</a></p>

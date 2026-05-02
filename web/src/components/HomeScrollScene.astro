@@ -15,14 +15,9 @@ import leafGreenB from "../assets/svg/green leaf b.svg?url";
 import leafGreenC from "../assets/svg/green leaf c.svg?url";
 import leafOrangeA from "../assets/svg/orange leaf a.svg?url";
 import leafRedA from "../assets/svg/red leaf a.svg?url";
-import letterA from "../assets/svg/reynard-a.svg?url";
-import letterD from "../assets/svg/reynard-d.svg?url";
-import letterE from "../assets/svg/reynard-e.svg?url";
-import letterN from "../assets/svg/reynard-n.svg?url";
-import letterR1 from "../assets/svg/reynard-r-1.svg?url";
-import letterR2 from "../assets/svg/reynard-r-2.svg?url";
-import letterY from "../assets/svg/reynard-y.svg?url";
 import groupedBotanicals from "../assets/svg/grouped-botanicals.svg?url";
+import logoTypeHotel from "../assets/svg/word-hotel.svg?url";
+import logoTypeReynard from "../assets/svg/word-reynard.svg?url";
 import homeScrollSceneScript from "../scripts/home-scroll-scene.ts?url";
 
 const showPoster = false;
@@ -45,15 +40,6 @@ const bouquetItems = [
   { id: "red-b", src: flowerRedB, width: 133.1, height: 121.7, centerX: 189.3, centerY: 351.8 },
 ];
 
-const letters = [
-  { id: "r1", label: "R", src: letterR1, width: 97, color: "orange" },
-  { id: "e", label: "E", src: letterE, width: 72, color: "blue" },
-  { id: "y", label: "Y", src: letterY, width: 85, color: "orange" },
-  { id: "n", label: "N", src: letterN, width: 90, color: "green" },
-  { id: "a", label: "A", src: letterA, width: 79, color: "orange" },
-  { id: "r2", label: "R", src: letterR2, width: 98, color: "blue" },
-  { id: "d", label: "D", src: letterD, width: 80, color: "green" },
-];
 ---
 
 <section class="home-scroll" data-home-scroll data-show-poster={showPoster ? "true" : "false"}>
@@ -76,6 +62,13 @@ const letters = [
         </div>
       )}
 
+      <div class="home-scroll__logo-layer" aria-hidden="true" data-scene-logo>
+        <div class="home-scroll__logo-mark">
+          <img src={logoTypeHotel} alt="" class="home-scroll__logo-hotel" />
+          <img src={logoTypeReynard} alt="" class="home-scroll__logo-reynard" />
+        </div>
+      </div>
+
       <div class="home-scroll__bouquet" aria-hidden="true">
         {bouquetItems.map((item) => (
           <figure
@@ -87,22 +80,6 @@ const letters = [
             data-height={item.height}
           >
             <img src={item.src} alt="" loading="eager" />
-          </figure>
-        ))}
-      </div>
-
-      <div class="home-scroll__word-guide" aria-hidden="true">
-        {letters.map((letter) => (
-          <span class="home-scroll__slot" data-slot={letter.id}>
-            <img src={letter.src} alt="" style={`width:${letter.width}px;`} />
-          </span>
-        ))}
-      </div>
-
-      <div class="home-scroll__letters" aria-label="Animated REYNARD wordmark">
-        {letters.map((letter) => (
-          <figure class="home-scroll__letter" data-letter={letter.id} data-color={letter.color}>
-            <img src={letter.src} alt={letter.label} style={`width:${letter.width}px;`} />
           </figure>
         ))}
       </div>

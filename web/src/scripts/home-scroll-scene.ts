@@ -10,17 +10,17 @@ const STAGE_BOUNDS = {
 // These are the main timing knobs to edit.
 // Each tuple is [startProgress, endProgress] on the overall scene scroll range.
 const PHASES = {
-  stageFill: [0.06, 0.38],
-  stripeRoll: [0.0, 0.42],
-  bouquetBurst: [0.0, 0.54],
-  letterFade: [0.1, 0.5],
-  letterTravel: [0.1, 0.5],
-  letterSettle: [0.5, 0.54],
-  posterHandoff: [0.1, 0.2],
+  bouquetBurst: [0.08, 0.34],
+  logoReveal: [0.0, 0.3],
+  logoTravel: [0.34, 0.66],
+  stickyLock: [0.58, 0.72],
+  navReveal: [0.7, 0.88],
+  stageFill: [0.68, 0.9],
+  posterHandoff: [0.08, 0.18],
 } as const;
 
 // Bouquet sizing controls.
-const BOUQUET_SCALE = 0.65;
+const BOUQUET_SCALE = 0.75;
 const BOUQUET_TIGHTNESS = 1.12;
 const BOTANICAL_SIZE_BOOST = 1.344;
 
@@ -32,11 +32,6 @@ type BotanicalLayout = {
   startX: number;
   startY: number;
   width: number;
-};
-
-type LetterTarget = {
-  x: number;
-  y: number;
 };
 
 type MotionController = ReturnType<typeof animate>;
@@ -74,34 +69,29 @@ const initHomeScrollScene = (scene: HTMLElement) => {
   }
 
   const showPoster = scene.dataset.showPoster === "true";
-  const wordSlots = Array.from(
-    scene.querySelectorAll<HTMLElement>("[data-slot]"),
-  );
   const botanicals = Array.from(
     scene.querySelectorAll<HTMLElement>("[data-botanical]"),
-  );
-  const letters = Array.from(
-    scene.querySelectorAll<HTMLElement>("[data-letter]"),
   );
   const groupedReference = scene.querySelector<HTMLElement>(
     ".home-scroll__grouped-reference img",
   );
-  const stageFill = scene.querySelector<HTMLElement>(".home-scroll__stage-fill");
-  const stageStripes = scene.querySelector<HTMLElement>(".home-scroll__stage-stripes");
-  const primaryNav = document.querySelector<HTMLElement>('header nav[aria-label="Primary"]');
+  const sceneLogo = scene.querySelector<HTMLElement>(".home-scroll__logo-mark");
+  const stageFill = scene.querySelector<HTMLElement>(
+    ".home-scroll__stage-fill",
+  );
+  const headerBar = document.querySelector<HTMLElement>(
+    "header > div[data-css-var-name='--site-header-height']",
+  );
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   );
 
   let cancelScroll: (() => void) | undefined;
   let botanicalAnimations: MotionController[] = [];
-  let letterAnimations: MotionController[] = [];
   let posterAnimations: MotionController[] = [];
-  let stripeAnimations: MotionController[] = [];
   let fillAnimations: MotionController[] = [];
   let navUnlocked = false;
 
-  const letterTargets = new Map<string, LetterTarget>();
   const botanicalLayouts = new Map<string, BotanicalLayout>();
 
   const setReducedMotion = () => {
@@ -118,27 +108,23 @@ const initHomeScrollScene = (scene: HTMLElement) => {
       stageFill.style.opacity = "1";
     }
 
-    if (stageStripes) {
-      stageStripes.style.opacity = "0";
-      stageStripes.style.transform = "translateY(-120px)";
+    if (sceneLogo) {
+      sceneLogo.style.opacity = "1";
+      sceneLogo.style.transform = "translateY(0) scale(1)";
     }
 
     botanicals.forEach((botanical) => {
       botanical.style.opacity = showPoster ? "0" : "1";
     });
 
-    letters.forEach((letter) => {
-      letter.style.opacity = "1";
-      letter.style.filter = "none";
-    });
-
-    primaryNav?.setAttribute("data-home-scroll-nav-state", "ready");
+    headerBar?.setAttribute("data-home-scroll-nav-state", "ready");
+    headerBar?.style.setProperty("--home-header-shell-opacity", "1");
+    headerBar?.style.setProperty("--home-header-logo-opacity", "1");
+    headerBar?.style.setProperty("--home-nav-reveal", "1");
   };
 
   const measure = () => {
     const stageRect = stage.getBoundingClientRect();
-    const stageCenterX = stageRect.left + stageRect.width / 2;
-    const stageCenterY = stageRect.top + stageRect.height / 2;
 
     const groupedScale = Math.min(
       (stageRect.width * 0.72) / STAGE_BOUNDS.width,
@@ -147,20 +133,6 @@ const initHomeScrollScene = (scene: HTMLElement) => {
 
     if (groupedReference) {
       groupedReference.style.width = `${STAGE_BOUNDS.width * groupedScale}px`;
-    }
-
-    letterTargets.clear();
-    for (const slot of wordSlots) {
-      const id = slot.dataset.slot;
-      if (!id) {
-        continue;
-      }
-
-      const rect = slot.getBoundingClientRect();
-      letterTargets.set(id, {
-        x: rect.left + rect.width / 2 - stageCenterX,
-        y: rect.top + rect.height / 2 - stageCenterY,
-      });
     }
 
     botanicalLayouts.clear();
@@ -185,12 +157,21 @@ const initHomeScrollScene = (scene: HTMLElement) => {
       // These define the outward burst direction and how dramatic each piece feels.
       const baseAngle = Math.atan2(startY, startX || 0.001);
       const distance = Math.hypot(startX, startY);
-      const outward = 165 + distance * 0.72 + seeded(index, 1) * 190;
-      const angle = baseAngle + (seeded(index, 2) - 0.5) * 1.1;
-      const burstX = Math.cos(angle) * outward + (seeded(index, 3) - 0.5) * 110;
-      const burstY = Math.sin(angle) * outward + (seeded(index, 4) - 0.5) * 90;
-      const burstRot = (seeded(index, 5) - 0.5) * 180;
-      const burstScale = 0.92 + seeded(index, 6) * 0.36;
+      const edgeBiasX = Math.sign(startX || seeded(index, 31) - 0.5 || 1);
+      const edgeBiasY = Math.sign(startY || seeded(index, 32) - 0.5 || 1);
+      const outward =
+        Math.max(stageRect.width, stageRect.height) * 0.42 +
+        distance * 0.68 +
+        seeded(index, 1) * 220;
+      const angle = baseAngle + (seeded(index, 2) - 0.5) * 0.72;
+      const burstX =
+        Math.cos(angle) * outward +
+        edgeBiasX * (stageRect.width * 0.2 + seeded(index, 3) * 120);
+      const burstY =
+        Math.sin(angle) * outward +
+        edgeBiasY * (stageRect.height * 0.18 + seeded(index, 4) * 110);
+      const burstRot = (seeded(index, 5) - 0.5) * 220;
+      const burstScale = 0.88 + seeded(index, 6) * 0.32;
 
       botanicalLayouts.set(id, {
         startX,
@@ -225,46 +206,12 @@ const initHomeScrollScene = (scene: HTMLElement) => {
         botanical,
         {
           x: [layout.startX, layout.startX + layout.burstX + sideDrift],
-          y: [layout.startY, layout.startY + layout.burstY - 26],
+          y: [layout.startY, layout.startY + layout.burstY],
           rotate: [0, layout.burstRot],
           scale: [1, layout.burstScale],
           opacity: [showPoster ? 0 : 1, 1],
         },
         {
-          duration: 1,
-          ease: "linear",
-          autoplay: false,
-        },
-      );
-    });
-  };
-
-  const createLetterAnimations = () => {
-    stopAnimations(letterAnimations);
-    letterAnimations = letters.map((letter, index) => {
-      const id = letter.dataset.letter ?? "";
-      const target = letterTargets.get(id) ?? { x: 0, y: 0 };
-
-      // These define where letters originate near the center before spreading.
-      const angle =
-        (index / Math.max(letters.length, 1)) * Math.PI * 2 + seeded(index, 10);
-      const radius = 22 + seeded(index, 11) * 28;
-      const startX = Math.cos(angle) * radius;
-      const startY = Math.sin(angle) * radius;
-      const startRotate = (seeded(index, 12) - 0.5) * 10;
-      const startScale = 0.72 + seeded(index, 13) * 0.08;
-
-      return animate(
-        letter,
-        {
-          x: [startX, target.x, target.x],
-          y: [startY, target.y, target.y],
-          rotate: [startRotate, 0, 0],
-          scale: [startScale, 1, 1],
-          opacity: [0, 0.55, 1],
-        },
-        {
-          times: [0, 0.7, 1],
           duration: 1,
           ease: "linear",
           autoplay: false,
@@ -291,27 +238,8 @@ const initHomeScrollScene = (scene: HTMLElement) => {
   };
 
   const createStageAnimations = () => {
-    stopAnimations(stripeAnimations);
     stopAnimations(fillAnimations);
-    stripeAnimations = [];
     fillAnimations = [];
-
-    if (stageStripes) {
-      stripeAnimations.push(
-        animate(
-          stageStripes,
-          {
-            y: [0, -180],
-            opacity: [1, 0],
-          },
-          {
-            duration: 1,
-            ease: "linear",
-            autoplay: false,
-          },
-        ),
-      );
-    }
 
     if (stageFill) {
       fillAnimations.push(
@@ -331,12 +259,12 @@ const initHomeScrollScene = (scene: HTMLElement) => {
   const applyProgress = (progress: number) => {
     scene.style.setProperty("--scene-progress", progress.toFixed(4));
 
-    const stageFillProgress = mapPhase(progress, PHASES.stageFill);
-    const stripeRollProgress = mapPhase(progress, PHASES.stripeRoll);
     const burstProgress = mapPhase(progress, PHASES.bouquetBurst);
-    const letterFadeProgress = mapPhase(progress, PHASES.letterFade);
-    const letterTravelProgress = mapPhase(progress, PHASES.letterTravel);
-    const settleProgress = mapPhase(progress, PHASES.letterSettle);
+    const logoRevealProgress = mapPhase(progress, PHASES.logoReveal);
+    const logoTravelProgress = mapPhase(progress, PHASES.logoTravel);
+    const stickyLockProgress = mapPhase(progress, PHASES.stickyLock);
+    const navRevealProgress = mapPhase(progress, PHASES.navReveal);
+    const stageFillProgress = mapPhase(progress, PHASES.stageFill);
     const posterProgress = showPoster
       ? mapPhase(progress, PHASES.posterHandoff)
       : 1;
@@ -345,38 +273,49 @@ const initHomeScrollScene = (scene: HTMLElement) => {
       animation.time = stageFillProgress * animation.duration;
     }
 
-    for (const animation of stripeAnimations) {
-      animation.time = stripeRollProgress * animation.duration;
-    }
-
     // Bouquet scrub: how quickly the flowers/leaves travel outward.
     for (const animation of botanicalAnimations) {
       animation.time = burstProgress * animation.duration;
-    }
-
-    // Letter scrub:
-    // - `letterFadeProgress` controls when letters stop being hidden
-    // - `letterTravelProgress` controls how soon they begin leaving the center
-    // - `settleProgress` handles the final snap into the wordmark
-    const letterCompositeProgress = clamp(
-      Math.max(
-        letterFadeProgress * 0.45,
-        letterTravelProgress * 0.75,
-        settleProgress,
-      ),
-      0,
-      1,
-    );
-
-    for (const animation of letterAnimations) {
-      animation.time = letterCompositeProgress * animation.duration;
     }
 
     for (const animation of posterAnimations) {
       animation.time = posterProgress * animation.duration;
     }
 
-    primaryNav?.setAttribute(
+    if (sceneLogo) {
+      const lift = 118 * stickyLockProgress + 180 * logoTravelProgress;
+      const scale = 1.06 - logoTravelProgress * 0.28 - stickyLockProgress * 0.12;
+      const opacity =
+        0.42 +
+        logoRevealProgress * 0.4 -
+        stickyLockProgress * 0.55 -
+        navRevealProgress * 0.35;
+
+      sceneLogo.style.opacity = String(clamp(opacity, 0, 1));
+      sceneLogo.style.transform = `translateY(${-lift}px) scale(${scale})`;
+    }
+
+    if (headerBar) {
+      const shellOpacity = clamp(stickyLockProgress * 1.2, 0, 1);
+      const headerLogoOpacity = clamp(
+        stickyLockProgress * 1.15 + navRevealProgress * 0.2,
+        0,
+        1,
+      );
+      const navReveal = clamp(navRevealProgress, 0, 1);
+
+      headerBar.style.setProperty(
+        "--home-header-shell-opacity",
+        shellOpacity.toFixed(4),
+      );
+      headerBar.style.setProperty(
+        "--home-header-logo-opacity",
+        headerLogoOpacity.toFixed(4),
+      );
+      headerBar.style.setProperty("--home-nav-reveal", navReveal.toFixed(4));
+    }
+
+    headerBar?.setAttribute(
       "data-home-scroll-nav-state",
       navUnlocked ? "ready" : "hidden",
     );
@@ -389,14 +328,13 @@ const initHomeScrollScene = (scene: HTMLElement) => {
     }
 
     scene.dataset.reducedMotion = "false";
-    primaryNav?.setAttribute(
+    headerBar?.setAttribute(
       "data-home-scroll-nav-state",
       navUnlocked ? "ready" : "hidden",
     );
     measure();
     createStageAnimations();
     createBotanicalAnimations();
-    createLetterAnimations();
     createPosterAnimations();
 
     cancelScroll?.();
@@ -412,7 +350,7 @@ const initHomeScrollScene = (scene: HTMLElement) => {
         1,
       );
 
-      if (!navUnlocked && progress >= 0.58) {
+      if (!navUnlocked && progress >= PHASES.navReveal[0]) {
         navUnlocked = true;
       }
 

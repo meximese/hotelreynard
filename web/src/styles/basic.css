@@ -81,8 +81,28 @@ img {
   flex-flow: column nowrap;
   align-items: center;
   gap: 0.2rem;
-  /** set the color of the svg logo to the brown color */
   color: var(--brown);
+  position: relative;
+  z-index: 2;
+  opacity: var(--home-header-logo-opacity, 1);
+  transform: translateY(calc((1 - var(--home-header-logo-opacity, 1)) * -0.9rem))
+    scale(calc(0.9 + var(--home-header-logo-opacity, 1) * 0.1));
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease;
+}
+
+.logo-hotel,
+.logo-reynard {
+  height: auto;
+}
+
+.logo-hotel {
+  width: 4rem;
+}
+
+.logo-reynard {
+  width: 9rem;
 }
 
 header,
@@ -96,45 +116,77 @@ footer {
 header {
   position: sticky;
   top: 1.5rem;
-  background: var(--surface);
   z-index: 1000;
+  width: 100%;
 }
 
-header > div {
-  padding: 1rem;
+.site-header__bar {
   align-items: center;
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-}
-
-nav {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem 1.2rem;
-  justify-content: flex-end;
+  backdrop-filter: blur(10px);
+  background: rgba(252, 248, 240, calc(0.82 * var(--home-header-shell-opacity, 1)));
+  border: 1px solid rgba(120, 57, 52, calc(0.12 * var(--home-header-shell-opacity, 1)));
+  border-radius: 999px;
+  box-shadow: 0 18px 48px rgba(120, 57, 52, calc(0.12 * var(--home-header-shell-opacity, 1)));
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  justify-content: center;
+  margin: 0 auto;
+  max-width: min(100%, 62rem);
+  padding: 1rem 1.2rem;
   transition:
+    max-width 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    gap 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms ease,
+    box-shadow 320ms ease,
+    border-color 320ms ease;
+}
+
+.site-header__nav {
+  align-items: center;
+  display: flex;
+  gap: 0.9rem 1.2rem;
+  min-width: 0;
+  max-width: 40rem;
+  opacity: var(--home-nav-reveal, 1);
+  overflow: hidden;
+  transform: translateY(calc((1 - var(--home-nav-reveal, 1)) * 0.8rem));
+  visibility: visible;
+  transition:
+    max-width 420ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 260ms ease,
     transform 260ms ease,
     visibility 260ms ease;
 }
 
-body:has([data-home-scroll]) nav[aria-label="Primary"]:not([data-home-scroll-nav-state="ready"]) {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-0.5rem);
-  visibility: hidden;
+.site-header__nav--left {
+  justify-content: flex-end;
 }
 
-nav[data-home-scroll-nav-state="hidden"] {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-0.5rem);
-  visibility: hidden;
+.site-header__nav--right {
+  justify-content: flex-start;
 }
 
-nav a {
+body:has([data-home-scroll]) .site-header__bar {
+  --home-header-shell-opacity: 0;
+  --home-header-logo-opacity: 0;
+  --home-nav-reveal: 0;
+}
+
+body:has([data-home-scroll]) .site-header__bar[data-home-scroll-nav-state="hidden"] .site-header__nav {
+  max-width: 0;
+  pointer-events: none;
+}
+
+body:has([data-home-scroll]) header:has(.site-header__bar[data-home-scroll-nav-state="ready"]) {
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.site-header__nav a {
   color: var(--muted);
   font-size: 0.95rem;
   letter-spacing: 0.08em;
@@ -152,7 +204,9 @@ footer > div {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
+  max-width: 58rem;
   padding: 1.5rem;
+  text-align: center;
 }
 
 footer p {
@@ -311,14 +365,17 @@ footer p {
   }
 
   .site-header__bar {
+    align-items: flex-start;
     border-radius: 28px;
-    align-items: start;
+    max-width: none;
+    display: flex;
     flex-direction: column;
   }
 
-  header > div {
-    align-items: flex-start;
-    flex-direction: column;
+  .site-header__nav,
+  .site-header__nav--left,
+  .site-header__nav--right {
+    justify-content: flex-start;
   }
 }
 
@@ -329,6 +386,19 @@ footer p {
 
   .site-logo {
     width: min(82vw, 420px);
+  }
+
+  body:has([data-home-scroll]) .site-header__bar[data-home-scroll-nav-state="hidden"] {
+    top: clamp(5rem, 15vh, 6.5rem);
+    width: min(88vw, 24rem);
+  }
+
+  body:has([data-home-scroll]) .site-header__bar[data-home-scroll-nav-state="hidden"] .logo-hotel {
+    width: 5.2rem;
+  }
+
+  body:has([data-home-scroll]) .site-header__bar[data-home-scroll-nav-state="hidden"] .logo-reynard {
+    width: 20rem;
   }
 
   .input-row {
