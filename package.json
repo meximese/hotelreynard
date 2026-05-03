@@ -2,7 +2,7 @@
   "name": "sanity-template-astro-clean",
   "description": "Minimal Astro site with Sanity Studio",
   "scripts": {
-    "dev": "concurrently \"npm run dev --workspace=web\" \"npm run dev --workspace=studio\"",
+    "dev": "concurrently \"npm run dev --workspace=site\" \"npm run dev --workspace=studio\"",
     "email:dev": "npm run preview:dev --workspace=@hotelreynard/email",
     "email:preview": "npm run preview:build --workspace=@hotelreynard/email"
   },
