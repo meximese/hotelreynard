@@ -1,4 +1,7 @@
 import NewsletterForm from "@/components/NewsletterForm";
+import ReynardWordmarkMorph, {
+  ReynardWordmarkMorphDemo,
+} from "@/components/ReynardWordmarkMorph";
 
 const flowers = [
   "/site-svg/orange%20flower%20a.svg",
@@ -36,9 +39,9 @@ export default function Home() {
 
         <div className="poster-bouquet poster-bouquet--hero" aria-hidden="true">
           <img
-            src="/site-svg/bouquet.svg"
-            alt="a bouquet of flowers"
-            className="flowers-bouquet"
+            src={"/site-svg/bouquet.svg"}
+            alt=""
+            className="flower-bouquet"
           />
         </div>
 
@@ -50,6 +53,10 @@ export default function Home() {
         <p className="poster-date poster-date--lower">
           Hotel Reynard opens July 1st, 2026
         </p>
+      </section>
+
+      <section>
+        <ReynardWordmarkMorph className="poster-hero__morph" mode="scroll" />
       </section>
 
       <section className="poster-section poster-section--rooms" id="rooms">
@@ -65,12 +72,7 @@ export default function Home() {
       <section className="poster-section poster-section--stays" id="stays">
         <div className="poster-bouquet poster-bouquet--mid" aria-hidden="true">
           {flowers.map((src, index) => (
-            <img
-              key={`${src}-mid`}
-              src={src}
-              alt=""
-              className={`flower-${index + 1}`}
-            />
+            <img key={src} src={src} alt="" className={`flower-${index + 1}`} />
           ))}
         </div>
 
@@ -117,6 +119,10 @@ export default function Home() {
             className="poster-hero__reynard"
           />
         </div>
+      </section>
+
+      <section className="poster-mark">
+        <ReynardWordmarkMorphDemo />
       </section>
 
       <section className="poster-footer">
