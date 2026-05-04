@@ -57,7 +57,7 @@ export default function RootLayout({
               holdEnd={0.5}
             >
               <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
-              <h2 className="poster-sub poster-hero__tavern">Tavern</h2>
+              <h2 className="poster-sub poster-hero__tavern">&amp; Tavern</h2>
               <p>© 2024 Hotel Reynard. All rights reserved.</p>
             </ReynardWordmarkMorphScrollScene>
           </footer>

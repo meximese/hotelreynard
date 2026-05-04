@@ -245,7 +245,7 @@ html[data-header-visible="true"] .site-header {
 .poster-mark__tavern {
   margin: 0;
   color: var(--orange);
-  font-size: clamp(1.6rem, 4vw, 5.5rem);
+  font-size: clamp(1.6rem, 3.5vw, 5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 700;
@@ -441,7 +441,6 @@ html[data-header-visible="true"] .site-header {
 
 .morph-scroll-track--footer {
   position: relative;
-  background-color: var(--yellow);
   & .poster-sub {
     position: absolute;
     left: 50%;
@@ -452,11 +451,11 @@ html[data-header-visible="true"] .site-header {
   }
 
   & .poster-hero__hotel {
-    top: 16%;
+    top: 13%;
   }
 
   & .poster-hero__tavern {
-    top: 64%;
+    top: 65%;
   }
 }
 

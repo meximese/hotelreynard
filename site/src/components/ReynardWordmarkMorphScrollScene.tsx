@@ -30,7 +30,7 @@ export default function ReynardWordmarkMorphScrollScene({
   const [progress, setProgress] = useState(0);
   const { scrollYProgress } = useScroll({
     target: trackRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
   useEffect(() => {
@@ -56,6 +56,7 @@ export default function ReynardWordmarkMorphScrollScene({
 
     lastCompletedRef.current = direction;
     setIsComplete(true);
+    console.log("complete!!");
     onComplete?.(direction, direction === "reverse" ? 0 : 1);
   }, [direction, onComplete, progress]);
 
