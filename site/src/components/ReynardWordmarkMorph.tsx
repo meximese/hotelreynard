@@ -163,6 +163,7 @@ export default function ReynardWordmarkMorph({
     const isTerminal = rawProgress >= 1;
 
     if (!isTerminal) {
+      lastCompletedRef.current = null;
       return;
     }
 
