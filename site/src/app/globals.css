@@ -230,10 +230,6 @@ html[data-header-visible="true"] .site-header {
   gap: 0.15rem;
 }
 
-.poster-hero__hotel {
-  width: 6.5rem;
-}
-
 .poster-hero__reynard {
   width: min(66dvh, 90vw);
 }
@@ -243,15 +239,18 @@ html[data-header-visible="true"] .site-header {
   margin: 0.25rem auto 0;
 }
 
+.poster-hero__hotel,
 .poster-hero__tavern,
 .poster-mark__hotel,
 .poster-mark__tavern {
   margin: 0;
   color: var(--orange);
-  font-size: clamp(2.1rem, 5vw, 4.5rem);
+  font-size: clamp(1.6rem, 4vw, 5.5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .poster-date {
@@ -409,9 +408,60 @@ html[data-header-visible="true"] .site-header {
   text-align: center;
 }
 
+.site-footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .poster-newsletter {
   width: min(28rem, calc(100% - 2rem));
   margin: 2rem auto 0;
+}
+
+.morph-scroll-track {
+  min-height: var(--morph-track-height, 200vh);
+  position: relative;
+}
+
+.morph-scroll-sticky {
+  align-items: center;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.morph-scroll-track--footer {
+  margin-bottom: 0;
+}
+
+.morph-scroll-track--footer {
+  position: relative;
+  background-color: var(--yellow);
+  & .poster-sub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 520ms ease;
+  }
+
+  & .poster-hero__hotel {
+    top: 16%;
+  }
+
+  & .poster-hero__tavern {
+    top: 64%;
+  }
+}
+
+.site-footer--morph-complete .poster-sub {
+  opacity: 1;
 }
 
 .reynard-morph {
@@ -692,4 +742,8 @@ html[data-header-visible="true"] .site-header {
   .poster-stair img {
     height: 5.2rem;
   }
+}
+
+footer {
+  /* background: #fa2a7a; */
 }

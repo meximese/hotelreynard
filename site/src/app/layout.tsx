@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import HeaderVisibilityController from "@/components/HeaderVisibilityController";
 import "./globals.css";
+import ReynardWordmarkMorphScrollScene from "@/components/ReynardWordmarkMorphScrollScene";
 
 export const metadata: Metadata = {
   title: "Hotel Reynard",
@@ -20,7 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Ga+Maamli&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
@@ -43,8 +48,24 @@ export default function RootLayout({
             </div>
           </header>
           <main className="site-main">{children}</main>
+          <footer className="site-footer">
+            <ReynardWordmarkMorphScrollScene
+              className="morph-scroll-track--footer"
+              morphClassName="poster-hero__morph"
+              direction="forward"
+              holdStart={0.0}
+              holdEnd={0.5}
+            >
+              <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
+              <h2 className="poster-sub poster-hero__tavern">Tavern</h2>
+              <p>© 2024 Hotel Reynard. All rights reserved.</p>
+            </ReynardWordmarkMorphScrollScene>
+          </footer>
         </div>
-        <Script src="https://api.mews.com/distributor/distributor.min.js" strategy="afterInteractive" />
+        <Script
+          src="https://api.mews.com/distributor/distributor.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

@@ -118,16 +118,6 @@ export default function Home() {
           <NewsletterForm />
         </div>
       </section>
-
-      <section className="morph-scroll-track">
-        <div className="morph-scroll-sticky">
-          <ReynardWordmarkMorph
-            className="poster-hero__morph"
-            mode="scroll"
-            direction="reverse"
-          />
-        </div>
-      </section>
     </section>
   );
 }
