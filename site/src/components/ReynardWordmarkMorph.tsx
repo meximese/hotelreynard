@@ -11,8 +11,13 @@ interface ReynardWordmarkMorphProps {
   className?: string;
   mode?: MorphMode;
   progress?: number;
+  direction?: "forward" | "reverse";
   onProgressChange?: (progress: number) => void;
-  onAnimationComplete?: (direction: "forward" | "reverse", progress: number) => void;
+  onAnimationComplete?: (
+    direction: "forward" | "reverse",
+    progress: number,
+  ) => void;
+  onComplete?: (direction: "forward" | "reverse", progress: number) => void;
   completionDirection?: "forward" | "reverse";
 }
 
@@ -33,42 +38,84 @@ type LetterConfig = {
 };
 
 const LETTERS: LetterConfig[] = [
-  { id: "r1", label: "R", src: "/site-svg/reynard-r-1.svg", width: 97, height: 193 },
-  { id: "e", label: "E", src: "/site-svg/reynard-e.svg", width: 72, height: 186 },
-  { id: "y", label: "Y", src: "/site-svg/reynard-y.svg", width: 85, height: 179 },
-  { id: "n", label: "N", src: "/site-svg/reynard-n.svg", width: 90, height: 177 },
-  { id: "a", label: "A", src: "/site-svg/reynard-a.svg", width: 79, height: 184 },
-  { id: "r2", label: "R", src: "/site-svg/reynard-r-2.svg", width: 98, height: 182 },
-  { id: "d", label: "D", src: "/site-svg/reynard-d.svg", width: 80, height: 178 },
+  {
+    id: "r1",
+    label: "R",
+    src: "/site-svg/reynard-r-1.svg",
+    width: 97,
+    height: 193,
+  },
+  {
+    id: "e",
+    label: "E",
+    src: "/site-svg/reynard-e.svg",
+    width: 72,
+    height: 186,
+  },
+  {
+    id: "y",
+    label: "Y",
+    src: "/site-svg/reynard-y.svg",
+    width: 85,
+    height: 179,
+  },
+  {
+    id: "n",
+    label: "N",
+    src: "/site-svg/reynard-n.svg",
+    width: 90,
+    height: 177,
+  },
+  {
+    id: "a",
+    label: "A",
+    src: "/site-svg/reynard-a.svg",
+    width: 79,
+    height: 184,
+  },
+  {
+    id: "r2",
+    label: "R",
+    src: "/site-svg/reynard-r-2.svg",
+    width: 98,
+    height: 182,
+  },
+  {
+    id: "d",
+    label: "D",
+    src: "/site-svg/reynard-d.svg",
+    width: 80,
+    height: 178,
+  },
 ];
 
 const KEYFRAMES: Record<MorphPhase, Record<LetterId, LetterFrame>> = {
   0: {
-    r1: { x: 8, y: 15, rotate: -10, scale: 1.08, color: "#BACBDF" },
-    e: { x: 21, y: 24, rotate: 3, scale: 1.02, color: "#BACBDF" },
-    y: { x: 32, y: 33, rotate: 2, scale: 1.02, color: "#BACBDF" },
-    n: { x: 45, y: 42, rotate: -4, scale: 1.02, color: "#BACBDF" },
-    a: { x: 57, y: 51, rotate: 4, scale: 1.02, color: "#BACBDF" },
-    r2: { x: 69, y: 60, rotate: 6, scale: 1.03, color: "#BACBDF" },
-    d: { x: 81, y: 69, rotate: 7, scale: 1.05, color: "#BACBDF" },
+    r1: { x: 7.9, y: 50, rotate: 0, scale: 1, color: "#F9A020" },
+    e: { x: 22.2, y: 54, rotate: 0, scale: 1, color: "#BACBDF" },
+    y: { x: 35, y: 47.8, rotate: 0, scale: 1, color: "#F9A020" },
+    n: { x: 48.7, y: 52.5, rotate: 0, scale: 1, color: "#94B5AD" },
+    a: { x: 63.4, y: 51.5, rotate: 0, scale: 1, color: "#F9A020" },
+    r2: { x: 78.2, y: 46, rotate: 0, scale: 1, color: "#BACBDF" },
+    d: { x: 93.5, y: 51, rotate: 0, scale: 1, color: "#94B5AD" },
   },
   1: {
-    r1: { x: 10, y: 22, rotate: -7, scale: 1.05, color: "#BACBDF" },
-    e: { x: 22, y: 27, rotate: 2, scale: 1.01, color: "#BACBDF" },
-    y: { x: 33, y: 31, rotate: 1, scale: 1.01, color: "#F9A020" },
-    n: { x: 45, y: 35, rotate: -2, scale: 1.01, color: "#94B5AD" },
-    a: { x: 56, y: 38, rotate: 2, scale: 1.01, color: "#F9A020" },
-    r2: { x: 68, y: 41, rotate: 3, scale: 1.02, color: "#BACBDF" },
-    d: { x: 80, y: 45, rotate: 4, scale: 1.03, color: "#94B5AD" },
+    r1: { x: 10, y: 22, rotate: -7, scale: 1, color: "#BACBDF" },
+    e: { x: 22, y: 27, rotate: 2, scale: 1, color: "#BACBDF" },
+    y: { x: 33, y: 31, rotate: 1, scale: 1, color: "#F9A020" },
+    n: { x: 45, y: 35, rotate: -2, scale: 1, color: "#94B5AD" },
+    a: { x: 56, y: 38, rotate: 2, scale: 1, color: "#F9A020" },
+    r2: { x: 68, y: 41, rotate: 3, scale: 1, color: "#BACBDF" },
+    d: { x: 80, y: 45, rotate: 4, scale: 1, color: "#94B5AD" },
   },
   2: {
-    r1: { x: 8, y: 30, rotate: 0, scale: 1, color: "#F9A020" },
-    e: { x: 20, y: 30, rotate: 0, scale: 1, color: "#BACBDF" },
-    y: { x: 31, y: 30, rotate: 0, scale: 1, color: "#F9A020" },
-    n: { x: 43, y: 30, rotate: 0, scale: 1, color: "#94B5AD" },
-    a: { x: 56, y: 30, rotate: 0, scale: 1, color: "#F9A020" },
-    r2: { x: 68, y: 30, rotate: 0, scale: 1, color: "#BACBDF" },
-    d: { x: 81, y: 30, rotate: 0, scale: 1, color: "#94B5AD" },
+    r1: { x: 7.9, y: 19, rotate: 4, scale: 1, color: "#BACBDF" },
+    e: { x: 22.2, y: 31, rotate: 0, scale: 1, color: "#BACBDF" },
+    y: { x: 35, y: 40.7, rotate: 0, scale: 1, color: "#BACBDF" },
+    n: { x: 48.7, y: 52, rotate: 0, scale: 1, color: "#BACBDF" },
+    a: { x: 63.4, y: 64, rotate: 0, scale: 1, color: "#BACBDF" },
+    r2: { x: 78.2, y: 73.4, rotate: 0, scale: 1, color: "#BACBDF" },
+    d: { x: 93.5, y: 82.5, rotate: 0, scale: 1, color: "#BACBDF" },
   },
 };
 
@@ -76,8 +123,10 @@ export default function ReynardWordmarkMorph({
   className,
   mode = "controlled",
   progress,
+  direction = "forward",
   onProgressChange,
   onAnimationComplete,
+  onComplete,
   completionDirection,
 }: ReynardWordmarkMorphProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -105,46 +154,45 @@ export default function ReynardWordmarkMorph({
     progress: number;
   } | null>(null);
 
-  const clampedProgress = clamp(
-    mode === "scroll" ? scrollProgress : progress ?? 0,
+  const rawProgress = clamp(
+    mode === "scroll" ? scrollProgress : (progress ?? 0),
     0,
     1,
   );
+  const clampedProgress =
+    direction === "reverse" ? 1 - rawProgress : rawProgress;
+  const resolvedOnComplete = onComplete ?? onAnimationComplete;
 
   useEffect(() => {
-    if (mode !== "controlled" || !onAnimationComplete) {
+    if (mode !== "controlled" || !resolvedOnComplete) {
       return;
     }
 
-    const direction =
-      completionDirection ??
-      (clampedProgress >= 1 ? "forward" : clampedProgress <= 0 ? "reverse" : null);
-    const isTerminal =
-      (direction === "forward" && clampedProgress >= 1) ||
-      (direction === "reverse" && clampedProgress <= 0);
+    const completedDirection = completionDirection ?? direction;
+    const isTerminal = rawProgress >= 1;
 
-    if (!isTerminal || !direction) {
+    if (!isTerminal) {
       return;
     }
 
-    const terminalProgress = direction === "reverse" ? 0 : 1;
+    const terminalProgress = completedDirection === "reverse" ? 0 : 1;
     const lastCompleted = lastCompletedRef.current;
 
     if (
       lastCompleted &&
-      lastCompleted.direction === direction &&
+      lastCompleted.direction === completedDirection &&
       lastCompleted.progress === terminalProgress
     ) {
       return;
     }
 
     lastCompletedRef.current = {
-      direction,
+      direction: completedDirection,
       progress: terminalProgress,
     };
 
-    onAnimationComplete(direction, terminalProgress);
-  }, [clampedProgress, completionDirection, mode, onAnimationComplete]);
+    resolvedOnComplete(completedDirection, terminalProgress);
+  }, [completionDirection, direction, mode, rawProgress, resolvedOnComplete]);
 
   const phaseProgress = clampedProgress * 2;
   const startPhase = Math.floor(phaseProgress) as MorphPhase;
@@ -173,7 +221,7 @@ export default function ReynardWordmarkMorph({
         {styles.map((letter) => (
           <span
             key={letter.id}
-            className="reynard-morph__letter"
+            className={`reynard-morph__letter letter-${letter.id}`}
             aria-label={letter.label}
             style={
               {
@@ -197,7 +245,9 @@ export default function ReynardWordmarkMorph({
 export function ReynardWordmarkMorphDemo() {
   const progress = useMotionValue(0);
   const [value, setValue] = useState(0);
-  const [isReversing, setIsReversing] = useState(false);
+  const [playDirection, setPlayDirection] = useState<"forward" | "reverse">(
+    "forward",
+  );
   const [completionMessage, setCompletionMessage] = useState("");
 
   useEffect(() => {
@@ -208,9 +258,14 @@ export function ReynardWordmarkMorphDemo() {
     return unsubscribe;
   }, [progress]);
 
-  const playTo = (target: number) => {
-    setIsReversing(target < value);
-    animate(progress, target, {
+  const setFrame = (target: number) => {
+    progress.set(target);
+  };
+
+  const play = (direction: "forward" | "reverse") => {
+    setPlayDirection(direction);
+    progress.set(0);
+    animate(progress, 1, {
       duration: 1.2,
       ease: [0.22, 1, 0.36, 1],
     });
@@ -223,15 +278,16 @@ export function ReynardWordmarkMorphDemo() {
         <h2 id="reynard-demo-title">Scroll it, trigger it, reverse it.</h2>
         <p>
           The same letter rig can be driven by scroll progress or by an
-          imperative trigger, which is what we&apos;ll want later for loading states.
+          imperative trigger, which is what we&apos;ll want later for loading
+          states.
         </p>
       </div>
 
       <ReynardWordmarkMorph
         className="reynard-demo__stage"
         progress={value}
-        completionDirection={isReversing ? "reverse" : "forward"}
-        onAnimationComplete={(direction, progressValue) => {
+        direction={playDirection}
+        onComplete={(direction, progressValue) => {
           setCompletionMessage(
             direction === "forward"
               ? `Forward animation finished at ${progressValue}.`
@@ -241,19 +297,37 @@ export function ReynardWordmarkMorphDemo() {
       />
 
       <div className="reynard-demo__controls">
-        <button type="button" onClick={() => playTo(0)}>
+        <button
+          type="button"
+          onClick={() => {
+            setPlayDirection("forward");
+            setFrame(0);
+          }}
+        >
           Stair Start
         </button>
-        <button type="button" onClick={() => playTo(0.5)}>
+        <button
+          type="button"
+          onClick={() => {
+            setPlayDirection("forward");
+            setFrame(0.5);
+          }}
+        >
           Mid Frame
         </button>
-        <button type="button" onClick={() => playTo(1)}>
+        <button
+          type="button"
+          onClick={() => {
+            setPlayDirection("forward");
+            setFrame(1);
+          }}
+        >
           Row End
         </button>
-        <button type="button" onClick={() => playTo(1)}>
+        <button type="button" onClick={() => play("forward")}>
           Play Forward
         </button>
-        <button type="button" onClick={() => playTo(0)}>
+        <button type="button" onClick={() => play("reverse")}>
           Play Reverse
         </button>
       </div>

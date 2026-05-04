@@ -55,10 +55,6 @@ export default function Home() {
         </p>
       </section>
 
-      <section>
-        <ReynardWordmarkMorph className="poster-hero__morph" mode="scroll" />
-      </section>
-
       <section className="poster-section poster-section--rooms" id="rooms">
         <div className="poster-copy">
           <h2>Rooms</h2>
@@ -108,6 +104,16 @@ export default function Home() {
             Small parties, private dinners, and the kind of gatherings that
             stretch a meal into the rest of the evening.
           </p>
+        </div>
+      </section>
+
+      <section className="morph-scroll-track">
+        <div className="morph-scroll-sticky">
+          <ReynardWordmarkMorph
+            className="poster-hero__morph"
+            mode="scroll"
+            direction="reverse"
+          />
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import HeaderVisibilityController from "@/components/HeaderVisibilityController";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <HeaderVisibilityController />
         <div className="site-shell">
           <header className="site-header">
             <div className="site-header__bar">
