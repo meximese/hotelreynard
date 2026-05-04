@@ -4,7 +4,7 @@ import { animate, useMotionValue, useScroll } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type MorphMode = "scroll" | "controlled";
-type MorphPhase = 0 | 1 | 2;
+type MorphPhase = 0 | 1;
 type LetterId = "r1" | "e" | "y" | "n" | "a" | "r2" | "d";
 
 interface ReynardWordmarkMorphProps {
@@ -100,15 +100,6 @@ const KEYFRAMES: Record<MorphPhase, Record<LetterId, LetterFrame>> = {
     d: { x: 93.5, y: 51, rotate: 0, scale: 1, color: "#94B5AD" },
   },
   1: {
-    r1: { x: 10, y: 22, rotate: -7, scale: 1, color: "#BACBDF" },
-    e: { x: 22, y: 27, rotate: 2, scale: 1, color: "#BACBDF" },
-    y: { x: 33, y: 31, rotate: 1, scale: 1, color: "#F9A020" },
-    n: { x: 45, y: 35, rotate: -2, scale: 1, color: "#94B5AD" },
-    a: { x: 56, y: 38, rotate: 2, scale: 1, color: "#F9A020" },
-    r2: { x: 68, y: 41, rotate: 3, scale: 1, color: "#BACBDF" },
-    d: { x: 80, y: 45, rotate: 4, scale: 1, color: "#94B5AD" },
-  },
-  2: {
     r1: { x: 7.9, y: 19, rotate: 4, scale: 1, color: "#BACBDF" },
     e: { x: 22.2, y: 31, rotate: 0, scale: 1, color: "#BACBDF" },
     y: { x: 35, y: 40.7, rotate: 0, scale: 1, color: "#BACBDF" },
@@ -133,7 +124,7 @@ export default function ReynardWordmarkMorph({
   const [scrollProgress, setScrollProgress] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 75%", "end 25%"],
+    offset: ["start 25%", "end 75%"],
   });
 
   useEffect(() => {
@@ -194,26 +185,21 @@ export default function ReynardWordmarkMorph({
     resolvedOnComplete(completedDirection, terminalProgress);
   }, [completionDirection, direction, mode, rawProgress, resolvedOnComplete]);
 
-  const phaseProgress = clampedProgress * 2;
-  const startPhase = Math.floor(phaseProgress) as MorphPhase;
-  const endPhase = Math.min(startPhase + 1, 2) as MorphPhase;
-  const localProgress = phaseProgress - startPhase;
-
   const styles = useMemo(() => {
     return LETTERS.map((letter) => {
-      const start = KEYFRAMES[startPhase][letter.id];
-      const end = KEYFRAMES[endPhase][letter.id];
+      const start = KEYFRAMES[0][letter.id];
+      const end = KEYFRAMES[1][letter.id];
 
       return {
         ...letter,
-        x: mix(start.x, end.x, localProgress),
-        y: mix(start.y, end.y, localProgress),
-        rotate: mix(start.rotate, end.rotate, localProgress),
-        scale: mix(start.scale, end.scale, localProgress),
-        color: mixColor(start.color, end.color, localProgress),
+        x: mix(start.x, end.x, clampedProgress),
+        y: mix(start.y, end.y, clampedProgress),
+        rotate: mix(start.rotate, end.rotate, clampedProgress),
+        scale: mix(start.scale, end.scale, clampedProgress),
+        color: mixColor(start.color, end.color, clampedProgress),
       };
     });
-  }, [endPhase, localProgress, startPhase]);
+  }, [clampedProgress]);
 
   return (
     <div className={`reynard-morph ${className ?? ""}`.trim()} ref={ref}>

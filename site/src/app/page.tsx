@@ -107,30 +107,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="morph-scroll-track">
-        <div className="morph-scroll-sticky">
-          <ReynardWordmarkMorph
-            className="poster-hero__morph"
-            mode="scroll"
-            direction="reverse"
-          />
-        </div>
-      </section>
-
-      <section className="poster-mark">
-        <div className="poster-hero__stack">
-          <img
-            src="/reynard-tall.png"
-            alt="Hotel Reynard"
-            className="poster-hero__reynard"
-          />
-        </div>
-      </section>
-
-      <section className="poster-mark">
-        <ReynardWordmarkMorphDemo />
-      </section>
-
       <section className="poster-footer">
         <p className="poster-date poster-date--footer">
           Hotel Reynard opens July 1st, 2026
@@ -140,6 +116,16 @@ export default function Home() {
 
         <div className="poster-newsletter">
           <NewsletterForm />
+        </div>
+      </section>
+
+      <section className="morph-scroll-track">
+        <div className="morph-scroll-sticky">
+          <ReynardWordmarkMorph
+            className="poster-hero__morph"
+            mode="scroll"
+            direction="reverse"
+          />
         </div>
       </section>
     </section>
