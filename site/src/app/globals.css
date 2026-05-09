@@ -1,3 +1,31 @@
+@font-face {
+  font-family: "Krete Book";
+  src: url("/fonts/krete-book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Krete Light";
+  src: url("/fonts/krete-light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tablet Gothic Narrow";
+  src:
+    url("/fonts/tablet-gothic-narrow-regular.woff2") format("woff2"),
+    url("/fonts/tablet-gothic-narrow-regular.woff") format("woff"),
+    url("/fonts/tablet-gothic-narrow-regular.ttf") format("truetype"),
+    url("/fonts/tablet-gothic-narrow-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --brown: #783934;
   --orange: #fca01c;
@@ -19,17 +47,92 @@
   --radius-md: 20px;
   --radius-sm: 14px;
   --max-width: 1512px;
+  --font-family-display: "Ga Maamli", cursive;
+  --font-family-heading: "Krete Book", serif;
+  --font-family-heading-light: "Krete Light", serif;
+  --font-family-body: "Tablet Gothic Narrow", "Arial Narrow", Arial, sans-serif;
+  --font-size-body: 1rem;
+  --font-size-h6: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --font-size-h5: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+  --font-size-h4: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --font-size-h3: clamp(1.5rem, 1.15rem + 1.6vw, 2.5rem);
+  --font-size-h2: clamp(2rem, 1.4rem + 2.8vw, 3.5rem);
+  --font-size-h1: clamp(2.5rem, 1.7rem + 4vw, 4.5rem);
+  --font-size-display: clamp(4rem, 2.8rem + 5vw, 6rem);
+  --line-height-body: 1.5;
+  --line-height-heading: 1;
 }
 
 html {
   color: var(--ink);
-  font-family: "PT Sans", sans-serif;
+  font-family: var(--font-family-body);
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   background: var(--white);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: inherit;
+  line-height: var(--line-height-heading);
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-family: var(--font-family-display);
+  font-weight: 400;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+}
+
+.display {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display);
+  line-height: 0.95;
+  font-weight: 400;
+  text-wrap: balance;
 }
 
 button,
@@ -92,8 +195,6 @@ html[data-header-visible="true"] .site-header {
 .site-header__nav a {
   color: var(--orange);
   text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -123,8 +224,6 @@ html[data-header-visible="true"] .site-header {
   min-height: 2.6rem;
   padding: 0 1rem;
   text-decoration: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -140,8 +239,6 @@ html[data-header-visible="true"] .site-header {
   color: var(--orange);
   display: block;
   margin-bottom: 0.7rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -170,7 +267,6 @@ html[data-header-visible="true"] .site-header {
 .status {
   color: var(--brown);
   margin-top: 0.8rem;
-  font-size: 0.85rem;
 }
 
 .status.success {
@@ -216,22 +312,36 @@ html[data-header-visible="true"] .site-header {
   justify-content: center;
   gap: 1rem;
   color: var(--orange);
-  font-size: 0.82rem;
+  text-transform: uppercase;
   margin-bottom: 0.4rem;
+  font-size: var(--font-size-h5);
+}
+
+.poster-hero__navline--top {
+  position: absolute;
+  left: 18%;
+  top: 2.5rem;
+  transform: translateX(-50%);
 }
 
 .poster-hero__navline--bottom {
-  margin-top: 0.35rem;
+  position: absolute;
+  left: 82%;
+  bottom: 2rem;
+  transform: translateX(-50%);
 }
 
 .poster-hero__stack {
   display: grid;
   justify-items: center;
   gap: 0.15rem;
+  position: relative;
+  width: min(77dvh, 90vw);
+  margin: 0 auto;
 }
 
 .poster-hero__reynard {
-  width: min(66dvh, 90vw);
+  width: min(77dvh, 90vw);
 }
 
 .poster-hero__morph {
@@ -243,12 +353,11 @@ html[data-header-visible="true"] .site-header {
 .poster-hero__tavern,
 .poster-mark__hotel,
 .poster-mark__tavern {
-  margin: 0;
   color: var(--orange);
-  font-size: clamp(1.6rem, 3.5vw, 5rem);
+  font-size: var(--font-size-display);
   line-height: 0.95;
   letter-spacing: -0.02em;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
   text-transform: uppercase;
 }
@@ -256,7 +365,6 @@ html[data-header-visible="true"] .site-header {
 .poster-date {
   margin: 1.35rem 0 0;
   text-align: center;
-  font-size: 0.82rem;
 }
 
 .poster-date--lower {
@@ -316,8 +424,29 @@ html[data-header-visible="true"] .site-header {
 }
 
 .poster-section--rooms .poster-copy {
-  grid-column: 1 / span 2;
-  margin-left: clamp(1rem, 7vw, 10rem);
+  grid-column: 2 / span 2;
+  margin: 0;
+}
+
+.poster-section--rooms .poster-copy p {
+  max-width: none;
+  line-height: 1.45;
+}
+
+.poster-section--rooms .poster-copy p + p {
+  margin-top: 1.25rem;
+}
+
+.poster-section--images {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 7vw;
+}
+
+.poster-section--images .poster-image {
+  width: min(50%, 32rem);
 }
 
 .poster-section--stays .poster-bouquet {
@@ -349,15 +478,12 @@ html[data-header-visible="true"] .site-header {
 .poster-copy h2 {
   margin: 0 0 0.45rem;
   color: #000;
-  font-size: clamp(1.8rem, 3vw, 2.25rem);
-  font-weight: 700;
 }
 
 .poster-copy p {
   margin: 0;
   max-width: 31rem;
   color: #000;
-  font-size: 0.95rem;
   line-height: 1.45;
 }
 
@@ -414,6 +540,8 @@ html[data-header-visible="true"] .site-header {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  background: var(--muted);
+  color: var(--white);
 }
 
 .poster-newsletter {
@@ -429,10 +557,10 @@ html[data-header-visible="true"] .site-header {
 .morph-scroll-sticky {
   align-items: center;
   display: grid;
-  min-height: 100vh;
+  min-height: 75dvh;
   place-items: center;
   position: sticky;
-  top: 0;
+  top: 7dvh;
 }
 
 .morph-scroll-track--footer {
@@ -444,18 +572,18 @@ html[data-header-visible="true"] .site-header {
   & .poster-sub {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: auto;
+    transform: translate(-50%, 0%);
     opacity: 0;
     transition: opacity 520ms ease;
   }
 
   & .poster-hero__hotel {
-    top: 13%;
+    top: 7%;
   }
 
   & .poster-hero__tavern {
-    top: 65%;
+    bottom: 0;
   }
 }
 
@@ -537,14 +665,11 @@ html[data-header-visible="true"] .site-header {
 .reynard-demo__eyebrow {
   margin: 0 0 0.6rem;
   color: var(--orange);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .reynard-demo__copy h2 {
   margin: 0 0 0.75rem;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
 }
 
 .reynard-demo__copy p {
@@ -568,7 +693,6 @@ html[data-header-visible="true"] .site-header {
 .reynard-demo__status {
   margin: 1rem 0 0;
   color: var(--green);
-  font-size: 0.9rem;
 }
 
 .rich-text-section,
@@ -589,10 +713,7 @@ html[data-header-visible="true"] .site-header {
 .rich-text-section h2,
 .detail-hero h1 {
   margin: 0 0 1rem;
-  font-family: "Alegreya", serif;
-  font-size: clamp(2.1rem, 5vw, 4rem);
   line-height: 0.95;
-  font-weight: 700;
 }
 
 .rich-text-section__body {

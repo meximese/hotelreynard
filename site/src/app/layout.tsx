@@ -27,7 +27,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Ga+Maamli&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -49,17 +49,27 @@ export default function RootLayout({
           </header>
           <main className="site-main">{children}</main>
           <footer className="site-footer">
-            <ReynardWordmarkMorphScrollScene
-              className="morph-scroll-track--footer"
-              morphClassName="poster-hero__morph"
-              direction="forward"
-              holdStart={0.0}
-              holdEnd={0.5}
-            >
-              <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
-              <h2 className="poster-sub poster-hero__tavern">&amp; Tavern</h2>
-              <p>© 2024 Hotel Reynard. All rights reserved.</p>
-            </ReynardWordmarkMorphScrollScene>
+            <div className="poster-hero__stack">
+              <img
+                src="/reynard-short.png"
+                alt="Hotel Reynard"
+                className="poster-hero__reynard"
+              />
+              <div
+                className="poster-hero__navline poster-hero__navline--top"
+                aria-hidden="true"
+              >
+                <span>Rooms</span>
+                <span>Stays</span>
+              </div>
+              <div
+                className="poster-hero__navline poster-hero__navline--bottom"
+                aria-hidden="true"
+              >
+                <span>Menu</span>
+                <span>Events</span>
+              </div>
+            </div>
           </footer>
         </div>
         <Script

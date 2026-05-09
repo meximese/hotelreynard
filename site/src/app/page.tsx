@@ -2,6 +2,7 @@ import NewsletterForm from "@/components/NewsletterForm";
 import ReynardWordmarkMorph, {
   ReynardWordmarkMorphDemo,
 } from "@/components/ReynardWordmarkMorph";
+import ReynardWordmarkMorphScrollScene from "@/components/ReynardWordmarkMorphScrollScene";
 
 const flowers = [
   "/site-svg/orange%20flower%20a.svg",
@@ -13,30 +14,18 @@ const flowers = [
 export default function Home() {
   return (
     <section className="poster-page" id="top">
-      <section className="poster-hero">
-        <div className="poster-hero__navline" aria-hidden="true">
-          <span>Rooms</span>
-          <span>Stays</span>
-        </div>
-
-        <div className="poster-hero__stack">
-          <img
-            src="/reynard-short.png"
-            alt="Hotel Reynard"
-            className="poster-hero__reynard"
-          />
-        </div>
-
-        <div
-          className="poster-hero__navline poster-hero__navline--bottom"
-          aria-hidden="true"
+      <footer className="site-footer">
+        <ReynardWordmarkMorphScrollScene
+          className="morph-scroll-track--footer"
+          morphClassName="poster-hero__morph"
+          direction="forward"
+          holdStart={0.0}
+          holdEnd={0.25}
         >
-          <span>Menu</span>
-          <span>Events</span>
-        </div>
-
+          <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
+          <h2 className="poster-sub poster-hero__tavern">&amp; Tavern</h2>
+        </ReynardWordmarkMorphScrollScene>
         <p className="poster-date">Hotel Reynard opens July 1st, 2026</p>
-
         <div className="poster-bouquet poster-bouquet--hero" aria-hidden="true">
           <img
             src={"/site-svg/bouquet.svg"}
@@ -44,35 +33,41 @@ export default function Home() {
             className="flower-bouquet"
           />
         </div>
-
-        <div
-          className="poster-placeholder poster-placeholder--hero"
-          aria-hidden="true"
-        ></div>
+      </footer>
+      <section className="poster-hero">
+        <div className="poster-image">
+          <img src="/images/gorge.jpg" alt="" />
+        </div>
 
         <p className="poster-date poster-date--lower">
-          Hotel Reynard opens July 1st, 2026
+          A view from the historic Columbia River Highway.
         </p>
       </section>
 
       <section className="poster-section poster-section--rooms" id="rooms">
         <div className="poster-copy">
-          <h2>Rooms</h2>
+          <h2>Hotel Reynard in Troutdale, OR</h2>
           <p>
             Eight rooms sit above the tavern, each built for dropping bags,
             changing pace, and coming back late after a good dinner downstairs.
           </p>
+          <p>
+            The tavern is the anchor: aperitifs, dinner, a little ceremony, and
+            enough warmth to make the whole building feel switched on.
+          </p>
+          <p>
+            Small parties, private dinners, and the kind of gatherings that
+            stretch a meal into the rest of the evening.
+          </p>
         </div>
       </section>
 
-      <section className="poster-section poster-section--stays" id="stays">
-        <div className="poster-bouquet poster-bouquet--mid" aria-hidden="true">
-          {flowers.map((src, index) => (
-            <img key={src} src={src} alt="" className={`flower-${index + 1}`} />
-          ))}
+      <section className="poster-section poster-section--images" id="images">
+        <div className="poster-image">
+          <img src="/images/mult-falls.jpg" alt="" />
         </div>
-
-        <div className="poster-copy">
+        <div className="poster-image">
+          <img src="/images/hood-lake.jpg" alt="" />
           <h2>Stays</h2>
           <p>
             A stay at Reynard should feel easy and a little theatrical. Come in,
@@ -82,31 +77,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="poster-section poster-section--menu" id="menu">
-        <div
-          className="poster-placeholder poster-placeholder--secondary"
-          aria-hidden="true"
-        ></div>
-
-        <div className="poster-copy">
-          <h2>Menu</h2>
-          <p>
-            The tavern is the anchor: aperitifs, dinner, a little ceremony, and
-            enough warmth to make the whole building feel switched on.
-          </p>
-        </div>
-      </section>
-
-      <section className="poster-section poster-section--events" id="events">
-        <div className="poster-copy">
-          <h2>Events</h2>
-          <p>
-            Small parties, private dinners, and the kind of gatherings that
-            stretch a meal into the rest of the evening.
-          </p>
-        </div>
-      </section>
-
+      <div className="poster-bouquet poster-bouquet--mid" aria-hidden="true">
+        {flowers.map((src, index) => (
+          <img key={src} src={src} alt="" className={`flower-${index + 1}`} />
+        ))}
+      </div>
       <section className="poster-footer">
         <p className="poster-date poster-date--footer">
           Hotel Reynard opens July 1st, 2026

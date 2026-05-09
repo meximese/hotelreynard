@@ -100,13 +100,13 @@ const KEYFRAMES: Record<MorphPhase, Record<LetterId, LetterFrame>> = {
     d: { x: 93.5, y: 51, rotate: 0, scale: 1, color: "#94B5AD" },
   },
   1: {
-    r1: { x: 7.9, y: 19, rotate: 4, scale: 1, color: "#BACBDF" },
-    e: { x: 22.2, y: 31, rotate: 0, scale: 1, color: "#BACBDF" },
-    y: { x: 35, y: 40.7, rotate: 0, scale: 1, color: "#BACBDF" },
-    n: { x: 48.7, y: 52, rotate: 0, scale: 1, color: "#BACBDF" },
-    a: { x: 63.4, y: 64, rotate: 0, scale: 1, color: "#BACBDF" },
-    r2: { x: 78.2, y: 73.4, rotate: 0, scale: 1, color: "#BACBDF" },
-    d: { x: 93.5, y: 82.5, rotate: 0, scale: 1, color: "#BACBDF" },
+    r1: { x: 7.9, y: 19, rotate: 4, scale: 1, color: "#fffdef" },
+    e: { x: 22.2, y: 31, rotate: 0, scale: 1, color: "#fffdef" },
+    y: { x: 35, y: 40.7, rotate: 0, scale: 1, color: "#fffdef" },
+    n: { x: 48.7, y: 52, rotate: 0, scale: 1, color: "#fffdef" },
+    a: { x: 63.4, y: 64, rotate: 0, scale: 1, color: "#fffdef" },
+    r2: { x: 78.2, y: 73.4, rotate: 0, scale: 1, color: "#fffdef" },
+    d: { x: 93.5, y: 82.5, rotate: 0, scale: 1, color: "#fffdef" },
   },
 };
 
