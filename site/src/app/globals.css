@@ -198,6 +198,50 @@ html[data-header-visible="true"] .site-header {
   text-transform: uppercase;
 }
 
+.site-header__brand {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.site-header__home-link {
+  color: var(--orange);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.header-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  line-height: 0;
+}
+
+.header-wordmark svg {
+  display: block;
+  fill: currentColor;
+}
+
+.header-wordmark__hotel {
+  width: 3.2rem;
+}
+
+.header-wordmark__reynard {
+  width: 6.2rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .site-header__nav {
   display: flex;
   flex-wrap: wrap;
@@ -534,6 +578,23 @@ html[data-header-visible="true"] .site-header {
   text-align: center;
 }
 
+.site-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--muted);
+  color: var(--white);
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(120, 57, 52, 0.6);
+    background: url("/images/reynard-rendering.jpg") center/cover no-repeat;
+  }
+}
+
 .site-footer {
   position: relative;
   display: flex;
@@ -541,6 +602,7 @@ html[data-header-visible="true"] .site-header {
   align-items: center;
   justify-content: flex-start;
   background: var(--muted);
+  background: url("/images/hood-tualatin.jpg") center/cover no-repeat;
   color: var(--white);
 }
 

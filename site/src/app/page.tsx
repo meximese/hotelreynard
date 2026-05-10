@@ -14,7 +14,7 @@ const flowers = [
 export default function Home() {
   return (
     <section className="poster-page" id="top">
-      <footer className="site-footer">
+      {/* <section className="site-intro">
         <ReynardWordmarkMorphScrollScene
           className="morph-scroll-track--footer"
           morphClassName="poster-hero__morph"
@@ -24,8 +24,8 @@ export default function Home() {
         >
           <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
           <h2 className="poster-sub poster-hero__tavern">&amp; Tavern</h2>
+          <p className="poster-date">Hotel Reynard opens July 1st, 2026</p>
         </ReynardWordmarkMorphScrollScene>
-        <p className="poster-date">Hotel Reynard opens July 1st, 2026</p>
         <div className="poster-bouquet poster-bouquet--hero" aria-hidden="true">
           <img
             src={"/site-svg/bouquet.svg"}
@@ -33,31 +33,26 @@ export default function Home() {
             className="flower-bouquet"
           />
         </div>
-      </footer>
-      <section className="poster-hero">
-        <div className="poster-image">
-          <img src="/images/gorge.jpg" alt="" />
-        </div>
-
-        <p className="poster-date poster-date--lower">
-          A view from the historic Columbia River Highway.
-        </p>
-      </section>
+      </section> */}
+      <div className="poster-bouquet poster-bouquet--hero" aria-hidden="true">
+        <img src={"/site-svg/bouquet.svg"} alt="" className="flower-bouquet" />
+      </div>
 
       <section className="poster-section poster-section--rooms" id="rooms">
         <div className="poster-copy">
-          <h2>Hotel Reynard in Troutdale, OR</h2>
+          <h3>Great food and drinks after a long day out</h3>
           <p>
-            Eight rooms sit above the tavern, each built for dropping bags,
-            changing pace, and coming back late after a good dinner downstairs.
+            Hotel Reynard sits at the gateway to the Columbia River Gorge, in
+            Troutdale, Oregon. Eight rooms sit above the tavern, each built for
+            dropping bags, changing pace, and coming back late after a good
+            dinner downstairs.
           </p>
+          <h3>A base for your next adventure.</h3>
           <p>
             The tavern is the anchor: aperitifs, dinner, a little ceremony, and
-            enough warmth to make the whole building feel switched on.
-          </p>
-          <p>
-            Small parties, private dinners, and the kind of gatherings that
-            stretch a meal into the rest of the evening.
+            enough warmth to make the whole building feel switched on. Small
+            parties, private dinners, and the kind of gatherings that stretch a
+            meal into the rest of the evening.
           </p>
         </div>
       </section>

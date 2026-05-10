@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import HeaderVisibilityController from "@/components/HeaderVisibilityController";
+import HeaderWordmark from "@/components/HeaderWordmark";
 import "./globals.css";
 import ReynardWordmarkMorphScrollScene from "@/components/ReynardWordmarkMorphScrollScene";
 
@@ -37,6 +38,10 @@ export default function RootLayout({
           <header className="site-header">
             <div className="site-header__bar">
               <a href="#top" className="site-header__brand">
+                <span className="sr-only">Hotel Reynard</span>
+                <HeaderWordmark />
+              </a>
+              <a href="#top" className="site-header__home-link">
                 Hotel Reynard
               </a>
               <nav className="site-header__nav" aria-label="Primary">
@@ -47,6 +52,19 @@ export default function RootLayout({
               </nav>
             </div>
           </header>
+          <section className="site-intro">
+            <ReynardWordmarkMorphScrollScene
+              className="morph-scroll-track--footer"
+              morphClassName="poster-hero__morph"
+              direction="forward"
+              holdStart={0.0}
+              holdEnd={0.25}
+            >
+              <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
+              <h2 className="poster-sub poster-hero__tavern">&amp; Tavern</h2>
+              <p className="poster-date">Hotel Reynard opens July 1st, 2026</p>
+            </ReynardWordmarkMorphScrollScene>
+          </section>
           <main className="site-main">{children}</main>
           <footer className="site-footer">
             <div className="poster-hero__stack">
