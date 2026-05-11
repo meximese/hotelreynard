@@ -14,30 +14,6 @@ const flowers = [
 export default function Home() {
   return (
     <section className="poster-page" id="top">
-      {/* <section className="site-intro">
-        <ReynardWordmarkMorphScrollScene
-          className="morph-scroll-track--footer"
-          morphClassName="poster-hero__morph"
-          direction="forward"
-          holdStart={0.0}
-          holdEnd={0.25}
-        >
-          <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
-          <h2 className="poster-sub poster-hero__tavern">&amp; Tavern</h2>
-          <p className="poster-date">Hotel Reynard opens July 1st, 2026</p>
-        </ReynardWordmarkMorphScrollScene>
-        <div className="poster-bouquet poster-bouquet--hero" aria-hidden="true">
-          <img
-            src={"/site-svg/bouquet.svg"}
-            alt=""
-            className="flower-bouquet"
-          />
-        </div>
-      </section> */}
-      <div className="poster-bouquet poster-bouquet--hero" aria-hidden="true">
-        <img src={"/site-svg/bouquet.svg"} alt="" className="flower-bouquet" />
-      </div>
-
       <section className="poster-section poster-section--rooms" id="rooms">
         <div className="poster-copy">
           <h3>Great food and drinks after a long day out</h3>

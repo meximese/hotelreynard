@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const HEADER_REVEAL_VIEWPORTS = 1;
+const HEADER_REVEAL_VIEWPORTS = 2;
 
 export default function HeaderVisibilityController() {
   useEffect(() => {
@@ -10,7 +10,8 @@ export default function HeaderVisibilityController() {
 
     const syncHeaderVisibility = () => {
       const threshold = window.innerHeight * HEADER_REVEAL_VIEWPORTS;
-      root.dataset.headerVisible = window.scrollY >= threshold ? "true" : "false";
+      root.dataset.headerVisible =
+        window.scrollY >= threshold ? "true" : "false";
     };
 
     syncHeaderVisibility();

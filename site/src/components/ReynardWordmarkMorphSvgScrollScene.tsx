@@ -3,9 +3,9 @@
 import { useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useLayoutAnimation } from "@/components/LayoutAnimationProvider";
-import ReynardWordmarkMorph from "@/components/ReynardWordmarkMorph";
+import ReynardWordmarkMorphSvg from "@/components/ReynardWordmarkMorphSvg";
 
-type ReynardWordmarkMorphScrollSceneProps = {
+type ReynardWordmarkMorphSvgScrollSceneProps = {
   className?: string;
   morphClassName?: string;
   direction?: "forward" | "reverse";
@@ -16,7 +16,7 @@ type ReynardWordmarkMorphScrollSceneProps = {
   children?: React.ReactNode;
 };
 
-export default function ReynardWordmarkMorphScrollScene({
+export default function ReynardWordmarkMorphSvgScrollScene({
   className,
   morphClassName,
   direction = "forward",
@@ -25,7 +25,7 @@ export default function ReynardWordmarkMorphScrollScene({
   trackViewportHeights = 2,
   onComplete,
   children,
-}: ReynardWordmarkMorphScrollSceneProps) {
+}: ReynardWordmarkMorphSvgScrollSceneProps) {
   const trackRef = useRef<HTMLElement>(null);
   const lastCompletedRef = useRef<"forward" | "reverse" | null>(null);
   const { isIntroMorphComplete, setIntroMorphComplete } = useLayoutAnimation();
@@ -74,7 +74,7 @@ export default function ReynardWordmarkMorphScrollScene({
       }
     >
       <div className="morph-scroll-sticky">
-        <ReynardWordmarkMorph
+        <ReynardWordmarkMorphSvg
           className={morphClassName}
           mode="controlled"
           progress={progress}
