@@ -381,7 +381,8 @@ html[data-header-visible="true"] .site-header {
   justify-items: center;
   gap: 0.15rem;
   position: relative;
-  width: min(77dvh, 90vw);
+  width: min(40dvw, 90vw);
+  width: auto;
   margin: 0 auto;
 }
 
@@ -625,9 +626,29 @@ html[data-intro-morph-complete="true"] .tagline {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: var(--muted);
-  background: url("/images/hood-tualatin.jpg") center/cover no-repeat;
+  background: var(--green);
+  /* background: url("/images/hood-tualatin.jpg") center/cover no-repeat; */
   color: var(--white);
+  isolation: isolate;
+  overflow: hidden;
+  padding: 4rem 1rem 5rem;
+}
+
+.site-footer > * {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-knockout-svg {
+  width: min(60vw, 80vw);
+  transform: rotate(-4deg);
+}
+
+.footer-knockout-svg svg,
+.footer-knockout-svg__art {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .poster-newsletter {
@@ -943,6 +964,11 @@ html[data-intro-morph-complete="true"] .tagline {
 @media (max-width: 720px) {
   .site-shell {
     padding: 0.75rem;
+  }
+
+  .poster-hero__stack,
+  .footer-knockout-svg {
+    width: 80vw;
   }
 
   .input-row {

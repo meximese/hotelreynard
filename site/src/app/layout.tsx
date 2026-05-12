@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import FooterKnockoutSvg from "@/components/FooterKnockoutSvg";
 import HeaderVisibilityController from "@/components/HeaderVisibilityController";
 import HeaderWordmark from "@/components/HeaderWordmark";
 import { LayoutAnimationProvider } from "@/components/LayoutAnimationProvider";
 import "./globals.css";
-import ReynardWordmarkMorphScrollScene from "@/components/ReynardWordmarkMorphScrollScene";
 import ReynardWordmarkMorphSvgScrollScene from "@/components/ReynardWordmarkMorphSvgScrollScene";
 
 export const metadata: Metadata = {
@@ -83,25 +83,12 @@ export default function RootLayout({
             <main className="site-main">{children}</main>
             <footer className="site-footer">
               <div className="poster-hero__stack">
-                <img
-                  src="/reynard-short.png"
-                  alt="Hotel Reynard"
-                  className="poster-hero__reynard"
-                />
-                <div
-                  className="poster-hero__navline poster-hero__navline--top"
-                  aria-hidden="true"
-                >
-                  <span>Rooms</span>
-                  <span>Stays</span>
-                </div>
-                <div
-                  className="poster-hero__navline poster-hero__navline--bottom"
-                  aria-hidden="true"
-                >
-                  <span>Menu</span>
-                  <span>Events</span>
-                </div>
+                <FooterKnockoutSvg />
+                <p className="poster-date poster-date--footer">
+                  Hotel Reynard opens July 1st, 2026
+                  <br />
+                  302 Historic Columbia River Highway
+                </p>
               </div>
             </footer>
           </div>

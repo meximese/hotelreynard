@@ -33,21 +33,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="poster-section poster-section--images" id="images">
-        <div className="poster-image">
-          <img src="/images/mult-falls.jpg" alt="" />
-        </div>
-        <div className="poster-image">
-          <img src="/images/hood-lake.jpg" alt="" />
-          <h2>Stays</h2>
-          <p>
-            A stay at Reynard should feel easy and a little theatrical. Come in,
-            go out, return after midnight, and wake up above the room where the
-            night happened.
-          </p>
-        </div>
-      </section>
-
       <div className="poster-bouquet poster-bouquet--mid" aria-hidden="true">
         {flowers.map((src, index) => (
           <img key={src} src={src} alt="" className={`flower-${index + 1}`} />
