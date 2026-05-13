@@ -4,7 +4,6 @@ import {
   renderContactInquiryEmail,
 } from "@hotelreynard/email";
 import { Resend } from "resend";
-import { getEmailTemplateByKey } from "@/lib/sanity/content";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resendAudienceId = process.env.RESEND_AUDIENCE_ID;
@@ -62,10 +61,7 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(resendApiKey);
-    const [internalTemplate, autoReplyTemplate] = await Promise.all([
-      getEmailTemplateByKey("contact-internal-inquiry"),
-      getEmailTemplateByKey("contact-auto-reply"),
-    ]);
+    const [internalTemplate, autoReplyTemplate] = await getContactTemplates();
     const tokens = {
       firstName,
       lastName,
@@ -139,4 +135,22 @@ export async function POST(request: Request) {
 
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+async function getContactTemplates() {
+  try {
+    const { getEmailTemplateByKey } = await import("@/lib/sanity/content");
+
+    return await Promise.all([
+      getEmailTemplateByKey("contact-internal-inquiry"),
+      getEmailTemplateByKey("contact-auto-reply"),
+    ]);
+  } catch (error) {
+    console.error(
+      "Unable to load Sanity email templates for contact route, using defaults:",
+      error,
+    );
+
+    return [null, null] as const;
+  }
 }

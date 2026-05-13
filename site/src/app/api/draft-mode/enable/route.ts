@@ -1,14 +1,14 @@
 import { draftMode } from "next/headers";
 import { NextResponse } from "next/server";
 import { validatePreviewUrl } from "@sanity/preview-url-secret";
-import { sanityClient, sanityReadToken } from "@/lib/sanity/client";
+import { getSanityClient, sanityReadToken } from "@/lib/sanity/client";
 
 export async function GET(request: Request) {
   if (!sanityReadToken) {
     return new NextResponse("Missing SANITY_API_READ_TOKEN.", { status: 500 });
   }
 
-  const clientWithToken = sanityClient.withConfig({ token: sanityReadToken });
+  const clientWithToken = getSanityClient().withConfig({ token: sanityReadToken });
 
   let isValid = false;
   let redirectTo = "/";

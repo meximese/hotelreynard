@@ -1,5 +1,5 @@
 import type { QueryParams } from "sanity";
-import { sanityClient, sanityReadToken } from "./client";
+import { getSanityClient, sanityReadToken } from "./client";
 
 export async function loadQuery<QueryResponse>({
   query,
@@ -17,6 +17,7 @@ export async function loadQuery<QueryResponse>({
   }
 
   const perspective = visualEditingEnabled ? "drafts" : "published";
+  const sanityClient = getSanityClient();
 
   const { result, resultSourceMap } = await sanityClient.fetch<QueryResponse>(
     query,
