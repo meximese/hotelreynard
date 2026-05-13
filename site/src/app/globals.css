@@ -426,6 +426,7 @@ html[data-header-visible="true"] .site-header {
   height: 10rem;
   margin: 2.2rem auto 1.25rem;
   z-index: 10;
+  filter: drop-shadow(0px 0px 15px var(--white));
 }
 
 .poster-bouquet img {
@@ -525,15 +526,19 @@ html[data-header-visible="true"] .site-header {
   grid-column: 2 / span 2;
 }
 
-.poster-copy h2 {
-  margin: 0 0 0.45rem;
-  color: #000;
+.poster-copy h1,
+.poster-copy h2,
+.poster-copy h3,
+.poster-copy h4,
+.poster-copy h5,
+.poster-copy h6 {
+  margin: 1em 0 0;
+  color: inherit;
 }
 
 .poster-copy p {
-  margin: 0;
-  max-width: 31rem;
-  color: #000;
+  margin: 1em 0 0;
+  color: inherit;
   line-height: 1.45;
 }
 
@@ -589,16 +594,15 @@ html[data-header-visible="true"] .site-header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background: var(--white); */
   justify-content: flex-start;
-  background: var(--muted);
   color: var(--white);
   &::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(120, 57, 52, 0.6);
     background: url("/images/hotel-rendering.jpg") center/cover no-repeat;
-    filter: blur(40px);
+    filter: blur(20px);
     transform: scale(1.02);
     transition: filter 420ms ease;
   }
@@ -610,10 +614,24 @@ html[data-intro-morph-complete="true"] .site-intro::before {
 
 .tagline {
   position: fixed;
-  bottom: 10dvh;
+  bottom: 18dvh;
   opacity: 0;
   transition: opacity 320ms ease;
   transition-delay: 0.1s;
+}
+
+@media (min-width: 720px) {
+  .site-intro {
+    background-color: var(--muted);
+    &::before {
+      background-color: rgba(120, 57, 52, 0.6);
+      background: url("/images/hotel-rendering.jpg") center/cover no-repeat;
+      filter: blur(40px);
+    }
+  }
+  .tagline {
+    bottom: 10dvh;
+  }
 }
 
 html[data-intro-morph-complete="true"] .tagline {
@@ -672,7 +690,7 @@ html[data-intro-morph-complete="true"] .tagline {
   top: 7dvh;
   left: 50%;
   width: auto;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(0.5);
 }
 
 .morph-scroll-track--footer {
@@ -713,6 +731,12 @@ html[data-intro-morph-complete="true"] .tagline {
   aspect-ratio: 628 / 508;
   width: 628px;
   height: 508px;
+}
+
+@media (min-width: 720px) {
+  .morph-scroll-sticky {
+    transform: translateX(-50%) scale(1);
+  }
 }
 
 .reynard-morph__viewport.testmode {
