@@ -627,11 +627,11 @@ html[data-intro-morph-complete="true"] .tagline {
   align-items: center;
   justify-content: flex-start;
   background: var(--green);
-  /* background: url("/images/hood-tualatin.jpg") center/cover no-repeat; */
+  background: url("/images/hood-duotone-blur.jpg") center/cover no-repeat;
   color: var(--white);
   isolation: isolate;
   overflow: hidden;
-  padding: 4rem 1rem 5rem;
+  padding: 2rem 1rem 3rem;
 }
 
 .site-footer > * {
@@ -640,7 +640,7 @@ html[data-intro-morph-complete="true"] .tagline {
 }
 
 .footer-knockout-svg {
-  width: min(60vw, 80vw);
+  width: min(40vw, 80vw);
   transform: rotate(-4deg);
 }
 
@@ -666,8 +666,13 @@ html[data-intro-morph-complete="true"] .tagline {
   display: grid;
   min-height: 75dvh;
   place-items: center;
-  position: sticky;
+  /* position: sticky; */
+  /* top: 7dvh; */
+  position: fixed;
   top: 7dvh;
+  left: 50%;
+  width: auto;
+  transform: translateX(-50%);
 }
 
 .morph-scroll-track--footer {
