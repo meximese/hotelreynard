@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hotel Reynard Site
+
+Next.js 16 App Router site for Hotel Reynard.
+
+This workspace contains the public-facing marketing site, newsletter signup flow, contact form handlers, Sanity-powered content queries, and the Mews booking widget integration.
+
+## Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Sanity via `next-sanity`
+- Resend for newsletter and contact emails
+- Mews Distributor widget
+
+## Features
+
+- Custom single-page landing experience with animated wordmark and poster-style layout
+- Sanity-backed content utilities for rooms, offers, pages, and managed email templates
+- Newsletter signup endpoint at `/api/subscribe`
+- Contact inquiry endpoint at `/api/contact`
+- Draft mode endpoints for Sanity visual editing
+- Mews booking widget loader
+
+## Project Structure
+
+```text
+site/
+  src/app/                  App Router pages, layout, API routes
+  src/components/           UI and client components
+  src/lib/sanity/           Sanity client, queries, preview helpers
+  public/                   Fonts, images, SVG assets
+  env.template              Example environment variables
+```
 
 ## Getting Started
 
-First, run the development server:
+From the repo root:
+
+```bash
+npm install
+npm run dev --workspace=site
+```
+
+Or from this directory:
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy [env.template](/Users/vinh/dev/reynard/hotelreynard/site/env.template) to `.env.local` or `.env` in `site/` and fill in the values you need.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Sanity
 
-## Learn More
+Required for the site to boot:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID=
+NEXT_PUBLIC_SANITY_STUDIO_DATASET=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Optional:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+NEXT_PUBLIC_SANITY_API_VERSION=2025-12-01
+NEXT_PUBLIC_SANITY_USE_CDN=false
+NEXT_PUBLIC_SANITY_VISUAL_EDITING_ENABLED=false
+NEXT_PUBLIC_SANITY_STUDIO_URL=
+SANITY_API_READ_TOKEN=
+SANITY_STUDIO_PREVIEW_URL=
+```
 
-## Deploy on Vercel
+`SANITY_API_READ_TOKEN` is required when using draft mode / visual editing.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Resend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Required for newsletter signup:
+
+```env
+RESEND_API_KEY=
+RESEND_AUDIENCE_ID=
+RESEND_FROM_EMAIL=
+```
+
+Also required for the contact form:
+
+```env
+CONTACT_TO_EMAIL=
+```
+
+`PUBLIC_SITE_URL` is available for links or email rendering if needed by surrounding workflows.
+
+### Mews
+
+The booking widget is enabled only when a configuration ID is present.
+
+```env
+NEXT_PUBLIC_MEWS_API_URL=
+NEXT_PUBLIC_MEWS_CLIENT_NAME=
+NEXT_PUBLIC_MEWS_HOTEL_ID=
+NEXT_PUBLIC_MEWS_CONFIGURATION_ID=
+NEXT_PUBLIC_MEWS_LANGUAGE_CODE=en-US
+NEXT_PUBLIC_MEWS_CULTURE_CODE=
+NEXT_PUBLIC_MEWS_CURRENCY_CODE=USD
+```
+
+If `NEXT_PUBLIC_MEWS_CONFIGURATION_ID` is not set, the booking button stays disabled.
+
+## Sanity Content
+
+The site queries these document types from Sanity:
+
+- `room`
+- `offer`
+- `page`
+- `emailTemplate`
+- `amenity`
+
+Core query helpers live in [src/lib/sanity/content.ts](/Users/vinh/dev/reynard/hotelreynard/site/src/lib/sanity/content.ts).
+
+## Related Workspaces
+
+- [../studio](/Users/vinh/dev/reynard/hotelreynard/studio) for content editing
+- [../packages/email](/Users/vinh/dev/reynard/hotelreynard/packages/email) for the shared email templates used by API routes
