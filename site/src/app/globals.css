@@ -304,7 +304,7 @@ html[data-header-visible="true"] .site-header {
   background: rgba(255, 255, 255, 0.45);
   color: var(--ink);
   font: inherit;
-  padding: 0.85rem 1rem;
+  padding: 0.5rem 1rem;
   box-sizing: border-box;
 }
 
@@ -630,32 +630,12 @@ html[data-intro-morph-complete="true"] .site-intro::before {
     }
   }
   .tagline {
-    bottom: 10dvh;
+    bottom: 12dvh;
   }
 }
 
 html[data-intro-morph-complete="true"] .tagline {
   opacity: 1;
-}
-
-.site-footer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: var(--green);
-  /* background: url("/images/hood-duotone-blur.jpg") center/cover no-repeat; */
-  background: linear-gradient(to bottom, var(--green), var(--blue));
-  color: var(--brown);
-  isolation: isolate;
-  overflow: hidden;
-  padding: 2rem 1rem 3rem;
-}
-
-.site-footer > * {
-  position: relative;
-  z-index: 1;
 }
 
 .footer-knockout-svg {
@@ -1027,6 +1007,24 @@ footer {
   /* background: #fa2a7a; */
 }
 
+.site-footer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  color: var(--brown);
+  isolation: isolate;
+  overflow: hidden;
+  padding: 1rem 2rem;
+}
+
+.site-footer > * {
+  position: relative;
+  z-index: 1;
+}
+
 .newsletter-signup {
   position: fixed;
   z-index: 100;
@@ -1037,5 +1035,19 @@ footer {
 
   & > form {
     padding: 0rem 2rem 3rem;
+  }
+}
+
+@media (min-width: 720px) {
+  .site-footer {
+    background: var(--white);
+  }
+  .newsletter-signup {
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    & > form {
+      padding: 0 1rem;
+    }
   }
 }

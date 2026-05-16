@@ -73,9 +73,6 @@ export default function RootLayout({
                 <br />
                 Hotel Reynard opens Summer 2026
               </p>
-              <section className="newsletter-signup">
-                <NewsletterForm />
-              </section>
             </section>
             {/* <div
               className="poster-bouquet poster-bouquet--hero"
@@ -89,16 +86,11 @@ export default function RootLayout({
             </div> */}
 
             {/* <main className="site-main">{children}</main> */}
-            {/* <footer className="site-footer">
-              <div className="poster-hero__stack">
-                <FooterKnockoutSvg />
-                <p className="poster-date poster-date--footer">
-                  Hotel Reynard opens Summer 2026
-                  <br />
-                  302 Historic Columbia River Highway
-                </p>
-              </div>
-            </footer> */}
+            <footer className="site-footer">
+              <section className="newsletter-signup">
+                <NewsletterForm />
+              </section>
+            </footer>
           </div>
         </LayoutAnimationProvider>
         <Script
