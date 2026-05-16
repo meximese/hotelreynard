@@ -5,9 +5,10 @@ import { useState } from "react";
 type StatusTone = "success" | "error";
 
 export default function NewsletterForm() {
-  const [status, setStatus] = useState<{ message: string; tone: StatusTone } | null>(
-    null,
-  );
+  const [status, setStatus] = useState<{
+    message: string;
+    tone: StatusTone;
+  } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -32,11 +33,15 @@ export default function NewsletterForm() {
         throw new Error(payload?.error || "Something went wrong.");
       }
 
-      setStatus({ message: "Success! Check your inbox.", tone: "success" });
+      setStatus({
+        message: "Thanks! We'll keep you updated.",
+        tone: "success",
+      });
       form.reset();
     } catch (error) {
       setStatus({
-        message: error instanceof Error ? error.message : "Unable to subscribe.",
+        message:
+          error instanceof Error ? error.message : "Unable to subscribe.",
         tone: "error",
       });
     } finally {
@@ -61,7 +66,11 @@ export default function NewsletterForm() {
         </button>
       </div>
       {status ? (
-        <div className={`status ${status.tone}`} role="status" aria-live="polite">
+        <div
+          className={`status ${status.tone}`}
+          role="status"
+          aria-live="polite"
+        >
           {status.message}
         </div>
       ) : null}

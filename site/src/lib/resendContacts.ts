@@ -23,26 +23,44 @@ export async function captureResendContact({
     throw new Error("Missing Resend configuration.");
   }
 
-  const createResult = await resend.contacts.create({
+  const createPayload = {
     email,
     firstName,
     lastName,
     unsubscribed: false,
     properties,
     segments: [{ id: segmentId }],
-  });
+  };
+
+  let createResult = await resend.contacts.create(createPayload);
+
+  if (hasMissingPropertyError(createResult.error)) {
+    createResult = await resend.contacts.create({
+      ...createPayload,
+      properties: undefined,
+    });
+  }
 
   if (!createResult.error) {
     return createResult.data;
   }
 
-  const updateResult = await resend.contacts.update({
+  const updatePayload = {
     email,
     firstName: firstName ?? null,
     lastName: lastName ?? null,
     unsubscribed: false,
     properties,
-  });
+  };
+
+  let updateResult = await resend.contacts.update(updatePayload);
+
+  if (hasMissingPropertyError(updateResult.error)) {
+    updateResult = await resend.contacts.update({
+      ...updatePayload,
+      properties: undefined,
+    });
+  }
 
   if (updateResult.error) {
     throw new Error(
@@ -60,4 +78,10 @@ export async function captureResendContact({
   }
 
   return updateResult.data;
+}
+
+function hasMissingPropertyError(
+  error: { message?: string | null } | null | undefined,
+) {
+  return error?.message?.includes("properties do not exist") ?? false;
 }
