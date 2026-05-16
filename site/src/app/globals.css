@@ -614,7 +614,7 @@ html[data-intro-morph-complete="true"] .site-intro::before {
 
 .tagline {
   position: fixed;
-  bottom: 18dvh;
+  bottom: 20vh;
   opacity: 0;
   transition: opacity 320ms ease;
   transition-delay: 0.1s;
@@ -683,12 +683,12 @@ html[data-intro-morph-complete="true"] .tagline {
 .morph-scroll-sticky {
   align-items: center;
   display: grid;
-  min-height: 75dvh;
+  min-height: 75vh;
   place-items: center;
   /* position: sticky; */
   /* top: 7dvh; */
   position: fixed;
-  top: 7dvh;
+  top: 5vh;
   left: 50%;
   width: auto;
   transform: translateX(-50%) scale(0.5);
@@ -1002,7 +1002,7 @@ html[data-intro-morph-complete="true"] .tagline {
   }
 
   .input-row {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .poster-hero {
@@ -1025,4 +1025,17 @@ html[data-intro-morph-complete="true"] .tagline {
 
 footer {
   /* background: #fa2a7a; */
+}
+
+.newsletter-signup {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  text-align: center;
+
+  & > form {
+    padding: 0rem 2rem 3rem;
+  }
 }
