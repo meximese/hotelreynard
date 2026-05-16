@@ -645,8 +645,9 @@ html[data-intro-morph-complete="true"] .tagline {
   align-items: center;
   justify-content: flex-start;
   background: var(--green);
-  background: url("/images/hood-duotone-blur.jpg") center/cover no-repeat;
-  color: var(--white);
+  /* background: url("/images/hood-duotone-blur.jpg") center/cover no-repeat; */
+  background: linear-gradient(to bottom, var(--green), var(--blue));
+  color: var(--brown);
   isolation: isolate;
   overflow: hidden;
   padding: 2rem 1rem 3rem;

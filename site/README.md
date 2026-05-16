@@ -92,7 +92,7 @@ Required to capture newsletter and contact form submissions:
 
 ```env
 RESEND_API_KEY=
-RESEND_AUDIENCE_ID=
+RESEND_SEGMENT_ID=
 ```
 
 This setup only creates or updates contacts in Resend. The site does not send outbound emails.
