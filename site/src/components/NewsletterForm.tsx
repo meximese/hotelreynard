@@ -51,7 +51,18 @@ export default function NewsletterForm() {
 
   return (
     <form className="form" onSubmit={onSubmit}>
-      <label htmlFor="email">Sign up to receive news and updates.</label>
+      {status ? (
+        <div
+          className={`status ${status.tone}`}
+          role="status"
+          aria-live="polite"
+        >
+          {status.message}
+        </div>
+      ) : (
+        <label htmlFor="email">Sign up to receive news and updates.</label>
+      )}
+
       <div className="input-row">
         <input
           id="email"
@@ -65,15 +76,6 @@ export default function NewsletterForm() {
           {isSubmitting ? "Submitting..." : "Sign Up"}
         </button>
       </div>
-      {status ? (
-        <div
-          className={`status ${status.tone}`}
-          role="status"
-          aria-live="polite"
-        >
-          {status.message}
-        </div>
-      ) : null}
     </form>
   );
 }

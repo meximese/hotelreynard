@@ -6,6 +6,7 @@ import HeaderWordmark from "@/components/HeaderWordmark";
 import { LayoutAnimationProvider } from "@/components/LayoutAnimationProvider";
 import "./globals.css";
 import ReynardWordmarkMorphSvgScrollScene from "@/components/ReynardWordmarkMorphSvgScrollScene";
+import NewsletterForm from "@/components/NewsletterForm";
 
 export const metadata: Metadata = {
   title: "Hotel Reynard",
@@ -67,9 +68,13 @@ export default function RootLayout({
                   <span>&amp;</span> Tavern
                 </h2>
               </ReynardWordmarkMorphSvgScrollScene>
-              <p className="tagline">Hotel Reynard opens Summer 2026</p>
+              <p className="tagline">
+                302 Historic Columbia River Highway
+                <br />
+                Hotel Reynard opens Summer 2026
+              </p>
             </section>
-            <div
+            {/* <div
               className="poster-bouquet poster-bouquet--hero"
               aria-hidden="true"
             >
@@ -78,18 +83,13 @@ export default function RootLayout({
                 alt=""
                 className="flower-bouquet"
               />
-            </div>
+            </div> */}
 
-            <main className="site-main">{children}</main>
+            {/* <main className="site-main">{children}</main> */}
             <footer className="site-footer">
-              <div className="poster-hero__stack">
-                <FooterKnockoutSvg />
-                <p className="poster-date poster-date--footer">
-                  Hotel Reynard opens Summer 2026
-                  <br />
-                  302 Historic Columbia River Highway
-                </p>
-              </div>
+              <section className="newsletter-signup">
+                <NewsletterForm />
+              </section>
             </footer>
           </div>
         </LayoutAnimationProvider>
