@@ -1,14 +1,5 @@
 import { NextResponse } from "next/server";
-import {
-  renderContactAutoReplyEmail,
-  renderContactInquiryEmail,
-} from "@hotelreynard/email";
-import { Resend } from "resend";
-
-const resendApiKey = process.env.RESEND_API_KEY;
-const resendAudienceId = process.env.RESEND_AUDIENCE_ID;
-const fromEmail = process.env.RESEND_FROM_EMAIL;
-const contactToEmail = process.env.CONTACT_TO_EMAIL;
+import { captureResendContact, hasResendContactConfig } from "@/lib/resendContacts";
 
 function requireText(
   value: FormDataEntryValue | null,
@@ -25,7 +16,7 @@ function requireText(
 }
 
 export async function POST(request: Request) {
-  if (!resendApiKey || !fromEmail || !contactToEmail) {
+  if (!hasResendContactConfig()) {
     return NextResponse.json(
       { error: "Missing Resend configuration." },
       { status: 500 },
@@ -60,63 +51,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const resend = new Resend(resendApiKey);
-    const [internalTemplate, autoReplyTemplate] = await getContactTemplates();
-    const tokens = {
+    await captureResendContact({
+      email,
       firstName,
       lastName,
-      email,
-      phone,
-      contactReason,
-      message,
-      hotelName: "Hotel Reynard",
-    };
-
-    if (resendAudienceId) {
-      const contactResult = await resend.contacts.create({
-        email,
-        audienceId: resendAudienceId,
-        firstName,
-        lastName,
-        unsubscribed: false,
-      });
-
-      if (contactResult.error) {
-        console.error("Resend contact error:", contactResult.error);
-      }
-    }
-
-    const [inquiryEmail, autoReplyEmail] = await Promise.all([
-      renderContactInquiryEmail(internalTemplate, tokens),
-      renderContactAutoReplyEmail(autoReplyTemplate, tokens),
-    ]);
-
-    const [inquiryResult, autoReplyResult] = await Promise.all([
-      resend.emails.send({
-        from: fromEmail,
-        to: contactToEmail,
-        replyTo: email,
-        subject: inquiryEmail.subject,
-        html: inquiryEmail.html,
-      }),
-      resend.emails.send({
-        from: fromEmail,
-        to: email,
-        subject: autoReplyEmail.subject,
-        html: autoReplyEmail.html,
-      }),
-    ]);
-
-    if (inquiryResult.error || autoReplyResult.error) {
-      console.error(
-        "Resend email error:",
-        inquiryResult.error || autoReplyResult.error,
-      );
-      return NextResponse.json(
-        { error: "Unable to send your inquiry right now." },
-        { status: 502 },
-      );
-    }
+      properties: {
+        source: "contact_form",
+        phone: phone || null,
+        contactReason,
+        message,
+        consent: "true",
+      },
+    });
 
     return NextResponse.json({ ok: true });
   } catch (error) {
@@ -126,31 +72,13 @@ export async function POST(request: Request) {
         error:
           error instanceof Error
             ? error.message
-            : "Unable to process your inquiry.",
+            : "Unable to capture your inquiry.",
       },
-      { status: 400 },
+      { status: 502 },
     );
   }
 }
 
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
-}
-
-async function getContactTemplates() {
-  try {
-    const { getEmailTemplateByKey } = await import("@/lib/sanity/content");
-
-    return await Promise.all([
-      getEmailTemplateByKey("contact-internal-inquiry"),
-      getEmailTemplateByKey("contact-auto-reply"),
-    ]);
-  } catch (error) {
-    console.error(
-      "Unable to load Sanity email templates for contact route, using defaults:",
-      error,
-    );
-
-    return [null, null] as const;
-  }
 }

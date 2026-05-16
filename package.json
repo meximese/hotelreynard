@@ -1,26 +1,19 @@
 {
-  "name": "sanity-template-astro-clean",
-  "description": "Minimal Astro site with Sanity Studio",
+  "name": "hotelreynard",
+  "description": "Hotel Reynard monorepo",
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=site\" \"npm run dev --workspace=studio\"",
     "email:dev": "npm run preview:dev --workspace=@hotelreynard/email",
     "email:preview": "npm run preview:build --workspace=@hotelreynard/email"
   },
   "keywords": [
+    "Next.js",
     "Sanity",
-    "Astro",
-    "Headless CMS",
-    "Visual Editing",
-    "Live Content API (LCAPI)",
-    "Real-time"
+    "Resend",
+    "Hotel"
   ],
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity-template-astro-clean/issues"
-  },
-  "homepage": "https://github.com/sanity-io/sanity-template-astro-clean#readme",
   "workspaces": [
     "studio",
-    "web",
     "site",
     "packages/*"
   ],

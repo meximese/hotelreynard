@@ -2,7 +2,7 @@
 
 Next.js 16 App Router site for Hotel Reynard.
 
-This workspace contains the public-facing marketing site, newsletter signup flow, contact form handlers, Sanity-powered content queries, and the Mews booking widget integration.
+This workspace contains the public-facing marketing site, newsletter signup flow, contact capture handlers, Sanity-powered content queries, and the Mews booking widget integration.
 
 ## Stack
 
@@ -10,7 +10,7 @@ This workspace contains the public-facing marketing site, newsletter signup flow
 - React 19
 - TypeScript
 - Sanity via `next-sanity`
-- Resend for newsletter and contact emails
+- Resend for contact capture
 - Mews Distributor widget
 
 ## Features
@@ -18,7 +18,7 @@ This workspace contains the public-facing marketing site, newsletter signup flow
 - Custom single-page landing experience with animated wordmark and poster-style layout
 - Sanity-backed content utilities for rooms, offers, pages, and managed email templates
 - Newsletter signup endpoint at `/api/subscribe`
-- Contact inquiry endpoint at `/api/contact`
+- Contact capture endpoint at `/api/contact`
 - Draft mode endpoints for Sanity visual editing
 - Mews booking widget loader
 
@@ -88,21 +88,14 @@ SANITY_STUDIO_PREVIEW_URL=
 
 ### Resend
 
-Required for newsletter signup:
+Required to capture newsletter and contact form submissions:
 
 ```env
 RESEND_API_KEY=
 RESEND_AUDIENCE_ID=
-RESEND_FROM_EMAIL=
 ```
 
-Also required for the contact form:
-
-```env
-CONTACT_TO_EMAIL=
-```
-
-`PUBLIC_SITE_URL` is available for links or email rendering if needed by surrounding workflows.
+This setup only creates or updates contacts in Resend. The site does not send outbound emails.
 
 ### Mews
 
