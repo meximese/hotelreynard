@@ -85,7 +85,7 @@ export default function RootLayout({
               <div className="poster-hero__stack">
                 <FooterKnockoutSvg />
                 <p className="poster-date poster-date--footer">
-                  Hotel Reynard opens July 1st, 2026
+                  Hotel Reynard opens Summer 2026
                   <br />
                   302 Historic Columbia River Highway
                 </p>
