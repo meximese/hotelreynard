@@ -1,0 +1,13 @@
+{
+  "/[slug]/page": "app/[slug]/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/events/[slug]/page": "app/events/[slug]/page.js",
+  "/events/page": "app/events/page.js",
+  "/location/page": "app/location/page.js",
+  "/page": "app/page.js",
+  "/private-events/page": "app/private-events/page.js",
+  "/restaurant/page": "app/restaurant/page.js",
+  "/rooms/[slug]/page": "app/rooms/[slug]/page.js",
+  "/stay/page": "app/stay/page.js"
+}

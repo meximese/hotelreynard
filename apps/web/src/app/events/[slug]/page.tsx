@@ -1,0 +1,42 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PortableText } from "@portabletext/react";
+import { PageShell } from "@/components/page-shell";
+import { getEventBySlug } from "@/lib/content/loaders";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function EventPage({ params }: PageProps) {
+  const { slug } = await params;
+  const event = await getEventBySlug(slug);
+
+  if (!event) {
+    notFound();
+  }
+
+  return (
+    <PageShell
+      eyebrow="Event"
+      title={event.title}
+      intro={
+        event.summary ||
+        "This route is ready for Sanity-backed event detail content and public programming."
+      }
+    >
+      {event.body?.length ? (
+        <div className="rich-body">
+          <PortableText value={event.body} />
+        </div>
+      ) : null}
+      {event.cta ? (
+        <div className="cta-row">
+          <Link className="button-link" href={event.cta.href}>
+            {event.cta.label}
+          </Link>
+        </div>
+      ) : null}
+    </PageShell>
+  );
+}

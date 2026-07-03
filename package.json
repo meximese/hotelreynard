@@ -2,7 +2,8 @@
   "name": "hotelreynard",
   "description": "Hotel Reynard monorepo",
   "scripts": {
-    "dev": "concurrently \"npm run dev --workspace=site\" \"npm run dev --workspace=studio\"",
+    "dev": "concurrently \"npm run dev --workspace=@hotelreynard/web\" \"npm run dev --workspace=@hotelreynard/studio\"",
+    "dev:legacy": "concurrently \"npm run dev --workspace=site\" \"npm run dev --workspace=studio\"",
     "email:dev": "npm run preview:dev --workspace=@hotelreynard/email",
     "email:preview": "npm run preview:build --workspace=@hotelreynard/email"
   },
@@ -13,6 +14,7 @@
     "Hotel"
   ],
   "workspaces": [
+    "apps/*",
     "studio",
     "site",
     "packages/*"
