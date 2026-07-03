@@ -3,6 +3,13 @@
   "description": "Hotel Reynard monorepo",
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=@hotelreynard/web\" \"npm run dev --workspace=@hotelreynard/studio\"",
+    "dev:web": "npm run dev --workspace=@hotelreynard/web",
+    "dev:studio": "npm run dev --workspace=@hotelreynard/studio",
+    "build": "npm run build --workspace=@hotelreynard/web && npm run build --workspace=@hotelreynard/studio",
+    "build:web": "npm run build --workspace=@hotelreynard/web",
+    "build:studio": "npm run build --workspace=@hotelreynard/studio",
+    "lint:web": "npm run lint --workspace=@hotelreynard/web",
+    "seed:import": "npm run seed:import --workspace=@hotelreynard/studio",
     "dev:legacy": "concurrently \"npm run dev --workspace=site\" \"npm run dev --workspace=studio\"",
     "email:dev": "npm run preview:dev --workspace=@hotelreynard/email",
     "email:preview": "npm run preview:build --workspace=@hotelreynard/email"

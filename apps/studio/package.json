@@ -8,7 +8,8 @@
     "dev": "sanity dev",
     "start": "sanity start",
     "build": "sanity build",
-    "deploy": "sanity deploy"
+    "deploy": "sanity deploy",
+    "seed:import": "sanity exec scripts/importSiteScaffold.mjs --with-user-token"
   },
   "dependencies": {
     "@sanity/vision": "^4.22.0",
