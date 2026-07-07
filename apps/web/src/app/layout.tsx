@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/site-header";
+import { getVisualEditingEnabled } from "@/lib/sanity/preview";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,11 +11,14 @@ export const metadata: Metadata = {
   description: "Hotel Reynard web experience",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const draft = await draftMode();
+  const visualEditingEnabled = getVisualEditingEnabled() && draft.isEnabled;
+
   return (
     <html lang="en">
       <head>
@@ -24,6 +30,7 @@ export default function RootLayout({
         <Providers>
           <SiteHeader />
           {children}
+          {visualEditingEnabled ? <VisualEditing /> : null}
           <footer className="site-footer">
             <div className="site-footer-grid">
               <div>

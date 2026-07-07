@@ -1,15 +1,21 @@
 import { createClient } from "next-sanity";
 
-const apiVersion =
+export const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2026-07-01";
-const projectId =
+export const projectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
   process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID ||
   "";
-const dataset =
+export const dataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET ||
   process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET ||
   "";
+export const useCdn = process.env.NEXT_PUBLIC_SANITY_USE_CDN === "true";
+export const studioUrl =
+  process.env.NEXT_PUBLIC_SANITY_STUDIO_URL ||
+  process.env.SANITY_STUDIO_PREVIEW_URL ||
+  "http://localhost:4321";
+export const sanityReadToken = process.env.SANITY_API_READ_TOKEN;
 
 export const sanityClient =
   projectId && dataset
@@ -17,10 +23,27 @@ export const sanityClient =
         projectId,
         dataset,
         apiVersion,
-        useCdn: process.env.NODE_ENV === "production",
+        useCdn,
+        perspective: "published",
+        stega: false,
       })
     : null;
 
 export function hasSanityConfig() {
   return Boolean(sanityClient);
+}
+
+export function getSanityClient() {
+  if (!projectId || !dataset) {
+    throw new Error("Missing Sanity project configuration.");
+  }
+
+  return createClient({
+    projectId,
+    dataset,
+    apiVersion,
+    useCdn,
+    perspective: "published",
+    stega: false,
+  });
 }
