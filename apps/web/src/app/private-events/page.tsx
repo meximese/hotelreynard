@@ -1,6 +1,5 @@
 import { PageShell } from "@/components/page-shell";
 import { PageSections } from "@/components/page-sections";
-import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { getPrivateEventsPage } from "@/lib/content/loaders";
 
 export default async function PrivateEventsPage() {
@@ -8,6 +7,7 @@ export default async function PrivateEventsPage() {
 
   return (
     <PageShell
+      hero={page.hero}
       eyebrow="Private Events"
       title={page.title}
       intro={page.intro}
@@ -17,7 +17,6 @@ export default async function PrivateEventsPage() {
       {page.sections?.length ? (
         <PageSections sections={page.sections} documentId={page._id} documentType={page._type} />
       ) : null}
-      <PrivateEventsInquiry />
     </PageShell>
   );
 }

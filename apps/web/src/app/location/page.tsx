@@ -7,6 +7,7 @@ export default async function LocationPage() {
 
   return (
     <PageShell
+      hero={page.hero}
       eyebrow="Location"
       title={page.title}
       intro={page.intro}

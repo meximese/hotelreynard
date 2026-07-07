@@ -1,14 +1,20 @@
-import { EventCard } from "@/components/event-card";
 import { PageSections } from "@/components/page-sections";
 import { PageShell } from "@/components/page-shell";
 import { getEventsPageData, getUpcomingEvents } from "@/lib/content/loaders";
 
 export default async function EventsPage() {
   const page = await getEventsPageData();
-  const events = await getUpcomingEvents();
+  const eventFeedLimit = Math.max(
+    0,
+    ...(page.sections
+      ?.filter((section) => section._type === "eventFeedBlock")
+      .map((section) => section.limit || 3) || [0]),
+  );
+  const events = eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
 
   return (
     <PageShell
+      hero={page.hero}
       eyebrow="Events"
       title={page.title}
       intro={page.intro}
@@ -16,13 +22,13 @@ export default async function EventsPage() {
       documentType={page._type}
     >
       {page.sections?.length ? (
-        <PageSections sections={page.sections} documentId={page._id} documentType={page._type} />
+        <PageSections
+          sections={page.sections}
+          documentId={page._id}
+          documentType={page._type}
+          upcomingEvents={events}
+        />
       ) : null}
-      <section className="card-grid">
-        {events.map((event) => (
-          <EventCard key={event._id} event={event} />
-        ))}
-      </section>
     </PageShell>
   );
 }

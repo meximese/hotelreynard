@@ -31,6 +31,7 @@ export default async function GenericPage({ params }: PageProps) {
 
   return (
     <PageShell
+      hero={page.hero}
       eyebrow="Page"
       title={page.title}
       intro="This route is reserved for generic editorial pages powered by the flexible section system."

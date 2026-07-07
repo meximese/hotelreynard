@@ -7,6 +7,7 @@ export default async function RestaurantPage() {
 
   return (
     <PageShell
+      hero={page.hero}
       eyebrow="Restaurant"
       title={page.title}
       intro={page.intro}

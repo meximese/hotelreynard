@@ -58,8 +58,20 @@ export interface PageSection {
   media?: SanityImage;
   images?: SanityImage[];
   items?: string[];
+  rooms?: Room[];
   content?: PortableTextBlock[];
   entries?: HoursEntry[];
+  limit?: number;
+  cta?: Cta;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+}
+
+export interface PageHero {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  media?: SanityImage;
   primaryCta?: Cta;
   secondaryCta?: Cta;
 }
@@ -67,22 +79,23 @@ export interface PageSection {
 export interface GenericPage {
   _id: string;
   _type: string;
+  hero?: PageHero;
   title: string;
   slug: Slug;
   sections?: PageSection[];
 }
 
 export interface HomePageData extends SanityDocumentIdentity {
+  hero?: PageHero;
   title: string;
   intro: string;
   primaryCta: Cta;
   secondaryCta: Cta;
-  featuredRooms: Room[];
-  upcomingEvents: Event[];
   sections?: PageSection[];
 }
 
 export interface SingletonPageData extends SanityDocumentIdentity {
+  hero?: PageHero;
   title: string;
   intro: string;
   sections?: PageSection[];

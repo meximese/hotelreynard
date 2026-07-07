@@ -1,17 +1,33 @@
 "use client";
 
 import { Field } from "@base-ui/react/field";
+import { cleanStegaString } from "@/lib/sanity/preview";
+import type { Cta } from "@/lib/content/types";
 
-export function PrivateEventsInquiry() {
+export function PrivateEventsInquiry({
+  eyebrow = "Inquiry",
+  title = "Tell us about your big day.",
+  body = "Share the gathering size, season, setting, and any questions you already have.",
+  cta,
+}: {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  cta?: Cta;
+}) {
   return (
     <section className="inquiry-panel" aria-labelledby="private-events-inquiry">
       <div>
-        <p className="eyebrow">Inquiry Preview</p>
-        <h2 id="private-events-inquiry">Tell us about your big day.</h2>
-        <p className="lede">
-          This is a front-end scaffold for the Sanity-managed inquiry content and eventual lead
-          capture workflow.
-        </p>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 id="private-events-inquiry">{title}</h2>
+        <p className="lede">{body}</p>
+        {cta?.label && cta.href ? (
+          <p>
+            <a className="text-link" href={cleanStegaString(cta.href)}>
+              {cta.label}
+            </a>
+          </p>
+        ) : null}
       </div>
 
       <form className="inquiry-grid">

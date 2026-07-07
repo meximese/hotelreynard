@@ -6,6 +6,20 @@ import type { Event, GenericPage, HomePageData, Room, SingletonPageData } from "
 const pageSectionsProjection = groq`
   "sections": sections[]{
     ...,
+    _type == "roomFeedBlock" => {
+      ...,
+      "rooms": rooms[]->{
+        _id,
+        _type,
+        title,
+        slug,
+        shortDescription,
+        heroImage,
+        gallery,
+        highlights,
+        isPublicPageEnabled
+      }
+    },
     _type == "richTextBlock" => {
       ...,
       content
@@ -13,32 +27,25 @@ const pageSectionsProjection = groq`
   }
 `;
 
+const pageHeroProjection = groq`
+  hero{
+    eyebrow,
+    title,
+    body,
+    media,
+    primaryCta,
+    secondaryCta
+  }
+`;
+
 const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
   _id,
   _type,
+  ${pageHeroProjection},
   title,
   intro,
   primaryCta,
   secondaryCta,
-  "featuredRooms": featuredRooms[]->{
-    _id,
-    title,
-    slug,
-    shortDescription,
-    heroImage,
-    gallery,
-    highlights,
-    isPublicPageEnabled
-  },
-  "upcomingEvents": *[_type == "event" && status == "scheduled"] | order(startDateTime asc)[0...3]{
-    _id,
-    title,
-    slug,
-    summary,
-    venueType,
-    startDateTime,
-    heroImage
-  },
   ${pageSectionsProjection}
 }`;
 
@@ -54,21 +61,11 @@ const FEATURED_ROOMS_QUERY = groq`*[_type == "room"] | order(sortOrder asc, titl
   isPublicPageEnabled
 }`;
 
-const UPCOMING_EVENTS_QUERY = groq`*[_type == "event" && status == "scheduled"] | order(startDateTime asc)[0...6]{
-  _id,
-  _type,
-  title,
-  slug,
-  summary,
-  venueType,
-  startDateTime,
-  heroImage
-}`;
-
 function emptyHomePage(): HomePageData {
   return {
     _id: "homePage",
     _type: "homePage",
+    hero: undefined,
     title: "",
     intro: "",
     primaryCta: {
@@ -79,8 +76,6 @@ function emptyHomePage(): HomePageData {
       label: "",
       href: "/",
     },
-    featuredRooms: [],
-    upcomingEvents: [],
     sections: [],
   };
 }
@@ -123,13 +118,23 @@ export async function getFeaturedRooms(): Promise<Room[]> {
   return data;
 }
 
-export async function getUpcomingEvents(): Promise<Event[]> {
+export async function getUpcomingEvents(limit = 6): Promise<Event[]> {
   if (!hasSanityConfig()) {
     return [];
   }
 
   const data = await sanityFetch<Event[]>({
-    query: UPCOMING_EVENTS_QUERY,
+    query: groq`*[_type == "event" && status == "scheduled"] | order(startDateTime asc)[0...$limit]{
+      _id,
+      _type,
+      title,
+      slug,
+      summary,
+      venueType,
+      startDateTime,
+      heroImage
+    }`,
+    params: { limit },
     tags: ["event"],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
@@ -194,6 +199,7 @@ export async function getGenericPageBySlug(slug: string): Promise<GenericPage | 
     query: groq`*[_type == "page" && slug.current == $slug][0]{
       _id,
       _type,
+      ${pageHeroProjection},
       title,
       slug,
       ${pageSectionsProjection}
@@ -213,6 +219,7 @@ async function getSingletonPage(type: string): Promise<SingletonPageData> {
     query: groq`*[_type == $type][0]{
       _id,
       _type,
+      ${pageHeroProjection},
       title,
       intro,
       ${pageSectionsProjection}

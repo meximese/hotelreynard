@@ -5,6 +5,7 @@ export default defineType({
   title: "Page",
   type: "document",
   fields: [
+    defineField({ name: "hero", title: "Top hero", type: "heroBlock" }),
     defineField({
       name: "title",
       title: "Title",

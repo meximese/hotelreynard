@@ -185,6 +185,18 @@ img {
   padding: 3rem 0 2.5rem;
 }
 
+.page-top-hero {
+  padding-top: 0.75rem;
+}
+
+.page-top-hero__caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding-top: 1.2rem;
+}
+
 .home-hero-frame {
   padding-top: 0.75rem;
 }
@@ -255,6 +267,8 @@ img {
 
 .home-rail-section {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
   padding: 0 0 6rem;
 }
 
@@ -273,8 +287,11 @@ img {
 .home-image-rail {
   display: flex;
   gap: 2.25rem;
+  min-width: 0;
+  max-width: 100%;
   padding-bottom: 0.5rem;
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: none;
 }
 
@@ -489,6 +506,30 @@ h3 {
 .section-stack {
   display: grid;
   gap: 1.5rem;
+}
+
+.page-section {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.page-section__header {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 44rem;
+}
+
+.page-section--bespoke {
+  gap: 0;
+  padding: 0;
+  border-top: 0;
+}
+
+.page-section:last-child {
+  border-bottom: 1px solid var(--line);
 }
 
 .image-grid {

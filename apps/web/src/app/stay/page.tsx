@@ -1,14 +1,13 @@
 import { PageShell } from "@/components/page-shell";
 import { PageSections } from "@/components/page-sections";
-import { RoomCard } from "@/components/room-card";
-import { getFeaturedRooms, getStayPage } from "@/lib/content/loaders";
+import { getStayPage } from "@/lib/content/loaders";
 
 export default async function StayPage() {
   const page = await getStayPage();
-  const rooms = await getFeaturedRooms();
 
   return (
     <PageShell
+      hero={page.hero}
       eyebrow="Stay"
       title={page.title}
       intro={page.intro}
@@ -18,11 +17,6 @@ export default async function StayPage() {
       {page.sections?.length ? (
         <PageSections sections={page.sections} documentId={page._id} documentType={page._type} />
       ) : null}
-      <section className="card-grid">
-        {rooms.map((room) => (
-          <RoomCard key={room._id} room={room} />
-        ))}
-      </section>
     </PageShell>
   );
 }
