@@ -44,11 +44,16 @@ export interface PageSection {
   title?: string;
   eyebrow?: string;
   body?: string;
+  quote?: string;
+  attribution?: string;
+  layout?: "imageLeft" | "imageRight";
   media?: SanityImage;
   images?: SanityImage[];
   items?: string[];
   content?: PortableTextBlock[];
   entries?: HoursEntry[];
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
 }
 
 export interface GenericPage {

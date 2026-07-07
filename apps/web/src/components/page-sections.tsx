@@ -32,11 +32,16 @@ export function PageSections({ sections }: { sections: PageSection[] }) {
           const value = `section-${index}`;
           const title =
             section.title ||
+            (section._type === "quoteBlock"
+              ? "Quote"
+              : section._type === "imageTextBlock"
+                ? "Story"
+                :
             (section._type === "hoursBlock"
               ? "Hours"
               : section._type === "featureListBlock"
                 ? "Highlights"
-                : "Section");
+                : "Section"));
 
           return (
             <Accordion.Item key={key} className="accordion-item" value={value}>
@@ -83,6 +88,33 @@ export function PageSections({ sections }: { sections: PageSection[] }) {
                     </div>
                   ) : null}
 
+                  {section._type === "imageTextBlock" ? (
+                    <div
+                      className={`split-feature ${
+                        section.layout === "imageRight" ? "split-feature--reverse" : ""
+                      }`}
+                    >
+                      {section.media ? (
+                        <SanityImageView
+                          image={section.media}
+                          alt={section.title}
+                          width={1400}
+                          height={1000}
+                          sizes="(max-width: 900px) 100vw, 50vw"
+                          className="split-feature__image"
+                        />
+                      ) : null}
+                      <div className="split-feature__copy">
+                        {section.body ? <p>{section.body}</p> : null}
+                        {section.primaryCta ? (
+                          <a className="text-link" href={section.primaryCta.href}>
+                            {section.primaryCta.label}
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : null}
+
                   {section._type === "featureListBlock" && section.items?.length ? (
                     <ul className="tag-list">
                       {section.items.map((item) => (
@@ -106,6 +138,13 @@ export function PageSections({ sections }: { sections: PageSection[] }) {
                     <div className="rich-body">
                       <PortableText value={section.content || []} />
                     </div>
+                  ) : null}
+
+                  {section._type === "quoteBlock" && section.quote ? (
+                    <figure className="quote-block">
+                      <blockquote>{section.quote}</blockquote>
+                      {section.attribution ? <figcaption>{section.attribution}</figcaption> : null}
+                    </figure>
                   ) : null}
                 </div>
               </Accordion.Panel>

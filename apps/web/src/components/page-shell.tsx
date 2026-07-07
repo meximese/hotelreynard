@@ -13,7 +13,6 @@ export function PageShell({
 }) {
   return (
     <main className="page-shell">
-      <ContentSeparator />
       <section className="hero">
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>

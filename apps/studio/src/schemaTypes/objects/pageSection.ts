@@ -7,6 +7,8 @@ export default defineType({
   of: [
     defineArrayMember({ type: "heroBlock" }),
     defineArrayMember({ type: "galleryBlock" }),
+    defineArrayMember({ type: "imageTextBlock" }),
+    defineArrayMember({ type: "quoteBlock" }),
     defineArrayMember({ type: "featureListBlock" }),
     defineArrayMember({ type: "bookingEmbedBlock" }),
     defineArrayMember({ type: "eventFeedBlock" }),

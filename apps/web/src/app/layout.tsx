@@ -15,12 +15,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap" rel="stylesheet" />
+      </head>
       <body>
         <Providers>
           <SiteHeader />
           {children}
           <footer className="site-footer">
-            <p>Hotel Reynard. A room-forward hotel and restaurant build in progress.</p>
+            <div className="site-footer-grid">
+              <div>
+                <p className="eyebrow">Visit</p>
+                <p>302 Historic Columbia River Highway</p>
+                <p>Troutdale, Oregon</p>
+              </div>
+              <div>
+                <p className="eyebrow">Hotel Reynard</p>
+                <p>A room-forward hotel and tavern in progress.</p>
+              </div>
+            </div>
           </footer>
         </Providers>
       </body>

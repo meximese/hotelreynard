@@ -17,10 +17,9 @@ export function SiteHeader() {
       <Toolbar.Root className="site-toolbar" aria-label="Primary">
         <Toolbar.Group className="toolbar-group" aria-label="Brand">
           <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
-            Hotel Reynard
+            <span className="toolbar-brand-display">Hotel Reynard</span>
           </Toolbar.Link>
         </Toolbar.Group>
-        <Toolbar.Separator className="toolbar-divider" />
         <Toolbar.Group className="toolbar-nav" aria-label="Primary navigation">
           {navItems.map((item) => (
             <Toolbar.Link
@@ -31,6 +30,12 @@ export function SiteHeader() {
               {item.label}
             </Toolbar.Link>
           ))}
+        </Toolbar.Group>
+        <Toolbar.Separator className="toolbar-divider" />
+        <Toolbar.Group className="toolbar-group" aria-label="Booking">
+          <Toolbar.Link render={<Link href="/stay" />} className="toolbar-link toolbar-link-book">
+            Reserve
+          </Toolbar.Link>
         </Toolbar.Group>
       </Toolbar.Root>
     </header>
