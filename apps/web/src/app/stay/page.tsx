@@ -1,16 +1,19 @@
 import { PageShell } from "@/components/page-shell";
+import { PageSections } from "@/components/page-sections";
 import { RoomCard } from "@/components/room-card";
-import { getFeaturedRooms } from "@/lib/content/loaders";
+import { getFeaturedRooms, getStayPage } from "@/lib/content/loaders";
 
 export default async function StayPage() {
+  const page = await getStayPage();
   const rooms = await getFeaturedRooms();
 
   return (
     <PageShell
       eyebrow="Stay"
-      title="Eight distinct rooms, one booking journey."
-      intro="Each room should carry its own mood, material palette, and local story. The content model treats them as first-class documents now, even while booking remains property-level."
+      title={page.title}
+      intro={page.intro}
     >
+      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
       <section className="card-grid">
         {rooms.map((room) => (
           <RoomCard key={room._id} room={room} />

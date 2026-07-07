@@ -15,7 +15,9 @@ export interface Room {
   title: string;
   slug: Slug;
   shortDescription?: string;
+  body?: PortableTextBlock[];
   heroImage?: SanityImage;
+  gallery?: SanityImage[];
   highlights?: string[];
   isPublicPageEnabled?: boolean;
 }
@@ -28,6 +30,7 @@ export interface Event {
   venueType?: string;
   startDateTime?: string;
   body?: PortableTextBlock[];
+  heroImage?: SanityImage;
   cta?: Cta;
 }
 
@@ -41,6 +44,8 @@ export interface PageSection {
   title?: string;
   eyebrow?: string;
   body?: string;
+  media?: SanityImage;
+  images?: SanityImage[];
   items?: string[];
   content?: PortableTextBlock[];
   entries?: HoursEntry[];
@@ -60,4 +65,11 @@ export interface HomePageData {
   secondaryCta: Cta;
   featuredRooms: Room[];
   upcomingEvents: Event[];
+  sections?: PageSection[];
+}
+
+export interface SingletonPageData {
+  title: string;
+  intro: string;
+  sections?: PageSection[];
 }

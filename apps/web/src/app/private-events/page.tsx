@@ -1,11 +1,19 @@
 import { PageShell } from "@/components/page-shell";
+import { PageSections } from "@/components/page-sections";
+import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
+import { getPrivateEventsPage } from "@/lib/content/loaders";
 
-export default function PrivateEventsPage() {
+export default async function PrivateEventsPage() {
+  const page = await getPrivateEventsPage();
+
   return (
     <PageShell
       eyebrow="Private Events"
-      title="An inquiry-led path for outdoor gatherings and hospitality-driven rentals."
-      intro="This page is reserved for event-space storytelling, venue details, and lead capture. It stays separate from the public events feed because the user journey is different."
-    />
+      title={page.title}
+      intro={page.intro}
+    >
+      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
+      <PrivateEventsInquiry />
+    </PageShell>
   );
 }

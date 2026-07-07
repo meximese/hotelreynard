@@ -1,11 +1,17 @@
 import { PageShell } from "@/components/page-shell";
+import { PageSections } from "@/components/page-sections";
+import { getLocationPage } from "@/lib/content/loaders";
 
-export default function LocationPage() {
+export default async function LocationPage() {
+  const page = await getLocationPage();
+
   return (
     <PageShell
       eyebrow="Location"
-      title="A gateway between town and the landscape beyond it."
-      intro="The location story deserves its own page and schema because it is one of the strongest conversion levers for this property. This route is where the city-plus-nature positioning will live."
-    />
+      title={page.title}
+      intro={page.intro}
+    >
+      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
+    </PageShell>
   );
 }

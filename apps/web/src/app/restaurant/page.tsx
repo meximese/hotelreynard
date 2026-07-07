@@ -1,11 +1,17 @@
 import { PageShell } from "@/components/page-shell";
+import { PageSections } from "@/components/page-sections";
+import { getRestaurantPage } from "@/lib/content/loaders";
 
-export default function RestaurantPage() {
+export default async function RestaurantPage() {
+  const page = await getRestaurantPage();
+
   return (
     <PageShell
       eyebrow="Restaurant"
-      title="A destination dining room with a bar that keeps the building alive."
-      intro="This route is ready for a structured restaurant page in Sanity: hours, reservation CTA, menu CTA, gallery, and event tie-ins without forcing item-level menu maintenance."
-    />
+      title={page.title}
+      intro={page.intro}
+    >
+      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
+    </PageShell>
   );
 }

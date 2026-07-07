@@ -1,4 +1,4 @@
-import type { Event, HomePageData, Room } from "./types";
+import type { Event, HomePageData, Room, SingletonPageData } from "./types";
 
 export const fallbackRooms: Room[] = [
   {
@@ -97,4 +97,40 @@ export const fallbackHomePage: HomePageData = {
   },
   featuredRooms: fallbackRooms,
   upcomingEvents: fallbackEvents,
+  sections: [],
+};
+
+export const fallbackStayPage: SingletonPageData = {
+  title: "Eight distinct rooms, one booking journey.",
+  intro:
+    "Each room should carry its own mood, material palette, and local story. The content model treats them as first-class documents now, even while booking remains property-level.",
+  sections: [],
+};
+
+export const fallbackRestaurantPage: SingletonPageData = {
+  title: "A destination dining room with a bar that keeps the building alive.",
+  intro:
+    "This route is ready for a structured restaurant page in Sanity: hours, reservation CTA, menu CTA, gallery, and event tie-ins without forcing item-level menu maintenance.",
+  sections: [],
+};
+
+export const fallbackEventsPage: SingletonPageData = {
+  title: "Public programming across the restaurant and outdoor event space.",
+  intro:
+    "Events are modeled as a real collection with schedule, venue, status, and CTA fields so the website can evolve beyond static promotional copy.",
+  sections: [],
+};
+
+export const fallbackPrivateEventsPage: SingletonPageData = {
+  title: "An inquiry-led path for outdoor gatherings and hospitality-driven rentals.",
+  intro:
+    "This page is reserved for event-space storytelling, venue details, and lead capture. It stays separate from the public events feed because the user journey is different.",
+  sections: [],
+};
+
+export const fallbackLocationPage: SingletonPageData = {
+  title: "A gateway between town and the landscape beyond it.",
+  intro:
+    "The location story deserves its own page and schema because it is one of the strongest conversion levers for this property. This route is where the city-plus-nature positioning will live.",
+  sections: [],
 };

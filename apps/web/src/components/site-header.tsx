@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { Toolbar } from "@base-ui/react/toolbar";
 
 const navItems = [
   { href: "/stay", label: "Stay" },
@@ -11,18 +14,25 @@ const navItems = [
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link href="/" className="brand">
-        Hotel Reynard
-      </Link>
-      <nav aria-label="Primary">
-        <ul className="nav-list">
+      <Toolbar.Root className="site-toolbar" aria-label="Primary">
+        <Toolbar.Group className="toolbar-group" aria-label="Brand">
+          <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
+            Hotel Reynard
+          </Toolbar.Link>
+        </Toolbar.Group>
+        <Toolbar.Separator className="toolbar-divider" />
+        <Toolbar.Group className="toolbar-nav" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href}>{item.label}</Link>
-            </li>
+            <Toolbar.Link
+              key={item.href}
+              render={<Link href={item.href} />}
+              className="toolbar-link"
+            >
+              {item.label}
+            </Toolbar.Link>
           ))}
-        </ul>
-      </nav>
+        </Toolbar.Group>
+      </Toolbar.Root>
     </header>
   );
 }

@@ -1,3 +1,5 @@
+import { ContentSeparator } from "@/components/content-separator";
+
 export function PageShell({
   eyebrow,
   title,
@@ -11,11 +13,13 @@ export function PageShell({
 }) {
   return (
     <main className="page-shell">
+      <ContentSeparator />
       <section className="hero">
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
         <p className="lede">{intro}</p>
       </section>
+      <ContentSeparator />
       {children}
     </main>
   );

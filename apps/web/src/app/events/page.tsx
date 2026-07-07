@@ -1,16 +1,19 @@
 import { EventCard } from "@/components/event-card";
+import { PageSections } from "@/components/page-sections";
 import { PageShell } from "@/components/page-shell";
-import { getUpcomingEvents } from "@/lib/content/loaders";
+import { getEventsPageData, getUpcomingEvents } from "@/lib/content/loaders";
 
 export default async function EventsPage() {
+  const page = await getEventsPageData();
   const events = await getUpcomingEvents();
 
   return (
     <PageShell
       eyebrow="Events"
-      title="Public programming across the restaurant and outdoor event space."
-      intro="Events are modeled as a real collection with schedule, venue, status, and CTA fields so the website can evolve beyond static promotional copy."
+      title={page.title}
+      intro={page.intro}
     >
+      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
       <section className="card-grid">
         {events.map((event) => (
           <EventCard key={event._id} event={event} />

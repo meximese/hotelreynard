@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { PageShell } from "@/components/page-shell";
+import { SanityImageView } from "@/components/sanity-image";
 import { getEventBySlug } from "@/lib/content/loaders";
 
 interface PageProps {
@@ -25,6 +26,14 @@ export default async function EventPage({ params }: PageProps) {
         "This route is ready for Sanity-backed event detail content and public programming."
       }
     >
+      <SanityImageView
+        image={event.heroImage}
+        alt={event.title}
+        width={1600}
+        height={1100}
+        sizes="100vw"
+        className="hero-image"
+      />
       {event.body?.length ? (
         <div className="rich-body">
           <PortableText value={event.body} />

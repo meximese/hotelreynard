@@ -2,8 +2,14 @@ import { createClient } from "next-sanity";
 
 const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2026-07-01";
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "";
+const projectId =
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
+  process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID ||
+  "";
+const dataset =
+  process.env.NEXT_PUBLIC_SANITY_DATASET ||
+  process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET ||
+  "";
 
 export const sanityClient =
   projectId && dataset
