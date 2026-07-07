@@ -4,10 +4,16 @@ import Link from "next/link";
 import type { Event } from "@/lib/content/types";
 import { ContentSeparator } from "@/components/content-separator";
 import { SanityImageView } from "@/components/sanity-image";
+import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
 export function EventCard({ event }: { event: Event }) {
+  const cardAttr =
+    event._id && event._type
+      ? createSanityDataAttribute({ id: event._id, type: event._type, path: ["title"] })
+      : undefined;
+
   return (
-    <article className="card">
+    <article className="card" data-sanity={cardAttr}>
       <SanityImageView
         image={event.heroImage}
         alt={event.title}

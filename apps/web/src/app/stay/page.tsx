@@ -12,8 +12,12 @@ export default async function StayPage() {
       eyebrow="Stay"
       title={page.title}
       intro={page.intro}
+      documentId={page._id}
+      documentType={page._type}
     >
-      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
+      {page.sections?.length ? (
+        <PageSections sections={page.sections} documentId={page._id} documentType={page._type} />
+      ) : null}
       <section className="card-grid">
         {rooms.map((room) => (
           <RoomCard key={room._id} room={room} />

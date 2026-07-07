@@ -1,16 +1,6 @@
 import groq from "groq";
 import { hasSanityConfig } from "@/lib/sanity/client";
 import { DEFAULT_SANITY_REVALIDATE, sanityFetch } from "@/lib/sanity/fetch";
-import {
-  fallbackEvents,
-  fallbackEventsPage,
-  fallbackHomePage,
-  fallbackLocationPage,
-  fallbackPrivateEventsPage,
-  fallbackRestaurantPage,
-  fallbackRooms,
-  fallbackStayPage,
-} from "./fallback";
 import type { Event, GenericPage, HomePageData, Room, SingletonPageData } from "./types";
 
 const pageSectionsProjection = groq`
@@ -24,6 +14,8 @@ const pageSectionsProjection = groq`
 `;
 
 const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
+  _id,
+  _type,
   title,
   intro,
   primaryCta,
@@ -52,6 +44,7 @@ const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
 
 const FEATURED_ROOMS_QUERY = groq`*[_type == "room"] | order(sortOrder asc, title asc)[0...8]{
   _id,
+  _type,
   title,
   slug,
   shortDescription,
@@ -63,6 +56,7 @@ const FEATURED_ROOMS_QUERY = groq`*[_type == "room"] | order(sortOrder asc, titl
 
 const UPCOMING_EVENTS_QUERY = groq`*[_type == "event" && status == "scheduled"] | order(startDateTime asc)[0...6]{
   _id,
+  _type,
   title,
   slug,
   summary,
@@ -71,9 +65,39 @@ const UPCOMING_EVENTS_QUERY = groq`*[_type == "event" && status == "scheduled"] 
   heroImage
 }`;
 
+function emptyHomePage(): HomePageData {
+  return {
+    _id: "homePage",
+    _type: "homePage",
+    title: "",
+    intro: "",
+    primaryCta: {
+      label: "",
+      href: "/",
+    },
+    secondaryCta: {
+      label: "",
+      href: "/",
+    },
+    featuredRooms: [],
+    upcomingEvents: [],
+    sections: [],
+  };
+}
+
+function emptySingletonPage(type: string): SingletonPageData {
+  return {
+    _id: type,
+    _type: type,
+    title: "",
+    intro: "",
+    sections: [],
+  };
+}
+
 export async function getHomePage(): Promise<HomePageData> {
   if (!hasSanityConfig()) {
-    return fallbackHomePage;
+    return emptyHomePage();
   }
 
   const data = await sanityFetch<HomePageData | null>({
@@ -82,12 +106,12 @@ export async function getHomePage(): Promise<HomePageData> {
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 
-  return data || fallbackHomePage;
+  return data || emptyHomePage();
 }
 
 export async function getFeaturedRooms(): Promise<Room[]> {
   if (!hasSanityConfig()) {
-    return fallbackRooms;
+    return [];
   }
 
   const data = await sanityFetch<Room[]>({
@@ -96,12 +120,12 @@ export async function getFeaturedRooms(): Promise<Room[]> {
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 
-  return data.length ? data : fallbackRooms;
+  return data;
 }
 
 export async function getUpcomingEvents(): Promise<Event[]> {
   if (!hasSanityConfig()) {
-    return fallbackEvents;
+    return [];
   }
 
   const data = await sanityFetch<Event[]>({
@@ -110,17 +134,18 @@ export async function getUpcomingEvents(): Promise<Event[]> {
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 
-  return data.length ? data : fallbackEvents;
+  return data;
 }
 
 export async function getEventBySlug(slug: string): Promise<Event | null> {
   if (!hasSanityConfig()) {
-    return fallbackEvents.find((event) => event.slug.current === slug) || null;
+    return null;
   }
 
   return sanityFetch<Event | null>({
     query: groq`*[_type == "event" && slug.current == $slug][0]{
       _id,
+      _type,
       title,
       slug,
       summary,
@@ -138,12 +163,13 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
 
 export async function getRoomBySlug(slug: string): Promise<Room | null> {
   if (!hasSanityConfig()) {
-    return fallbackRooms.find((room) => room.slug.current === slug) || null;
+    return null;
   }
 
   return sanityFetch<Room | null>({
     query: groq`*[_type == "room" && slug.current == $slug][0]{
       _id,
+      _type,
       title,
       slug,
       shortDescription,
@@ -167,6 +193,7 @@ export async function getGenericPageBySlug(slug: string): Promise<GenericPage | 
   return sanityFetch<GenericPage | null>({
     query: groq`*[_type == "page" && slug.current == $slug][0]{
       _id,
+      _type,
       title,
       slug,
       ${pageSectionsProjection}
@@ -177,16 +204,15 @@ export async function getGenericPageBySlug(slug: string): Promise<GenericPage | 
   });
 }
 
-async function getSingletonPage(
-  type: string,
-  fallback: SingletonPageData,
-): Promise<SingletonPageData> {
+async function getSingletonPage(type: string): Promise<SingletonPageData> {
   if (!hasSanityConfig()) {
-    return fallback;
+    return emptySingletonPage(type);
   }
 
   const data = await sanityFetch<SingletonPageData | null>({
     query: groq`*[_type == $type][0]{
+      _id,
+      _type,
       title,
       intro,
       ${pageSectionsProjection}
@@ -196,25 +222,25 @@ async function getSingletonPage(
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 
-  return data || fallback;
+  return data || emptySingletonPage(type);
 }
 
 export function getStayPage() {
-  return getSingletonPage("stayPage", fallbackStayPage);
+  return getSingletonPage("stayPage");
 }
 
 export function getRestaurantPage() {
-  return getSingletonPage("restaurantPage", fallbackRestaurantPage);
+  return getSingletonPage("restaurantPage");
 }
 
 export function getEventsPageData() {
-  return getSingletonPage("eventsPage", fallbackEventsPage);
+  return getSingletonPage("eventsPage");
 }
 
 export function getPrivateEventsPage() {
-  return getSingletonPage("privateEventsPage", fallbackPrivateEventsPage);
+  return getSingletonPage("privateEventsPage");
 }
 
 export function getLocationPage() {
-  return getSingletonPage("locationPage", fallbackLocationPage);
+  return getSingletonPage("locationPage");
 }

@@ -24,6 +24,8 @@ export default async function RoomPage({ params }: PageProps) {
         room.shortDescription ||
         "This room is modeled as a first-class content type so it can grow into a richer public experience over time."
       }
+      documentId={room._id}
+      documentType={room._type || "room"}
     >
       <SanityImageView
         image={room.heroImage}

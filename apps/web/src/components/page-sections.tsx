@@ -3,6 +3,7 @@
 import { PortableText } from "@portabletext/react";
 import { Accordion } from "@base-ui/react/accordion";
 import { SanityImageView } from "@/components/sanity-image";
+import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { PageSection } from "@/lib/content/types";
 
 function PlusIcon() {
@@ -23,13 +24,30 @@ function PlusIcon() {
   );
 }
 
-export function PageSections({ sections }: { sections: PageSection[] }) {
+export function PageSections({
+  sections,
+  documentId,
+  documentType,
+}: {
+  sections: PageSection[];
+  documentId?: string;
+  documentType?: string;
+}) {
   return (
     <div className="section-stack">
       <Accordion.Root className="content-accordion" multiple defaultValue={["section-0"]}>
         {sections.map((section, index) => {
           const key = `${section._type}-${index}`;
           const value = `section-${index}`;
+          const sectionPath = section._key ? `sections[_key=="${section._key}"]` : `sections[${index}]`;
+          const sectionAttr =
+            documentId && documentType
+              ? createSanityDataAttribute({
+                  id: documentId,
+                  type: documentType,
+                  path: [sectionPath],
+                })
+              : undefined;
           const title =
             section.title ||
             (section._type === "quoteBlock"
@@ -44,7 +62,7 @@ export function PageSections({ sections }: { sections: PageSection[] }) {
                 : "Section"));
 
           return (
-            <Accordion.Item key={key} className="accordion-item" value={value}>
+            <Accordion.Item key={key} className="accordion-item" value={value} data-sanity={sectionAttr}>
               <Accordion.Header>
                 <Accordion.Trigger className="accordion-trigger">
                   <span>
@@ -107,7 +125,7 @@ export function PageSections({ sections }: { sections: PageSection[] }) {
                       <div className="split-feature__copy">
                         {section.body ? <p>{section.body}</p> : null}
                         {section.primaryCta ? (
-                          <a className="text-link" href={section.primaryCta.href}>
+                          <a className="text-link" href={cleanStegaString(section.primaryCta.href)}>
                             {section.primaryCta.label}
                           </a>
                         ) : null}

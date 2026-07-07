@@ -5,6 +5,11 @@ export interface SanityImage extends Image {
   alt?: string;
 }
 
+export interface SanityDocumentIdentity {
+  _id: string;
+  _type: string;
+}
+
 export interface Cta {
   label: string;
   href: string;
@@ -12,6 +17,7 @@ export interface Cta {
 
 export interface Room {
   _id: string;
+  _type?: string;
   title: string;
   slug: Slug;
   shortDescription?: string;
@@ -24,6 +30,7 @@ export interface Room {
 
 export interface Event {
   _id: string;
+  _type?: string;
   title: string;
   slug: Slug;
   summary?: string;
@@ -40,6 +47,7 @@ export interface HoursEntry {
 }
 
 export interface PageSection {
+  _key?: string;
   _type: string;
   title?: string;
   eyebrow?: string;
@@ -58,12 +66,13 @@ export interface PageSection {
 
 export interface GenericPage {
   _id: string;
+  _type: string;
   title: string;
   slug: Slug;
   sections?: PageSection[];
 }
 
-export interface HomePageData {
+export interface HomePageData extends SanityDocumentIdentity {
   title: string;
   intro: string;
   primaryCta: Cta;
@@ -73,7 +82,7 @@ export interface HomePageData {
   sections?: PageSection[];
 }
 
-export interface SingletonPageData {
+export interface SingletonPageData extends SanityDocumentIdentity {
   title: string;
   intro: string;
   sections?: PageSection[];

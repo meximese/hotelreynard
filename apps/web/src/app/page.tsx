@@ -6,6 +6,7 @@ import { PageSections } from "@/components/page-sections";
 import { RoomCard } from "@/components/room-card";
 import { SanityImageView } from "@/components/sanity-image";
 import { getHomePage } from "@/lib/content/loaders";
+import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { SanityImage } from "@/lib/content/types";
 
 export default async function HomePage() {
@@ -23,6 +24,8 @@ export default async function HomePage() {
         .slice(0, 6);
   const heroPrimaryCta = heroSection?.primaryCta || page.primaryCta;
   const heroSecondaryCta = heroSection?.secondaryCta || page.secondaryCta;
+  const titleAttr = createSanityDataAttribute({ id: page._id, type: page._type, path: ["title"] });
+  const introAttr = createSanityDataAttribute({ id: page._id, type: page._type, path: ["intro"] });
 
   return (
     <main className="home-shell">
@@ -48,14 +51,19 @@ export default async function HomePage() {
       <section className="home-intro">
         <div className="home-intro-copy">
           <p className="eyebrow">Hotel + Tavern</p>
-          <h1>{heroSection?.title || page.title}</h1>
-          <p className="home-intro-lede">{page.intro}</p>
+          <h1 data-sanity={titleAttr}>{heroSection?.title || page.title}</h1>
+          <p className="home-intro-lede" data-sanity={introAttr}>
+            {page.intro}
+          </p>
           <div className="cta-row">
-            <Link className="button-link" href={heroPrimaryCta.href}>
+            <Link className="button-link" href={cleanStegaString(heroPrimaryCta.href)}>
               {heroPrimaryCta.label}
               <ArrowRight size={16} />
             </Link>
-            <Link className="button-link button-link-secondary" href={heroSecondaryCta.href}>
+            <Link
+              className="button-link button-link-secondary"
+              href={cleanStegaString(heroSecondaryCta.href)}
+            >
               {heroSecondaryCta.label}
               <ArrowRight size={16} />
             </Link>
@@ -119,7 +127,7 @@ export default async function HomePage() {
         <>
           <ContentSeparator />
           <section className="home-section home-section--stacked">
-            <PageSections sections={remainingSections} />
+            <PageSections sections={remainingSections} documentId={page._id} documentType={page._type} />
           </section>
         </>
       ) : null}

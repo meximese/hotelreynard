@@ -11,8 +11,12 @@ export default async function PrivateEventsPage() {
       eyebrow="Private Events"
       title={page.title}
       intro={page.intro}
+      documentId={page._id}
+      documentType={page._type}
     >
-      {page.sections?.length ? <PageSections sections={page.sections} /> : null}
+      {page.sections?.length ? (
+        <PageSections sections={page.sections} documentId={page._id} documentType={page._type} />
+      ) : null}
       <PrivateEventsInquiry />
     </PageShell>
   );

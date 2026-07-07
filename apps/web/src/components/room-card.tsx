@@ -4,12 +4,17 @@ import Link from "next/link";
 import type { Room } from "@/lib/content/types";
 import { ContentSeparator } from "@/components/content-separator";
 import { SanityImageView } from "@/components/sanity-image";
+import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
 export function RoomCard({ room }: { room: Room }) {
   const href = room.slug.current ? `/rooms/${room.slug.current}` : "/stay";
+  const cardAttr =
+    room._id && room._type
+      ? createSanityDataAttribute({ id: room._id, type: room._type, path: ["title"] })
+      : undefined;
 
   return (
-    <article className="card">
+    <article className="card" data-sanity={cardAttr}>
       <SanityImageView
         image={room.heroImage}
         alt={room.title}
