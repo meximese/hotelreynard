@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Providers } from "@/components/providers";
+import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
 import "./globals.css";
-import { SplashSiteHeader } from "@/components/splash/SplashSiteHeader";
 
 export const metadata: Metadata = {
   title: "Hotel Reynard",
@@ -35,22 +35,23 @@ export default async function RootLayout({
       </head>
       <body>
         <Providers>
-          <SplashSiteHeader />
-          {children}
-          {visualEditingEnabled ? <VisualEditing /> : null}
-          <footer className="site-footer">
-            <div className="site-footer-grid">
-              <div>
-                <p className="eyebrow">Visit</p>
-                <p>302 Historic Columbia River Highway</p>
-                <p>Troutdale, Oregon</p>
+          <SplashLayoutScaffold>
+            {children}
+            {visualEditingEnabled ? <VisualEditing /> : null}
+            <footer className="site-footer">
+              <div className="site-footer-grid">
+                <div>
+                  <p className="eyebrow">Visit</p>
+                  <p>302 Historic Columbia River Highway</p>
+                  <p>Troutdale, Oregon</p>
+                </div>
+                <div>
+                  <p className="eyebrow">Hotel Reynard</p>
+                  <p>A room-forward hotel and tavern in progress.</p>
+                </div>
               </div>
-              <div>
-                <p className="eyebrow">Hotel Reynard</p>
-                <p>A room-forward hotel and tavern in progress.</p>
-              </div>
-            </div>
-          </footer>
+            </footer>
+          </SplashLayoutScaffold>
         </Providers>
       </body>
     </html>
