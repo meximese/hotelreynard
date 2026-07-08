@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Providers } from "@/components/providers";
-import { SiteHeader } from "@/components/site-header";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
 import "./globals.css";
+import { SplashSiteHeader } from "@/components/splash/SplashSiteHeader";
 
 export const metadata: Metadata = {
   title: "Hotel Reynard",
@@ -23,12 +23,19 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body>
         <Providers>
-          <SiteHeader />
+          <SplashSiteHeader />
           {children}
           {visualEditingEnabled ? <VisualEditing /> : null}
           <footer className="site-footer">

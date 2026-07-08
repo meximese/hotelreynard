@@ -5,6 +5,7 @@ import { EventCard } from "@/components/event-card";
 import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { RoomCard } from "@/components/room-card";
 import { SanityImageView } from "@/components/sanity-image";
+import { StickyScrollGallery } from "@/components/sticky-scroll-gallery";
 import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
 
@@ -117,31 +118,39 @@ export function PageSections({
             ) : null}
 
             {section._type === "galleryBlock" && section.images?.length ? (
-              <div className="home-rail-section" aria-label={section.title || "Property views"}>
-                <div className="home-rail-head">
-                  {section.eyebrow ? <span className="eyebrow">{section.eyebrow}</span> : <span />}
-                  <span className="eyebrow">{section.title || title}</span>
+              section.displayMode === "stickyScroll" ? (
+                <StickyScrollGallery
+                  eyebrow={section.eyebrow}
+                  title={section.title || title}
+                  images={section.images}
+                />
+              ) : (
+                <div className="home-rail-section" aria-label={section.title || "Property views"}>
+                  <div className="home-rail-head">
+                    {section.eyebrow ? <span className="eyebrow">{section.eyebrow}</span> : <span />}
+                    <span className="eyebrow">{section.title || title}</span>
+                  </div>
+                  <div className="home-image-rail">
+                    {section.images.map((image, imageIndex) => (
+                      <div
+                        key={`${image.asset?._ref || "image"}-${imageIndex}`}
+                        className={`home-image-rail__item ${
+                          imageIndex % 2 === 1 ? "is-portrait" : "is-landscape"
+                        }`}
+                      >
+                        <SanityImageView
+                          image={image}
+                          alt={image.alt || `${title} image ${imageIndex + 1}`}
+                          width={1200}
+                          height={900}
+                          sizes="(max-width: 900px) 80vw, 40vw"
+                          className="home-image-rail__image"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="home-image-rail">
-                  {section.images.map((image, imageIndex) => (
-                    <div
-                      key={`${image.asset?._ref || "image"}-${imageIndex}`}
-                      className={`home-image-rail__item ${
-                        imageIndex % 2 === 1 ? "is-portrait" : "is-landscape"
-                      }`}
-                    >
-                      <SanityImageView
-                        image={image}
-                        alt={image.alt || `${title} image ${imageIndex + 1}`}
-                        width={1200}
-                        height={900}
-                        sizes="(max-width: 900px) 80vw, 40vw"
-                        className="home-image-rail__image"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+              )
             ) : null}
 
             {section._type === "imageBlock" ? (
