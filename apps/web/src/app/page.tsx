@@ -12,14 +12,30 @@ export default async function HomePage() {
       ?.filter((section) => section._type === "eventFeedBlock")
       .map((section) => section.limit || 3) || [0]),
   );
-  const titleAttr = createSanityDataAttribute({ id: page._id, type: page._type, path: ["title"] });
-  const introAttr = createSanityDataAttribute({ id: page._id, type: page._type, path: ["intro"] });
-  const heroAttr = createSanityDataAttribute({ id: page._id, type: page._type, path: ["hero"] });
-  const upcomingEvents = eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
+  const titleAttr = createSanityDataAttribute({
+    id: page._id,
+    type: page._type,
+    path: ["title"],
+  });
+  const introAttr = createSanityDataAttribute({
+    id: page._id,
+    type: page._type,
+    path: ["intro"],
+  });
+  const heroAttr = createSanityDataAttribute({
+    id: page._id,
+    type: page._type,
+    path: ["hero"],
+  });
+  const upcomingEvents =
+    eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
 
   return (
     <main className="home-shell">
-      {page.hero?.media || page.hero?.eyebrow || page.hero?.title || page.hero?.body ? (
+      {page.hero?.media ||
+      page.hero?.eyebrow ||
+      page.hero?.title ||
+      page.hero?.body ? (
         <section className="page-top-hero" data-sanity={heroAttr}>
           {page.hero.media ? (
             <SanityImageView
@@ -33,15 +49,23 @@ export default async function HomePage() {
           ) : null}
           {page.hero.eyebrow || page.hero.title || page.hero.body ? (
             <div className="page-top-hero__caption">
-              <span className="home-hero-name">{page.hero.title || page.hero.eyebrow}</span>
-              {page.hero.body ? <span className="home-hero-meta">{page.hero.body}</span> : null}
+              <span className="home-hero-name">
+                {page.hero.title || page.hero.eyebrow}
+              </span>
+              {page.hero.body ? (
+                <span className="home-hero-meta">{page.hero.body}</span>
+              ) : null}
             </div>
           ) : null}
         </section>
       ) : null}
       <section className="home-intro">
         <div className="home-intro-copy">
-          <p className="eyebrow">Hotel + Tavern</p>
+          <img
+            src="/crest.svg"
+            alt="Hotel Reynard crest"
+            className="home-intro-crest"
+          />
           <h1 data-sanity={titleAttr}>{page.title}</h1>
           <p className="home-intro-lede" data-sanity={introAttr}>
             {page.intro}

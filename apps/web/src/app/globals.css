@@ -90,7 +90,7 @@ img {
   max-width: 100%;
 }
 
-.site-header,
+.site-header > .site-toolbar,
 .site-footer,
 .page-shell,
 .home-shell {
@@ -98,9 +98,22 @@ img {
   margin: 0 auto;
 }
 
+.sticky-sentinel {
+  width: 100%;
+  height: 1px;
+}
+
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
   padding: 0.5rem 0;
   background-color: var(--bg);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    backdrop-filter 180ms ease;
 }
 
 .site-toolbar {
@@ -112,6 +125,9 @@ img {
   padding: 0;
   border: 0;
   background: transparent;
+  transition:
+    min-height 180ms ease,
+    padding 180ms ease;
 }
 
 .toolbar-group,
@@ -123,8 +139,9 @@ img {
 }
 
 .toolbar-brand-logo {
-  width: max(120px, 220px);
+  width: 220px;
   height: auto;
+  transition: width 180ms ease;
 }
 
 .toolbar-nav {
@@ -165,6 +182,20 @@ img {
 .toolbar-link-book {
   padding-bottom: 0.2rem;
   border-bottom: 1px solid var(--ink);
+}
+
+.site-header--stuck {
+  background-color: color-mix(in srgb, var(--bg) 88%, white 12%);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(16, 15, 13, 0.06);
+}
+
+.site-header--stuck .site-toolbar {
+  min-height: 3.5rem;
+}
+
+.site-header--stuck .toolbar-brand-logo {
+  width: 120px;
 }
 
 .site-footer {
@@ -844,6 +875,10 @@ h3 {
     width: min(calc(100% - 1.5rem), var(--max-width));
   }
 
+  .site-header {
+    padding: 0.35rem 0;
+  }
+
   .site-toolbar {
     display: grid;
     gap: 0;
@@ -859,6 +894,14 @@ h3 {
   .toolbar-nav {
     gap: 0.75rem 1.1rem;
     padding: 0.4rem 0;
+  }
+
+  .toolbar-brand-logo {
+    width: min(180px, 52vw);
+  }
+
+  .site-header--stuck .toolbar-brand-logo {
+    width: 120px;
   }
 
   .toolbar-divider {
