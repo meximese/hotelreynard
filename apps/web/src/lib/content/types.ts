@@ -54,7 +54,8 @@ export interface PageSection {
   body?: string;
   quote?: string;
   attribution?: string;
-  layout?: "imageLeft" | "imageRight";
+  layout?: "imageLeft" | "imageRight" | "imageTop" | "imageBottom";
+  textAlign?: "left" | "center" | "right";
   displayMode?: "rail" | "stickyScroll";
   media?: SanityImage;
   images?: SanityImage[];

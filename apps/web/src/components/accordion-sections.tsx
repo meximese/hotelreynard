@@ -9,35 +9,8 @@ import { SanityImageView } from "@/components/sanity-image";
 import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
 
-function getSectionTitle(section: PageSection) {
-  if (section.title) return section.title;
-
-  switch (section._type) {
-    case "heroBlock":
-      return "Hero";
-    case "galleryBlock":
-      return "Gallery";
-    case "imageBlock":
-      return "Image";
-    case "bookingEmbedBlock":
-      return "Booking";
-    case "quoteBlock":
-      return "Quote";
-    case "imageTextBlock":
-      return "Story";
-    case "roomFeedBlock":
-      return "Rooms";
-    case "eventFeedBlock":
-      return "Events";
-    case "hoursBlock":
-      return "Hours";
-    case "featureListBlock":
-      return "Highlights";
-    case "inquiryBlock":
-      return "Inquiry";
-    default:
-      return "Section";
-  }
+function getTextAlignClass(textAlign?: PageSection["textAlign"]) {
+  return textAlign ? `text-align-${textAlign}` : "";
 }
 
 function PlusIcon() {
@@ -92,7 +65,7 @@ export function AccordionSections({
                   path: [sectionPath],
                 })
               : undefined;
-          const title = getSectionTitle(section);
+          const textAlignClass = getTextAlignClass(section.textAlign);
 
           return (
             <Accordion.Item key={key} className="accordion-item" value={value} data-sanity={sectionAttr}>
@@ -100,7 +73,7 @@ export function AccordionSections({
                 <Accordion.Trigger className="accordion-trigger">
                   <span>
                     {section.eyebrow ? <span className="accordion-kicker">{section.eyebrow}</span> : null}
-                    <span className="accordion-title">{title}</span>
+                    {section.title ? <span className="accordion-title">{section.title}</span> : null}
                   </span>
                   <PlusIcon />
                 </Accordion.Trigger>
@@ -146,7 +119,7 @@ export function AccordionSections({
                         <SanityImageView
                           key={`${image.asset?._ref || "image"}-${imageIndex}`}
                           image={image}
-                          alt={image.alt || `${title} image ${imageIndex + 1}`}
+                          alt={image.alt || `Gallery image ${imageIndex + 1}`}
                           width={900}
                           height={700}
                           sizes="(max-width: 900px) 100vw, 50vw"
@@ -157,7 +130,7 @@ export function AccordionSections({
                   ) : null}
 
                   {section._type === "imageBlock" ? (
-                    <div className="section-stack">
+                    <div className={`section-stack ${textAlignClass}`.trim()}>
                       {section.media ? (
                         <SanityImageView
                           image={section.media}
@@ -175,8 +148,12 @@ export function AccordionSections({
                   {section._type === "imageTextBlock" ? (
                     <div
                       className={`split-feature ${
-                        section.layout === "imageRight" ? "split-feature--reverse" : ""
-                      }`}
+                        section.layout === "imageRight"
+                          ? "split-feature--reverse"
+                          : section.layout === "imageTop" || section.layout === "imageBottom"
+                            ? "split-feature--stacked"
+                            : ""
+                      } ${section.layout === "imageBottom" ? "split-feature--image-bottom" : ""}`}
                     >
                       {section.media ? (
                         <SanityImageView
@@ -188,7 +165,7 @@ export function AccordionSections({
                           className="split-feature__image"
                         />
                       ) : null}
-                      <div className="split-feature__copy">
+                      <div className={`split-feature__copy ${textAlignClass}`.trim()}>
                         {section.body ? <p>{section.body}</p> : null}
                         {section.primaryCta ? (
                           <a className="text-link" href={cleanStegaString(section.primaryCta.href)}>
@@ -241,13 +218,13 @@ export function AccordionSections({
                   ) : null}
 
                   {section._type === "richTextBlock" ? (
-                    <div className="rich-body">
+                    <div className={`rich-body ${textAlignClass}`.trim()}>
                       <PortableText value={section.content || []} />
                     </div>
                   ) : null}
 
                   {section._type === "quoteBlock" && section.quote ? (
-                    <figure className="quote-block">
+                    <figure className={`quote-block ${textAlignClass}`.trim()}>
                       <blockquote>{section.quote}</blockquote>
                       {section.attribution ? <figcaption>{section.attribution}</figcaption> : null}
                     </figure>

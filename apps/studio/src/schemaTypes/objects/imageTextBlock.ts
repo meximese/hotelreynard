@@ -29,9 +29,24 @@ export default defineType({
         list: [
           { title: "Image left", value: "imageLeft" },
           { title: "Image right", value: "imageRight" },
+          { title: "Image top", value: "imageTop" },
+          { title: "Image bottom", value: "imageBottom" },
         ],
         layout: "radio",
-        direction: "horizontal",
+      },
+    }),
+    defineField({
+      name: "textAlign",
+      title: "Text alignment",
+      type: "string",
+      initialValue: "left",
+      options: {
+        list: [
+          { title: "Left", value: "left" },
+          { title: "Center", value: "center" },
+          { title: "Right", value: "right" },
+        ],
+        layout: "radio",
       },
     }),
     defineField({ name: "primaryCta", title: "Primary CTA", type: "cta" }),
