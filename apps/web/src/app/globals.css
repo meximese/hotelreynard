@@ -107,8 +107,14 @@ img {
 }
 
 .site-content-shell__fade {
-  height: 50px;
+  height: 25px;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .site-content-shell__fade {
+    height: 50px;
+  }
 }
 
 .site-content-inner {
@@ -1080,7 +1086,7 @@ h3 {
   }
 
   .site-content-shell {
-    margin-top: 100svh;
+    margin-top: 90svh;
   }
 
   .date-desktop {
@@ -1092,6 +1098,7 @@ h3 {
   }
 
   .splash-backdrop {
+    height: 90dvh;
     padding: 1rem 0.75rem 1rem;
   }
 
