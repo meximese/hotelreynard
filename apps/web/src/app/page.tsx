@@ -61,11 +61,6 @@ export default async function HomePage() {
       ) : null}
       <section className="home-intro">
         <div className="home-intro-copy">
-          <img
-            src="/crest.svg"
-            alt="Hotel Reynard crest"
-            className="home-intro-crest"
-          />
           <h1 data-sanity={titleAttr}>{page.title}</h1>
           <p className="home-intro-lede" data-sanity={introAttr}>
             {page.intro}

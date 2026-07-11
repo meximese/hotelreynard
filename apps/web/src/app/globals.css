@@ -127,9 +127,6 @@ img {
   position: fixed;
   inset: 0;
   z-index: 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: auto 1fr auto;
   padding: 1.25rem 1.5rem 1.5rem;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.8), transparent 42%),
@@ -137,13 +134,15 @@ img {
 }
 
 .splash-backdrop__center {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: center;
-  justify-self: center;
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
   display: grid;
   justify-items: center;
   gap: 0;
+  width: 70vw;
+  min-width: 250px;
+  max-width: 42rem;
   pointer-events: none;
 }
 
@@ -170,31 +169,27 @@ img {
 }
 
 .splash-backdrop__corner--top-left {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: start;
-  justify-self: start;
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
 }
 
 .splash-backdrop__corner--top-right {
-  grid-column: 3;
-  grid-row: 1;
-  align-self: start;
-  justify-self: end;
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
 }
 
 .splash-backdrop__corner--bottom-left {
-  grid-column: 1;
-  grid-row: 3;
-  align-self: end;
-  justify-self: start;
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
 }
 
 .splash-backdrop__corner--bottom-right {
-  grid-column: 3;
-  grid-row: 3;
-  align-self: end;
-  justify-self: end;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
 }
 
 .site-header-shell {
@@ -1047,12 +1042,38 @@ h3 {
     padding: 1rem 0.75rem 1rem;
   }
 
+  .splash-backdrop__center {
+    width: 70vw;
+    min-width: 220px;
+    max-width: 70vw;
+  }
+
   .splash-backdrop__logo {
-    width: min(22rem, 78vw);
+    width: 100%;
   }
 
   .splash-backdrop__crest {
-    width: 56px;
+    width: 55vw;
+  }
+
+  .splash-backdrop__corner--top-left,
+  .splash-backdrop__corner--top-right {
+    top: 1rem;
+  }
+
+  .splash-backdrop__corner--top-left,
+  .splash-backdrop__corner--bottom-left {
+    left: 0.75rem;
+  }
+
+  .splash-backdrop__corner--top-right,
+  .splash-backdrop__corner--bottom-right {
+    right: 0.75rem;
+  }
+
+  .splash-backdrop__corner--bottom-left,
+  .splash-backdrop__corner--bottom-right {
+    bottom: 1rem;
   }
 
   .site-header {
