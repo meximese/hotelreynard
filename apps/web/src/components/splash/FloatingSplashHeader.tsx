@@ -18,7 +18,8 @@ export function FloatingSplashHeader({
       <header className={`site-header${isCompact ? " site-header--compact" : ""}`}>
         <Toolbar.Root className="site-toolbar" aria-label="Primary">
           <Toolbar.Group className="toolbar-group" aria-label="Primary navigation">
-            <span>September 2026</span>
+            <span className="toolbar-corner-label date-desktop">September 2026</span>
+            <span className="toolbar-corner-label date-mobile">Sept 2026</span>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">
             <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
@@ -36,7 +37,7 @@ export function FloatingSplashHeader({
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
             <Toolbar.Link
               render={<Link href="/stay" />}
-              className="toolbar-link toolbar-link-book"
+              className="toolbar-link toolbar-link-book toolbar-corner-link"
             >
               Reserve
             </Toolbar.Link>

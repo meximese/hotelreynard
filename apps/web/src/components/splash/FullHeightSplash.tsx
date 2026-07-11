@@ -7,7 +7,8 @@ export function FullHeightSplash() {
   return (
     <section className="splash-backdrop striped" aria-hidden="true">
       <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
-        <span>September 2026</span>
+        <span className="date-desktop">September 2026</span>
+        <span className="date-mobile">Sept 2026</span>
       </div>
       <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
         <Link href="/stay">Reserve</Link>

@@ -37,6 +37,7 @@
   --line: rgba(16, 15, 13, 0.13);
   --accent: #100f0d;
   --max-width: 1180px;
+  --shell-gutter: 1.5rem;
   --font-display: "Ga Maamli", cursive;
   --font-heading: "Krete Book", Georgia, serif;
   --font-heading-light: "Krete Light", Georgia, serif;
@@ -94,7 +95,7 @@ img {
 .site-footer,
 .page-shell,
 .home-shell {
-  width: min(calc(100% - 3rem), var(--max-width));
+  width: min(calc(100% - (var(--shell-gutter) * 2)), var(--max-width));
   margin: 0 auto;
 }
 
@@ -162,6 +163,19 @@ img {
   font-size: 0.82rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.toolbar-corner-label,
+.toolbar-corner-link {
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.date-mobile {
+  display: none;
 }
 
 .splash-backdrop__corner a {
@@ -265,6 +279,11 @@ img {
 .toolbar-link {
   opacity: 0.68;
   transition: opacity 160ms ease;
+}
+
+.toolbar-corner-label,
+.toolbar-corner-link {
+  opacity: 1;
 }
 
 .toolbar-link:hover,
@@ -529,7 +548,7 @@ img {
   display: flex;
   align-items: center;
   gap: var(--sticky-gallery-item-gap);
-  padding: 0 var(--sticky-gallery-side-pad);
+  padding: 0; /**0 var(--sticky-gallery-side-pad); */
   will-change: transform;
 }
 
@@ -1027,15 +1046,27 @@ h3 {
 }
 
 @media (max-width: 900px) {
-  .site-header,
+  :root {
+    --shell-gutter: 0.75rem;
+  }
+
+  .site-header > .site-toolbar,
   .site-footer,
   .page-shell,
   .home-shell {
-    width: min(calc(100% - 1.5rem), var(--max-width));
+    width: min(calc(100% - (var(--shell-gutter) * 2)), var(--max-width));
   }
 
   .site-content-shell {
     margin-top: 100svh;
+  }
+
+  .date-desktop {
+    display: none;
+  }
+
+  .date-mobile {
+    display: inline;
   }
 
   .splash-backdrop {
@@ -1080,18 +1111,59 @@ h3 {
     padding: 0.35rem 0;
   }
 
+  .site-header .site-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0;
+  }
+
+  .site-header .toolbar-group,
+  .site-header .toolbar-nav {
+    width: auto;
+  }
+
+  .site-header .toolbar-group {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+  }
+
+  .site-header .toolbar-nav {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .site-header .toolbar-brand {
+    min-height: auto;
+  }
+
+  .site-footer .site-toolbar,
+  .page-shell .site-toolbar,
+  .home-shell .site-toolbar,
   .site-toolbar {
     display: grid;
     gap: 0;
     padding-bottom: 0.5rem;
   }
 
+  .site-footer .toolbar-group,
+  .site-footer .toolbar-nav,
+  .page-shell .toolbar-group,
+  .page-shell .toolbar-nav,
+  .home-shell .toolbar-group,
+  .home-shell .toolbar-nav,
   .toolbar-group,
   .toolbar-nav {
     width: 100%;
     justify-content: flex-start;
   }
 
+  .site-footer .toolbar-nav,
+  .page-shell .toolbar-nav,
+  .home-shell .toolbar-nav,
   .toolbar-nav {
     gap: 0.75rem 1.1rem;
     padding: 0.4rem 0;
@@ -1140,8 +1212,8 @@ h3 {
   }
 
   :root {
-    --sticky-gallery-item-height: 50vh;
-    --sticky-gallery-item-gap: 36px;
+    --sticky-gallery-item-height: 66vh;
+    --sticky-gallery-item-gap: 64px;
     --sticky-gallery-side-pad: 24px;
   }
 
