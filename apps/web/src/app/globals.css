@@ -553,7 +553,8 @@ img {
 }
 
 .sticky-gallery__item {
-  height: var(--sticky-gallery-item-height);
+  height: auto;
+  width: 100%;
   flex: none;
   position: relative;
   overflow: hidden;
@@ -565,6 +566,24 @@ img {
 
 .sticky-gallery__item.is-portrait {
   aspect-ratio: 2 / 3;
+}
+
+@media (min-width: 768px) {
+  .sticky-gallery__item {
+    height: var(--sticky-gallery-item-height);
+    width: auto;
+    flex: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sticky-gallery__item.is-landscape {
+    aspect-ratio: 3 / 2;
+  }
+
+  .sticky-gallery__item.is-portrait {
+    aspect-ratio: 2 / 3;
+  }
 }
 
 .sticky-gallery__image {
@@ -866,7 +885,10 @@ h3 {
 }
 
 .split-feature__image {
+  width: 100%;
+  height: auto;
   aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .split-feature__copy {
