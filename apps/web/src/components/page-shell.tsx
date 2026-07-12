@@ -40,6 +40,7 @@ export function PageShell({
           {hero.media ? (
             <SanityImageView
               image={hero.media}
+              mobileImage={hero.mobileMedia}
               alt={hero.title || title}
               width={1800}
               height={1200}

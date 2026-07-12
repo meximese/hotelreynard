@@ -47,7 +47,7 @@ export default async function RootLayout({
                 </div>
                 <div>
                   <p className="eyebrow">Hotel Reynard</p>
-                  <p>A room-forward hotel and tavern in progress.</p>
+                  <p>where the city ends and nature begins</p>
                 </div>
               </div>
             </footer>

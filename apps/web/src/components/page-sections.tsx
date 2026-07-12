@@ -97,10 +97,12 @@ export function PageSections({
                   eyebrow={section.eyebrow}
                   title={section.title}
                   images={section.images}
+                  showGalleryHeader={section.showGalleryHeader}
+                  showGalleryProgress={section.showGalleryProgress}
                 />
               ) : (
                 <div className="home-rail-section" aria-label={section.title || "Gallery"}>
-                  {section.eyebrow || section.title ? (
+                  {section.showGalleryHeader && (section.eyebrow || section.title) ? (
                     <div className="home-rail-head">
                       {section.eyebrow ? <span className="eyebrow">{section.eyebrow}</span> : <span />}
                       {section.title ? <span className="eyebrow">{section.title}</span> : <span />}

@@ -681,6 +681,10 @@ h1 {
   font-size: clamp(3.6rem, 8vw, 6.4rem);
 }
 
+h1.display {
+  font-family: var(--font-display);
+}
+
 h2 {
   font-size: clamp(2rem, 4vw, 3.3rem);
 }
@@ -897,7 +901,13 @@ h3 {
   flex: 1 1 0;
   width: 100%;
   height: auto;
-  max-width: 50vw;
+}
+
+@media (min-width: 768px) {
+  .split-feature__image {
+    max-width: 50vw;
+    max-width: min(50vw, 36rem);
+  }
 }
 
 .split-feature--reverse .split-feature__image {

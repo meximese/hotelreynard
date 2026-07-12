@@ -21,6 +21,19 @@ export default defineType({
       },
     }),
     defineField({
+      name: "showGalleryHeader",
+      title: "Show gallery header",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "showGalleryProgress",
+      title: "Show gallery progress",
+      type: "boolean",
+      initialValue: true,
+      description: "Used by the sticky scroll gallery.",
+    }),
+    defineField({
       name: "images",
       title: "Images",
       type: "array",

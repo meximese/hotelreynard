@@ -57,6 +57,8 @@ export interface PageSection {
   layout?: "imageLeft" | "imageRight" | "imageTop" | "imageBottom";
   textAlign?: "left" | "center" | "right";
   displayMode?: "rail" | "stickyScroll";
+  showGalleryHeader?: boolean;
+  showGalleryProgress?: boolean;
   media?: SanityImage;
   images?: SanityImage[];
   items?: string[];
@@ -74,6 +76,7 @@ export interface PageHero {
   title?: string;
   body?: string;
   media?: SanityImage;
+  mobileMedia?: SanityImage;
   primaryCta?: Cta;
   secondaryCta?: Cta;
 }

@@ -12,8 +12,10 @@ export function StickyScrollGallery({
   title,
   images,
   showGalleryHeader = false,
+  showGalleryProgress = true,
 }: {
   showGalleryHeader?: boolean;
+  showGalleryProgress?: boolean;
   eyebrow?: string;
   title?: string;
   images: SanityImage[];
@@ -170,22 +172,24 @@ export function StickyScrollGallery({
           ))}
         </div>
 
-        <div
-          className="sticky-gallery__progress"
-          aria-hidden={isStickyActive ? undefined : true}
-        >
-          <span className="eyebrow">
-            {String(currentIndex).padStart(2, "0")} /{" "}
-            {String(images.length).padStart(2, "0")}
-          </span>
-          <div className="sticky-gallery__bar">
-            <div
-              className="sticky-gallery__bar-fill"
-              style={{ width: `${progress * 100}%` }}
-            />
+        {showGalleryProgress ? (
+          <div
+            className="sticky-gallery__progress"
+            aria-hidden={isStickyActive ? undefined : true}
+          >
+            <span className="eyebrow">
+              {String(currentIndex).padStart(2, "0")} /{" "}
+              {String(images.length).padStart(2, "0")}
+            </span>
+            <div className="sticky-gallery__bar">
+              <div
+                className="sticky-gallery__bar-fill"
+                style={{ width: `${progress * 100}%` }}
+              />
+            </div>
+            <span className="eyebrow">Scroll</span>
           </div>
-          <span className="eyebrow">Scroll</span>
-        </div>
+        ) : null}
       </div>
     </section>
   );

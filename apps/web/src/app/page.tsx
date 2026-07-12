@@ -40,6 +40,7 @@ export default async function HomePage() {
           {page.hero.media ? (
             <SanityImageView
               image={page.hero.media}
+              mobileImage={page.hero.mobileMedia}
               alt={page.hero.title || page.title}
               width={1800}
               height={1200}

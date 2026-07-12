@@ -33,6 +33,7 @@ const pageHeroProjection = groq`
     title,
     body,
     media,
+    mobileMedia,
     primaryCta,
     secondaryCta
   }
