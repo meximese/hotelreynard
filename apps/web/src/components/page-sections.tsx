@@ -101,18 +101,24 @@ export function PageSections({
                   showGalleryProgress={section.showGalleryProgress}
                 />
               ) : (
-                <div className="home-rail-section" aria-label={section.title || "Gallery"}>
+                <div className="gallery-grid-section" aria-label={section.title || "Gallery"}>
                   {section.showGalleryHeader && (section.eyebrow || section.title) ? (
-                    <div className="home-rail-head">
+                    <div className="gallery-grid-head">
                       {section.eyebrow ? <span className="eyebrow">{section.eyebrow}</span> : <span />}
                       {section.title ? <span className="eyebrow">{section.title}</span> : <span />}
                     </div>
                   ) : null}
-                  <div className="home-image-rail">
+                  <div
+                    className={
+                      section.displayMode === "vertical"
+                        ? "gallery-image-stack"
+                        : "gallery-image-grid"
+                    }
+                  >
                     {section.images.map((image, imageIndex) => (
                       <div
                         key={`${image.asset?._ref || "image"}-${imageIndex}`}
-                        className={`home-image-rail__item ${
+                        className={`gallery-image-item ${
                           imageIndex % 2 === 1 ? "is-portrait" : "is-landscape"
                         }`}
                       >
@@ -121,8 +127,8 @@ export function PageSections({
                           alt={image.alt || `Gallery image ${imageIndex + 1}`}
                           width={1200}
                           height={900}
-                          sizes="(max-width: 900px) 80vw, 40vw"
-                          className="home-image-rail__image"
+                          sizes="(max-width: 900px) 100vw, 50vw"
+                          className="gallery-image"
                         />
                       </div>
                     ))}

@@ -56,7 +56,7 @@ export interface PageSection {
   attribution?: string;
   layout?: "imageLeft" | "imageRight" | "imageTop" | "imageBottom";
   textAlign?: "left" | "center" | "right";
-  displayMode?: "rail" | "stickyScroll";
+  displayMode?: "grid" | "stickyScroll" | "vertical";
   showGalleryHeader?: boolean;
   showGalleryProgress?: boolean;
   media?: SanityImage;

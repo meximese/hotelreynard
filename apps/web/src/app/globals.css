@@ -480,14 +480,14 @@ svg {
   line-height: 1.65;
 }
 
-.home-rail-section {
+.gallery-grid-section {
   position: relative;
   min-width: 0;
   max-width: 100%;
   padding: 0 0 6rem;
 }
 
-.home-rail-head,
+.gallery-grid-head,
 .section-heading-split {
   display: flex;
   justify-content: space-between;
@@ -495,37 +495,55 @@ svg {
   align-items: baseline;
 }
 
-.home-rail-head {
+.gallery-grid-head {
   padding-bottom: 1.5rem;
 }
 
-.home-image-rail {
+.gallery-image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 1.5rem;
+  width: min(100%, 56rem);
+  margin-inline: auto;
+}
+
+.gallery-image-item {
   display: flex;
-  gap: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   min-width: 0;
-  max-width: 100%;
-  padding-bottom: 0.5rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-}
-
-.home-image-rail::-webkit-scrollbar {
-  display: none;
-}
-
-.home-image-rail__item {
-  flex: none;
-  width: min(42rem, 78vw);
   overflow: hidden;
 }
 
-.home-image-rail__item.is-portrait {
-  width: min(26rem, 56vw);
+.gallery-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: min(72vh, 42rem);
 }
 
-.home-image-rail__image {
-  display: block;
+.gallery-image-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: min(100%, 56rem);
+  margin-inline: auto;
+}
+
+.gallery-image-stack .gallery-image-item {
+  width: auto;
+  max-width: min(50vw, 42rem);
+}
+
+.gallery-image-stack .gallery-image {
+  width: auto;
+  max-width: min(50vw, 42rem);
+  height: auto;
+  max-height: calc(80vw - var(--sticky-header-offset));
 }
 
 .sticky-gallery {
@@ -1252,7 +1270,7 @@ h3 {
 
   .site-footer-grid,
   .section-heading-split,
-  .home-rail-head,
+  .gallery-grid-head,
   .home-hero-caption {
     display: grid;
   }
@@ -1296,18 +1314,28 @@ h3 {
     text-align: left;
   }
 
-  .home-image-rail {
-    gap: 1.25rem;
-  }
-
-  .home-image-rail__item,
-  .home-image-rail__item.is-portrait {
-    width: 84vw;
-  }
-
-  .home-image-rail__image {
+  .gallery-image-grid {
+    grid-template-columns: 1fr;
     width: 100%;
-    max-width: 100vw;
+    gap: 1rem;
+  }
+
+  .gallery-image {
+    width: 100%;
+    max-height: none;
+  }
+
+  .gallery-image-stack,
+  .gallery-image-stack .gallery-image-item,
+  .gallery-image-stack .gallery-image-item.is-portrait {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .gallery-image-stack .gallery-image {
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
   }
 
   .sticky-gallery__progress {

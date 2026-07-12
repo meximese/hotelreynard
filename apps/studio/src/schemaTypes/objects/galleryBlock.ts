@@ -11,11 +11,12 @@ export default defineType({
       name: "displayMode",
       title: "Display mode",
       type: "string",
-      initialValue: "rail",
+      initialValue: "grid",
       options: {
         list: [
-          { title: "Horizontal rail", value: "rail" },
+          { title: "Grid", value: "grid" },
           { title: "Sticky scroll", value: "stickyScroll" },
+          { title: "Vertical stack", value: "vertical" },
         ],
         layout: "radio",
       },
