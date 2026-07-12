@@ -33,7 +33,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="striped">
+      <body className="striped-light">
         <Providers>
           <SplashLayoutScaffold>
             {children}

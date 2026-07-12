@@ -21,6 +21,7 @@ export function StickyScrollGallery({
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [isStickyActive, setIsStickyActive] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -45,6 +46,8 @@ export function StickyScrollGallery({
     function update() {
       const rect = section.getBoundingClientRect();
       const travel = rect.height - window.innerHeight;
+      const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
+      const stickyActive = scrollDistance > 0 && rect.top <= stickyTop && rect.bottom >= window.innerHeight;
       let rawProgress = travel > 0 ? -rect.top / travel : 0;
       rawProgress = Math.min(Math.max(rawProgress, 0), 1);
 
@@ -57,6 +60,7 @@ export function StickyScrollGallery({
       track.style.transform = `translateX(${-nextProgress * scrollDistance}px)`;
       setProgress(nextProgress);
       setCurrentIndex(Math.min(images.length, Math.max(1, Math.round(nextProgress * (images.length - 1)) + 1)));
+      setIsStickyActive(stickyActive);
       ticking = false;
     }
 
@@ -113,7 +117,12 @@ export function StickyScrollGallery({
   }, [images.length]);
 
   return (
-    <section ref={sectionRef} className="sticky-gallery" aria-label={title || "Property views"}>
+    <section
+      ref={sectionRef}
+      className={`sticky-gallery ${isStickyActive ? "is-sticky-active" : ""}`.trim()}
+      aria-label={title || "Property views"}
+      data-sticky-active={isStickyActive ? "true" : "false"}
+    >
       <div ref={stickyRef} className="sticky-gallery__sticky">
         <div className="sticky-gallery__head">
           <span className="eyebrow">{eyebrow || "Gallery"}</span>
@@ -138,7 +147,7 @@ export function StickyScrollGallery({
           ))}
         </div>
 
-        <div className="sticky-gallery__progress">
+        <div className="sticky-gallery__progress" aria-hidden={isStickyActive ? undefined : true}>
           <span className="eyebrow">
             {String(currentIndex).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
           </span>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function FullHeightSplash() {
   return (
-    <section className="splash-backdrop striped" aria-hidden="true">
+    <section className="splash-backdrop striped-light" aria-hidden="true">
       <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
         <span className="date-desktop">September 2026</span>
         <span className="date-mobile">Sept 2026</span>
@@ -28,6 +28,7 @@ export function FullHeightSplash() {
           width={96}
           height={96}
           className="splash-backdrop__crest"
+          color="var(--brown)"
         />
       </div>
       <div className="splash-backdrop__corner splash-backdrop__corner--bottom-left">
