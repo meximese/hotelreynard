@@ -11,7 +11,9 @@ export function StickyScrollGallery({
   eyebrow,
   title,
   images,
+  showGalleryHeader = false,
 }: {
+  showGalleryHeader?: boolean;
   eyebrow?: string;
   title?: string;
   images: SanityImage[];
@@ -47,19 +49,28 @@ export function StickyScrollGallery({
       const rect = section.getBoundingClientRect();
       const travel = rect.height - window.innerHeight;
       const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
-      const stickyActive = scrollDistance > 0 && rect.top <= stickyTop && rect.bottom >= window.innerHeight;
+      const stickyActive =
+        scrollDistance > 0 &&
+        rect.top <= stickyTop &&
+        rect.bottom >= window.innerHeight;
       let rawProgress = travel > 0 ? -rect.top / travel : 0;
       rawProgress = Math.min(Math.max(rawProgress, 0), 1);
 
       let nextProgress = 0;
       if (rawProgress > START_DELAY_FRACTION) {
-        nextProgress = (rawProgress - START_DELAY_FRACTION) / (1 - START_DELAY_FRACTION);
+        nextProgress =
+          (rawProgress - START_DELAY_FRACTION) / (1 - START_DELAY_FRACTION);
       }
       nextProgress = Math.min(Math.max(nextProgress, 0), 1);
 
       track.style.transform = `translateX(${-nextProgress * scrollDistance}px)`;
       setProgress(nextProgress);
-      setCurrentIndex(Math.min(images.length, Math.max(1, Math.round(nextProgress * (images.length - 1)) + 1)));
+      setCurrentIndex(
+        Math.min(
+          images.length,
+          Math.max(1, Math.round(nextProgress * (images.length - 1)) + 1),
+        ),
+      );
       setIsStickyActive(stickyActive);
       ticking = false;
     }
@@ -122,12 +133,24 @@ export function StickyScrollGallery({
       className={`sticky-gallery ${isStickyActive ? "is-sticky-active" : ""}`.trim()}
       aria-label={title || "Property views"}
       data-sticky-active={isStickyActive ? "true" : "false"}
+      style={
+        {
+          "--sticky-gallery-item-height": showGalleryHeader
+            ? "62vh"
+            : "calc(80vh - var(--sticky-header-offset, 5rem))",
+          "--sticky-gallery-track-offset": showGalleryHeader
+            ? "0"
+            : "calc(-1 * var(--sticky-header-offset, 5rem) / 2)",
+        } as React.CSSProperties
+      }
     >
       <div ref={stickyRef} className="sticky-gallery__sticky">
-        <div className="sticky-gallery__head">
-          <span className="eyebrow">{eyebrow || "Gallery"}</span>
-          <span className="eyebrow">{title || "Property views"}</span>
-        </div>
+        {showGalleryHeader && (
+          <div className="sticky-gallery__head">
+            <span className="eyebrow">{eyebrow || "Gallery"}</span>
+            <span className="eyebrow">{title || "Property views"}</span>
+          </div>
+        )}
 
         <div ref={trackRef} className="sticky-gallery__track">
           {images.map((image, index) => (
@@ -147,12 +170,19 @@ export function StickyScrollGallery({
           ))}
         </div>
 
-        <div className="sticky-gallery__progress" aria-hidden={isStickyActive ? undefined : true}>
+        <div
+          className="sticky-gallery__progress"
+          aria-hidden={isStickyActive ? undefined : true}
+        >
           <span className="eyebrow">
-            {String(currentIndex).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+            {String(currentIndex).padStart(2, "0")} /{" "}
+            {String(images.length).padStart(2, "0")}
           </span>
           <div className="sticky-gallery__bar">
-            <div className="sticky-gallery__bar-fill" style={{ width: `${progress * 100}%` }} />
+            <div
+              className="sticky-gallery__bar-fill"
+              style={{ width: `${progress * 100}%` }}
+            />
           </div>
           <span className="eyebrow">Scroll</span>
         </div>

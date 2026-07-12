@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { CrestMark } from "@/components/svg/crest-mark";
+import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 
 export function FullHeightSplash() {
   return (
@@ -14,22 +15,8 @@ export function FullHeightSplash() {
         <Link href="/stay">Reserve</Link>
       </div>
       <div className="splash-backdrop__center">
-        <Image
-          src="/logo-solid.svg"
-          alt="Hotel Reynard"
-          width={500}
-          height={218}
-          priority
-          className="splash-backdrop__logo"
-        />
-        <Image
-          src="/crest.svg"
-          alt=""
-          width={96}
-          height={96}
-          className="splash-backdrop__crest"
-          color="var(--brown)"
-        />
+        <LogoSolidMark className="splash-backdrop__logo" color="var(--brown)" />
+        <CrestMark className="splash-backdrop__crest" color="var(--brown)" />
       </div>
       <div className="splash-backdrop__corner splash-backdrop__corner--bottom-left">
         <span>Hotel and Tavern</span>
