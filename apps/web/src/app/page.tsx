@@ -64,7 +64,7 @@ export default async function HomePage() {
       <section className="home-intro">
         <div className="home-intro-copy">
           {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
-          <p className="home-intro" data-sanity={introAttr}>
+          <p className="home-intro-lede" data-sanity={introAttr}>
             {page.intro}
           </p>
         </div>

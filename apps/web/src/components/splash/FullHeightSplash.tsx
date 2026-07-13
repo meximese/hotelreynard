@@ -22,7 +22,10 @@ export function FullHeightSplash() {
 
     const progress = clamp(scroll / window.innerHeight);
     splash.style.setProperty("--splash-parallax-y", `${progress * -28}px`);
-    splash.style.setProperty("--splash-parallax-scale", `${1 + progress * 0.018}`);
+    splash.style.setProperty(
+      "--splash-parallax-scale",
+      `${1 + progress * 0.018}`,
+    );
   };
 
   useLenis((lenis) => {
@@ -44,7 +47,11 @@ export function FullHeightSplash() {
   }, []);
 
   return (
-    <section ref={splashRef} className="splash-backdrop striped-light" aria-hidden="true">
+    <section
+      ref={splashRef}
+      className="splash-backdrop striped"
+      aria-hidden="true"
+    >
       <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
         <span className="date-desktop">September 2026</span>
         <span className="date-mobile">Sept 2026</span>

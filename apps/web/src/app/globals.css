@@ -33,15 +33,15 @@
   --blue: #bacbdf;
   --green: #93b5ac;
   --yellow: #fbf38f;
-  --bg: #fdfcf9;
-  --bg-alt: #faf9f6;
-  --surface: rgba(255, 255, 255, 0.5);
-  --surface-solid: #fdfcf8;
-  --surface-alt: #f1eee6;
-  --ink: #100f0d;
-  --muted: rgba(16, 15, 13, 0.62);
-  --line: rgba(16, 15, 13, 0.13);
-  --accent: #100f0d;
+  --bg: #fdf9ee;
+  --bg-alt: #f7f0e0;
+  --surface: rgba(255, 253, 240, 0.5);
+  --surface-solid: #fdf9ee;
+  --surface-alt: #f1e8d6;
+  --ink: #3a2a20;
+  --muted: rgba(58, 42, 32, 0.62);
+  --line: rgba(58, 42, 32, 0.15);
+  --accent: var(--brown);
   --max-width: 1180px;
   --shell-gutter: 1.5rem;
   --font-display: "Ga Maamli", cursive;
@@ -301,6 +301,13 @@ svg {
   text-transform: uppercase;
 }
 
+.toolbar-brand-display {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
 .toolbar-link {
   opacity: 0.68;
   transition: opacity 160ms ease;
@@ -392,7 +399,7 @@ svg {
   );
 }
 
-.striped-light {
+.striped {
   background-image: linear-gradient(
     to right,
     #fdfcf9 0%,
@@ -418,9 +425,9 @@ svg {
 
 .page-top-hero__caption {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
   padding-top: 1.2rem;
 }
 
@@ -441,9 +448,9 @@ svg {
 
 .home-hero-caption {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
   padding-top: 1.2rem;
 }
 
@@ -482,7 +489,7 @@ svg {
 .home-intro-lede {
   margin-top: 1.5rem;
   font-family: var(--font-heading-light);
-  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.72rem);
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
   line-height: 1.65;
 }
 
@@ -496,13 +503,19 @@ svg {
 .gallery-section__head,
 .section-heading-split {
   display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
 }
 
 .gallery-section__head {
   padding-bottom: 1.5rem;
+}
+
+.gallery-section__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
 }
 
 .gallery-grid {
@@ -578,9 +591,9 @@ svg {
   right: 0;
   z-index: 3;
   display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
   pointer-events: none;
 }
 
@@ -707,7 +720,7 @@ h3 {
 h1 {
   max-width: 11ch;
   margin: 0 auto;
-  font-size: clamp(3.6rem, 8vw, 6.4rem);
+  font-size: clamp(2.6rem, 2rem + 2.4vw, 4.1rem);
 }
 
 h1.display {
@@ -715,11 +728,11 @@ h1.display {
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem);
 }
 
 h3 {
-  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.55rem);
   margin-bottom: 0.75rem;
 }
 
@@ -1284,10 +1297,7 @@ h3 {
     height: 1px;
   }
 
-  .site-footer-grid,
-  .section-heading-split,
-  .gallery-section__head,
-  .home-hero-caption {
+  .site-footer-grid {
     display: grid;
   }
 
@@ -1297,7 +1307,7 @@ h3 {
 
   h1 {
     max-width: 100%;
-    font-size: clamp(2.8rem, 14vw, 4.6rem);
+    font-size: clamp(2.2rem, 1.6rem + 5vw, 3.2rem);
   }
 
   .home-grid,

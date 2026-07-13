@@ -25,11 +25,8 @@ export function SplashLayoutScaffold({
         isCompact={isHeaderVisible}
       />
       <div className="site-content-shell">
-        <div
-          className="site-content-shell__fade striped-light"
-          aria-hidden="true"
-        />
-        <div className="site-content-inner striped-light">
+        <div className="site-content-shell__fade striped" aria-hidden="true" />
+        <div className="site-content-inner striped">
           <div
             ref={ref}
             className="site-content-shell__sentinel"

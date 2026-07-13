@@ -176,7 +176,7 @@ export function StickyScrollGallery({
         {showGalleryHeader && (
           <div className="sticky-gallery__head">
             <span className="eyebrow">{eyebrow || "Gallery"}</span>
-            <span className="eyebrow">{title || "Property views"}</span>
+            <span className="gallery-section__title">{title || "Property views"}</span>
           </div>
         )}
 

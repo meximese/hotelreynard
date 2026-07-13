@@ -18,8 +18,8 @@ export function VerticalGallerySection({
     <div className="gallery-section" aria-label={title || "Gallery"}>
       {showGalleryHeader && (eyebrow || title) ? (
         <div className="gallery-section__head">
-          {eyebrow ? <span className="eyebrow">{eyebrow}</span> : <span />}
-          {title ? <span className="eyebrow">{title}</span> : <span />}
+          {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
+          {title ? <span className="gallery-section__title">{title}</span> : null}
         </div>
       ) : null}
 
