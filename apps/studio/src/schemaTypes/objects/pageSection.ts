@@ -6,7 +6,9 @@ export default defineType({
   type: "array",
   of: [
     defineArrayMember({ type: "heroBlock" }),
-    defineArrayMember({ type: "galleryBlock" }),
+    defineArrayMember({ type: "stickyGalleryBlock" }),
+    defineArrayMember({ type: "gridGalleryBlock" }),
+    defineArrayMember({ type: "verticalGalleryBlock" }),
     defineArrayMember({ type: "imageBlock" }),
     defineArrayMember({ type: "imageTextBlock" }),
     defineArrayMember({ type: "quoteBlock" }),

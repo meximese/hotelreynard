@@ -41,16 +41,33 @@ export function StickyScrollGallery({
     let listening = false;
 
     function measure() {
-      const trackWidth = track.scrollWidth;
-      const viewportWidth = sticky.clientWidth;
+      const currentTrack = trackRef.current;
+      const currentSticky = stickyRef.current;
+      const currentSection = sectionRef.current;
+
+      if (!currentTrack || !currentSticky || !currentSection) {
+        return;
+      }
+
+      const trackWidth = currentTrack.scrollWidth;
+      const viewportWidth = currentSticky.clientWidth;
       scrollDistance = Math.max(trackWidth - viewportWidth, 0);
-      section.style.height = `${window.innerHeight + scrollDistance * SCROLL_SPEED_MULTIPLIER}px`;
+      currentSection.style.height = `${window.innerHeight + scrollDistance * SCROLL_SPEED_MULTIPLIER}px`;
     }
 
     function update() {
-      const rect = section.getBoundingClientRect();
+      const currentTrack = trackRef.current;
+      const currentSticky = stickyRef.current;
+      const currentSection = sectionRef.current;
+
+      if (!currentTrack || !currentSticky || !currentSection) {
+        ticking = false;
+        return;
+      }
+
+      const rect = currentSection.getBoundingClientRect();
       const travel = rect.height - window.innerHeight;
-      const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
+      const stickyTop = Number.parseFloat(getComputedStyle(currentSticky).top) || 0;
       const stickyActive =
         scrollDistance > 0 &&
         rect.top <= stickyTop &&
@@ -65,7 +82,7 @@ export function StickyScrollGallery({
       }
       nextProgress = Math.min(Math.max(nextProgress, 0), 1);
 
-      track.style.transform = `translateX(${-nextProgress * scrollDistance}px)`;
+      currentTrack.style.transform = `translateX(${-nextProgress * scrollDistance}px)`;
       setProgress(nextProgress);
       setCurrentIndex(
         Math.min(

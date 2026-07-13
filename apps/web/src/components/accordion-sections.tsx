@@ -113,7 +113,10 @@ export function AccordionSections({
                     </div>
                   ) : null}
 
-                  {section._type === "galleryBlock" && section.images?.length ? (
+                  {(section._type === "stickyGalleryBlock" ||
+                    section._type === "gridGalleryBlock" ||
+                    section._type === "verticalGalleryBlock") &&
+                  section.images?.length ? (
                     <div className="image-grid">
                       {section.images.map((image, imageIndex) => (
                         <SanityImageView

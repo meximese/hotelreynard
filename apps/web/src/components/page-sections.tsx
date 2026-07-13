@@ -2,10 +2,12 @@
 
 import { PortableText } from "@portabletext/react";
 import { EventCard } from "@/components/event-card";
+import { GridGallerySection } from "@/components/grid-gallery-section";
 import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { RoomCard } from "@/components/room-card";
 import { SanityImageView } from "@/components/sanity-image";
 import { StickyScrollGallery } from "@/components/sticky-scroll-gallery";
+import { VerticalGallerySection } from "@/components/vertical-gallery-section";
 import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
 
@@ -38,7 +40,10 @@ export function PageSections({
               })
             : undefined;
         const isBespokeSection =
-          section._type === "heroBlock" || section._type === "galleryBlock";
+          section._type === "heroBlock" ||
+          section._type === "stickyGalleryBlock" ||
+          section._type === "gridGalleryBlock" ||
+          section._type === "verticalGalleryBlock";
         const textAlignClass = getTextAlignClass(section.textAlign);
         const hasSectionHeader = !isBespokeSection && section._type !== "inquiryBlock" && (section.eyebrow || section.title);
 
@@ -91,50 +96,32 @@ export function PageSections({
               </div>
             ) : null}
 
-            {section._type === "galleryBlock" && section.images?.length ? (
-              section.displayMode === "stickyScroll" ? (
-                <StickyScrollGallery
-                  eyebrow={section.eyebrow}
-                  title={section.title}
-                  images={section.images}
-                  showGalleryHeader={section.showGalleryHeader}
-                  showGalleryProgress={section.showGalleryProgress}
-                />
-              ) : (
-                <div className="gallery-grid-section" aria-label={section.title || "Gallery"}>
-                  {section.showGalleryHeader && (section.eyebrow || section.title) ? (
-                    <div className="gallery-grid-head">
-                      {section.eyebrow ? <span className="eyebrow">{section.eyebrow}</span> : <span />}
-                      {section.title ? <span className="eyebrow">{section.title}</span> : <span />}
-                    </div>
-                  ) : null}
-                  <div
-                    className={
-                      section.displayMode === "vertical"
-                        ? "gallery-image-stack"
-                        : "gallery-image-grid"
-                    }
-                  >
-                    {section.images.map((image, imageIndex) => (
-                      <div
-                        key={`${image.asset?._ref || "image"}-${imageIndex}`}
-                        className={`gallery-image-item ${
-                          imageIndex % 2 === 1 ? "is-portrait" : "is-landscape"
-                        }`}
-                      >
-                        <SanityImageView
-                          image={image}
-                          alt={image.alt || `Gallery image ${imageIndex + 1}`}
-                          width={1200}
-                          height={900}
-                          sizes="(max-width: 900px) 100vw, 50vw"
-                          className="gallery-image"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )
+            {section._type === "stickyGalleryBlock" && section.images?.length ? (
+              <StickyScrollGallery
+                eyebrow={section.eyebrow}
+                title={section.title}
+                images={section.images}
+                showGalleryHeader={section.showGalleryHeader}
+                showGalleryProgress={section.showGalleryProgress}
+              />
+            ) : null}
+
+            {section._type === "gridGalleryBlock" && section.images?.length ? (
+              <GridGallerySection
+                eyebrow={section.eyebrow}
+                title={section.title}
+                images={section.images}
+                showGalleryHeader={section.showGalleryHeader}
+              />
+            ) : null}
+
+            {section._type === "verticalGalleryBlock" && section.images?.length ? (
+              <VerticalGallerySection
+                eyebrow={section.eyebrow}
+                title={section.title}
+                images={section.images}
+                showGalleryHeader={section.showGalleryHeader}
+              />
             ) : null}
 
             {section._type === "imageBlock" ? (

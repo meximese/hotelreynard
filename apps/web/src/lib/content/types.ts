@@ -5,6 +5,10 @@ export interface SanityImage extends Image {
   alt?: string;
 }
 
+export interface GalleryImage extends SanityImage {
+  fullWidth?: boolean;
+}
+
 export interface SanityDocumentIdentity {
   _id: string;
   _type: string;
@@ -56,11 +60,10 @@ export interface PageSection {
   attribution?: string;
   layout?: "imageLeft" | "imageRight" | "imageTop" | "imageBottom";
   textAlign?: "left" | "center" | "right";
-  displayMode?: "grid" | "stickyScroll" | "vertical";
   showGalleryHeader?: boolean;
   showGalleryProgress?: boolean;
   media?: SanityImage;
-  images?: SanityImage[];
+  images?: GalleryImage[];
   items?: string[];
   rooms?: Room[];
   content?: PortableTextBlock[];
