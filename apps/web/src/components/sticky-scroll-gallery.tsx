@@ -5,7 +5,18 @@ import { SanityImageView } from "@/components/sanity-image";
 import type { SanityImage } from "@/lib/content/types";
 
 const SCROLL_SPEED_MULTIPLIER = 1.8;
-const START_DELAY_FRACTION = 0.12;
+const START_DELAY_FRACTION = 0.08;
+const END_DELAY_FRACTION = 0.08;
+
+function clamp(value: number, min = 0, max = 1) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function smoothstep(value: number) {
+  const t = clamp(value);
+
+  return t * t * (3 - 2 * t);
+}
 
 export function StickyScrollGallery({
   eyebrow,
@@ -72,15 +83,13 @@ export function StickyScrollGallery({
         scrollDistance > 0 &&
         rect.top <= stickyTop &&
         rect.bottom >= window.innerHeight;
-      let rawProgress = travel > 0 ? -rect.top / travel : 0;
-      rawProgress = Math.min(Math.max(rawProgress, 0), 1);
-
-      let nextProgress = 0;
-      if (rawProgress > START_DELAY_FRACTION) {
-        nextProgress =
-          (rawProgress - START_DELAY_FRACTION) / (1 - START_DELAY_FRACTION);
-      }
-      nextProgress = Math.min(Math.max(nextProgress, 0), 1);
+      const rawProgress = clamp(travel > 0 ? -rect.top / travel : 0);
+      const activeRange = 1 - START_DELAY_FRACTION - END_DELAY_FRACTION;
+      const nextProgress = smoothstep(
+        activeRange > 0
+          ? (rawProgress - START_DELAY_FRACTION) / activeRange
+          : rawProgress,
+      );
 
       currentTrack.style.transform = `translateX(${-nextProgress * scrollDistance}px)`;
       setProgress(nextProgress);

@@ -153,6 +153,10 @@ svg {
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.8), transparent 42%),
     linear-gradient(180deg, #fdfcf9 0%, #faf9f6 42%, #f6f1e8 100%);
+  transform: translate3d(0, var(--splash-parallax-y, 0), 0)
+    scale(var(--splash-parallax-scale, 1));
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .splash-backdrop__center {

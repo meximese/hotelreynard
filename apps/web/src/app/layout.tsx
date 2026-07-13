@@ -4,6 +4,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { Providers } from "@/components/providers";
 import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

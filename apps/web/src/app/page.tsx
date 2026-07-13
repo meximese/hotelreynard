@@ -1,6 +1,7 @@
 import { ContentSeparator } from "@/components/content-separator";
 import { PageSections } from "@/components/page-sections";
 import { SanityImageView } from "@/components/sanity-image";
+import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { getHomePage, getUpcomingEvents } from "@/lib/content/loaders";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
@@ -62,8 +63,8 @@ export default async function HomePage() {
       ) : null}
       <section className="home-intro">
         <div className="home-intro-copy">
-          <h1 data-sanity={titleAttr}>{page.title}</h1>
-          <p className="home-intro-lede" data-sanity={introAttr}>
+          {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
+          <p className="home-intro" data-sanity={introAttr}>
             {page.intro}
           </p>
         </div>
