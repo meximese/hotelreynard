@@ -56,7 +56,7 @@ export function FullHeightSplash({
   return (
     <section
       ref={splashRef}
-      className={`splash-backdrop splash-backdrop--${layout} striped`}
+      className={`splash-backdrop splash-backdrop--${layout}`}
       aria-hidden="true"
     >
       {!isRowLayout ? (

@@ -42,7 +42,7 @@
   --muted: rgba(23, 38, 43, 0.62);
   --line: rgba(23, 38, 43, 0.15);
   --accent: var(--brown);
-  --max-width: 1180px;
+  --max-width: 1000px;
   --shell-gutter: 1.5rem;
   --font-display: "Ga Maamli", cursive;
   --font-heading: "Krete Book", Georgia, serif;
@@ -82,6 +82,15 @@ html {
 body {
   margin: 0;
   background-color: var(--bg);
+  background-image:
+    var(--grain-texture),
+    linear-gradient(180deg, #ff6b6b 0%, #ffe66d 48%, #4ecdc4 100%);
+  background-repeat: repeat, no-repeat;
+  background-size:
+    180px 180px,
+    100% 100%;
+  background-attachment: scroll, fixed;
+  background-blend-mode: multiply, normal;
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.65;
@@ -117,10 +126,11 @@ svg {
   z-index: 2;
   min-height: 100vh;
   margin-top: 100vh;
+  isolation: isolate;
 }
 
 .site-content-inner {
-  background-color: var(--bg);
+  position: relative;
   padding-top: var(--shell-gutter);
 }
 
@@ -138,9 +148,7 @@ svg {
   inset: 0;
   z-index: 0;
   padding: 1.25rem 1.5rem 1.5rem;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.8), transparent 42%),
-    linear-gradient(180deg, #f4f8fb 0%, #edf5f7 42%, #dce8ee 100%);
+  background: transparent;
   overflow: hidden;
 }
 
@@ -149,14 +157,7 @@ svg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image:
-    var(--grain-texture),
-    linear-gradient(180deg, #d7eef1 0%, #edf5f7 56%, #e6eef3 100%);
-  background-repeat: repeat, no-repeat;
-  background-size:
-    180px 180px,
-    100% 100%;
-  background-blend-mode: multiply, normal;
+  background: transparent;
   opacity: var(--splash-cool-opacity, 0);
   pointer-events: none;
   will-change: opacity;
@@ -439,15 +440,7 @@ svg {
 }
 
 .striped-cool {
-  /* background-image:
-    var(--grain-texture), linear-gradient(180deg, #d7eef1 0%, #e6eef3 100%); */
-  background-image:
-    var(--grain-texture), linear-gradient(180deg, #edf5f7 0%, #d6f0eb 100%);
-  background-repeat: repeat, no-repeat;
-  background-size:
-    180px 180px,
-    100% 100%;
-  background-blend-mode: multiply, normal;
+  background: transparent;
 }
 
 .hero {
