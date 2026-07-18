@@ -598,11 +598,22 @@ svg {
   max-width: var(--gallery-max-image-width);
 }
 
+.gallery-vertical__item--full {
+  width: min(calc(100vw - (var(--shell-gutter) * 2)), var(--max-width));
+  max-width: none;
+}
+
 .gallery-vertical .gallery-image {
   width: auto;
   max-width: var(--gallery-max-image-width);
   height: auto;
   max-height: var(--gallery-max-image-height);
+}
+
+.gallery-vertical__item--full .gallery-image {
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
 }
 
 .sticky-gallery {

@@ -13,7 +13,7 @@ import bookingEmbedBlock from "./objects/bookingEmbedBlock";
 import cta from "./objects/cta";
 import eventFeedBlock from "./objects/eventFeedBlock";
 import featureListBlock from "./objects/featureListBlock";
-import gridGalleryBlock from "./objects/gridGalleryBlock";
+import galleryBlock from "./objects/galleryBlock";
 import heroBlock from "./objects/heroBlock";
 import hoursBlock from "./objects/hoursBlock";
 import imageBlock from "./objects/imageBlock";
@@ -24,8 +24,6 @@ import quoteBlock from "./objects/quoteBlock";
 import richTextBlock from "./objects/richTextBlock";
 import roomFeedBlock from "./objects/roomFeedBlock";
 import seo from "./objects/seo";
-import stickyGalleryBlock from "./objects/stickyGalleryBlock";
-import verticalGalleryBlock from "./objects/verticalGalleryBlock";
 
 export const schemaTypes = [
   siteSettings,
@@ -41,9 +39,7 @@ export const schemaTypes = [
   seo,
   cta,
   heroBlock,
-  stickyGalleryBlock,
-  gridGalleryBlock,
-  verticalGalleryBlock,
+  galleryBlock,
   imageBlock,
   imageTextBlock,
   quoteBlock,

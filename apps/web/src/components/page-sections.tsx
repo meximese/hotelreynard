@@ -41,9 +41,7 @@ export function PageSections({
             : undefined;
         const isBespokeSection =
           section._type === "heroBlock" ||
-          section._type === "stickyGalleryBlock" ||
-          section._type === "gridGalleryBlock" ||
-          section._type === "verticalGalleryBlock";
+          section._type === "galleryBlock";
         const textAlignClass = getTextAlignClass(section.textAlign);
         const hasSectionHeader = !isBespokeSection && section._type !== "inquiryBlock" && (section.eyebrow || section.title);
 
@@ -96,32 +94,30 @@ export function PageSections({
               </div>
             ) : null}
 
-            {section._type === "stickyGalleryBlock" && section.images?.length ? (
-              <StickyScrollGallery
-                eyebrow={section.eyebrow}
-                title={section.title}
-                images={section.images}
-                showGalleryHeader={section.showGalleryHeader}
-                showGalleryProgress={section.showGalleryProgress}
-              />
-            ) : null}
-
-            {section._type === "gridGalleryBlock" && section.images?.length ? (
-              <GridGallerySection
-                eyebrow={section.eyebrow}
-                title={section.title}
-                images={section.images}
-                showGalleryHeader={section.showGalleryHeader}
-              />
-            ) : null}
-
-            {section._type === "verticalGalleryBlock" && section.images?.length ? (
-              <VerticalGallerySection
-                eyebrow={section.eyebrow}
-                title={section.title}
-                images={section.images}
-                showGalleryHeader={section.showGalleryHeader}
-              />
+            {section._type === "galleryBlock" && section.images?.length ? (
+              section.displayMode === "stickyScroll" ? (
+                <StickyScrollGallery
+                  eyebrow={section.eyebrow}
+                  title={section.title}
+                  images={section.images}
+                  showGalleryHeader={section.showGalleryHeader}
+                  showGalleryProgress={section.showGalleryProgress}
+                />
+              ) : section.displayMode === "vertical" ? (
+                <VerticalGallerySection
+                  eyebrow={section.eyebrow}
+                  title={section.title}
+                  images={section.images}
+                  showGalleryHeader={section.showGalleryHeader}
+                />
+              ) : (
+                <GridGallerySection
+                  eyebrow={section.eyebrow}
+                  title={section.title}
+                  images={section.images}
+                  showGalleryHeader={section.showGalleryHeader}
+                />
+              )
             ) : null}
 
             {section._type === "imageBlock" ? (

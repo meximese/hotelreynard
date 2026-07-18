@@ -59,6 +59,7 @@ export interface PageSection {
   quote?: string;
   attribution?: string;
   layout?: "imageLeft" | "imageRight" | "imageTop" | "imageBottom";
+  displayMode?: "grid" | "vertical" | "stickyScroll";
   textAlign?: "left" | "center" | "right";
   showGalleryHeader?: boolean;
   showGalleryProgress?: boolean;

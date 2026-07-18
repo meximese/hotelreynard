@@ -500,7 +500,8 @@ export const singletonDocuments = [
         ],
       },
       {
-        _type: "gridGalleryBlock",
+        _type: "galleryBlock",
+        displayMode: "grid",
         title: "Property Atmosphere",
       },
       {
@@ -553,7 +554,8 @@ export const singletonDocuments = [
         ],
       },
       {
-        _type: "gridGalleryBlock",
+        _type: "galleryBlock",
+        displayMode: "grid",
         title: "Rooms + Details",
       },
       richTextBlock([
@@ -609,7 +611,8 @@ export const singletonDocuments = [
         ],
       },
       {
-        _type: "gridGalleryBlock",
+        _type: "galleryBlock",
+        displayMode: "grid",
         title: "The Restaurant",
       },
       richTextBlock([
@@ -685,7 +688,8 @@ export const singletonDocuments = [
         ],
       },
       {
-        _type: "gridGalleryBlock",
+        _type: "galleryBlock",
+        displayMode: "grid",
         title: "The Event Space",
       },
       {
@@ -732,7 +736,8 @@ export const singletonDocuments = [
         ],
       },
       {
-        _type: "gridGalleryBlock",
+        _type: "galleryBlock",
+        displayMode: "grid",
         title: "The Region",
       },
       richTextBlock([
