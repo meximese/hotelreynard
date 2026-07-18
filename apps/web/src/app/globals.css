@@ -581,7 +581,6 @@ svg {
   width: 100%;
   max-width: 100%;
   height: auto;
-  max-height: min(72vh, 42rem);
 }
 
 .gallery-vertical {
@@ -594,7 +593,7 @@ svg {
 }
 
 .gallery-vertical__item {
-  width: auto;
+  width: min(100%, var(--gallery-max-image-width));
   max-width: var(--gallery-max-image-width);
 }
 
@@ -604,16 +603,61 @@ svg {
 }
 
 .gallery-vertical .gallery-image {
-  width: auto;
-  max-width: var(--gallery-max-image-width);
+  width: 100%;
+  max-width: 100%;
   height: auto;
-  max-height: var(--gallery-max-image-height);
 }
 
 .gallery-vertical__item--full .gallery-image {
   width: 100%;
   max-width: 100%;
   max-height: none;
+}
+
+.gallery-custom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gallery-gap);
+  width: min(calc(100vw - (var(--shell-gutter) * 2)), var(--max-width));
+  margin-inline: auto;
+}
+
+.gallery-custom__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.gallery-custom__item--center {
+  flex: 0 0 min(100%, var(--gallery-max-image-width));
+  max-width: var(--gallery-max-image-width);
+}
+
+.gallery-custom__item--wide {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.gallery-custom__item--half {
+  flex: 1 1 calc((100% - var(--gallery-gap)) / 2);
+  max-width: calc((100% - var(--gallery-gap)) / 2);
+}
+
+.gallery-custom__item--center .gallery-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.gallery-custom__item--wide .gallery-image,
+.gallery-custom__item--half .gallery-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .sticky-gallery {
@@ -1424,6 +1468,27 @@ h3 {
   }
 
   .gallery-vertical .gallery-image {
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .gallery-custom {
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .gallery-custom__item,
+  .gallery-custom__item--center,
+  .gallery-custom__item--wide,
+  .gallery-custom__item--half {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .gallery-custom__item--center .gallery-image,
+  .gallery-custom__item--wide .gallery-image,
+  .gallery-custom__item--half .gallery-image {
     width: 100%;
     max-width: 100%;
     max-height: none;

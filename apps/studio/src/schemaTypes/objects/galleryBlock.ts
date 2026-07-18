@@ -15,6 +15,7 @@ export default defineType({
         list: [
           { title: "Grid", value: "grid" },
           { title: "Vertical", value: "vertical" },
+          { title: "Custom", value: "custom" },
           { title: "Sticky scroll", value: "stickyScroll" },
         ],
       },
@@ -48,10 +49,27 @@ export default defineType({
             { name: "alt", title: "Alternative text", type: "string" },
             {
               name: "fullWidth",
-              title: "Full width",
-              description: "Used by grid and vertical galleries; ignored by sticky scroll.",
+              title: "Full width / wide",
+              description: "Breaks the gallery row and uses the wider hero-style width where supported.",
               type: "boolean",
               initialValue: false,
+              options: {
+                layout: "checkbox",
+              },
+            },
+            {
+              name: "layout",
+              title: "Custom layout",
+              description: "Used by Custom galleries. Full width / wide overrides this.",
+              type: "string",
+              initialValue: "center",
+              options: {
+                layout: "radio",
+                list: [
+                  { title: "Centered", value: "center" },
+                  { title: "2-Column", value: "half" },
+                ],
+              },
             },
           ],
         }),
@@ -68,6 +86,7 @@ export default defineType({
       const modeLabels: Record<string, string> = {
         grid: "Grid",
         vertical: "Vertical",
+        custom: "Custom",
         stickyScroll: "Sticky scroll",
       };
 

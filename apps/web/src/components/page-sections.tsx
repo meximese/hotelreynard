@@ -1,6 +1,7 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
+import { CustomGallerySection } from "@/components/custom-gallery-section";
 import { EventCard } from "@/components/event-card";
 import { GridGallerySection } from "@/components/grid-gallery-section";
 import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
@@ -30,6 +31,7 @@ export function PageSections({
     <div className="section-stack">
       {sections.map((section, index) => {
         const key = `${section._type}-${index}`;
+        const galleryImages = section.images;
         const sectionPath = section._key ? `sections[_key=="${section._key}"]` : `sections[${index}]`;
         const sectionAttr =
           documentId && documentType
@@ -94,12 +96,12 @@ export function PageSections({
               </div>
             ) : null}
 
-            {section._type === "galleryBlock" && section.images?.length ? (
+            {section._type === "galleryBlock" && galleryImages?.length ? (
               section.displayMode === "stickyScroll" ? (
                 <StickyScrollGallery
                   eyebrow={section.eyebrow}
                   title={section.title}
-                  images={section.images}
+                  images={galleryImages}
                   showGalleryHeader={section.showGalleryHeader}
                   showGalleryProgress={section.showGalleryProgress}
                 />
@@ -107,14 +109,21 @@ export function PageSections({
                 <VerticalGallerySection
                   eyebrow={section.eyebrow}
                   title={section.title}
-                  images={section.images}
+                  images={galleryImages}
+                  showGalleryHeader={section.showGalleryHeader}
+                />
+              ) : section.displayMode === "custom" ? (
+                <CustomGallerySection
+                  eyebrow={section.eyebrow}
+                  title={section.title}
+                  images={galleryImages}
                   showGalleryHeader={section.showGalleryHeader}
                 />
               ) : (
                 <GridGallerySection
                   eyebrow={section.eyebrow}
                   title={section.title}
-                  images={section.images}
+                  images={galleryImages}
                   showGalleryHeader={section.showGalleryHeader}
                 />
               )

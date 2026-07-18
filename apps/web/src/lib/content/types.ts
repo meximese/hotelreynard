@@ -7,6 +7,7 @@ export interface SanityImage extends Image {
 
 export interface GalleryImage extends SanityImage {
   fullWidth?: boolean;
+  layout?: "center" | "wide" | "half";
 }
 
 export interface SanityDocumentIdentity {
@@ -59,7 +60,7 @@ export interface PageSection {
   quote?: string;
   attribution?: string;
   layout?: "imageLeft" | "imageRight" | "imageTop" | "imageBottom";
-  displayMode?: "grid" | "vertical" | "stickyScroll";
+  displayMode?: "grid" | "vertical" | "custom" | "stickyScroll";
   textAlign?: "left" | "center" | "right";
   showGalleryHeader?: boolean;
   showGalleryProgress?: boolean;
