@@ -35,7 +35,7 @@
   --yellow: #fbf38f;
   --bg: #f4f8fb;
   --bg-alt: #e6eef3;
-  --surface: rgba(248, 251, 255, 0.56);
+  --surface: rgba(248, 251, 255, 0.46);
   --surface-solid: #f4f8fb;
   --surface-alt: #dce8ee;
   --ink: #17262b;
@@ -101,6 +101,21 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    font-weight: 700;
+  }
 }
 
 img {
@@ -373,7 +388,7 @@ svg {
 .site-header--compact {
   /* background-color: color-mix(in srgb, var(--bg) 88%, white 12%); */
   background-color: var(--surface);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(16, 15, 13, 0.06);
 }
 
