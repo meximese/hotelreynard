@@ -30,7 +30,10 @@ export function FloatingSplashHeader({
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">
             <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
-              <LogoSolidMark className="toolbar-brand-logo" />
+              <LogoSolidMark
+                className="toolbar-brand-logo"
+                color="var(--brown)"
+              />
               <span className="sr-only">Hotel Reynard</span>
             </Toolbar.Link>
           </Toolbar.Group>
@@ -39,7 +42,7 @@ export function FloatingSplashHeader({
               render={<Link href="/stay" />}
               className="toolbar-link toolbar-link-book toolbar-corner-link"
             >
-              Reserve
+              Reserve Now
             </Toolbar.Link>
           </Toolbar.Group>
         </Toolbar.Root>

@@ -10,33 +10,40 @@ function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
 }
 
-export function FullHeightSplash() {
+export function FullHeightSplash({
+  layout = "corners",
+}: {
+  layout?: "corners" | "row";
+}) {
   const splashRef = useRef<HTMLElement | null>(null);
+  const isRowLayout = layout === "row";
 
-  const updateParallax = (scroll: number) => {
+  const updateSplashState = (scroll: number) => {
     const splash = splashRef.current;
 
     if (!splash) {
       return;
     }
 
-    const progress = clamp(scroll / window.innerHeight);
-    splash.style.setProperty("--splash-parallax-y", `${progress * -28}px`);
+    const colorProgress = clamp(scroll / window.innerHeight);
+    const contentProgress = clamp(scroll / (window.innerHeight * 0.62));
+
+    splash.style.setProperty("--splash-cool-opacity", `${colorProgress}`);
     splash.style.setProperty(
-      "--splash-parallax-scale",
-      `${1 + progress * 0.018}`,
+      "--splash-content-opacity",
+      `${1 - contentProgress}`,
     );
   };
 
   useLenis((lenis) => {
-    updateParallax(lenis.scroll);
+    updateSplashState(lenis.scroll);
   });
 
   useEffect(() => {
-    updateParallax(window.scrollY);
+    updateSplashState(window.scrollY);
 
     function handleScroll() {
-      updateParallax(window.scrollY);
+      updateSplashState(window.scrollY);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -49,26 +56,48 @@ export function FullHeightSplash() {
   return (
     <section
       ref={splashRef}
-      className="splash-backdrop striped"
+      className={`splash-backdrop splash-backdrop--${layout} striped`}
       aria-hidden="true"
     >
-      <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
-        <span className="date-desktop">September 2026</span>
-        <span className="date-mobile">Sept 2026</span>
-      </div>
-      <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
-        <Link href="/stay">Reserve</Link>
-      </div>
+      {!isRowLayout ? (
+        <>
+          <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
+            <span className="date-desktop">September 2026</span>
+            <span className="date-mobile">Sept 2026</span>
+          </div>
+          <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
+            <Link href="/stay">Reserve Now</Link>
+          </div>
+        </>
+      ) : null}
       <div className="splash-backdrop__center">
         <LogoSolidMark className="splash-backdrop__logo" color="var(--brown)" />
         <CrestMark className="splash-backdrop__crest" color="var(--brown)" />
+        {isRowLayout ? (
+          <>
+            <h4>Rooms and Tavern</h4>
+            <div className="splash-backdrop__detail-row">
+              <span>
+                <span className="date-desktop">September 2026</span>
+                <span className="date-mobile">Sept 2026</span>
+              </span>
+              <Link href="/stay">Reserve Now</Link>
+
+              <span>Keep in Touch</span>
+            </div>
+          </>
+        ) : null}
       </div>
-      <div className="splash-backdrop__corner splash-backdrop__corner--bottom-left">
-        <span>Hotel and Tavern</span>
-      </div>
-      <div className="splash-backdrop__corner splash-backdrop__corner--bottom-right">
-        <span>Keep in Touch</span>
-      </div>
+      {!isRowLayout ? (
+        <>
+          <div className="splash-backdrop__corner splash-backdrop__corner--bottom-left">
+            <span>Hotel and Tavern</span>
+          </div>
+          <div className="splash-backdrop__corner splash-backdrop__corner--bottom-right">
+            <span>Keep in Touch</span>
+          </div>
+        </>
+      ) : null}
     </section>
   );
 }

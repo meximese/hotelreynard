@@ -19,14 +19,13 @@ export function SplashLayoutScaffold({
 
   return (
     <>
-      <FullHeightSplash />
+      <FullHeightSplash layout="row" />
       <FloatingSplashHeader
         isVisible={isHeaderVisible}
         isCompact={isHeaderVisible}
       />
       <div className="site-content-shell">
-        <div className="site-content-shell__fade striped" aria-hidden="true" />
-        <div className="site-content-inner striped">
+        <div className="site-content-inner striped-cool">
           <div
             ref={ref}
             className="site-content-shell__sentinel"

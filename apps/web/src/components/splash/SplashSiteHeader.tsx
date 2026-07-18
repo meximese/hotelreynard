@@ -25,7 +25,7 @@ export function SplashSiteHeader() {
             render={<Link href="/stay" />}
             className="toolbar-link toolbar-link-book"
           >
-            Reserve
+            Reserve Now
           </Toolbar.Link>
         </Toolbar.Group>
       </Toolbar.Root>

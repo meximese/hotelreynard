@@ -33,8 +33,11 @@ export function SiteHeader() {
         </Toolbar.Group>
         <Toolbar.Separator className="toolbar-divider" />
         <Toolbar.Group className="toolbar-group" aria-label="Booking">
-          <Toolbar.Link render={<Link href="/stay" />} className="toolbar-link toolbar-link-book">
-            Reserve
+          <Toolbar.Link
+            render={<Link href="/stay" />}
+            className="toolbar-link toolbar-link-book"
+          >
+            Reserve Now
           </Toolbar.Link>
         </Toolbar.Group>
       </Toolbar.Root>
