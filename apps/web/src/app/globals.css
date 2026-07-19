@@ -1183,6 +1183,18 @@ h3 {
   margin-left: auto;
 }
 
+.section__content.text-align-left {
+  justify-items: start;
+}
+
+.section__content.text-align-center {
+  justify-items: center;
+}
+
+.section__content.text-align-right {
+  justify-items: end;
+}
+
 .page-section:last-child {
   /* border-bottom: 1px solid var(--line); */
 }
