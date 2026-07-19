@@ -374,6 +374,25 @@ svg {
   opacity: 1;
 }
 
+.book-now-button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.book-now-button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.book-now-button.toolbar-link-book {
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--ink);
+}
+
 .toolbar-divider {
   width: 1px;
   align-self: stretch;
@@ -928,6 +947,10 @@ h3 {
 .button-link:hover,
 .button-link-secondary:hover {
   opacity: 1;
+}
+
+.book-now-button.button-link {
+  border-bottom: 1px solid var(--ink);
 }
 
 .text-link {

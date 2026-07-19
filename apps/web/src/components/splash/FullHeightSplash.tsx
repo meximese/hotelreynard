@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
-import Link from "next/link";
+import { BookNowButtonClient } from "@/components/book-now-button-client";
 import { CrestMark } from "@/components/svg/crest-mark";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 
@@ -57,7 +57,6 @@ export function FullHeightSplash({
     <section
       ref={splashRef}
       className={`splash-backdrop splash-backdrop--${layout}`}
-      aria-hidden="true"
     >
       {!isRowLayout ? (
         <>
@@ -66,7 +65,7 @@ export function FullHeightSplash({
             <span className="date-mobile">Sept 2026</span>
           </div>
           <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
-            <Link href="/stay">Reserve Now</Link>
+            <BookNowButtonClient className="splash-book-button" />
           </div>
         </>
       ) : null}
@@ -81,7 +80,7 @@ export function FullHeightSplash({
                 <span className="date-desktop">September 2026</span>
                 <span className="date-mobile">Sept 2026</span>
               </span>
-              <Link href="/stay">Reserve Now</Link>
+              <BookNowButtonClient className="splash-book-button" />
 
               <span>Keep in Touch</span>
             </div>

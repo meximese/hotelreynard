@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
+import Script from "next/script";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { Providers } from "@/components/providers";
@@ -54,6 +55,10 @@ export default async function RootLayout({
             </footer>
           </SplashLayoutScaffold>
         </Providers>
+        <Script
+          src="https://api.mews.com/distributor/distributor.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
+import { BookNowButtonClient } from "@/components/book-now-button-client";
 import { CustomGallerySection } from "@/components/custom-gallery-section";
 import { EventCard } from "@/components/event-card";
 import { GridGallerySection } from "@/components/grid-gallery-section";
@@ -239,11 +240,12 @@ export function PageSections({
               />
             ) : null}
 
-            {section._type === "bookingEmbedBlock" && section.cta ? (
+            {section._type === "bookingEmbedBlock" ? (
               <div className="cta-row">
-                <a className="button-link" href={cleanStegaString(section.cta.href)}>
-                  {section.cta.label}
-                </a>
+                <BookNowButtonClient
+                  className="button-link"
+                  label={section.cta?.label || "Book Now"}
+                />
               </div>
             ) : null}
           </section>

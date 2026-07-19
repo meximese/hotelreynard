@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
+import { BookNowButtonClient } from "@/components/book-now-button-client";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 
 export function FloatingSplashHeader({
@@ -38,12 +39,9 @@ export function FloatingSplashHeader({
             </Toolbar.Link>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
-            <Toolbar.Link
-              render={<Link href="/stay" />}
+            <BookNowButtonClient
               className="toolbar-link toolbar-link-book toolbar-corner-link"
-            >
-              Reserve Now
-            </Toolbar.Link>
+            />
           </Toolbar.Group>
         </Toolbar.Root>
       </header>
