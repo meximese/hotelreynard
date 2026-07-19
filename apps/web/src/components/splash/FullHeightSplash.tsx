@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
-import { BookNowButtonClient } from "@/components/book-now-button-client";
+import { BookNowButton } from "@/components/book-now-button";
 import { CrestMark } from "@/components/svg/crest-mark";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 
@@ -65,7 +65,7 @@ export function FullHeightSplash({
             <span className="date-mobile">Sept 2026</span>
           </div>
           <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
-            <BookNowButtonClient className="splash-book-button" />
+            <BookNowButton />
           </div>
         </>
       ) : null}
@@ -80,7 +80,7 @@ export function FullHeightSplash({
                 <span className="date-desktop">September 2026</span>
                 <span className="date-mobile">Sept 2026</span>
               </span>
-              <BookNowButtonClient className="splash-book-button" />
+              <BookNowButton />
 
               <span>Keep in Touch</span>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
-import { BookNowButtonClient } from "@/components/book-now-button-client";
+import { BookNowButton } from "@/components/book-now-button";
 import { CustomGallerySection } from "@/components/custom-gallery-section";
 import { EventCard } from "@/components/event-card";
 import { GridGallerySection } from "@/components/grid-gallery-section";
@@ -9,6 +9,8 @@ import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { RoomCard } from "@/components/room-card";
 import { SanityImageView } from "@/components/sanity-image";
 import { StickyScrollGallery } from "@/components/sticky-scroll-gallery";
+import { UiLink } from "@/components/ui/actions";
+import { Headline, Text } from "@/components/ui/typography";
 import { VerticalGallerySection } from "@/components/vertical-gallery-section";
 import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
@@ -56,8 +58,8 @@ export function PageSections({
           >
             {hasSectionHeader ? (
               <header className={`page-section__header ${textAlignClass}`.trim()}>
-                {section.eyebrow ? <p className="eyebrow">{section.eyebrow}</p> : null}
-                {section.title ? <h2>{section.title}</h2> : null}
+                {section.eyebrow ? <Text variant="eyebrow">{section.eyebrow}</Text> : null}
+                {section.title ? <Headline as="h2">{section.title}</Headline> : null}
               </header>
             ) : null}
 
@@ -80,17 +82,18 @@ export function PageSections({
                 {(section.primaryCta || section.secondaryCta) ? (
                   <div className="cta-row">
                     {section.primaryCta ? (
-                      <a className="button-link" href={cleanStegaString(section.primaryCta.href)}>
+                      <UiLink variant="button" className="button-link" href={cleanStegaString(section.primaryCta.href)}>
                         {section.primaryCta.label}
-                      </a>
+                      </UiLink>
                     ) : null}
                     {section.secondaryCta ? (
-                      <a
+                      <UiLink
+                        variant="secondary"
                         className="button-link button-link-secondary"
                         href={cleanStegaString(section.secondaryCta.href)}
                       >
                         {section.secondaryCta.label}
-                      </a>
+                      </UiLink>
                     ) : null}
                   </div>
                 ) : null}
@@ -142,7 +145,7 @@ export function PageSections({
                     className="feature-image"
                   />
                 ) : null}
-                {section.body ? <p>{section.body}</p> : null}
+                {section.body ? <Text>{section.body}</Text> : null}
               </div>
             ) : null}
 
@@ -167,11 +170,11 @@ export function PageSections({
                   />
                 ) : null}
                 <div className={`split-feature__copy ${textAlignClass}`.trim()}>
-                  {section.body ? <p>{section.body}</p> : null}
+                  {section.body ? <Text>{section.body}</Text> : null}
                   {section.primaryCta ? (
-                    <a className="text-link" href={cleanStegaString(section.primaryCta.href)}>
+                    <UiLink className="text-link" href={cleanStegaString(section.primaryCta.href)}>
                       {section.primaryCta.label}
-                    </a>
+                    </UiLink>
                   ) : null}
                 </div>
               </div>
@@ -187,7 +190,7 @@ export function PageSections({
 
             {section._type === "roomFeedBlock" && section.rooms?.length ? (
               <div className="section-stack">
-                {section.body ? <p className="lede">{section.body}</p> : null}
+                {section.body ? <Text className="lede">{section.body}</Text> : null}
                 <div className="card-grid">
                   {section.rooms.map((room) => (
                     <RoomCard key={room._id} room={room} />
@@ -198,7 +201,7 @@ export function PageSections({
 
             {section._type === "eventFeedBlock" && upcomingEvents.length ? (
               <div className="section-stack">
-                {section.body ? <p className="lede">{section.body}</p> : null}
+                {section.body ? <Text className="lede">{section.body}</Text> : null}
                 <div className="card-grid">
                   {upcomingEvents.slice(0, section.limit || 3).map((event) => (
                     <EventCard key={event._id} event={event} />
@@ -242,10 +245,7 @@ export function PageSections({
 
             {section._type === "bookingEmbedBlock" ? (
               <div className="cta-row">
-                <BookNowButtonClient
-                  className="button-link"
-                  label={section.cta?.label || "Book Now"}
-                />
+                <BookNowButton label={section.cta?.label || "Book Now"} />
               </div>
             ) : null}
           </section>

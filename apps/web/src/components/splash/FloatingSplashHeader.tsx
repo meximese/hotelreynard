@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
-import { BookNowButtonClient } from "@/components/book-now-button-client";
+import { BookNowButton } from "@/components/book-now-button";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 
 export function FloatingSplashHeader({
@@ -39,9 +39,7 @@ export function FloatingSplashHeader({
             </Toolbar.Link>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
-            <BookNowButtonClient
-              className="toolbar-link toolbar-link-book toolbar-corner-link"
-            />
+            <BookNowButton />
           </Toolbar.Group>
         </Toolbar.Root>
       </header>

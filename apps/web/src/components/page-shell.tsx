@@ -1,5 +1,6 @@
 import { ContentSeparator } from "@/components/content-separator";
 import { SanityImageView } from "@/components/sanity-image";
+import { Headline, Text } from "@/components/ui/typography";
 import type { PageHero } from "@/lib/content/types";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
@@ -57,11 +58,13 @@ export function PageShell({
         </section>
       ) : null}
       <section className="hero">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 data-sanity={titleAttr}>{title}</h1>
-        <p className="lede" data-sanity={introAttr}>
+        <Text variant="eyebrow">{eyebrow}</Text>
+        <Headline as="h1" data-sanity={titleAttr}>
+          {title}
+        </Headline>
+        <Text variant="body" className="lede" data-sanity={introAttr}>
           {intro}
-        </p>
+        </Text>
       </section>
       <ContentSeparator />
       {children}

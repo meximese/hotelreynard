@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
-import { BookNowButtonClient } from "@/components/book-now-button-client";
+import { BookNowButton } from "@/components/book-now-button";
 
 const navItems = [
   { href: "/stay", label: "Stay" },
@@ -34,7 +34,7 @@ export function SiteHeader() {
         </Toolbar.Group>
         <Toolbar.Separator className="toolbar-divider" />
         <Toolbar.Group className="toolbar-group" aria-label="Booking">
-          <BookNowButtonClient className="toolbar-link toolbar-link-book" />
+          <BookNowButton />
         </Toolbar.Group>
       </Toolbar.Root>
     </header>
