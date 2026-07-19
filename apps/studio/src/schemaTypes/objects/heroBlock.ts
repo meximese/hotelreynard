@@ -1,13 +1,12 @@
 import {defineField, defineType} from 'sanity'
+import {sectionGroupsWithMedia} from './shared/sectionGroups'
+import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'heroBlock',
   title: 'Hero block',
   type: 'object',
-  groups: [
-    {name: 'media', title: 'Media', default: true},
-    {name: 'content', title: 'Call to Action'},
-  ],
+  groups: sectionGroupsWithMedia,
   fields: [
     defineField({
       name: 'media',
@@ -42,5 +41,6 @@ export default defineType({
     defineField({name: 'body', title: 'Body', type: 'text', rows: 4, group: 'content'}),
     defineField({name: 'primaryCta', title: 'Primary CTA', type: 'cta', group: 'content'}),
     defineField({name: 'secondaryCta', title: 'Secondary CTA', type: 'cta', group: 'content'}),
+    defineSectionTextAlignField(),
   ],
 })

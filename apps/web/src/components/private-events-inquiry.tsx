@@ -2,30 +2,22 @@
 
 import { Field } from "@base-ui/react/field";
 import { BuiLink } from "@/components/ui/actions";
-import { BuiHeadline, BuiText } from "@/components/ui/typography";
+import { BuiText } from "@/components/ui/typography";
 import { cleanStegaString } from "@/lib/sanity/preview";
 import type { Cta } from "@/lib/content/types";
 
 export function PrivateEventsInquiry({
-  eyebrow = "Inquiry",
-  title = "Tell us about your big day.",
   body = "Share the gathering size, season, setting, and any questions you already have.",
   cta,
+  alignClassName = "",
 }: {
-  eyebrow?: string;
-  title?: string;
   body?: string;
   cta?: Cta;
+  alignClassName?: string;
 }) {
   return (
-    <section className="inquiry-panel" aria-labelledby="private-events-inquiry">
-      <div>
-        <BuiText variant="eyebrow" className="eyebrow">
-          {eyebrow}
-        </BuiText>
-        <BuiHeadline as="h2" id="private-events-inquiry">
-          {title}
-        </BuiHeadline>
+    <div className="inquiry-panel">
+      <div className={`section__content ${alignClassName}`.trim()}>
         <BuiText className="lede">{body}</BuiText>
         {cta?.label && cta.href ? (
           <p>
@@ -74,6 +66,6 @@ export function PrivateEventsInquiry({
           </Field.Description>
         </Field.Root>
       </form>
-    </section>
+    </div>
   );
 }

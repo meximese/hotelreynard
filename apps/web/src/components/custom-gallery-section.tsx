@@ -1,7 +1,4 @@
-"use client";
-
 import { SanityImageView } from "@/components/sanity-image";
-import { BuiText } from "@/components/ui/typography";
 import type { GalleryImage } from "@/lib/content/types";
 
 function getCustomGalleryLayout(image: GalleryImage) {
@@ -17,25 +14,14 @@ function getCustomGalleryLayout(image: GalleryImage) {
 }
 
 export function CustomGallerySection({
-  eyebrow,
   title,
   images,
-  showGalleryHeader = false,
 }: {
-  eyebrow?: string;
   title?: string;
   images: GalleryImage[];
-  showGalleryHeader?: boolean;
 }) {
   return (
-    <div className="gallery-section" aria-label={title || "Gallery"}>
-      {showGalleryHeader && (eyebrow || title) ? (
-        <div className="gallery-section__head">
-          {eyebrow ? <BuiText as="span" variant="eyebrow" className="eyebrow">{eyebrow}</BuiText> : null}
-          {title ? <BuiText as="span" className="gallery-section__title">{title}</BuiText> : null}
-        </div>
-      ) : null}
-
+    <div aria-label={title || "Gallery"}>
       <div className="gallery-custom">
         {images.map((image, index) => {
           const layout = getCustomGalleryLayout(image);

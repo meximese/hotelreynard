@@ -20,19 +20,15 @@ function smoothstep(value: number) {
 }
 
 export function StickyScrollGallery({
-  eyebrow,
   title,
   images,
-  showGalleryHeader = false,
   showGalleryProgress = true,
 }: {
-  showGalleryHeader?: boolean;
   showGalleryProgress?: boolean;
-  eyebrow?: string;
   title?: string;
   images: SanityImage[];
 }) {
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -157,34 +153,14 @@ export function StickyScrollGallery({
   }, [images.length]);
 
   return (
-    <section
+    <div
       ref={sectionRef}
       className={`sticky-gallery ${isStickyActive ? "is-sticky-active" : ""}`.trim()}
       aria-label={title || "Property views"}
       data-sticky-active={isStickyActive ? "true" : "false"}
-      style={
-        {
-          "--sticky-gallery-item-height": showGalleryHeader
-            ? "62vh"
-            : "calc(80vh - var(--sticky-header-offset, 5rem))",
-          "--sticky-gallery-track-offset": showGalleryHeader
-            ? "0"
-            : "calc(-1 * var(--sticky-header-offset, 5rem) / 2)",
-        } as React.CSSProperties
-      }
+      style={{ "--sticky-gallery-track-offset": "0" } as React.CSSProperties}
     >
       <div ref={stickyRef} className="sticky-gallery__sticky">
-        {showGalleryHeader && (
-          <div className="sticky-gallery__head">
-            <BuiText as="span" variant="eyebrow" className="eyebrow">
-              {eyebrow || "Gallery"}
-            </BuiText>
-            <BuiText as="span" className="gallery-section__title">
-              {title || "Property views"}
-            </BuiText>
-          </div>
-        )}
-
         <div ref={trackRef} className="sticky-gallery__track">
           {images.map((image, index) => (
             <div
@@ -224,6 +200,6 @@ export function StickyScrollGallery({
           </div>
         ) : null}
       </div>
-    </section>
+    </div>
   );
 }

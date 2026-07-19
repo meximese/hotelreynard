@@ -1,33 +1,24 @@
-import { defineField, defineType } from "sanity";
+import {defineField, defineType} from 'sanity'
+import {sectionGroups} from './shared/sectionGroups'
+import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
-  name: "quoteBlock",
-  title: "Quote block",
-  type: "object",
+  name: 'quoteBlock',
+  title: 'Quote block',
+  type: 'object',
+  groups: sectionGroups,
   fields: [
-    defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
-    defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({name: 'eyebrow', title: 'Eyebrow', type: 'string', group: 'content'}),
+    defineField({name: 'title', title: 'Title', type: 'string', group: 'content'}),
     defineField({
-      name: "quote",
-      title: "Quote",
-      type: "text",
+      name: 'quote',
+      title: 'Quote',
+      type: 'text',
       rows: 4,
       validation: (Rule) => Rule.required(),
+      group: 'content',
     }),
-    defineField({ name: "attribution", title: "Attribution", type: "string" }),
-    defineField({
-      name: "textAlign",
-      title: "Text alignment",
-      type: "string",
-      initialValue: "left",
-      options: {
-        list: [
-          { title: "Left", value: "left" },
-          { title: "Center", value: "center" },
-          { title: "Right", value: "right" },
-        ],
-        layout: "radio",
-      },
-    }),
+    defineField({name: 'attribution', title: 'Attribution', type: 'string', group: 'content'}),
+    defineSectionTextAlignField(),
   ],
-});
+})
