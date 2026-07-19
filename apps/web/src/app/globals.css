@@ -145,7 +145,7 @@ h3 {
   margin: 0;
   font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 1.04;
+  line-height: 1.5;
 }
 
 .type-display {
@@ -713,24 +713,24 @@ h3 {
   position: relative;
   min-width: 0;
   max-width: 100%;
-  padding: 0 0 6rem;
+  padding: 0 0 var(--gallery-gap);
 }
 
 .gallery-section__head,
 .section-heading-split {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 .gallery-section__head {
-  padding-bottom: 1.5rem;
+  padding-bottom: calc(var(--gallery-gap) / 2);
 }
 
 .gallery-section__title {
-  font-family: var(--font-heading);
-  font-size: var(--type-body-size);
+  font-family: var(--font-display);
+  font-size: var(--type-headline-size);
   letter-spacing: 0.01em;
 }
 
@@ -971,7 +971,6 @@ h3 {
 }
 
 .eyebrow {
-  margin: 0 0 0.7rem;
   color: var(--muted);
   font-family: var(--font-body);
   font-size: var(--type-kicker-size);

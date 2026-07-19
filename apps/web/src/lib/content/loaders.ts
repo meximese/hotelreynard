@@ -1,7 +1,13 @@
 import groq from "groq";
 import { hasSanityConfig } from "@/lib/sanity/client";
 import { DEFAULT_SANITY_REVALIDATE, sanityFetch } from "@/lib/sanity/fetch";
-import type { Event, GenericPage, HomePageData, Room, SingletonPageData } from "./types";
+import type {
+  Event,
+  GenericPage,
+  HomePageData,
+  Room,
+  SingletonPageData,
+} from "./types";
 
 const pageSectionsProjection = groq`
   "sections": sections[]{
@@ -29,11 +35,12 @@ const pageSectionsProjection = groq`
 
 const pageHeroProjection = groq`
   hero{
-    eyebrow,
-    title,
-    body,
     media,
     mobileMedia,
+    caption,
+    enableContent,
+    title,
+    body,
     primaryCta,
     secondaryCta
   }
@@ -191,7 +198,9 @@ export async function getRoomBySlug(slug: string): Promise<Room | null> {
   });
 }
 
-export async function getGenericPageBySlug(slug: string): Promise<GenericPage | null> {
+export async function getGenericPageBySlug(
+  slug: string,
+): Promise<GenericPage | null> {
   if (!hasSanityConfig()) {
     return null;
   }

@@ -34,38 +34,40 @@ export default async function HomePage() {
 
   return (
     <main className="home-shell">
-      {page.hero?.media ||
-      page.hero?.eyebrow ||
-      page.hero?.title ||
-      page.hero?.body ? (
+      {page.hero?.media && (
         <section className="page-top-hero" data-sanity={heroAttr}>
-          {page.hero.media ? (
-            <SanityImageView
-              image={page.hero.media}
-              mobileImage={page.hero.mobileMedia}
-              alt={page.hero.title || page.title}
-              width={1800}
-              height={1200}
-              sizes="100vw"
-              className="home-hero-image"
-            />
-          ) : null}
-          {page.hero.eyebrow || page.hero.title || page.hero.body ? (
+          <SanityImageView
+            image={page.hero.media}
+            mobileImage={page.hero.mobileMedia}
+            alt={page.hero.title || page.title}
+            width={1800}
+            height={1200}
+            sizes="100vw"
+            className="home-hero-image"
+          />
+          {page.hero.caption && (
             <div className="page-top-hero__caption">
-              <span className="home-hero-name">
-                {page.hero.title || page.hero.eyebrow}
-              </span>
+              <span className="home-hero-name">{page.hero.caption}</span>
+            </div>
+          )}
+          {page.hero.enableContent && (
+            <div className="page-top-hero__caption">
+              <span className="home-hero-name">{page.hero.title}</span>
               {page.hero.body ? (
                 <span className="home-hero-meta">{page.hero.body}</span>
               ) : null}
             </div>
-          ) : null}
+          )}
         </section>
-      ) : null}
+      )}
       <section className="home-intro">
         <div className="home-intro-copy">
           {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
-          <BuiText variant="intro" className="home-intro-lede" data-sanity={introAttr}>
+          <BuiText
+            variant="intro"
+            className="home-intro-lede"
+            data-sanity={introAttr}
+          >
             {page.intro}
           </BuiText>
         </div>

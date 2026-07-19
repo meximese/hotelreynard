@@ -77,11 +77,12 @@ export interface PageSection {
 }
 
 export interface PageHero {
-  eyebrow?: string;
-  title?: string;
-  body?: string;
+  enableContent?: boolean;
   media?: SanityImage;
   mobileMedia?: SanityImage;
+  caption?: string;
+  title?: string;
+  body?: string;
   primaryCta?: Cta;
   secondaryCta?: Cta;
 }
