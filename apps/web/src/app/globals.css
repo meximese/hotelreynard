@@ -407,6 +407,7 @@ svg {
 
 .site-footer-grid {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   color: var(--muted);
   justify-content: center;
@@ -420,6 +421,61 @@ svg {
 
 .site-footer-grid p {
   margin: 0 0 0.35rem;
+}
+
+.site-footer-newsletter {
+  width: min(100%, 24rem);
+}
+
+.newsletter-form {
+  color: var(--muted);
+}
+
+.newsletter-form__row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+}
+
+.newsletter-form input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.36);
+  color: var(--ink);
+  font: inherit;
+  padding: 0.5rem 0.9rem;
+}
+
+.newsletter-form input::placeholder {
+  color: var(--muted);
+}
+
+.newsletter-form button {
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--white);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5rem 0.9rem;
+  text-transform: uppercase;
+}
+
+.newsletter-form button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.newsletter-form__status {
+  margin-bottom: 0.35rem;
+  color: var(--brown);
+}
+
+.newsletter-form__status--error {
+  color: var(--accent);
 }
 
 .page-shell,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
+import { NewsletterForm } from "@/components/newsletter-form";
 import { Providers } from "@/components/providers";
 import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
@@ -46,9 +47,8 @@ export default async function RootLayout({
                   <p>302 Historic Columbia River Highway</p>
                   <p>Troutdale, Oregon</p>
                 </div>
-                <div>
-                  <p className="eyebrow">Hotel Reynard</p>
-                  <p>where the city ends and nature begins</p>
+                <div className="site-footer-newsletter">
+                  <NewsletterForm />
                 </div>
               </div>
             </footer>
