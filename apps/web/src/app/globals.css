@@ -39,7 +39,7 @@
   --surface-solid: #f4f8fb;
   --surface-alt: #dce8ee;
   --ink: #17262b;
-  --muted: rgba(23, 38, 43, 0.62);
+  --muted: #5f6d72;
   --line: rgba(23, 38, 43, 0.15);
   --accent: var(--brown);
   --max-width: 1000px;
@@ -154,7 +154,7 @@ h3 {
 
 .type-intro {
   margin: 0;
-  color: var(--muted);
+  color: var(--ink);
   font-family: var(--font-heading-light);
   font-size: var(--type-intro-size);
   line-height: 1.65;
@@ -162,7 +162,7 @@ h3 {
 
 .type-body {
   margin: 0;
-  color: var(--muted);
+  color: var(--ink);
   font-size: var(--type-body-size);
   line-height: 1.75;
 }
@@ -204,7 +204,18 @@ h3 {
   font-family: var(--font-body);
   font-size: var(--type-action-size);
   letter-spacing: var(--type-action-tracking);
+  text-decoration: none;
   text-transform: uppercase;
+}
+
+.ui-action--hover-full:not(:disabled):hover {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+}
+
+.ui-action--hover-weight:not(:disabled):hover {
+  font-weight: 700;
 }
 
 .ui-action--button,
@@ -214,12 +225,12 @@ h3 {
 }
 
 .ui-action--secondary {
-  opacity: 0.72;
+  color: var(--muted);
 }
 
 .ui-action:disabled {
   cursor: wait;
-  opacity: 0.5;
+  color: var(--muted);
 }
 
 .site-header > .site-toolbar,
@@ -319,8 +330,8 @@ h3 {
   margin-top: 1.5rem;
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: var(--type-kicker-size);
-  letter-spacing: var(--type-kicker-tracking);
+  font-size: var(--type-action-size);
+  letter-spacing: var(--type-action-tracking);
   line-height: 1.2;
   text-transform: uppercase;
   pointer-events: auto;
@@ -453,19 +464,19 @@ h3 {
 }
 
 .toolbar-link {
-  opacity: 0.68;
-  transition: opacity 160ms ease;
+  color: var(--muted);
+  transition: color 160ms ease;
 }
 
 .toolbar-corner-label,
 .toolbar-corner-link {
-  opacity: 1;
+  color: var(--ink);
 }
 
 .toolbar-link:hover,
 .toolbar-brand:hover,
 .toolbar-link-book {
-  opacity: 1;
+  color: var(--ink);
 }
 
 .book-now-button {
@@ -474,7 +485,7 @@ h3 {
 
 .book-now-button:disabled {
   cursor: wait;
-  opacity: 0.5;
+  color: var(--muted);
 }
 
 .book-now-button.toolbar-link-book {
@@ -572,7 +583,7 @@ h3 {
 
 .newsletter-form button:disabled {
   cursor: wait;
-  opacity: 0.62;
+  color: var(--muted);
 }
 
 .newsletter-form__status {
@@ -686,7 +697,7 @@ h3 {
 .lede,
 .card p {
   margin: 0;
-  color: var(--muted);
+  color: var(--ink);
   font-size: var(--type-body-size);
   line-height: 1.75;
 }
@@ -1019,12 +1030,12 @@ h3 {
 }
 
 .button-link-secondary {
-  opacity: 0.72;
+  color: var(--muted);
 }
 
 .button-link:hover,
 .button-link-secondary:hover {
-  opacity: 1;
+  color: var(--ink);
 }
 
 .book-now-button.button-link {
