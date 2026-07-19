@@ -8,12 +8,12 @@ import { getCliClient } from "sanity/cli";
 const scriptDir = path.dirname(new URL(import.meta.url).pathname);
 const studioDir = path.resolve(scriptDir, "..");
 const repoRoot = path.resolve(studioDir, "..", "..");
-const legacyEnvPath = path.join(repoRoot, "studio", ".env");
-const siteEnvPath = path.join(repoRoot, "site", ".env");
+const studioEnvPath = path.join(studioDir, ".env.local");
+const webEnvPath = path.join(repoRoot, "apps", "web", ".env.local");
 const seedFilePath = path.join(studioDir, "src", "seed", "siteScaffold.ts");
 
-loadEnvFile(legacyEnvPath);
-loadEnvFile(siteEnvPath);
+loadEnvFile(studioEnvPath);
+loadEnvFile(webEnvPath);
 
 const projectId =
   process.env.SANITY_STUDIO_PROJECT_ID ||
@@ -25,13 +25,13 @@ const writeToken = process.env.SANITY_API_WRITE_TOKEN || process.env.SANITY_AUTH
 
 if (!projectId || !dataset) {
   throw new Error(
-    `Missing Sanity configuration. Expected project and dataset env vars, checked ${legacyEnvPath} and ${siteEnvPath}.`,
+    `Missing Sanity configuration. Expected project and dataset env vars, checked ${studioEnvPath} and ${webEnvPath}.`,
   );
 }
 
 if (!writeToken) {
   throw new Error(
-    `Missing SANITY_API_WRITE_TOKEN or SANITY_AUTH_TOKEN. Checked ${legacyEnvPath} and ${siteEnvPath}.`,
+    `Missing SANITY_API_WRITE_TOKEN or SANITY_AUTH_TOKEN. Checked ${studioEnvPath} and ${webEnvPath}.`,
   );
 }
 

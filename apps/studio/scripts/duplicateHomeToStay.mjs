@@ -9,7 +9,6 @@ const repoRoot = path.resolve(studioDir, "..", "..");
 for (const envPath of [
   path.join(studioDir, ".env.local"),
   path.join(repoRoot, "apps", "web", ".env.local"),
-  path.join(repoRoot, "site", ".env"),
 ]) {
   loadEnvFile(envPath);
 }

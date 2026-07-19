@@ -10,7 +10,6 @@
     "build:studio": "npm run build --workspace=@hotelreynard/studio",
     "lint:web": "npm run lint --workspace=@hotelreynard/web",
     "seed:import": "npm run seed:import --workspace=@hotelreynard/studio",
-    "dev:legacy": "concurrently \"npm run dev --workspace=site\" \"npm run dev --workspace=studio\"",
     "email:dev": "npm run preview:dev --workspace=@hotelreynard/email",
     "email:preview": "npm run preview:build --workspace=@hotelreynard/email"
   },
@@ -23,7 +22,6 @@
   "workspaces": [
     "apps/*",
     "studio",
-    "site",
     "packages/*"
   ],
   "devDependencies": {
