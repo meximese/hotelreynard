@@ -5,6 +5,7 @@ export default defineType({
   title: "Restaurant page",
   type: "document",
   fields: [
+    defineField({ name: "hero", title: "Top hero", type: "heroBlock" }),
     defineField({ name: "title", title: "Title", type: "string" }),
     defineField({ name: "intro", title: "Intro", type: "text", rows: 4 }),
     defineField({ name: "sections", title: "Sections", type: "pageSection" }),
