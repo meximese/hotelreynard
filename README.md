@@ -2,13 +2,15 @@
 
 Monorepo for the Hotel Reynard website and supporting content tooling.
 
-The primary frontend in this repo is the Next.js app in [site](/Users/vinh/dev/reynard/hotelreynard/site). The repo also includes a Sanity Studio workspace and a shared email package.
+The primary frontend in this repo is the Next.js app in [apps/web](/Users/vinh/dev/reynard/hotelreynard/apps/web). The repo also includes a Sanity Studio workspace and a shared email package.
+
+Legacy work from the retired `/site` app is being folded into `apps/web`. If you need to reference saved motion experiments during that cleanup, the archived Reynard wordmark morph now lives in [apps/web/src/components/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/apps/web/src/components/archive/reynard-wordmark-morph) with source SVGs in [apps/web/public/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/apps/web/public/archive/reynard-wordmark-morph).
 
 ## Workspaces
 
-- `site` - Next.js 16 App Router marketing site
-- `studio` - Sanity Studio for editorial content
-- `packages/email` - shared React email templates used by site API routes
+- `apps/web` - Next.js 16 App Router hotel site
+- `apps/studio` - Sanity Studio for editorial content
+- `packages/email` - shared React email templates used by app API routes
 
 ## Getting Started
 
@@ -18,15 +20,15 @@ Install dependencies from the repo root:
 npm install
 ```
 
-Run the Next.js site:
+Run the Next.js app:
 
 ```bash
-npm run dev --workspace=site
+npm run dev --workspace=@hotelreynard/web
 ```
 
-The site runs at [http://localhost:3000](http://localhost:3000).
+The web app runs at [http://localhost:3000](http://localhost:3000).
 
-Run the site and Sanity Studio together:
+Run the web app and Sanity Studio together:
 
 ```bash
 npm run dev
@@ -34,26 +36,26 @@ npm run dev
 
 That starts:
 
-- the Next.js site at [http://localhost:3000](http://localhost:3000)
+- the Next.js app at [http://localhost:3000](http://localhost:3000)
 - the Sanity Studio at [http://localhost:3333](http://localhost:3333)
-
-## Next.js Site
-
-See the workspace README for full setup details:
-
-- [site/README.md](/Users/vinh/dev/reynard/hotelreynard/site/README.md)
 
 ## Useful Commands
 
 ```bash
-# Next.js site
-npm run dev --workspace=site
-npm run build --workspace=site
-npm run lint --workspace=site
+# Next.js app
+npm run dev --workspace=@hotelreynard/web
+npm run build --workspace=@hotelreynard/web
+npm run lint --workspace=@hotelreynard/web
 
 # Sanity Studio
-npm run dev --workspace=studio
+npm run dev --workspace=@hotelreynard/studio
 
 # Email previews
 npm run email:dev
 ```
+
+## Migration Notes
+
+- `apps/web` is the active frontend. Do not add new product code to the legacy `/site` app.
+- `apps/studio` is the active Sanity workspace used alongside `apps/web`.
+- After deleting `/site`, run `npm install` from the repo root once to refresh [package-lock.json](/Users/vinh/dev/reynard/hotelreynard/package-lock.json) and remove the old workspace entries.
