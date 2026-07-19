@@ -55,6 +55,6 @@ Treat authoritative data sources and observational data sources differently. Cor
 
 ### principle: prefer current workspaces over legacy ones
 
-- Treat `apps/web` as the active frontend and `apps/studio` as the active content workspace.
+- Treat `site` as the active frontend and `studio` as the active content workspace.
 - Avoid reviving or extending retired workspace code when an archived copy has already been preserved inside an active workspace.
 - When legacy code is worth keeping for reference, move it into a clearly named archive location in the active app instead of leaving it in a parallel abandoned workspace.
