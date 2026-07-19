@@ -9,8 +9,8 @@ import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { RoomCard } from "@/components/room-card";
 import { SanityImageView } from "@/components/sanity-image";
 import { StickyScrollGallery } from "@/components/sticky-scroll-gallery";
-import { UiLink } from "@/components/ui/actions";
-import { Headline, Text } from "@/components/ui/typography";
+import { BuiLink } from "@/components/ui/actions";
+import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import { VerticalGallerySection } from "@/components/vertical-gallery-section";
 import { cleanStegaString, createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
@@ -58,8 +58,8 @@ export function PageSections({
           >
             {hasSectionHeader ? (
               <header className={`page-section__header ${textAlignClass}`.trim()}>
-                {section.eyebrow ? <Text variant="eyebrow">{section.eyebrow}</Text> : null}
-                {section.title ? <Headline as="h2">{section.title}</Headline> : null}
+                {section.eyebrow ? <BuiText variant="eyebrow">{section.eyebrow}</BuiText> : null}
+                {section.title ? <BuiHeadline as="h2">{section.title}</BuiHeadline> : null}
               </header>
             ) : null}
 
@@ -82,18 +82,18 @@ export function PageSections({
                 {(section.primaryCta || section.secondaryCta) ? (
                   <div className="cta-row">
                     {section.primaryCta ? (
-                      <UiLink variant="button" className="button-link" href={cleanStegaString(section.primaryCta.href)}>
+                      <BuiLink variant="button" className="button-link" href={cleanStegaString(section.primaryCta.href)}>
                         {section.primaryCta.label}
-                      </UiLink>
+                      </BuiLink>
                     ) : null}
                     {section.secondaryCta ? (
-                      <UiLink
+                      <BuiLink
                         variant="secondary"
                         className="button-link button-link-secondary"
                         href={cleanStegaString(section.secondaryCta.href)}
                       >
                         {section.secondaryCta.label}
-                      </UiLink>
+                      </BuiLink>
                     ) : null}
                   </div>
                 ) : null}
@@ -145,7 +145,7 @@ export function PageSections({
                     className="feature-image"
                   />
                 ) : null}
-                {section.body ? <Text>{section.body}</Text> : null}
+                {section.body ? <BuiText>{section.body}</BuiText> : null}
               </div>
             ) : null}
 
@@ -170,11 +170,11 @@ export function PageSections({
                   />
                 ) : null}
                 <div className={`split-feature__copy ${textAlignClass}`.trim()}>
-                  {section.body ? <Text>{section.body}</Text> : null}
+                  {section.body ? <BuiText>{section.body}</BuiText> : null}
                   {section.primaryCta ? (
-                    <UiLink className="text-link" href={cleanStegaString(section.primaryCta.href)}>
+                    <BuiLink className="text-link" href={cleanStegaString(section.primaryCta.href)}>
                       {section.primaryCta.label}
-                    </UiLink>
+                    </BuiLink>
                   ) : null}
                 </div>
               </div>
@@ -190,7 +190,7 @@ export function PageSections({
 
             {section._type === "roomFeedBlock" && section.rooms?.length ? (
               <div className="section-stack">
-                {section.body ? <Text className="lede">{section.body}</Text> : null}
+                {section.body ? <BuiText className="lede">{section.body}</BuiText> : null}
                 <div className="card-grid">
                   {section.rooms.map((room) => (
                     <RoomCard key={room._id} room={room} />
@@ -201,7 +201,7 @@ export function PageSections({
 
             {section._type === "eventFeedBlock" && upcomingEvents.length ? (
               <div className="section-stack">
-                {section.body ? <Text className="lede">{section.body}</Text> : null}
+                {section.body ? <BuiText className="lede">{section.body}</BuiText> : null}
                 <div className="card-grid">
                   {upcomingEvents.slice(0, section.limit || 3).map((event) => (
                     <EventCard key={event._id} event={event} />

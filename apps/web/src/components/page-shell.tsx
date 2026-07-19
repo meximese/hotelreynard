@@ -1,6 +1,6 @@
 import { ContentSeparator } from "@/components/content-separator";
 import { SanityImageView } from "@/components/sanity-image";
-import { Headline, Text } from "@/components/ui/typography";
+import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import type { PageHero } from "@/lib/content/types";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
@@ -58,13 +58,13 @@ export function PageShell({
         </section>
       ) : null}
       <section className="hero">
-        <Text variant="eyebrow">{eyebrow}</Text>
-        <Headline as="h1" data-sanity={titleAttr}>
+        <BuiText variant="eyebrow">{eyebrow}</BuiText>
+        <BuiHeadline as="h1" data-sanity={titleAttr}>
           {title}
-        </Headline>
-        <Text variant="body" className="lede" data-sanity={introAttr}>
+        </BuiHeadline>
+        <BuiText variant="body" className="lede" data-sanity={introAttr}>
           {intro}
-        </Text>
+        </BuiText>
       </section>
       <ContentSeparator />
       {children}

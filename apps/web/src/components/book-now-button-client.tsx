@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/actions";
+import { BuiButton } from "@/components/ui/actions";
 
 interface MewsDistributorApi {
   open: () => void;
@@ -109,7 +109,7 @@ export function BookNowButtonClient({
     : "Set NEXT_PUBLIC_MEWS_CONFIGURATION_ID to enable booking.";
 
   return (
-    <Button
+    <BuiButton
       className={`book-now-button${className ? ` ${className}` : ""}`}
       disabled={!enabled}
       onClick={() => apiRef.current?.open()}
@@ -118,6 +118,6 @@ export function BookNowButtonClient({
       variant="plain"
     >
       {label}
-    </Button>
+    </BuiButton>
   );
 }

@@ -2,7 +2,7 @@ import { ContentSeparator } from "@/components/content-separator";
 import { PageSections } from "@/components/page-sections";
 import { SanityImageView } from "@/components/sanity-image";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
-import { Text } from "@/components/ui/typography";
+import { BuiText } from "@/components/ui/typography";
 import { getHomePage, getUpcomingEvents } from "@/lib/content/loaders";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
@@ -65,9 +65,9 @@ export default async function HomePage() {
       <section className="home-intro">
         <div className="home-intro-copy">
           {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
-          <Text variant="intro" className="home-intro-lede" data-sanity={introAttr}>
+          <BuiText variant="intro" className="home-intro-lede" data-sanity={introAttr}>
             {page.intro}
-          </Text>
+          </BuiText>
         </div>
       </section>
       {page.sections?.length ? (

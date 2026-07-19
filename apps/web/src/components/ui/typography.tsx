@@ -13,7 +13,7 @@ type PolymorphicProps<T extends ElementType, Variant extends string> = {
   variant?: Variant;
 } & Omit<ComponentPropsWithoutRef<T>, "as" | "className">;
 
-export function Headline<T extends ElementType = "h2">({
+export function BuiHeadline<T extends ElementType = "h2">({
   as,
   className,
   variant = "headline",
@@ -29,7 +29,7 @@ export function Headline<T extends ElementType = "h2">({
   );
 }
 
-export function Text<T extends ElementType = "p">({
+export function BuiText<T extends ElementType = "p">({
   as,
   className,
   variant = "body",

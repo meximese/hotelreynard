@@ -24,7 +24,7 @@ function getActionClass(variant: ActionVariant) {
   return "ui-action ui-action--inline";
 }
 
-export function UiLink({
+export function BuiLink({
   className,
   variant = "inline",
   ...props
@@ -35,7 +35,7 @@ export function UiLink({
   return <Link className={classes(getActionClass(variant), className)} {...props} />;
 }
 
-export function Button({
+export function BuiButton({
   className,
   variant = "button",
   ...props
