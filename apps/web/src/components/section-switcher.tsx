@@ -17,10 +17,6 @@ export function getSectionTextAlignClass(textAlign?: PageSection["textAlign"]) {
   return `text-align-${textAlign || "center"}`;
 }
 
-export function usesCustomSectionLayout(section: PageSection) {
-  return section._type === "heroBlock";
-}
-
 export function sectionHasHeader(section: PageSection) {
   if (!section.eyebrow && !section.title) {
     return false;
@@ -31,7 +27,6 @@ export function sectionHasHeader(section: PageSection) {
   }
 
   return (
-    !usesCustomSectionLayout(section) &&
     !!(section.eyebrow || section.title)
   );
 }
@@ -55,49 +50,6 @@ export function SectionSwitcher({
 }) {
   const textAlignClass = getSectionTextAlignClass(section.textAlign);
   const galleryImages = section.images;
-
-  if (section._type === "heroBlock") {
-    return (
-      <div className="home-hero-frame">
-        {section.media ? (
-          <SanityImageView
-            image={section.media}
-            alt={section.title}
-            width={1800}
-            height={1200}
-            sizes="100vw"
-            className="home-hero-image"
-          />
-        ) : null}
-        <div className={`home-hero-caption ${textAlignClass}`.trim()}>
-          {section.title ? <span className="home-hero-name">{section.title}</span> : null}
-          {section.body ? <span className="home-hero-meta">{section.body}</span> : null}
-        </div>
-        {(section.primaryCta || section.secondaryCta) ? (
-          <div className={`cta-row ${textAlignClass}`.trim()}>
-            {section.primaryCta ? (
-              <BuiLink
-                variant="button"
-                className="button-link"
-                href={cleanStegaString(section.primaryCta.href)}
-              >
-                {section.primaryCta.label}
-              </BuiLink>
-            ) : null}
-            {section.secondaryCta ? (
-              <BuiLink
-                variant="secondary"
-                className="button-link button-link-secondary"
-                href={cleanStegaString(section.secondaryCta.href)}
-              >
-                {section.secondaryCta.label}
-              </BuiLink>
-            ) : null}
-          </div>
-        ) : null}
-      </div>
-    );
-  }
 
   if (section._type === "galleryBlock" && galleryImages?.length) {
     if (section.displayMode === "stickyScroll") {

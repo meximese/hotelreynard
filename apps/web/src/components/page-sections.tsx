@@ -3,7 +3,6 @@ import {
   getSectionTextAlignClass,
   sectionHasHeader,
   SectionSwitcher,
-  usesCustomSectionLayout,
 } from "@/components/section-switcher";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
@@ -32,7 +31,6 @@ export function PageSections({
                 path: [sectionPath],
               })
             : undefined;
-        const usesCustomLayout = usesCustomSectionLayout(section);
         const textAlignClass = getSectionTextAlignClass(section.textAlign);
         const hasHeader = sectionHasHeader(section);
 
@@ -41,7 +39,7 @@ export function PageSections({
             key={key}
             className={`section page-section ${
               section._type === "galleryBlock" ? "gallery-section" : ""
-            } ${usesCustomLayout ? "section--custom-layout page-section--custom-layout" : ""}`.trim()}
+            }`.trim()}
             data-sanity={sectionAttr}
           >
             {hasHeader ? (

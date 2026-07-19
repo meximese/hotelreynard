@@ -1183,13 +1183,6 @@ h3 {
   margin-left: auto;
 }
 
-.section--custom-layout,
-.page-section--custom-layout {
-  gap: 0;
-  padding: 0;
-  border-top: 0;
-}
-
 .page-section:last-child {
   /* border-bottom: 1px solid var(--line); */
 }
