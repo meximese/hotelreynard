@@ -233,7 +233,7 @@ The strongest long-term option is usually `2` or `3`, since rooms are the emotio
 For a fresh app, use explicit typed routes instead of over-relying on a generic catch-all pattern.
 
 ```text
-apps/web/
+site/
   src/app/
     (marketing)/
       page.tsx
@@ -278,7 +278,7 @@ If the frontend starts with BaseUI and Phosphor Icons:
 ## Sanity Studio Map
 
 ```text
-apps/studio/
+studio/
   src/schemaTypes/
     documents/
       siteSettings.ts

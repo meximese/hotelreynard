@@ -16,9 +16,13 @@ import featureListBlock from "./objects/featureListBlock";
 import galleryBlock from "./objects/galleryBlock";
 import heroBlock from "./objects/heroBlock";
 import hoursBlock from "./objects/hoursBlock";
+import imageBlock from "./objects/imageBlock";
+import imageTextBlock from "./objects/imageTextBlock";
 import inquiryBlock from "./objects/inquiryBlock";
 import pageSection from "./objects/pageSection";
+import quoteBlock from "./objects/quoteBlock";
 import richTextBlock from "./objects/richTextBlock";
+import roomFeedBlock from "./objects/roomFeedBlock";
 import seo from "./objects/seo";
 
 export const schemaTypes = [
@@ -36,6 +40,10 @@ export const schemaTypes = [
   cta,
   heroBlock,
   galleryBlock,
+  imageBlock,
+  imageTextBlock,
+  quoteBlock,
+  roomFeedBlock,
   featureListBlock,
   bookingEmbedBlock,
   eventFeedBlock,

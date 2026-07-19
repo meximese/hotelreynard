@@ -1,5 +1,5 @@
 {
-  "name": "studio",
+  "name": "@hotelreynard/studio",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -9,22 +9,20 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "seed:import": "sanity exec scripts/importSiteScaffold.mjs --with-user-token"
   },
-  "keywords": [
-    "sanity"
-  ],
   "dependencies": {
     "@sanity/vision": "^4.22.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sanity": "^4.22.0",
+    "sanity-plugin-media": "^4.3.6",
     "styled-components": "^6.3.12"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
-    "eslint": "^9.39.4",
     "@types/react": "^19.2.14",
+    "eslint": "^9.39.4",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   },

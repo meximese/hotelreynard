@@ -23,20 +23,32 @@ export function PageShell({
 }) {
   const titleAttr =
     documentId && documentType
-      ? createSanityDataAttribute({ id: documentId, type: documentType, path: ["title"] })
+      ? createSanityDataAttribute({
+          id: documentId,
+          type: documentType,
+          path: ["title"],
+        })
       : undefined;
   const introAttr =
     documentId && documentType
-      ? createSanityDataAttribute({ id: documentId, type: documentType, path: ["intro"] })
+      ? createSanityDataAttribute({
+          id: documentId,
+          type: documentType,
+          path: ["intro"],
+        })
       : undefined;
   const heroAttr =
     documentId && documentType
-      ? createSanityDataAttribute({ id: documentId, type: documentType, path: ["hero"] })
+      ? createSanityDataAttribute({
+          id: documentId,
+          type: documentType,
+          path: ["hero"],
+        })
       : undefined;
 
   return (
     <main className="page-shell">
-      {hero?.media || hero?.eyebrow || hero?.title || hero?.body ? (
+      {hero?.media || hero?.title || hero?.body ? (
         <section className="page-top-hero" data-sanity={heroAttr}>
           {hero.media ? (
             <SanityImageView
@@ -49,10 +61,12 @@ export function PageShell({
               className="home-hero-image"
             />
           ) : null}
-          {hero.eyebrow || hero.title || hero.body ? (
+          {hero.title || hero.body ? (
             <div className="page-top-hero__caption">
-              <span className="home-hero-name">{hero.title || hero.eyebrow}</span>
-              {hero.body ? <span className="home-hero-meta">{hero.body}</span> : null}
+              <span className="home-hero-name">{hero.title}</span>
+              {hero.body ? (
+                <span className="home-hero-meta">{hero.body}</span>
+              ) : null}
             </div>
           ) : null}
         </section>
