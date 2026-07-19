@@ -21,3 +21,9 @@ Treat authoritative data sources and observational data sources differently. Cor
 - Put source-of-truth selection, normalization, and business rules in the page, controller, or adapter layer.
 - Only couple a shared component to app state/hooks when that coupling is explicitly desired and improves the user-facing outcome more than it increases ambiguity.
 - Do not introduce extra abstraction unless reuse or correctness clearly requires it.
+
+### principle: prefer current workspaces over legacy ones
+
+- Treat `apps/web` as the active frontend and `apps/studio` as the active content workspace.
+- Avoid reviving or extending retired workspace code when an archived copy has already been preserved inside an active workspace.
+- When legacy code is worth keeping for reference, move it into a clearly named archive location in the active app instead of leaving it in a parallel abandoned workspace.
