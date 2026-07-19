@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SanityImageView } from "@/components/sanity-image";
+import { BuiText } from "@/components/ui/typography";
 import type { SanityImage } from "@/lib/content/types";
 
 const SCROLL_SPEED_MULTIPLIER = 1.8;
@@ -175,8 +176,12 @@ export function StickyScrollGallery({
       <div ref={stickyRef} className="sticky-gallery__sticky">
         {showGalleryHeader && (
           <div className="sticky-gallery__head">
-            <span className="eyebrow">{eyebrow || "Gallery"}</span>
-            <span className="gallery-section__title">{title || "Property views"}</span>
+            <BuiText as="span" variant="eyebrow" className="eyebrow">
+              {eyebrow || "Gallery"}
+            </BuiText>
+            <BuiText as="span" className="gallery-section__title">
+              {title || "Property views"}
+            </BuiText>
           </div>
         )}
 
@@ -203,17 +208,19 @@ export function StickyScrollGallery({
             className="sticky-gallery__progress"
             aria-hidden={isStickyActive ? undefined : true}
           >
-            <span className="eyebrow">
+            <BuiText as="span" variant="eyebrow" className="eyebrow">
               {String(currentIndex).padStart(2, "0")} /{" "}
               {String(images.length).padStart(2, "0")}
-            </span>
+            </BuiText>
             <div className="sticky-gallery__bar">
               <div
                 className="sticky-gallery__bar-fill"
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
-            <span className="eyebrow">Scroll</span>
+            <BuiText as="span" variant="eyebrow" className="eyebrow">
+              Scroll
+            </BuiText>
           </div>
         ) : null}
       </div>

@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import type { Event } from "@/lib/content/types";
 import { ContentSeparator } from "@/components/content-separator";
 import { SanityImageView } from "@/components/sanity-image";
+import { BuiLink } from "@/components/ui/actions";
+import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
 export function EventCard({ event }: { event: Event }) {
@@ -24,14 +25,16 @@ export function EventCard({ event }: { event: Event }) {
       />
       <div className="card-stack">
         <div>
-          <p className="eyebrow">{event.venueType || "Event"}</p>
-          <h3>{event.title}</h3>
-          {event.summary ? <p>{event.summary}</p> : null}
+          <BuiText variant="eyebrow" className="eyebrow">
+            {event.venueType || "Event"}
+          </BuiText>
+          <BuiHeadline as="h3">{event.title}</BuiHeadline>
+          {event.summary ? <BuiText>{event.summary}</BuiText> : null}
         </div>
         <ContentSeparator />
-        <Link href={`/events/${event.slug.current}`} className="text-link">
+        <BuiLink href={`/events/${event.slug.current}`} className="text-link">
           View event
-        </Link>
+        </BuiLink>
       </div>
     </article>
   );

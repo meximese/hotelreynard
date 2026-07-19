@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { PageShell } from "@/components/page-shell";
 import { SanityImageView } from "@/components/sanity-image";
+import { BuiLink } from "@/components/ui/actions";
 import { getEventBySlug } from "@/lib/content/loaders";
 import { cleanStegaString } from "@/lib/sanity/preview";
 
@@ -44,9 +44,9 @@ export default async function EventPage({ params }: PageProps) {
       ) : null}
       {event.cta ? (
         <div className="cta-row">
-          <Link className="button-link" href={cleanStegaString(event.cta.href)}>
+          <BuiLink variant="button" className="button-link" href={cleanStegaString(event.cta.href)}>
             {event.cta.label}
-          </Link>
+          </BuiLink>
         </div>
       ) : null}
     </PageShell>

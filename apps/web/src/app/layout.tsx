@@ -5,6 +5,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { Providers } from "@/components/providers";
 import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
+import { BuiText } from "@/components/ui/typography";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
 import "lenis/dist/lenis.css";
 import "./globals.css";
@@ -44,7 +45,9 @@ export default async function RootLayout({
             <footer className="site-footer">
               <div className="site-footer-grid">
                 <div>
-                  <p className="eyebrow">Visit</p>
+                  <BuiText variant="eyebrow" className="eyebrow">
+                    Visit
+                  </BuiText>
                   <p>302 Historic Columbia River Highway</p>
                   <p>Troutdale, Oregon</p>
                 </div>

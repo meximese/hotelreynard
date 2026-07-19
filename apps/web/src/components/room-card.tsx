@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import type { Room } from "@/lib/content/types";
 import { ContentSeparator } from "@/components/content-separator";
 import { SanityImageView } from "@/components/sanity-image";
+import { BuiLink } from "@/components/ui/actions";
+import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 
 export function RoomCard({ room }: { room: Room }) {
@@ -25,9 +26,11 @@ export function RoomCard({ room }: { room: Room }) {
       />
       <div className="card-stack">
         <div>
-          <p className="eyebrow">Room</p>
-          <h3>{room.title}</h3>
-          {room.shortDescription ? <p>{room.shortDescription}</p> : null}
+          <BuiText variant="eyebrow" className="eyebrow">
+            Room
+          </BuiText>
+          <BuiHeadline as="h3">{room.title}</BuiHeadline>
+          {room.shortDescription ? <BuiText>{room.shortDescription}</BuiText> : null}
         </div>
         <ContentSeparator />
         <div className="card-meta">
@@ -38,9 +41,9 @@ export function RoomCard({ room }: { room: Room }) {
               ))}
             </ul>
           ) : null}
-          <Link href={href} className="text-link">
+          <BuiLink href={href} className="text-link">
             View room details
-          </Link>
+          </BuiLink>
         </div>
       </div>
     </article>

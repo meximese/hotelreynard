@@ -330,8 +330,8 @@ h3 {
 .toolbar-corner-link {
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: var(--type-kicker-size);
-  letter-spacing: var(--type-kicker-tracking);
+  font-size: var(--type-action-size);
+  letter-spacing: var(--type-action-tracking);
   text-transform: uppercase;
 }
 
@@ -567,9 +567,7 @@ h3 {
   background: var(--ink);
   color: var(--white);
   cursor: pointer;
-  font: inherit;
   padding: 0.5rem 0.9rem;
-  text-transform: uppercase;
 }
 
 .newsletter-form button:disabled {

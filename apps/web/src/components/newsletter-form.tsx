@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { BuiButton } from "@/components/ui/actions";
+import { BuiText } from "@/components/ui/typography";
 
 type StatusTone = "success" | "error";
 
@@ -59,17 +61,18 @@ export function NewsletterForm() {
   return (
     <form className="newsletter-form" onSubmit={onSubmit}>
       {status ? (
-        <div
+        <BuiText
+          as="div"
           className={`newsletter-form__status newsletter-form__status--${status.tone}`}
           role="status"
           aria-live="polite"
         >
           {status.message}
-        </div>
+        </BuiText>
       ) : (
-        <label className="eyebrow" htmlFor="newsletter-email">
+        <BuiText as="label" variant="eyebrow" className="eyebrow" htmlFor="newsletter-email">
           Keep in Touch
-        </label>
+        </BuiText>
       )}
 
       <div className="newsletter-form__row">
@@ -81,9 +84,9 @@ export function NewsletterForm() {
           placeholder="you@example.com"
           required
         />
-        <button type="submit" disabled={isSubmitting}>
+        <BuiButton type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Sign Up"}
-        </button>
+        </BuiButton>
       </div>
     </form>
   );

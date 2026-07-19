@@ -1,6 +1,7 @@
 "use client";
 
 import { SanityImageView } from "@/components/sanity-image";
+import { BuiText } from "@/components/ui/typography";
 import type { GalleryImage } from "@/lib/content/types";
 
 export function GridGallerySection({
@@ -18,8 +19,8 @@ export function GridGallerySection({
     <div className="gallery-section" aria-label={title || "Gallery"}>
       {showGalleryHeader && (eyebrow || title) ? (
         <div className="gallery-section__head">
-          {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
-          {title ? <span className="gallery-section__title">{title}</span> : null}
+          {eyebrow ? <BuiText as="span" variant="eyebrow" className="eyebrow">{eyebrow}</BuiText> : null}
+          {title ? <BuiText as="span" className="gallery-section__title">{title}</BuiText> : null}
         </div>
       ) : null}
 

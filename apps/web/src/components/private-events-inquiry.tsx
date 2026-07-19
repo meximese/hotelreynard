@@ -1,6 +1,8 @@
 "use client";
 
 import { Field } from "@base-ui/react/field";
+import { BuiLink } from "@/components/ui/actions";
+import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import { cleanStegaString } from "@/lib/sanity/preview";
 import type { Cta } from "@/lib/content/types";
 
@@ -18,14 +20,18 @@ export function PrivateEventsInquiry({
   return (
     <section className="inquiry-panel" aria-labelledby="private-events-inquiry">
       <div>
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 id="private-events-inquiry">{title}</h2>
-        <p className="lede">{body}</p>
+        <BuiText variant="eyebrow" className="eyebrow">
+          {eyebrow}
+        </BuiText>
+        <BuiHeadline as="h2" id="private-events-inquiry">
+          {title}
+        </BuiHeadline>
+        <BuiText className="lede">{body}</BuiText>
         {cta?.label && cta.href ? (
           <p>
-            <a className="text-link" href={cleanStegaString(cta.href)}>
+            <BuiLink className="text-link" href={cleanStegaString(cta.href)}>
               {cta.label}
-            </a>
+            </BuiLink>
           </p>
         ) : null}
       </div>
