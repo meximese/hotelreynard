@@ -4,7 +4,7 @@ import Script from "next/script";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { Providers } from "@/components/providers";
-import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
+import { SiteHeaderShell } from "@/components/site-header-shell";
 import { BuiText } from "@/components/ui/typography";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
 import "lenis/dist/lenis.css";
@@ -39,24 +39,23 @@ export default async function RootLayout({
       </head>
       <body className="striped">
         <Providers>
-          <SplashLayoutScaffold>
-            {children}
-            {visualEditingEnabled ? <VisualEditing /> : null}
-            <footer className="site-footer">
-              <div className="site-footer-grid">
-                <div>
-                  <BuiText variant="eyebrow" className="eyebrow">
-                    Visit
-                  </BuiText>
-                  <p>302 Historic Columbia River Highway</p>
-                  <p>Troutdale, Oregon</p>
-                </div>
-                <div className="site-footer-newsletter">
-                  <NewsletterForm />
-                </div>
+          <SiteHeaderShell />
+          {children}
+          {visualEditingEnabled ? <VisualEditing /> : null}
+          <footer className="site-footer">
+            <div className="site-footer-grid">
+              <div>
+                <BuiText variant="eyebrow" className="eyebrow">
+                  Visit
+                </BuiText>
+                <p>302 Historic Columbia River Highway</p>
+                <p>Troutdale, Oregon</p>
               </div>
-            </footer>
-          </SplashLayoutScaffold>
+              <div className="site-footer-newsletter">
+                <NewsletterForm />
+              </div>
+            </div>
+          </footer>
         </Providers>
         <Script
           src="https://api.mews.com/distributor/distributor.min.js"

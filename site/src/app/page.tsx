@@ -1,6 +1,7 @@
 import { ContentSeparator } from "@/components/content-separator";
 import { PageSections } from "@/components/page-sections";
 import { SanityImageView } from "@/components/sanity-image";
+import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiText } from "@/components/ui/typography";
 import { getHomePage, getUpcomingEvents } from "@/lib/content/loaders";
@@ -33,58 +34,60 @@ export default async function HomePage() {
     eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
 
   return (
-    <main className="home-shell">
-      {page.hero?.media && (
-        <section className="page-top-hero" data-sanity={heroAttr}>
-          <SanityImageView
-            image={page.hero.media}
-            mobileImage={page.hero.mobileMedia}
-            alt={page.hero.title || page.title}
-            width={1800}
-            height={1200}
-            sizes="100vw"
-            className="home-hero-image"
-          />
-          {page.hero.caption && (
-            <div className="page-top-hero__caption">
-              <span className="home-hero-name">{page.hero.caption}</span>
-            </div>
-          )}
-          {page.hero.enableContent && (
-            <div className="page-top-hero__caption">
-              <span className="home-hero-name">{page.hero.title}</span>
-              {page.hero.body ? (
-                <span className="home-hero-meta">{page.hero.body}</span>
-              ) : null}
-            </div>
-          )}
-        </section>
-      )}
-      <section className="home-intro">
-        <div className="home-intro-copy">
-          {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
-          <BuiText
-            variant="intro"
-            className="home-intro-lede"
-            data-sanity={introAttr}
-          >
-            {page.intro}
-          </BuiText>
-        </div>
-      </section>
-      {page.sections?.length ? (
-        <>
-          <ContentSeparator />
-          <section className="home-section home-section--stacked">
-            <PageSections
-              sections={page.sections}
-              documentId={page._id}
-              documentType={page._type}
-              upcomingEvents={upcomingEvents}
+    <SplashLayoutScaffold>
+      <main className="home-shell">
+        {page.hero?.media && (
+          <section className="page-top-hero" data-sanity={heroAttr}>
+            <SanityImageView
+              image={page.hero.media}
+              mobileImage={page.hero.mobileMedia}
+              alt={page.hero.title || page.title}
+              width={1800}
+              height={1200}
+              sizes="100vw"
+              className="home-hero-image"
             />
+            {page.hero.caption && (
+              <div className="page-top-hero__caption">
+                <span className="home-hero-name">{page.hero.caption}</span>
+              </div>
+            )}
+            {page.hero.enableContent && (
+              <div className="page-top-hero__caption">
+                <span className="home-hero-name">{page.hero.title}</span>
+                {page.hero.body ? (
+                  <span className="home-hero-meta">{page.hero.body}</span>
+                ) : null}
+              </div>
+            )}
           </section>
-        </>
-      ) : null}
-    </main>
+        )}
+        <section className="home-intro">
+          <div className="home-intro-copy">
+            {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
+            <BuiText
+              variant="intro"
+              className="home-intro-lede"
+              data-sanity={introAttr}
+            >
+              {page.intro}
+            </BuiText>
+          </div>
+        </section>
+        {page.sections?.length ? (
+          <>
+            <ContentSeparator />
+            <section className="home-section home-section--stacked">
+              <PageSections
+                sections={page.sections}
+                documentId={page._id}
+                documentType={page._type}
+                upcomingEvents={upcomingEvents}
+              />
+            </section>
+          </>
+        ) : null}
+      </main>
+    </SplashLayoutScaffold>
   );
 }

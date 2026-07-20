@@ -298,6 +298,12 @@ h3 {
   will-change: opacity;
 }
 
+.splash-backdrop__composite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .splash-backdrop__logo {
   width: min(32vw, 600px);
   height: auto;
@@ -306,6 +312,12 @@ h3 {
 .splash-backdrop__crest {
   width: min(24vw, 400px);
   height: auto;
+}
+
+.splash-backdrop__headline {
+  color: var(--brown);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .splash-backdrop__corner {

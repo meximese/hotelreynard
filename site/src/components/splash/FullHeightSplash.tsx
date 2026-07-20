@@ -5,6 +5,7 @@ import { useLenis } from "lenis/react";
 import { BookNowButton } from "@/components/book-now-button";
 import { CrestMark } from "@/components/svg/crest-mark";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
+import { BuiHeadline } from "../ui/typography";
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -70,11 +71,27 @@ export function FullHeightSplash({
         </>
       ) : null}
       <div className="splash-backdrop__center">
-        <LogoSolidMark className="splash-backdrop__logo" color="var(--brown)" />
-        <CrestMark className="splash-backdrop__crest" color="var(--brown)" />
+        <h1 className="splash-backdrop__composite">
+          <LogoSolidMark
+            className="splash-backdrop__logo"
+            color="var(--brown)"
+            aria-label="Hotel Reynard"
+          />
+          <CrestMark
+            className="splash-backdrop__crest"
+            color="var(--brown)"
+            aria-label="In Flumine Columbia"
+          />
+        </h1>
         {isRowLayout ? (
           <>
-            <h4>Rooms and Tavern</h4>
+            <BuiHeadline
+              as="h2"
+              variant="display"
+              className="splash-backdrop__headline"
+            >
+              Rooms and Tavern
+            </BuiHeadline>
             <div className="splash-backdrop__detail-row">
               <span>
                 <span className="date-desktop">September 2026</span>
