@@ -56,7 +56,7 @@ export default async function RoomPage({ params }: PageProps) {
               alt={image.alt || `${room.title} gallery image ${index + 1}`}
               width={1000}
               height={800}
-              sizes="(max-width: 900px) 100vw, 50vw"
+              sizes="(max-width: 767px) 100vw, 50vw"
               className="gallery-image"
             />
           ))}

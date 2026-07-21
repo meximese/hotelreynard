@@ -8,7 +8,7 @@ import { SiteHeaderShell } from "@/components/site-header-shell";
 import { BuiText } from "@/components/ui/typography";
 import { getVisualEditingEnabled } from "@/lib/sanity/preview";
 import "lenis/dist/lenis.css";
-import "./globals.css";
+import "./globals-system.css";
 
 export const metadata: Metadata = {
   title: "Hotel Reynard",

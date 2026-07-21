@@ -74,12 +74,12 @@ export function FullHeightSplash({
         <h1 className="splash-backdrop__composite">
           <LogoSolidMark
             className="splash-backdrop__logo"
-            color="var(--brown)"
+            color="var(--color-accent)"
             aria-label="Hotel Reynard"
           />
           <CrestMark
             className="splash-backdrop__crest"
-            color="var(--brown)"
+            color="var(--color-accent)"
             aria-label="In Flumine Columbia"
           />
         </h1>
