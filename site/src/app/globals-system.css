@@ -1,0 +1,6 @@
+@layer base, components, utilities;
+
+@import "./normalize.css" layer(base);
+@import "./globals-base.css" layer(base);
+@import "./globals-components.css" layer(components);
+@import "./globals-utilities.css" layer(utilities);

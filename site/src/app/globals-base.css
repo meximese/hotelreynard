@@ -1,0 +1,195 @@
+@font-face {
+  font-family: "Krete Book";
+  src: url("/fonts/krete-book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Krete Light";
+  src: url("/fonts/krete-light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tablet Gothic Narrow";
+  src:
+    url("/fonts/tablet-gothic-narrow-regular.woff2") format("woff2"),
+    url("/fonts/tablet-gothic-narrow-regular.woff") format("woff"),
+    url("/fonts/tablet-gothic-narrow-regular.ttf") format("truetype"),
+    url("/fonts/tablet-gothic-narrow-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-bg: #f4f8fb;
+  --color-surface: rgba(248, 251, 255, 0.46);
+  --color-surface-alt: #dce8ee;
+  --color-ink: #17262b;
+  --color-muted: #5f6d72;
+  --color-line: rgba(23, 38, 43, 0.15);
+  --color-accent: #783934;
+  --color-white: #f8fbff;
+
+  --font-display: "Ga Maamli", cursive;
+  --font-heading: "Krete Book", Georgia, serif;
+  --font-heading-light: "Krete Light", Georgia, serif;
+  --font-body: "Tablet Gothic Narrow", "Arial Narrow", Arial, sans-serif;
+
+  --type-hero: clamp(2.2rem, 1.7rem + 4vw, 4rem);
+  --type-h2: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem);
+  --type-h3: clamp(1.3rem, 1.1rem + 0.8vw, 1.55rem);
+  --type-intro: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+  --type-body: 1.05rem;
+  --type-meta: 0.85rem;
+
+  --space-2xs: 0.35rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --section-space: 2rem;
+  --gallery-gap: 1rem;
+
+  --max-width: 1000px;
+  --gutter: 0.75rem;
+  --shell-width: min(calc(100% - (var(--gutter) * 2)), var(--max-width));
+  --header-offset: 4.5rem;
+  --sticky-gallery-height: 66vh;
+  --shadow-soft: 0 20px 60px rgba(16, 15, 13, 0.05);
+
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix in='noise' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.1'/%3E%3C/svg%3E");
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+}
+
+:where(img, svg) {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.striped,
+.striped-gray {
+  background-repeat: repeat, no-repeat;
+  background-size:
+    180px 180px,
+    100% 100%;
+  background-blend-mode: multiply, normal;
+}
+
+.striped {
+  background-image:
+    var(--grain), linear-gradient(180deg, #d6f0eb 0%, #edf5f7 100%);
+}
+
+.striped-gray {
+  background-image:
+    var(--grain), linear-gradient(180deg, #f4f8fb 0%, #edf5f7 100%);
+}
+
+.striped-cool {
+  background: transparent;
+}
+
+:where(h1, h2, h3, .type-headline) {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+:where(h1, .type-heading-hero, .hero h1) {
+  max-width: 11ch;
+  font-family: var(--font-display);
+  font-size: var(--type-hero);
+}
+
+:where(h2, .section__title, .type-heading-section) {
+  font-family: var(--font-display);
+  font-size: var(--type-h2);
+}
+
+:where(h3, .accordion-title, .type-heading-card) {
+  font-size: var(--type-h3);
+}
+
+.type-display {
+  font-family: var(--font-display);
+}
+
+:where(.type-intro, .home-intro-lede) {
+  font-family: var(--font-heading-light);
+  font-size: var(--type-intro);
+  line-height: 1.65;
+}
+
+:where(.type-body, .lede, .card p, .rich-body) {
+  font-size: var(--type-body);
+  line-height: 1.75;
+}
+
+:where(
+  .type-eyebrow,
+  .type-caption,
+  .type-action,
+  .eyebrow,
+  .section__eyebrow,
+  .accordion-kicker,
+  .field-label,
+  .toolbar-link,
+  .toolbar-corner-label,
+  .toolbar-corner-link,
+  .home-hero-meta
+) {
+  font-family: var(--font-body);
+  font-size: var(--type-meta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+:where(
+  .type-eyebrow,
+  .type-caption,
+  .eyebrow,
+  .section__eyebrow,
+  .accordion-kicker,
+  .field-label,
+  .home-hero-meta,
+  .section-note,
+  .field-description
+) {
+  color: var(--color-muted);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 1.5rem;
+    --section-space: 2.5rem;
+    --gallery-gap: 4rem;
+    --header-offset: 5rem;
+  }
+}

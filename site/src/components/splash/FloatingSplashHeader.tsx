@@ -33,7 +33,7 @@ export function FloatingSplashHeader({
             <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
               <LogoSolidMark
                 className="toolbar-brand-logo"
-                color="var(--brown)"
+                color="var(--color-accent)"
               />
               <span className="sr-only">Hotel Reynard</span>
             </Toolbar.Link>

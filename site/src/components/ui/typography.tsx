@@ -1,7 +1,7 @@
 import type { ElementType, ComponentPropsWithoutRef } from "react";
 
 type TextVariant = "body" | "intro" | "eyebrow" | "caption" | "action";
-type HeadlineVariant = "headline" | "display";
+type HeadlineVariant = "headline" | "display" | "hero" | "section" | "card";
 
 function classes(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -20,10 +20,20 @@ export function BuiHeadline<T extends ElementType = "h2">({
   ...props
 }: PolymorphicProps<T, HeadlineVariant>) {
   const Component = as || "h2";
+  const variantClassName =
+    variant === "display"
+      ? "type-display"
+      : variant === "hero"
+        ? "type-heading-hero"
+        : variant === "section"
+          ? "type-heading-section"
+          : variant === "card"
+            ? "type-heading-card"
+            : undefined;
 
   return (
     <Component
-      className={classes("type-headline", variant === "display" && "type-display", className)}
+      className={classes("type-headline", variantClassName, className)}
       {...props}
     />
   );
