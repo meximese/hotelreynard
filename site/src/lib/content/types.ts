@@ -92,6 +92,7 @@ export interface GenericPage {
   _type: string;
   hero?: PageHero;
   title: string;
+  intro?: string;
   slug: Slug;
   sections?: PageSection[];
 }
@@ -105,7 +106,7 @@ export interface HomePageData extends SanityDocumentIdentity {
   sections?: PageSection[];
 }
 
-export interface SingletonPageData extends SanityDocumentIdentity {
+export interface EventsPageData extends SanityDocumentIdentity {
   hero?: PageHero;
   title: string;
   intro: string;

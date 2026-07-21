@@ -8,11 +8,7 @@ interface PageProps {
 }
 
 const reservedSlugs = new Set([
-  "stay",
-  "restaurant",
   "events",
-  "private-events",
-  "location",
   "rooms",
 ]);
 
@@ -34,7 +30,7 @@ export default async function GenericPage({ params }: PageProps) {
       hero={page.hero}
       eyebrow="Page"
       title={page.title}
-      intro="This route is reserved for generic editorial pages powered by the flexible section system."
+      intro={page.intro || ""}
       documentId={page._id}
       documentType={page._type}
     >

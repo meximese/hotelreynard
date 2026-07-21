@@ -12,6 +12,7 @@ export default defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({ name: "intro", title: "Intro", type: "text", rows: 4 }),
     defineField({
       name: "slug",
       title: "Slug",
@@ -20,7 +21,7 @@ export default defineType({
       validation: (Rule) =>
         Rule.required().custom((slug) => {
           const value = slug?.current;
-          const reserved = ["stay", "restaurant", "events", "private-events", "location", "rooms"];
+          const reserved = ["events", "rooms"];
           if (value && reserved.includes(value)) {
             return "This slug is reserved for a first-class route.";
           }

@@ -526,12 +526,45 @@ export const singletonDocuments = [
     ),
   },
   {
-    _id: "stayPage",
-    _type: "stayPage",
+    _id: "eventsPage",
+    _type: "eventsPage",
+    title: "Events",
+    intro:
+      "Public events happen in the courtyard and in the restaurant. Some nights are louder, some softer, some built around food, some built around music, but all of them should feel like a natural extension of the property.",
+    sections: [
+      {
+        _type: "heroBlock",
+        eyebrow: "Public Events",
+        title: "Come by even if you are not staying the night.",
+        body:
+          "Supper series, listening sessions, maker markets, guest pours, visiting cooks, and whatever else makes sense for the room and the season.",
+        primaryCta: cta("Browse events", "/events"),
+        secondaryCta: cta("Host something private", "/private-events"),
+      },
+      {
+        _type: "eventFeedBlock",
+        title: "Upcoming events",
+        limit: 6,
+      },
+      richTextBlock([
+        "Programming should support the restaurant, animate the courtyard, and give locals a reason to come back often enough that the property becomes part of their regular rhythm.",
+      ]),
+    ],
+    seo: seo(
+      "Events at Hotel Reynard",
+      "Public dinners, music, markets, and seasonal programming across the restaurant and courtyard.",
+    ),
+  },
+];
+
+export const pageDocuments = [
+  {
+    _id: "page-stay",
+    _type: "page",
     title: "Stay",
+    slug: slug("stay"),
     intro:
       "The rooms are individually composed, the pace is unhurried, and the assignment is based on availability rather than guest selection. What you are really booking is the full Reynard experience: a strong room, a very good meal downstairs, and a location that opens up from there.",
-    featuredRooms: roomDocuments.map((room) => ref(room._id)),
     sections: [
       {
         _type: "heroBlock",
@@ -576,9 +609,10 @@ export const singletonDocuments = [
     ),
   },
   {
-    _id: "restaurantPage",
-    _type: "restaurantPage",
+    _id: "page-restaurant",
+    _type: "page",
     title: "Restaurant",
+    slug: slug("restaurant"),
     intro:
       "Open for aperitifs, dinner, and whatever happens after. The menu changes, the bar stays lively, and the room is meant to be as much of a draw as the hotel upstairs.",
     sections: [
@@ -631,39 +665,10 @@ export const singletonDocuments = [
     ),
   },
   {
-    _id: "eventsPage",
-    _type: "eventsPage",
-    title: "Events",
-    intro:
-      "Public events happen in the courtyard and in the restaurant. Some nights are louder, some softer, some built around food, some built around music, but all of them should feel like a natural extension of the property.",
-    sections: [
-      {
-        _type: "heroBlock",
-        eyebrow: "Public Events",
-        title: "Come by even if you are not staying the night.",
-        body:
-          "Supper series, listening sessions, maker markets, guest pours, visiting cooks, and whatever else makes sense for the room and the season.",
-        primaryCta: cta("Browse events", "/events"),
-        secondaryCta: cta("Host something private", "/private-events"),
-      },
-      {
-        _type: "eventFeedBlock",
-        title: "Upcoming events",
-        limit: 6,
-      },
-      richTextBlock([
-        "Programming should support the restaurant, animate the courtyard, and give locals a reason to come back often enough that the property becomes part of their regular rhythm.",
-      ]),
-    ],
-    seo: seo(
-      "Events at Hotel Reynard",
-      "Public dinners, music, markets, and seasonal programming across the restaurant and courtyard.",
-    ),
-  },
-  {
-    _id: "privateEventsPage",
-    _type: "privateEventsPage",
+    _id: "page-private-events",
+    _type: "page",
     title: "Private Events",
+    slug: slug("private-events"),
     intro:
       "Big or small, indoor or outdoor, you have options. The courtyard brings fresh air and a little drama; the restaurant brings warmth, food, and a reason to stay late.",
     sections: [
@@ -709,9 +714,10 @@ export const singletonDocuments = [
     ),
   },
   {
-    _id: "locationPage",
-    _type: "locationPage",
+    _id: "page-location",
+    _type: "page",
     title: "Location",
+    slug: slug("location"),
     intro:
       "You can hike. You can bike. You can float. You can fish. You can drive out to waterfalls. You can come back for dinner. You can walk to one more drink. The point is not choosing city or nature. The point is having both within reach.",
     sections: [
@@ -749,14 +755,13 @@ export const singletonDocuments = [
       "A boutique hotel and restaurant positioned between town life and Columbia Gorge adventure.",
     ),
   },
-];
-
-export const pageDocuments = [
   {
     _id: "page-about",
     _type: "page",
     title: "About",
     slug: slug("about"),
+    intro:
+      "A small hotel with a strong downstairs pulse, a restaurant with its own draw, and a point of view that is meant to feel social, grounded, and lived in.",
     sections: [
       {
         _type: "heroBlock",
@@ -777,6 +782,8 @@ export const pageDocuments = [
     _type: "page",
     title: "FAQ",
     slug: slug("faq"),
+    intro:
+      "The practical stuff guests want to know before they book, arrive, dine downstairs, or bring a whole group along.",
     sections: [
       {
         _type: "heroBlock",
@@ -807,6 +814,8 @@ export const pageDocuments = [
     _type: "page",
     title: "Group Stays",
     slug: slug("group-stays"),
+    intro:
+      "With only eight rooms, group stays can feel unusually intimate, whether the occasion is strategic, celebratory, or somewhere between the two.",
     sections: [
       {
         _type: "heroBlock",
@@ -861,25 +870,25 @@ export const seedImageManifest: ImageManifestEntry[] = [
     alt: "A scenic outdoor destination image for regional atmosphere.",
   },
   {
-    documentId: "stayPage",
+    documentId: "page-stay",
     fieldPath: "sections[0].media",
     assetPath: "assets/pexels-ahmetcotur-19075430.jpg",
     alt: "A quiet interior scene suitable for room storytelling.",
   },
   {
-    documentId: "stayPage",
+    documentId: "page-stay",
     fieldPath: "sections[2].images[0]",
     assetPath: "assets/pexels-thisispav-29350088.jpg",
     alt: "A detail-rich image evoking boutique room atmosphere.",
   },
   {
-    documentId: "restaurantPage",
+    documentId: "page-restaurant",
     fieldPath: "sections[0].media",
     assetPath: "assets/pexels-rahle-rabia-688134264-17948645.jpg",
     alt: "A restaurant or dining-adjacent hospitality scene.",
   },
   {
-    documentId: "restaurantPage",
+    documentId: "page-restaurant",
     fieldPath: "sections[3].images[0]",
     assetPath: "assets/pexels-leticia-alvares-1805702-31145160.jpg",
     alt: "Food-and-drink atmosphere imagery for the restaurant page.",
@@ -891,25 +900,25 @@ export const seedImageManifest: ImageManifestEntry[] = [
     alt: "Outdoor gathering imagery for public events.",
   },
   {
-    documentId: "privateEventsPage",
+    documentId: "page-private-events",
     fieldPath: "sections[0].media",
     assetPath: "assets/pexels-ahmetcotur-19075308.jpg",
     alt: "Large outdoor lawn or event-ready setting.",
   },
   {
-    documentId: "privateEventsPage",
+    documentId: "page-private-events",
     fieldPath: "sections[2].images[0]",
     assetPath: "assets/pexels-ahmetcotur-19075430.jpg",
     alt: "Hospitality-focused outdoor event imagery.",
   },
   {
-    documentId: "locationPage",
+    documentId: "page-location",
     fieldPath: "sections[0].media",
     assetPath: "assets/pexels-vince-37964089.jpg",
     alt: "Scenic landscape imagery for the region and destination story.",
   },
   {
-    documentId: "locationPage",
+    documentId: "page-location",
     fieldPath: "sections[2].images[0]",
     assetPath: "assets/pexels-luis-zambrano-3782493-16436966.jpg",
     alt: "A destination image that supports the city-and-nature positioning.",
