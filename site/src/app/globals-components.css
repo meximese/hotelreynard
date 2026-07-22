@@ -59,6 +59,45 @@
   text-underline-offset: 0.24rem;
 }
 
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(23, 38, 43, 0.24);
+  backdrop-filter: blur(6px);
+}
+
+.dialog-popup {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  z-index: 81;
+  width: min(calc(100% - (var(--gutter) * 2)), 34rem);
+  transform: translate(-50%, -50%);
+}
+
+.dialog-panel {
+  display: grid;
+  gap: var(--space-lg);
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  border: var(--border-subtle);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.dialog-panel__head {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.dialog-title,
+.dialog-description {
+  max-width: 28rem;
+}
+
+.dialog-close {
+  justify-self: start;
+}
+
 .site-header-shell {
   position: fixed;
   inset: 0 0 auto;
@@ -201,6 +240,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: var(--space-sm) var(--space-md);
   width: min(100%, 24rem);
   margin-top: var(--space-md);
@@ -449,8 +489,6 @@
 
 .rich-body blockquote,
 .quote-block blockquote {
-  padding-left: 1.25rem;
-  border-left: var(--border-subtle);
   font-family: var(--font-heading-light);
   font-size: var(--type-intro);
   line-height: var(--leading-relaxed);
