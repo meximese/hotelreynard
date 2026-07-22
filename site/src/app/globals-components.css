@@ -190,10 +190,9 @@
 }
 
 .splash-backdrop {
-  position: fixed;
-  inset: 0;
+  position: relative;
   z-index: 0;
-  height: 90dvh;
+  min-height: 100svh;
   padding: var(--space-md) var(--gutter);
   overflow: hidden;
 }
@@ -273,7 +272,6 @@
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  margin-top: 90svh;
 }
 
 .site-content-inner {
@@ -744,10 +742,9 @@
     display: none;
   }
   .site-content-shell {
-    margin-top: 100vh;
+    margin-top: 0;
   }
   .splash-backdrop {
-    height: auto;
     padding: 1.25rem 1.5rem 1.5rem;
   }
   .splash-backdrop__center {

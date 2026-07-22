@@ -22,15 +22,18 @@ export function FullHeightSplash({
   const isRowLayout = layout === "row";
   const newsletterDialog = useMemo(() => Dialog.createHandle(), []);
 
-  const updateSplashState = (scroll: number) => {
+  const updateSplashState = () => {
     const splash = splashRef.current;
 
     if (!splash) {
       return;
     }
 
-    const colorProgress = clamp(scroll / window.innerHeight);
-    const contentProgress = clamp(scroll / (window.innerHeight * 0.62));
+    const rect = splash.getBoundingClientRect();
+    const scrolledPast = Math.max(-rect.top, 0);
+    const fadeDistance = Math.max(rect.height * 0.62, 1);
+    const colorProgress = clamp(scrolledPast / Math.max(window.innerHeight, 1));
+    const contentProgress = clamp(scrolledPast / fadeDistance);
 
     splash.style.setProperty("--splash-cool-opacity", `${colorProgress}`);
     splash.style.setProperty(
@@ -40,20 +43,23 @@ export function FullHeightSplash({
   };
 
   useLenis((lenis) => {
-    updateSplashState(lenis.scroll);
+    void lenis;
+    updateSplashState();
   });
 
   useEffect(() => {
-    updateSplashState(window.scrollY);
+    updateSplashState();
 
     function handleScroll() {
-      updateSplashState(window.scrollY);
+      updateSplashState();
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
