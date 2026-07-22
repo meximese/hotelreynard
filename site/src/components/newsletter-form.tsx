@@ -14,7 +14,7 @@ function safeParseJson(value: string) {
   }
 }
 
-export function NewsletterForm() {
+export function NewsletterForm({ showLabel = true }: { showLabel?: boolean }) {
   const [status, setStatus] = useState<{
     message: string;
     tone: StatusTone;
@@ -69,11 +69,11 @@ export function NewsletterForm() {
         >
           {status.message}
         </BuiText>
-      ) : (
+      ) : showLabel ? (
         <BuiText as="label" variant="eyebrow" className="eyebrow" htmlFor="newsletter-email">
           Keep in Touch
         </BuiText>
-      )}
+      ) : null}
 
       <div className="newsletter-form__row">
         <input

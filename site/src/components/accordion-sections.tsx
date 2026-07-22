@@ -2,6 +2,7 @@
 
 import { Accordion } from "@base-ui/react/accordion";
 import { SectionSwitcher } from "@/components/section-switcher";
+import { BuiText } from "@/components/ui/typography";
 import { createSanityDataAttribute } from "@/lib/sanity/preview";
 import type { Event, PageSection } from "@/lib/content/types";
 
@@ -63,10 +64,20 @@ export function AccordionSections({
                 <Accordion.Trigger className="accordion-trigger">
                   <span>
                     {section.eyebrow ? (
-                      <span className="section__eyebrow accordion-kicker">{section.eyebrow}</span>
+                      <BuiText
+                        as="span"
+                        className="section__eyebrow accordion-kicker"
+                      >
+                        {section.eyebrow}
+                      </BuiText>
                     ) : null}
                     {section.title ? (
-                      <span className="section__title accordion-title">{section.title}</span>
+                      <BuiText
+                        as="span"
+                        className="section__title accordion-title"
+                      >
+                        {section.title}
+                      </BuiText>
                     ) : null}
                   </span>
                   <PlusIcon />

@@ -48,8 +48,8 @@ export default async function RootLayout({
                 <BuiText variant="eyebrow" className="eyebrow">
                   Visit
                 </BuiText>
-                <p>302 Historic Columbia River Highway</p>
-                <p>Troutdale, Oregon</p>
+                <BuiText as="p">302 Historic Columbia River Highway</BuiText>
+                <BuiText as="p">Troutdale, Oregon</BuiText>
               </div>
               <div className="site-footer-newsletter">
                 <NewsletterForm />

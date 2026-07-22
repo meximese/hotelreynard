@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
 import { BookNowButton } from "@/components/book-now-button";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
+import { BuiText } from "@/components/ui/typography";
 
 export function FloatingSplashHeader({
   isVisible,
@@ -24,10 +25,12 @@ export function FloatingSplashHeader({
             className="toolbar-group"
             aria-label="Primary navigation"
           >
-            <span className="toolbar-corner-label date-desktop">
+            <BuiText as="span" className="toolbar-corner-label date-desktop">
               September 2026
-            </span>
-            <span className="toolbar-corner-label date-mobile">Sept 2026</span>
+            </BuiText>
+            <BuiText as="span" className="toolbar-corner-label date-mobile">
+              Sept 2026
+            </BuiText>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">
             <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">

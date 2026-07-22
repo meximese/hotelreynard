@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
 import { BookNowButton } from "@/components/book-now-button";
+import { BuiText } from "@/components/ui/typography";
 
 const navItems = [
   { href: "/stay", label: "Stay" },
@@ -18,7 +19,9 @@ export function SiteHeader() {
       <Toolbar.Root className="site-toolbar" aria-label="Primary">
         <Toolbar.Group className="toolbar-group" aria-label="Brand">
           <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
-            <span className="toolbar-brand-display">Hotel Reynard</span>
+            <BuiText as="span" className="toolbar-brand-display">
+              Hotel Reynard
+            </BuiText>
           </Toolbar.Link>
         </Toolbar.Group>
         <Toolbar.Group className="toolbar-nav" aria-label="Primary navigation">
@@ -28,7 +31,7 @@ export function SiteHeader() {
               render={<Link href={item.href} />}
               className="toolbar-link"
             >
-              {item.label}
+              <BuiText as="span">{item.label}</BuiText>
             </Toolbar.Link>
           ))}
         </Toolbar.Group>

@@ -3,11 +3,7 @@ import { StructureBuilder } from "sanity/structure";
 const singletonTypes = [
   { schemaType: "siteSettings", title: "Site Settings" },
   { schemaType: "homePage", title: "Home Page" },
-  { schemaType: "stayPage", title: "Stay Page" },
-  { schemaType: "restaurantPage", title: "Restaurant Page" },
   { schemaType: "eventsPage", title: "Events Page" },
-  { schemaType: "privateEventsPage", title: "Private Events Page" },
-  { schemaType: "locationPage", title: "Location Page" },
 ];
 
 export const deskStructure = (S: StructureBuilder) =>
@@ -31,5 +27,5 @@ export const deskStructure = (S: StructureBuilder) =>
         ),
       S.documentTypeListItem("room").title("Rooms"),
       S.documentTypeListItem("event").title("Events"),
-      S.documentTypeListItem("page").title("Editorial Pages"),
+      S.documentTypeListItem("page").title("Pages"),
     ]);

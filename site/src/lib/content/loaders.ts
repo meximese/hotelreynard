@@ -3,10 +3,10 @@ import { hasSanityConfig } from "@/lib/sanity/client";
 import { DEFAULT_SANITY_REVALIDATE, sanityFetch } from "@/lib/sanity/fetch";
 import type {
   Event,
+  EventsPageData,
   GenericPage,
   HomePageData,
   Room,
-  SingletonPageData,
 } from "./types";
 
 const pageSectionsProjection = groq`
@@ -88,10 +88,10 @@ function emptyHomePage(): HomePageData {
   };
 }
 
-function emptySingletonPage(type: string): SingletonPageData {
+function emptyEventsPage(): EventsPageData {
   return {
-    _id: type,
-    _type: type,
+    _id: "eventsPage",
+    _type: "eventsPage",
     title: "",
     intro: "",
     sections: [],
@@ -211,6 +211,7 @@ export async function getGenericPageBySlug(
       _type,
       ${pageHeroProjection},
       title,
+      intro,
       slug,
       ${pageSectionsProjection}
     }`,
@@ -220,13 +221,13 @@ export async function getGenericPageBySlug(
   });
 }
 
-async function getSingletonPage(type: string): Promise<SingletonPageData> {
+export async function getEventsPageData(): Promise<EventsPageData> {
   if (!hasSanityConfig()) {
-    return emptySingletonPage(type);
+    return emptyEventsPage();
   }
 
-  const data = await sanityFetch<SingletonPageData | null>({
-    query: groq`*[_type == $type][0]{
+  const data = await sanityFetch<EventsPageData | null>({
+    query: groq`*[_type == "eventsPage"][0]{
       _id,
       _type,
       ${pageHeroProjection},
@@ -234,30 +235,9 @@ async function getSingletonPage(type: string): Promise<SingletonPageData> {
       intro,
       ${pageSectionsProjection}
     }`,
-    params: { type },
-    tags: [type],
+    tags: ["eventsPage"],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 
-  return data || emptySingletonPage(type);
-}
-
-export function getStayPage() {
-  return getSingletonPage("stayPage");
-}
-
-export function getRestaurantPage() {
-  return getSingletonPage("restaurantPage");
-}
-
-export function getEventsPageData() {
-  return getSingletonPage("eventsPage");
-}
-
-export function getPrivateEventsPage() {
-  return getSingletonPage("privateEventsPage");
-}
-
-export function getLocationPage() {
-  return getSingletonPage("locationPage");
+  return data || emptyEventsPage();
 }

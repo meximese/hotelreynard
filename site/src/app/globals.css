@@ -791,10 +791,6 @@ h3 {
   padding: 0 0 var(--section-space, 2rem);
 }
 
-.page-section.gallery-section {
-  --section-space: var(--gallery-gap);
-}
-
 .section__head,
 .section-heading-split {
   display: flex;
