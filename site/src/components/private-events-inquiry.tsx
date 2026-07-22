@@ -20,11 +20,11 @@ export function PrivateEventsInquiry({
       <div className={`section__content ${alignClassName}`.trim()}>
         <BuiText className="lede">{body}</BuiText>
         {cta?.label && cta.href ? (
-          <p>
+          <BuiText as="p">
             <BuiLink className="text-link" href={cleanStegaString(cta.href)}>
               {cta.label}
             </BuiLink>
-          </p>
+          </BuiText>
         ) : null}
       </div>
 

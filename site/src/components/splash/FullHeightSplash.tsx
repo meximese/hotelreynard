@@ -5,7 +5,7 @@ import { useLenis } from "lenis/react";
 import { BookNowButton } from "@/components/book-now-button";
 import { CrestMark } from "@/components/svg/crest-mark";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
-import { BuiHeadline } from "../ui/typography";
+import { BuiHeadline, BuiText } from "../ui/typography";
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -62,8 +62,12 @@ export function FullHeightSplash({
       {!isRowLayout ? (
         <>
           <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
-            <span className="date-desktop">September 2026</span>
-            <span className="date-mobile">Sept 2026</span>
+            <BuiText as="span" className="date-desktop">
+              September 2026
+            </BuiText>
+            <BuiText as="span" className="date-mobile">
+              Sept 2026
+            </BuiText>
           </div>
           <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
             <BookNowButton />
@@ -85,21 +89,21 @@ export function FullHeightSplash({
         </h1>
         {isRowLayout ? (
           <>
-            <BuiHeadline
-              as="h2"
-              variant="display"
-              className="splash-backdrop__headline"
-            >
+            <BuiHeadline as="h2" className="splash-backdrop__headline">
               Rooms and Tavern
             </BuiHeadline>
             <div className="splash-backdrop__detail-row">
-              <span>
-                <span className="date-desktop">September 2026</span>
-                <span className="date-mobile">Sept 2026</span>
-              </span>
+              <BuiText as="span">
+                <BuiText as="span" className="date-desktop">
+                  September 2026
+                </BuiText>
+                <BuiText as="span" className="date-mobile">
+                  Sept 2026
+                </BuiText>
+              </BuiText>
               <BookNowButton />
 
-              <span>Keep in Touch</span>
+              <BuiText as="span">Keep in Touch</BuiText>
             </div>
           </>
         ) : null}
@@ -107,10 +111,10 @@ export function FullHeightSplash({
       {!isRowLayout ? (
         <>
           <div className="splash-backdrop__corner splash-backdrop__corner--bottom-left">
-            <span>Hotel and Tavern</span>
+            <BuiText as="span">Hotel and Tavern</BuiText>
           </div>
           <div className="splash-backdrop__corner splash-backdrop__corner--bottom-right">
-            <span>Keep in Touch</span>
+            <BuiText as="span">Keep in Touch</BuiText>
           </div>
         </>
       ) : null}

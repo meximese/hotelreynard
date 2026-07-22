@@ -63,9 +63,13 @@ export function PageShell({
           ) : null}
           {hero.title || hero.body ? (
             <div className="page-top-hero__caption">
-              <span className="home-hero-name">{hero.title}</span>
+              <BuiText as="span" className="home-hero-name">
+                {hero.title}
+              </BuiText>
               {hero.body ? (
-                <span className="home-hero-meta">{hero.body}</span>
+                <BuiText as="span" className="home-hero-meta">
+                  {hero.body}
+                </BuiText>
               ) : null}
             </div>
           ) : null}

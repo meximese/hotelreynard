@@ -28,6 +28,8 @@
   --color-bg: #f4f8fb;
   --color-surface: rgba(248, 251, 255, 0.46);
   --color-surface-alt: #dce8ee;
+  --color-surface-soft: rgba(255, 255, 255, 0.7);
+  --color-surface-panel: rgba(255, 255, 255, 0.36);
   --color-ink: #17262b;
   --color-muted: #5f6d72;
   --color-line: rgba(23, 38, 43, 0.15);
@@ -39,12 +41,31 @@
   --font-heading-light: "Krete Light", Georgia, serif;
   --font-body: "Tablet Gothic Narrow", "Arial Narrow", Arial, sans-serif;
 
+  --type-display: clamp(2.6rem, 2rem + 4.6vw, 4.8rem);
   --type-hero: clamp(2.2rem, 1.7rem + 4vw, 4rem);
+  --type-h1: clamp(2rem, 1.55rem + 2.6vw, 3.2rem);
   --type-h2: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem);
   --type-h3: clamp(1.3rem, 1.1rem + 0.8vw, 1.55rem);
+  --type-h4: 1.2rem;
+  --type-h5: 1.05rem;
+  --type-h6: 0.95rem;
   --type-intro: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
-  --type-body: 1.05rem;
-  --type-meta: 0.85rem;
+  --type-body: 1rem;
+  --type-small: 0.85rem;
+  --type-caption: 0.75rem;
+  --type-label: var(--type-small);
+  --type-action: var(--type-body);
+  --type-meta: var(--type-body);
+
+  --leading-tight: 1.1;
+  --leading-heading: 1.2;
+  --leading-body: 1.75;
+  --leading-relaxed: 1.65;
+  --leading-compact: 1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-base: 0;
+  --tracking-ui: 0.12em;
 
   --space-2xs: 0.35rem;
   --space-xs: 0.5rem;
@@ -62,6 +83,13 @@
   --header-offset: 4.5rem;
   --sticky-gallery-height: 66vh;
   --shadow-soft: 0 20px 60px rgba(16, 15, 13, 0.05);
+  --shadow-raised: 0 10px 30px rgba(16, 15, 13, 0.06);
+  --border-subtle: 1px solid var(--color-line);
+  --border-strong: 1px solid var(--color-ink);
+  --radius-none: 0;
+  --control-min-height: 3rem;
+  --control-padding-y: 0.85rem;
+  --control-padding-x: 0.95rem;
 
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix in='noise' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.1'/%3E%3C/svg%3E");
 }
@@ -118,13 +146,24 @@ a {
   background: transparent;
 }
 
-:where(h1, h2, h3, .type-headline) {
+:where(h1, h2, h3, h4, h5, h6, .type-headline) {
   font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
 }
 
-:where(h1, .type-heading-hero, .hero h1) {
+:where(h1, .hero h1) {
+  font-size: var(--type-h1);
+}
+
+.type-display {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  line-height: var(--leading-tight);
+}
+
+:where(.type-heading-hero, .hero h1) {
   max-width: 11ch;
   font-family: var(--font-display);
   font-size: var(--type-hero);
@@ -139,22 +178,39 @@ a {
   font-size: var(--type-h3);
 }
 
-.type-display {
-  font-family: var(--font-display);
+:where(h4, .type-heading-small) {
+  font-size: var(--type-h4);
+  line-height: var(--leading-heading);
+}
+
+h5 {
+  font-size: var(--type-h5);
+  line-height: var(--leading-heading);
+}
+
+h6 {
+  font-size: var(--type-h6);
+  line-height: var(--leading-heading);
 }
 
 :where(.type-intro, .home-intro-lede) {
   font-family: var(--font-heading-light);
   font-size: var(--type-intro);
-  line-height: 1.65;
+  line-height: var(--leading-relaxed);
 }
 
 :where(.type-body, .lede, .card p, .rich-body) {
   font-size: var(--type-body);
-  line-height: 1.75;
+  line-height: var(--leading-body);
+}
+
+:where(.type-small, small) {
+  font-size: var(--type-small);
+  line-height: var(--leading-compact);
 }
 
 :where(
+  .type-meta,
   .type-eyebrow,
   .type-caption,
   .type-action,
@@ -168,9 +224,33 @@ a {
   .home-hero-meta
 ) {
   font-family: var(--font-body);
-  font-size: var(--type-meta);
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-ui);
   text-transform: uppercase;
+}
+
+:where(
+  .type-meta,
+  .type-eyebrow,
+  .eyebrow,
+  .section__eyebrow,
+  .accordion-kicker,
+  .home-hero-meta
+) {
+  font-size: var(--type-label);
+}
+
+:where(
+  .type-caption,
+  .field-label,
+  .toolbar-link,
+  .toolbar-corner-label,
+  .toolbar-corner-link
+) {
+  font-size: var(--type-caption);
+}
+
+.type-action {
+  font-size: var(--type-action);
 }
 
 :where(
@@ -190,7 +270,7 @@ a {
 @media (min-width: 768px) {
   :root {
     --gutter: 1.5rem;
-    --section-space: 2.5rem;
+    --section-space: 5rem;
     --gallery-gap: 4rem;
     --header-offset: 5rem;
   }

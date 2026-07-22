@@ -1,7 +1,7 @@
 import type { ElementType, ComponentPropsWithoutRef } from "react";
 
-type TextVariant = "body" | "intro" | "eyebrow" | "caption" | "action";
-type HeadlineVariant = "headline" | "display" | "hero" | "section" | "card";
+type TextVariant = "body" | "small" | "intro" | "eyebrow" | "caption" | "action";
+type HeadlineVariant = "headline" | "display" | "hero" | "section" | "card" | "small";
 
 function classes(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -29,6 +29,8 @@ export function BuiHeadline<T extends ElementType = "h2">({
           ? "type-heading-section"
           : variant === "card"
             ? "type-heading-card"
+            : variant === "small"
+              ? "type-heading-small"
             : undefined;
 
   return (

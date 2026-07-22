@@ -49,14 +49,20 @@ export default async function HomePage() {
             />
             {page.hero.caption && (
               <div className="page-top-hero__caption">
-                <span className="home-hero-name">{page.hero.caption}</span>
+                <BuiText as="span" className="home-hero-name">
+                  {page.hero.caption}
+                </BuiText>
               </div>
             )}
             {page.hero.enableContent && (
               <div className="page-top-hero__caption">
-                <span className="home-hero-name">{page.hero.title}</span>
+                <BuiText as="span" className="home-hero-name">
+                  {page.hero.title}
+                </BuiText>
                 {page.hero.body ? (
-                  <span className="home-hero-meta">{page.hero.body}</span>
+                  <BuiText as="span" className="home-hero-meta">
+                    {page.hero.body}
+                  </BuiText>
                 ) : null}
               </div>
             )}

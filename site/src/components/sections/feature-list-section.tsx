@@ -1,3 +1,4 @@
+import { BuiText } from "@/components/ui/typography";
 import type { PageSection } from "@/lib/content/types";
 
 export function FeatureListSection({
@@ -12,7 +13,9 @@ export function FeatureListSection({
   return (
     <ul className="tag-list">
       {section.items.map((item) => (
-        <li key={item}>{item}</li>
+        <li key={item}>
+          <BuiText as="span">{item}</BuiText>
+        </li>
       ))}
     </ul>
   );

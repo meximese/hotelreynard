@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
 import { BookNowButton } from "@/components/book-now-button";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
+import { BuiText } from "@/components/ui/typography";
 
 export function SplashSiteHeader() {
   return (
@@ -13,7 +14,7 @@ export function SplashSiteHeader() {
           className="toolbar-group"
           aria-label="Primary navigation"
         >
-          <span>September 2026</span>
+          <BuiText as="span">September 2026</BuiText>
         </Toolbar.Group>
         <Toolbar.Group className="toolbar-nav" aria-label="Brand">
           <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
