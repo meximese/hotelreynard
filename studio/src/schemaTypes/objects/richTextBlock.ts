@@ -1,47 +1,65 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {BlockContentIcon} from '@sanity/icons'
+import {defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
-import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'richTextBlock',
   title: 'Rich text block',
+  icon: BlockContentIcon,
+  description: 'A section for longer formatted text with headings, links, and simple lists.',
   type: 'object',
   groups: sectionGroups,
   fields: [
-    defineField({name: 'eyebrow', title: 'Eyebrow', type: 'string', group: 'content'}),
-    defineField({name: 'title', title: 'Title', type: 'string', group: 'content'}),
-    defineSectionTextAlignField(),
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      description: 'The smaller text that sits above the title to provide context.',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      description: 'The large text that is the primary focus of the block.',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'string',
+      initialValue: 'center',
+      options: {
+        list: [
+          {title: 'Left', value: 'left'},
+          {title: 'Center', value: 'center'},
+          {title: 'Right', value: 'right'},
+        ],
+        layout: 'radio',
+      },
+      group: 'layout',
+    }),
     defineField({
       name: 'content',
       title: 'Content',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          styles: [
-            {title: 'Normal', value: 'normal'},
-            {title: 'H2', value: 'h2'},
-            {title: 'H3', value: 'h3'},
-            {title: 'Quote', value: 'blockquote'},
-          ],
-          lists: [{title: 'Bullet', value: 'bullet'}],
-          marks: {
-            decorators: [
-              {title: 'Strong', value: 'strong'},
-              {title: 'Emphasis', value: 'em'},
-            ],
-            annotations: [
-              {
-                name: 'link',
-                title: 'Link',
-                type: 'object',
-                fields: [{name: 'href', title: 'Href', type: 'url'}],
-              },
-            ],
-          },
-        }),
-      ],
+      description: 'Large body text with headings, links, quotes, and bullet points.',
+      type: 'richPortableText',
       group: 'content',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      eyebrow: 'eyebrow',
+      content: 'content',
+    },
+    prepare({content, eyebrow, title}) {
+      const blockCount = Array.isArray(content) ? content.length : 0
+
+      return {
+        title: title || eyebrow || 'Rich text block',
+        subtitle: blockCount ? `${blockCount} content block${blockCount === 1 ? '' : 's'}` : 'No content yet',
+      }
+    },
+  },
 })

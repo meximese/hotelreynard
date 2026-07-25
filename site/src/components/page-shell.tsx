@@ -1,14 +1,16 @@
-import { ContentSeparator } from "@/components/content-separator";
-import { SanityImageView } from "@/components/sanity-image";
-import { BuiHeadline, BuiText } from "@/components/ui/typography";
-import type { PageHero } from "@/lib/content/types";
-import { createSanityDataAttribute } from "@/lib/sanity/preview";
+import type {PortableTextBlock} from "@portabletext/types";
+import {PortableText} from "@portabletext/react";
+import {ContentSeparator} from "@/components/content-separator";
+import {SanityImageView} from "@/components/sanity-image";
+import {BuiHeadline, BuiText} from "@/components/ui/typography";
+import type {PageHero} from "@/lib/content/types";
+import {createSanityDataAttribute} from "@/lib/sanity/preview";
 
 export function PageShell({
   hero,
   eyebrow,
   title,
-  intro,
+  pageIntro,
   documentId,
   documentType,
   children,
@@ -16,7 +18,7 @@ export function PageShell({
   hero?: PageHero;
   eyebrow: string;
   title: string;
-  intro: string;
+  pageIntro?: PortableTextBlock[];
   documentId?: string;
   documentType?: string;
   children?: React.ReactNode;
@@ -34,7 +36,7 @@ export function PageShell({
       ? createSanityDataAttribute({
           id: documentId,
           type: documentType,
-          path: ["intro"],
+          path: ["pageIntro"],
         })
       : undefined;
   const heroAttr =
@@ -80,9 +82,11 @@ export function PageShell({
         <BuiHeadline as="h1" data-sanity={titleAttr}>
           {title}
         </BuiHeadline>
-        <BuiText variant="body" className="lede" data-sanity={introAttr}>
-          {intro}
-        </BuiText>
+        {pageIntro?.length ? (
+          <div className="lede" data-sanity={introAttr}>
+            <PortableText value={pageIntro} />
+          </div>
+        ) : null}
       </section>
       <ContentSeparator />
       {children}

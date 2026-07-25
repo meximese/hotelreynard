@@ -2,11 +2,10 @@ import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { SectionBody } from "@/components/section-body";
 import { BookingEmbedBlockSection } from "@/components/sections/booking-embed-block-section";
 import { EventFeedSection } from "@/components/sections/event-feed-section";
-import { FeatureListSection } from "@/components/sections/feature-list-section";
 import { GalleryBlockSection } from "@/components/sections/gallery-block-section";
-import { HoursBlockSection } from "@/components/sections/hours-block-section";
 import { ImageBlockSection } from "@/components/sections/image-block-section";
 import { ImageTextBlockSection } from "@/components/sections/image-text-block-section";
+import { NewsletterSignupSection } from "@/components/sections/newsletter-signup-section";
 import { QuoteBlockSection } from "@/components/sections/quote-block-section";
 import { RichTextBlockSection } from "@/components/sections/rich-text-block-section";
 import { RoomFeedSection } from "@/components/sections/room-feed-section";
@@ -57,14 +56,6 @@ export function SectionSwitcher({
     );
   }
 
-  if (section._type === "featureListBlock" && section.items?.length) {
-    return (
-      <SectionBody alignClassName={textAlignClass}>
-        <FeatureListSection section={section} />
-      </SectionBody>
-    );
-  }
-
   if (section._type === "roomFeedBlock" && section.rooms?.length) {
     return (
       <SectionBody alignClassName={textAlignClass} stack>
@@ -77,14 +68,6 @@ export function SectionSwitcher({
     return (
       <SectionBody alignClassName={textAlignClass} stack>
         <EventFeedSection section={section} upcomingEvents={upcomingEvents} />
-      </SectionBody>
-    );
-  }
-
-  if (section._type === "hoursBlock" && section.entries?.length) {
-    return (
-      <SectionBody alignClassName={textAlignClass}>
-        <HoursBlockSection section={section} />
       </SectionBody>
     );
   }
@@ -109,7 +92,7 @@ export function SectionSwitcher({
     return (
       <PrivateEventsInquiry
         body={section.body}
-        cta={section.cta}
+        link={section.link}
         alignClassName={textAlignClass}
       />
     );
@@ -119,6 +102,14 @@ export function SectionSwitcher({
     return (
       <SectionBody alignClassName={textAlignClass}>
         <BookingEmbedBlockSection section={section} />
+      </SectionBody>
+    );
+  }
+
+  if (section._type === "newsletterSignup") {
+    return (
+      <SectionBody alignClassName={textAlignClass}>
+        <NewsletterSignupSection section={section} />
       </SectionBody>
     );
   }

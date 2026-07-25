@@ -1,13 +1,21 @@
 import groq from "groq";
-import { hasSanityConfig } from "@/lib/sanity/client";
-import { DEFAULT_SANITY_REVALIDATE, sanityFetch } from "@/lib/sanity/fetch";
-import type {
-  Event,
-  EventsPageData,
-  GenericPage,
-  HomePageData,
-  Room,
-} from "./types";
+import {hasSanityConfig} from "@/lib/sanity/client";
+import {DEFAULT_SANITY_REVALIDATE, sanityFetch} from "@/lib/sanity/fetch";
+import type {Event, EventsPageData, GenericPage, HomePageData, Room} from "./types";
+
+const linkProjection = groq`
+  {
+    linkType,
+    href,
+    openInNewTab,
+    "reference": reference->{
+      _id,
+      _type,
+      title,
+      slug
+    }
+  }
+`;
 
 const pageSectionsProjection = groq`
   "sections": sections[]{
@@ -29,6 +37,22 @@ const pageSectionsProjection = groq`
     _type == "richTextBlock" => {
       ...,
       content
+    },
+    _type == "imageTextBlock" => {
+      ...,
+      "link": link${linkProjection}
+    },
+    _type == "inquiryBlock" => {
+      ...,
+      "link": link${linkProjection}
+    },
+    _type == "bookingEmbedBlock" => {
+      ...,
+      bookingButton
+    },
+    _type == "newsletterSignup" => {
+      ...,
+      "successRedirect": successRedirect${linkProjection}
     }
   }
 `;
@@ -41,8 +65,8 @@ const pageHeroProjection = groq`
     enableContent,
     title,
     body,
-    primaryCta,
-    secondaryCta
+    "primaryLink": primaryLink${linkProjection},
+    "secondaryLink": secondaryLink${linkProjection}
   }
 `;
 
@@ -51,9 +75,7 @@ const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
   _type,
   ${pageHeroProjection},
   title,
-  intro,
-  primaryCta,
-  secondaryCta,
+  pageIntro,
   ${pageSectionsProjection}
 }`;
 
@@ -75,15 +97,7 @@ function emptyHomePage(): HomePageData {
     _type: "homePage",
     hero: undefined,
     title: "",
-    intro: "",
-    primaryCta: {
-      label: "",
-      href: "/",
-    },
-    secondaryCta: {
-      label: "",
-      href: "/",
-    },
+    pageIntro: [],
     sections: [],
   };
 }
@@ -93,7 +107,7 @@ function emptyEventsPage(): EventsPageData {
     _id: "eventsPage",
     _type: "eventsPage",
     title: "",
-    intro: "",
+    pageIntro: [],
     sections: [],
   };
 }
@@ -142,7 +156,7 @@ export async function getUpcomingEvents(limit = 6): Promise<Event[]> {
       startDateTime,
       heroImage
     }`,
-    params: { limit },
+    params: {limit},
     tags: ["event"],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
@@ -166,9 +180,9 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
       startDateTime,
       "body": body.content,
       heroImage,
-      cta
+      "link": link${linkProjection}
     }`,
-    params: { slug },
+    params: {slug},
     tags: ["event", `event:${slug}`],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
@@ -192,15 +206,13 @@ export async function getRoomBySlug(slug: string): Promise<Room | null> {
       highlights,
       isPublicPageEnabled
     }`,
-    params: { slug },
+    params: {slug},
     tags: ["room", `room:${slug}`],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 }
 
-export async function getGenericPageBySlug(
-  slug: string,
-): Promise<GenericPage | null> {
+export async function getGenericPageBySlug(slug: string): Promise<GenericPage | null> {
   if (!hasSanityConfig()) {
     return null;
   }
@@ -211,11 +223,11 @@ export async function getGenericPageBySlug(
       _type,
       ${pageHeroProjection},
       title,
-      intro,
+      pageIntro,
       slug,
       ${pageSectionsProjection}
     }`,
-    params: { slug },
+    params: {slug},
     tags: ["page", `page:${slug}`],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
@@ -232,7 +244,7 @@ export async function getEventsPageData(): Promise<EventsPageData> {
       _type,
       ${pageHeroProjection},
       title,
-      intro,
+      pageIntro,
       ${pageSectionsProjection}
     }`,
     tags: ["eventsPage"],

@@ -1,7 +1,7 @@
 import { SanityImageView } from "@/components/sanity-image";
 import { BuiLink } from "@/components/ui/actions";
 import { BuiText } from "@/components/ui/typography";
-import { cleanStegaString } from "@/lib/sanity/preview";
+import { resolveSanityLinkHref } from "@/lib/content/links";
 import type { PageSection } from "@/lib/content/types";
 
 function getSplitFeatureClassName(section: PageSection) {
@@ -21,6 +21,8 @@ export function ImageTextBlockSection({
   section: PageSection;
   textAlignClass: string;
 }) {
+  const href = resolveSanityLinkHref(section.link);
+
   return (
     <div className={getSplitFeatureClassName(section)}>
       {section.media ? (
@@ -35,9 +37,9 @@ export function ImageTextBlockSection({
       ) : null}
       <div className={`section__content split-feature__copy ${textAlignClass}`.trim()}>
         {section.body ? <BuiText>{section.body}</BuiText> : null}
-        {section.primaryCta ? (
-          <BuiLink className="text-link" href={cleanStegaString(section.primaryCta.href)}>
-            {section.primaryCta.label}
+        {href ? (
+          <BuiLink className="text-link" href={href}>
+            Learn more
           </BuiLink>
         ) : null}
       </div>

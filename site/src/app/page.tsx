@@ -1,11 +1,11 @@
-import { ContentSeparator } from "@/components/content-separator";
-import { PageSections } from "@/components/page-sections";
-import { SanityImageView } from "@/components/sanity-image";
-import { SplashLayoutScaffold } from "@/components/splash/SplashLayoutScaffold";
-import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
-import { BuiText } from "@/components/ui/typography";
-import { getHomePage, getUpcomingEvents } from "@/lib/content/loaders";
-import { createSanityDataAttribute } from "@/lib/sanity/preview";
+import {PortableText} from "@portabletext/react";
+import {ContentSeparator} from "@/components/content-separator";
+import {PageSections} from "@/components/page-sections";
+import {SanityImageView} from "@/components/sanity-image";
+import {SplashLayoutScaffold} from "@/components/splash/SplashLayoutScaffold";
+import {BuiText} from "@/components/ui/typography";
+import {getHomePage, getUpcomingEvents} from "@/lib/content/loaders";
+import {createSanityDataAttribute} from "@/lib/sanity/preview";
 
 export default async function HomePage() {
   const page = await getHomePage();
@@ -15,23 +15,17 @@ export default async function HomePage() {
       ?.filter((section) => section._type === "eventFeedBlock")
       .map((section) => section.limit || 3) || [0]),
   );
-  const titleAttr = createSanityDataAttribute({
-    id: page._id,
-    type: page._type,
-    path: ["title"],
-  });
   const introAttr = createSanityDataAttribute({
     id: page._id,
     type: page._type,
-    path: ["intro"],
+    path: ["pageIntro"],
   });
   const heroAttr = createSanityDataAttribute({
     id: page._id,
     type: page._type,
     path: ["hero"],
   });
-  const upcomingEvents =
-    eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
+  const upcomingEvents = eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
 
   return (
     <SplashLayoutScaffold>
@@ -68,18 +62,15 @@ export default async function HomePage() {
             )}
           </section>
         )}
-        <section className="home-intro">
-          <div className="home-intro-copy">
-            {/* <h1 data-sanity={titleAttr}>{page.title}</h1> */}
-            <BuiText
-              variant="intro"
-              className="home-intro-lede"
-              data-sanity={introAttr}
-            >
-              {page.intro}
-            </BuiText>
-          </div>
-        </section>
+        {page.pageIntro?.length ? (
+          <section className="home-intro">
+            <div className="home-intro-copy" data-sanity={introAttr}>
+              <div className="home-intro-lede">
+                <PortableText value={page.pageIntro} />
+              </div>
+            </div>
+          </section>
+        ) : null}
         {page.sections?.length ? (
           <>
             <ContentSeparator />

@@ -1,34 +1,58 @@
+import {ImageIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
-import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'imageTextBlock',
   title: 'Image + text block',
+  icon: ImageIcon,
+  description: 'A split section with an image and supporting text content.',
   type: 'object',
   groups: sectionGroups,
   fields: [
-    defineField({name: 'eyebrow', title: 'Eyebrow', type: 'string', group: 'content'}),
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      description: 'The smaller text that sits above the title to provide context.',
+      type: 'string',
+      group: 'content',
+    }),
     defineField({
       name: 'title',
       title: 'Title',
+      description: 'The large text that is the primary focus of the block.',
       type: 'string',
       validation: (Rule) => Rule.required(),
       group: 'content',
     }),
-    defineField({name: 'body', title: 'Body', type: 'text', rows: 5, group: 'content'}),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      description: 'Supporting copy shown next to the image.',
+      type: 'text',
+      rows: 5,
+      group: 'content',
+    }),
     defineField({
       name: 'media',
       title: 'Media',
+      description: 'The image shown alongside the text.',
       type: 'image',
       options: {hotspot: true},
       fields: [{name: 'alt', title: 'Alternative text', type: 'string'}],
       group: 'content',
     }),
-    defineField({name: 'primaryCta', title: 'Primary CTA', type: 'cta', group: 'content'}),
+    defineField({
+      name: 'link',
+      title: 'Link',
+      description: 'An optional link shown with the text content.',
+      type: 'link',
+      group: 'content',
+    }),
     defineField({
       name: 'layout',
       title: 'Layout',
+      description: 'Choose how the image and text should be arranged.',
       type: 'string',
       initialValue: 'imageLeft',
       options: {
@@ -42,6 +66,45 @@ export default defineType({
       },
       group: 'layout',
     }),
-    defineSectionTextAlignField(),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'string',
+      initialValue: 'center',
+      options: {
+        list: [
+          {title: 'Left', value: 'left'},
+          {title: 'Center', value: 'center'},
+          {title: 'Right', value: 'right'},
+        ],
+        layout: 'radio',
+      },
+      group: 'layout',
+    }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      eyebrow: 'eyebrow',
+      body: 'body',
+      layout: 'layout',
+      media: 'media',
+    },
+    prepare({body, eyebrow, layout, media, title}) {
+      const layoutLabel =
+        layout === 'imageRight'
+          ? 'Image right'
+          : layout === 'imageTop'
+            ? 'Image top'
+            : layout === 'imageBottom'
+              ? 'Image bottom'
+              : 'Image left'
+
+      return {
+        title: title || eyebrow || 'Image + text block',
+        subtitle: body ? layoutLabel : `${layoutLabel} • no body yet`,
+        media,
+      }
+    },
+  },
 })

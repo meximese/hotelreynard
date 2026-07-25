@@ -5,21 +5,24 @@ import page from "./documents/page";
 import room from "./documents/room";
 import siteSettings from "./documents/siteSettings";
 import artisanFeature from "./objects/artisanFeature";
+import bookingButton from "./objects/bookingButton";
 import bookingEmbedBlock from "./objects/bookingEmbedBlock";
-import cta from "./objects/cta";
 import eventFeedBlock from "./objects/eventFeedBlock";
-import featureListBlock from "./objects/featureListBlock";
 import galleryBlock from "./objects/galleryBlock";
 import heroBlock from "./objects/heroBlock";
-import hoursBlock from "./objects/hoursBlock";
 import imageBlock from "./objects/imageBlock";
 import imageTextBlock from "./objects/imageTextBlock";
 import inquiryBlock from "./objects/inquiryBlock";
+import link from "./objects/link";
+import newsletterSignup from "./objects/newsletterSignup";
 import pageSection from "./objects/pageSection";
 import quoteBlock from "./objects/quoteBlock";
+import richPortableText from "./objects/richPortableText";
 import richTextBlock from "./objects/richTextBlock";
 import roomFeedBlock from "./objects/roomFeedBlock";
 import seo from "./objects/seo";
+import simplePortableText from "./objects/simplePortableText";
+import standardPortableText from "./objects/standardPortableText";
 
 export const schemaTypes = [
   siteSettings,
@@ -29,17 +32,20 @@ export const schemaTypes = [
   event,
   page,
   seo,
-  cta,
+  link,
+  bookingButton,
+  newsletterSignup,
+  simplePortableText,
+  standardPortableText,
+  richPortableText,
   heroBlock,
   galleryBlock,
   imageBlock,
   imageTextBlock,
   quoteBlock,
   roomFeedBlock,
-  featureListBlock,
   bookingEmbedBlock,
   eventFeedBlock,
-  hoursBlock,
   inquiryBlock,
   artisanFeature,
   richTextBlock,

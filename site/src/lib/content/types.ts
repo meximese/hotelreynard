@@ -1,5 +1,5 @@
-import type { PortableTextBlock } from "@portabletext/types";
-import type { Image, Slug } from "@sanity/types";
+import type {PortableTextBlock} from "@portabletext/types";
+import type {Image, Slug} from "@sanity/types";
 
 export interface SanityImage extends Image {
   alt?: string;
@@ -15,9 +15,27 @@ export interface SanityDocumentIdentity {
   _type: string;
 }
 
-export interface Cta {
-  label: string;
-  href: string;
+export interface InternalLinkReference extends SanityDocumentIdentity {
+  title?: string;
+  slug?: Slug;
+}
+
+export interface SanityLink {
+  linkType: "internal" | "relative" | "external";
+  reference?: InternalLinkReference;
+  href?: string;
+  openInNewTab?: boolean;
+}
+
+export interface BookingButton {
+  label?: string;
+}
+
+export interface NewsletterSignup {
+  _type?: "newsletterSignup";
+  showLabel?: boolean;
+  thankYouMessage?: string;
+  successRedirect?: SanityLink;
 }
 
 export interface Room {
@@ -43,7 +61,7 @@ export interface Event {
   startDateTime?: string;
   body?: PortableTextBlock[];
   heroImage?: SanityImage;
-  cta?: Cta;
+  link?: SanityLink;
 }
 
 export interface HoursEntry {
@@ -71,9 +89,11 @@ export interface PageSection {
   content?: PortableTextBlock[];
   entries?: HoursEntry[];
   limit?: number;
-  cta?: Cta;
-  primaryCta?: Cta;
-  secondaryCta?: Cta;
+  link?: SanityLink;
+  bookingButton?: BookingButton;
+  showLabel?: boolean;
+  thankYouMessage?: string;
+  successRedirect?: SanityLink;
 }
 
 export interface PageHero {
@@ -83,8 +103,8 @@ export interface PageHero {
   caption?: string;
   title?: string;
   body?: string;
-  primaryCta?: Cta;
-  secondaryCta?: Cta;
+  primaryLink?: SanityLink;
+  secondaryLink?: SanityLink;
 }
 
 export interface GenericPage {
@@ -92,7 +112,7 @@ export interface GenericPage {
   _type: string;
   hero?: PageHero;
   title: string;
-  intro?: string;
+  pageIntro?: PortableTextBlock[];
   slug: Slug;
   sections?: PageSection[];
 }
@@ -100,15 +120,13 @@ export interface GenericPage {
 export interface HomePageData extends SanityDocumentIdentity {
   hero?: PageHero;
   title: string;
-  intro: string;
-  primaryCta: Cta;
-  secondaryCta: Cta;
+  pageIntro?: PortableTextBlock[];
   sections?: PageSection[];
 }
 
 export interface EventsPageData extends SanityDocumentIdentity {
   hero?: PageHero;
   title: string;
-  intro: string;
+  pageIntro?: PortableTextBlock[];
   sections?: PageSection[];
 }

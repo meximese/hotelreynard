@@ -11,6 +11,7 @@ export default defineType({
     defineField({
       name: 'displayMode',
       title: 'Display mode',
+      description: 'Choose how this gallery should be laid out on the website.',
       type: 'string',
       initialValue: 'grid',
       options: {
@@ -25,11 +26,24 @@ export default defineType({
       validation: (Rule) => Rule.required(),
       group: 'layout',
     }),
-    defineField({name: 'eyebrow', title: 'Eyebrow', type: 'string', group: 'content'}),
-    defineField({name: 'title', title: 'Title', type: 'string', group: 'content'}),
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      description: 'The smaller text that sits above the title to provide context.',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      description: 'The large text that is the primary focus of the block.',
+      type: 'string',
+      group: 'content',
+    }),
     defineField({
       name: 'showGalleryHeader',
       title: 'Show gallery header',
+      description: 'Turn this on to show the eyebrow and title above the gallery.',
       type: 'boolean',
       initialValue: false,
       group: 'layout',
@@ -46,13 +60,19 @@ export default defineType({
     defineField({
       name: 'images',
       title: 'Images',
+      description: 'Add the images for this gallery here.',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'image',
           options: {hotspot: true},
           fields: [
-            {name: 'alt', title: 'Alternative text', type: 'string'},
+            {
+              name: 'alt',
+              title: 'Alternative text',
+              description: 'Describe the image for accessibility and screen readers.',
+              type: 'string',
+            },
             {
               name: 'fullWidth',
               title: 'Full width / wide',

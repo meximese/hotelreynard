@@ -1,17 +1,71 @@
+import {EnvelopeIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
-import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'inquiryBlock',
   title: 'Inquiry block',
+  icon: EnvelopeIcon,
+  description: 'A section for private event inquiry copy and the inquiry form.',
   type: 'object',
   groups: sectionGroups,
   fields: [
-    defineField({name: 'eyebrow', title: 'Eyebrow', type: 'string', group: 'content'}),
-    defineField({name: 'title', title: 'Title', type: 'string', group: 'content'}),
-    defineField({name: 'body', title: 'Body', type: 'text', rows: 4, group: 'content'}),
-    defineField({name: 'cta', title: 'CTA', type: 'cta', group: 'content'}),
-    defineSectionTextAlignField(),
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      description: 'The smaller text that sits above the title to provide context.',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      description: 'The large text that is the primary focus of the block.',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      description: 'Supporting copy shown above the inquiry form.',
+      type: 'text',
+      rows: 4,
+      group: 'content',
+    }),
+    defineField({
+      name: 'link',
+      title: 'Link',
+      description: 'An optional link shown alongside the inquiry copy.',
+      type: 'link',
+      group: 'content',
+    }),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'string',
+      initialValue: 'center',
+      options: {
+        list: [
+          {title: 'Left', value: 'left'},
+          {title: 'Center', value: 'center'},
+          {title: 'Right', value: 'right'},
+        ],
+        layout: 'radio',
+      },
+      group: 'layout',
+    }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      eyebrow: 'eyebrow',
+      body: 'body',
+    },
+    prepare({body, eyebrow, title}) {
+      return {
+        title: title || eyebrow || 'Inquiry block',
+        subtitle: body ? 'Inquiry form + supporting copy' : 'Inquiry form',
+      }
+    },
+  },
 })
