@@ -5,6 +5,7 @@ import type {Event, EventsPageData, GenericPage, HomePageData, Room} from "./typ
 
 const linkProjection = groq`
   {
+    label,
     linkType,
     href,
     openInNewTab,
@@ -40,11 +41,11 @@ const pageSectionsProjection = groq`
     },
     _type == "imageTextBlock" => {
       ...,
-      "link": link${linkProjection}
+      "callsToAction": callsToAction[]${linkProjection}
     },
     _type == "inquiryBlock" => {
       ...,
-      "link": link${linkProjection}
+      "callsToAction": callsToAction[]${linkProjection}
     },
     _type == "bookingEmbedBlock" => {
       ...,
@@ -65,8 +66,7 @@ const pageHeroProjection = groq`
     enableContent,
     title,
     body,
-    "primaryLink": primaryLink${linkProjection},
-    "secondaryLink": secondaryLink${linkProjection}
+    "callsToAction": callsToAction[]${linkProjection}
   }
 `;
 
@@ -180,7 +180,7 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
       startDateTime,
       "body": body.content,
       heroImage,
-      "link": link${linkProjection}
+      "callsToAction": callsToAction[]${linkProjection}
     }`,
     params: {slug},
     tags: ["event", `event:${slug}`],

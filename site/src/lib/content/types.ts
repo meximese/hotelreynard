@@ -21,6 +21,7 @@ export interface InternalLinkReference extends SanityDocumentIdentity {
 }
 
 export interface SanityLink {
+  label?: string;
   linkType: "internal" | "relative" | "external";
   reference?: InternalLinkReference;
   href?: string;
@@ -61,7 +62,7 @@ export interface Event {
   startDateTime?: string;
   body?: PortableTextBlock[];
   heroImage?: SanityImage;
-  link?: SanityLink;
+  callsToAction?: SanityLink[];
 }
 
 export interface HoursEntry {
@@ -89,7 +90,7 @@ export interface PageSection {
   content?: PortableTextBlock[];
   entries?: HoursEntry[];
   limit?: number;
-  link?: SanityLink;
+  callsToAction?: SanityLink[];
   bookingButton?: BookingButton;
   showLabel?: boolean;
   thankYouMessage?: string;
@@ -103,8 +104,7 @@ export interface PageHero {
   caption?: string;
   title?: string;
   body?: string;
-  primaryLink?: SanityLink;
-  secondaryLink?: SanityLink;
+  callsToAction?: SanityLink[];
 }
 
 export interface GenericPage {

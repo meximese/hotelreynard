@@ -92,7 +92,7 @@ export function SectionSwitcher({
     return (
       <PrivateEventsInquiry
         body={section.body}
-        link={section.link}
+        callsToAction={section.callsToAction}
         alignClassName={textAlignClass}
       />
     );

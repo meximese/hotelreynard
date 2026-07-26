@@ -8,25 +8,29 @@ import type { SanityLink } from "@/lib/content/types";
 
 export function PrivateEventsInquiry({
   body = "Share the gathering size, season, setting, and any questions you already have.",
-  link,
+  callsToAction = [],
   alignClassName = "",
 }: {
   body?: string;
-  link?: SanityLink;
+  callsToAction?: SanityLink[];
   alignClassName?: string;
 }) {
-  const href = resolveSanityLinkHref(link);
+  const actions = callsToAction
+    .map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+    .filter((item): item is { href: string; label: string } => Boolean(item.href));
 
   return (
     <div className="inquiry-panel">
       <div className={`section__content ${alignClassName}`.trim()}>
         <BuiText className="lede">{body}</BuiText>
-        {href ? (
-          <BuiText as="p">
-            <BuiLink className="text-link" href={href}>
-              Learn more
-            </BuiLink>
-          </BuiText>
+        {actions.length ? (
+          <div className="cta-row">
+            {actions.map((action) => (
+              <BuiLink key={action.href} className="text-link" href={action.href}>
+                {action.label}
+              </BuiLink>
+            ))}
+          </div>
         ) : null}
       </div>
 

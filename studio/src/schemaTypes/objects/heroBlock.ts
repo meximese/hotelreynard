@@ -1,5 +1,5 @@
 import {ImageIcon} from '@sanity/icons'
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionGroupsWithMedia} from './shared/sectionGroups'
 
 export default defineType({
@@ -59,17 +59,12 @@ export default defineType({
       group: 'content',
     }),
     defineField({
-      name: 'primaryLink',
-      title: 'Primary link',
-      description: 'Optional primary link shown with the hero content.',
-      type: 'link',
-      group: 'content',
-    }),
-    defineField({
-      name: 'secondaryLink',
-      title: 'Secondary link',
-      description: 'Optional secondary link shown with the hero content.',
-      type: 'link',
+      name: 'callsToAction',
+      title: 'Calls to action',
+      description: 'Add up to two calls to action shown with the hero content.',
+      type: 'array',
+      of: [defineArrayMember({type: 'link'})],
+      validation: (Rule) => Rule.max(2),
       group: 'content',
     }),
     defineField({

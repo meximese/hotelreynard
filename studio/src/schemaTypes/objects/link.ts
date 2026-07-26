@@ -11,12 +11,13 @@ export default defineType({
   fields: linkFields,
   preview: {
     select: {
+      label: 'label',
       linkType: 'linkType',
       internalTitle: 'reference.title',
       href: 'href',
     },
-    prepare({href, internalTitle, linkType}) {
-      const destination = internalTitle || href || 'Choose a destination'
+    prepare({href, internalTitle, label, linkType}) {
+      const destination = label || internalTitle || href || 'Choose a destination'
 
       const typeLabel =
         linkType === 'internal'
@@ -29,7 +30,7 @@ export default defineType({
 
       return {
         title: destination,
-        subtitle: typeLabel,
+        subtitle: label && (internalTitle || href) ? `${typeLabel} • ${internalTitle || href}` : typeLabel,
       }
     },
   },

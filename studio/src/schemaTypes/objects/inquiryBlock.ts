@@ -1,5 +1,5 @@
 import {EnvelopeIcon} from '@sanity/icons'
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
 
 export default defineType({
@@ -33,10 +33,12 @@ export default defineType({
       group: 'content',
     }),
     defineField({
-      name: 'link',
-      title: 'Link',
-      description: 'An optional link shown alongside the inquiry copy.',
-      type: 'link',
+      name: 'callsToAction',
+      title: 'Calls to action',
+      description: 'Add up to two calls to action shown alongside the inquiry copy.',
+      type: 'array',
+      of: [defineArrayMember({type: 'link'})],
+      validation: (Rule) => Rule.max(2),
       group: 'content',
     }),
     defineField({

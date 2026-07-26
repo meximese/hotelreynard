@@ -21,7 +21,9 @@ export function ImageTextBlockSection({
   section: PageSection;
   textAlignClass: string;
 }) {
-  const href = resolveSanityLinkHref(section.link);
+  const actions = (section.callsToAction || [])
+    .map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+    .filter((item): item is { href: string; label: string } => Boolean(item.href));
 
   return (
     <div className={getSplitFeatureClassName(section)}>
@@ -37,10 +39,14 @@ export function ImageTextBlockSection({
       ) : null}
       <div className={`section__content split-feature__copy ${textAlignClass}`.trim()}>
         {section.body ? <BuiText>{section.body}</BuiText> : null}
-        {href ? (
-          <BuiLink className="text-link" href={href}>
-            Learn more
-          </BuiLink>
+        {actions.length ? (
+          <div className="cta-row">
+            {actions.map((action) => (
+              <BuiLink key={action.href} className="text-link" href={action.href}>
+                {action.label}
+              </BuiLink>
+            ))}
+          </div>
         ) : null}
       </div>
     </div>

@@ -13,7 +13,10 @@ interface PageProps {
 export default async function EventPage({ params }: PageProps) {
   const { slug } = await params;
   const event = await getEventBySlug(slug);
-  const eventLinkHref = resolveSanityLinkHref(event?.link);
+  const actions =
+    event?.callsToAction
+      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
 
   if (!event) {
     notFound();
@@ -40,11 +43,13 @@ export default async function EventPage({ params }: PageProps) {
           <PortableText value={event.body} />
         </div>
       ) : null}
-      {eventLinkHref ? (
+      {actions.length ? (
         <div className="cta-row">
-          <BuiLink variant="button" className="button-link" href={eventLinkHref}>
-            Learn more
-          </BuiLink>
+          {actions.map((action) => (
+            <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
+              {action.label}
+            </BuiLink>
+          ))}
         </div>
       ) : null}
     </PageShell>

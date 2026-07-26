@@ -3,7 +3,9 @@ import {ContentSeparator} from "@/components/content-separator";
 import {PageSections} from "@/components/page-sections";
 import {SanityImageView} from "@/components/sanity-image";
 import {SplashLayoutScaffold} from "@/components/splash/SplashLayoutScaffold";
+import {BuiLink} from "@/components/ui/actions";
 import {BuiText} from "@/components/ui/typography";
+import {resolveSanityLinkHref} from "@/lib/content/links";
 import {getHomePage, getUpcomingEvents} from "@/lib/content/loaders";
 import {createSanityDataAttribute} from "@/lib/sanity/preview";
 
@@ -25,6 +27,10 @@ export default async function HomePage() {
     type: page._type,
     path: ["hero"],
   });
+  const heroActions =
+    page.hero?.callsToAction
+      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
   const upcomingEvents = eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
 
   return (
@@ -57,6 +63,15 @@ export default async function HomePage() {
                   <BuiText as="span" className="home-hero-meta">
                     {page.hero.body}
                   </BuiText>
+                ) : null}
+                {heroActions.length ? (
+                  <div className="cta-row">
+                    {heroActions.map((action) => (
+                      <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
+                        {action.label}
+                      </BuiLink>
+                    ))}
+                  </div>
                 ) : null}
               </div>
             )}
