@@ -1,6 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
-import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'galleryBlock',
@@ -30,14 +29,14 @@ export default defineType({
       name: 'eyebrow',
       title: 'Eyebrow',
       description: 'The smaller text that sits above the title to provide context.',
-      type: 'string',
+      type: 'sectionEyebrow',
       group: 'content',
     }),
     defineField({
       name: 'title',
       title: 'Title',
       description: 'The large text that is the primary focus of the block.',
-      type: 'string',
+      type: 'sectionTitle',
       group: 'content',
     }),
     defineField({
@@ -103,7 +102,12 @@ export default defineType({
       ],
       group: 'content',
     }),
-    defineSectionTextAlignField(),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'sectionTextAlign',
+      group: 'layout',
+    }),
   ],
   preview: {
     select: {

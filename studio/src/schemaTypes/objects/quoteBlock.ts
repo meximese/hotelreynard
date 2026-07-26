@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
-import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'quoteBlock',
@@ -13,14 +12,14 @@ export default defineType({
       name: 'eyebrow',
       title: 'Eyebrow',
       description: 'The smaller text that sits above the title to provide context.',
-      type: 'string',
+      type: 'sectionEyebrow',
       group: 'content',
     }),
     defineField({
       name: 'title',
       title: 'Title',
       description: 'An optional heading for the quote section.',
-      type: 'string',
+      type: 'sectionTitle',
       group: 'content',
     }),
     defineField({
@@ -39,7 +38,12 @@ export default defineType({
       type: 'string',
       group: 'content',
     }),
-    defineSectionTextAlignField(),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'sectionTextAlign',
+      group: 'layout',
+    }),
   ],
   preview: {
     select: {

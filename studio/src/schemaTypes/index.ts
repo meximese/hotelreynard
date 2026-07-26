@@ -23,8 +23,15 @@ import richPortableText from './objects/richPortableText'
 import richTextBlock from './objects/richTextBlock'
 import roomFeedBlock from './objects/roomFeedBlock'
 import seo from './objects/seo'
+import seoImage from './objects/seoImage'
+import sectionBody from './objects/sectionBody'
+import sectionEyebrow from './objects/sectionEyebrow'
+import sectionImage from './objects/sectionImage'
+import sectionTextAlign from './objects/sectionTextAlign'
+import sectionTitle from './objects/sectionTitle'
 import simplePortableText from './objects/simplePortableText'
 import standardPortableText from './objects/standardPortableText'
+import bookingSettings from './objects/bookingSettings'
 
 export const schemaTypes = [
   siteSettings,
@@ -37,11 +44,18 @@ export const schemaTypes = [
   link,
   button,
   callsToAction,
+  bookingSettings,
   bookingButton,
   newsletterSignup,
+  sectionEyebrow,
+  sectionTitle,
+  sectionBody,
+  sectionTextAlign,
+  sectionImage,
   simplePortableText,
   standardPortableText,
   richPortableText,
+  seoImage,
   heroBlock,
   galleryBlock,
   imageBlock,

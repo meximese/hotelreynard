@@ -25,16 +25,7 @@ export default defineType({
       name: 'openGraphImage',
       title: 'Open Graph image',
       description: 'The social sharing image used when this page is shared.',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alternative text',
-          description: 'Describe the image for accessibility and screen readers.',
-          type: 'string',
-        }),
-      ],
+      type: 'seoImage',
     }),
     defineField({
       name: 'noIndex',

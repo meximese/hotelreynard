@@ -82,9 +82,7 @@ export default defineType({
       name: 'heroImage',
       title: 'Hero image',
       description: 'The main image used for this event.',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [{name: 'alt', title: 'Alternative text', type: 'string'}],
+      type: 'sectionImage',
       group: 'media',
     }),
     defineField({

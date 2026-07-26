@@ -24,27 +24,7 @@ export default defineType({
       name: 'booking',
       title: 'Booking settings',
       description: 'Shared booking widget settings used by booking controls across the site.',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'widgetProvider',
-          title: 'Widget provider',
-          description: 'The booking system provider name.',
-          type: 'string',
-        }),
-        defineField({
-          name: 'widgetConfigurationId',
-          title: 'Widget configuration ID',
-          description: 'The booking widget configuration ID used by the website.',
-          type: 'string',
-        }),
-        defineField({
-          name: 'defaultCtaLabel',
-          title: 'Default button label',
-          description: 'Fallback text for booking buttons when no custom label is provided.',
-          type: 'string',
-        }),
-      ],
+      type: 'bookingSettings',
     }),
     defineField({
       name: 'seo',

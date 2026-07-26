@@ -14,29 +14,20 @@ export default defineType({
       name: 'eyebrow',
       title: 'Eyebrow',
       description: 'The smaller text that sits above the title to provide context.',
-      type: 'string',
+      type: 'sectionEyebrow',
       group: 'content',
     }),
     defineField({
       name: 'title',
       title: 'Title',
       description: 'The large text that is the primary focus of the block.',
-      type: 'string',
+      type: 'sectionTitle',
       group: 'content',
     }),
     defineField({
       name: 'textAlign',
       title: 'Text alignment',
-      type: 'string',
-      initialValue: 'center',
-      options: {
-        list: [
-          {title: 'Left', value: 'left'},
-          {title: 'Center', value: 'center'},
-          {title: 'Right', value: 'right'},
-        ],
-        layout: 'radio',
-      },
+      type: 'sectionTextAlign',
       group: 'layout',
     }),
     defineField({
