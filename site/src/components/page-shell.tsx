@@ -1,14 +1,18 @@
-import { ContentSeparator } from "@/components/content-separator";
-import { SanityImageView } from "@/components/sanity-image";
-import { BuiHeadline, BuiText } from "@/components/ui/typography";
-import type { PageHero } from "@/lib/content/types";
-import { createSanityDataAttribute } from "@/lib/sanity/preview";
+import type {PortableTextBlock} from "@portabletext/types";
+import {PortableText} from "@portabletext/react";
+import {ContentSeparator} from "@/components/content-separator";
+import {SanityImageView} from "@/components/sanity-image";
+import {BuiLink} from "@/components/ui/actions";
+import {BuiHeadline, BuiText} from "@/components/ui/typography";
+import {resolveSanityLinkHref} from "@/lib/content/links";
+import type {PageHero} from "@/lib/content/types";
+import {createSanityDataAttribute} from "@/lib/sanity/preview";
 
 export function PageShell({
   hero,
   eyebrow,
   title,
-  intro,
+  pageIntro,
   documentId,
   documentType,
   children,
@@ -16,11 +20,16 @@ export function PageShell({
   hero?: PageHero;
   eyebrow: string;
   title: string;
-  intro: string;
+  pageIntro?: PortableTextBlock[];
   documentId?: string;
   documentType?: string;
   children?: React.ReactNode;
 }) {
+  const heroActions =
+    hero?.callsToAction
+      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
+
   const titleAttr =
     documentId && documentType
       ? createSanityDataAttribute({
@@ -34,7 +43,7 @@ export function PageShell({
       ? createSanityDataAttribute({
           id: documentId,
           type: documentType,
-          path: ["intro"],
+          path: ["pageIntro"],
         })
       : undefined;
   const heroAttr =
@@ -71,6 +80,15 @@ export function PageShell({
                   {hero.body}
                 </BuiText>
               ) : null}
+              {heroActions.length ? (
+                <div className="cta-row">
+                  {heroActions.map((action) => (
+                    <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
+                      {action.label}
+                    </BuiLink>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ) : null}
         </section>
@@ -80,9 +98,11 @@ export function PageShell({
         <BuiHeadline as="h1" data-sanity={titleAttr}>
           {title}
         </BuiHeadline>
-        <BuiText variant="body" className="lede" data-sanity={introAttr}>
-          {intro}
-        </BuiText>
+        {pageIntro?.length ? (
+          <div className="lede" data-sanity={introAttr}>
+            <PortableText value={pageIntro} />
+          </div>
+        ) : null}
       </section>
       <ContentSeparator />
       {children}

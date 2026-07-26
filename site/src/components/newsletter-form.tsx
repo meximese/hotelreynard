@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BuiButton } from "@/components/ui/actions";
 import { BuiText } from "@/components/ui/typography";
 
@@ -14,7 +15,16 @@ function safeParseJson(value: string) {
   }
 }
 
-export function NewsletterForm({ showLabel = true }: { showLabel?: boolean }) {
+export function NewsletterForm({
+  showLabel = true,
+  thankYouMessage = "Thanks! We'll keep you updated.",
+  successRedirectHref,
+}: {
+  showLabel?: boolean;
+  thankYouMessage?: string;
+  successRedirectHref?: string;
+}) {
+  const router = useRouter();
   const [status, setStatus] = useState<{
     message: string;
     tone: StatusTone;
@@ -44,10 +54,13 @@ export function NewsletterForm({ showLabel = true }: { showLabel?: boolean }) {
       }
 
       setStatus({
-        message: "Thanks! We'll keep you updated.",
+        message: thankYouMessage,
         tone: "success",
       });
       form.reset();
+      if (successRedirectHref) {
+        router.push(successRedirectHref);
+      }
     } catch (error) {
       setStatus({
         message: error instanceof Error ? error.message : "Unable to subscribe.",

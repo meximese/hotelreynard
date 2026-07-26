@@ -1,46 +1,90 @@
+import {ImageIcon} from '@sanity/icons/Image'
 import {defineField, defineType} from 'sanity'
 import {sectionGroupsWithMedia} from './shared/sectionGroups'
-import {defineSectionTextAlignField} from './shared/textAlignField'
 
 export default defineType({
   name: 'heroBlock',
   title: 'Hero block',
+  icon: ImageIcon,
+  description: 'The hero media and optional copy shown at the top of a page.',
   type: 'object',
   groups: sectionGroupsWithMedia,
   fields: [
     defineField({
       name: 'media',
       title: 'Media',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [{name: 'alt', title: 'Alternative text', type: 'string'}],
+      description: 'The main image shown in the hero area.',
+      type: 'sectionImage',
       group: 'media',
     }),
     defineField({
       name: 'mobileMedia',
       title: 'Mobile media',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [{name: 'alt', title: 'Alternative text', type: 'string'}],
       description: 'Optional alternate image used for the page-level hero on smaller screens.',
+      type: 'sectionImage',
       group: 'media',
     }),
-    defineField({name: 'caption', title: 'Caption', type: 'text', rows: 1, group: 'media'}),
+    defineField({
+      name: 'caption',
+      title: 'Caption',
+      description: 'Optional small text used as an image caption.',
+      type: 'text',
+      rows: 1,
+      group: 'media',
+    }),
     defineField({
       name: 'enableContent',
-      title: 'Show Call to Action',
+      title: 'Show hero content',
+      description: 'Turn this on to show the hero title and body on top of the image.',
       type: 'boolean',
       group: 'content',
     }),
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      description: 'The main hero title shown over the image when hero content is enabled.',
+      type: 'sectionTitle',
       group: 'content',
     }),
-    defineField({name: 'body', title: 'Body', type: 'text', rows: 4, group: 'content'}),
-    defineField({name: 'primaryCta', title: 'Primary CTA', type: 'cta', group: 'content'}),
-    defineField({name: 'secondaryCta', title: 'Secondary CTA', type: 'cta', group: 'content'}),
-    defineSectionTextAlignField(),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      description: 'Supporting copy shown in the hero when hero content is enabled.',
+      type: 'sectionBody',
+      group: 'content',
+    }),
+    defineField({
+      name: 'callsToAction',
+      title: 'Calls to action',
+      description: 'Add up to two calls to action shown with the hero content.',
+      type: 'callsToAction',
+      group: 'content',
+    }),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'sectionTextAlign',
+      group: 'layout',
+    }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      caption: 'caption',
+      body: 'body',
+      media: 'media',
+      enableContent: 'enableContent',
+    },
+    prepare({body, caption, enableContent, media, title}) {
+      return {
+        title: title || caption || 'Hero block',
+        subtitle: enableContent
+          ? body
+            ? 'Hero content enabled'
+            : 'Hero content enabled, no body yet'
+          : 'Image-focused hero',
+        media,
+      }
+    },
+  },
 })

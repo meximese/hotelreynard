@@ -11,7 +11,7 @@ export function BookingEmbedBlockSection({
     <>
       {section.body ? <BuiText>{section.body}</BuiText> : null}
       <div className="cta-row">
-        <BookNowButton label={section.cta?.label || "Book Now"} />
+        <BookNowButton label={section.bookingButton?.label || "Book Now"} />
       </div>
     </>
   );

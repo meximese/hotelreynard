@@ -17,7 +17,7 @@ export default async function EventsPage() {
       hero={page.hero}
       eyebrow="Events"
       title={page.title}
-      intro={page.intro}
+      pageIntro={page.pageIntro}
       documentId={page._id}
       documentType={page._type}
     >

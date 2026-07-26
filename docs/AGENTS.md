@@ -1,5 +1,36 @@
 ## Below are some base principles to follow.
 
+### principle: read problem-solving guidelines at the start of each session
+
+- At the start of every session in this repository, read [problem-solving-guidelines.md](/Users/vinh/dev/reynard/hotelreynard/docs/problem-solving-guidelines.md) before making implementation decisions.
+- Treat that file as a standing guardrail for code-level problem solving, schema design, abstractions, and refactors.
+
+### principle: answer the exact question that was asked
+
+- Interpret direct questions literally before expanding into adjacent explanation.
+- If the user asks whether something is documented, answer whether it is documented.
+- Do not answer a nearby question instead of the actual one.
+- Add extra context only after the direct answer is clear.
+
+### principle: keep responses short
+
+- Default to short responses.
+- Do not add extra explanation unless it is necessary or explicitly requested.
+
+### principle: assume senior engineering context
+
+- Assume the user is a very experienced engineer, at staff level or higher.
+- Default to concise, direct, technical communication.
+- Do not over-explain common engineering concepts unless explicitly asked.
+
+### principle: keep sanity schemas flat and sanely native
+
+- Sanity schemas should stay simple, flat, and close to the documented Sanity model.
+- Do not over-engineer schema primitives, annotations, field helpers, or validation layers.
+- Prefer static objects and arrays over helper functions when defining schema structure.
+- Prefer Sanity-native patterns that are known to be stable in the admin UI.
+- Before adding indirection or dynamic behavior, confirm it is necessary and supported by Sanity docs.
+
 ### principle: don't overcomplicate things or be "smart" about solutions
 
 - Prefer the smallest change that fully satisfies the user-facing requirement.

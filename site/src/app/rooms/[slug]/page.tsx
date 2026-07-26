@@ -20,10 +20,7 @@ export default async function RoomPage({ params }: PageProps) {
     <PageShell
       eyebrow="Room"
       title={room.title}
-      intro={
-        room.shortDescription ||
-        "This room is modeled as a first-class content type so it can grow into a richer public experience over time."
-      }
+      pageIntro={[]}
       documentId={room._id}
       documentType={room._type || "room"}
     >

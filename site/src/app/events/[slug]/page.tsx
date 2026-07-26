@@ -3,8 +3,8 @@ import { PortableText } from "@portabletext/react";
 import { PageShell } from "@/components/page-shell";
 import { SanityImageView } from "@/components/sanity-image";
 import { BuiLink } from "@/components/ui/actions";
+import { resolveSanityLinkHref } from "@/lib/content/links";
 import { getEventBySlug } from "@/lib/content/loaders";
-import { cleanStegaString } from "@/lib/sanity/preview";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -13,6 +13,10 @@ interface PageProps {
 export default async function EventPage({ params }: PageProps) {
   const { slug } = await params;
   const event = await getEventBySlug(slug);
+  const actions =
+    event?.callsToAction
+      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
 
   if (!event) {
     notFound();
@@ -22,10 +26,7 @@ export default async function EventPage({ params }: PageProps) {
     <PageShell
       eyebrow="Event"
       title={event.title}
-      intro={
-        event.summary ||
-        "This route is ready for Sanity-backed event detail content and public programming."
-      }
+      pageIntro={[]}
       documentId={event._id}
       documentType={event._type || "event"}
     >
@@ -42,11 +43,13 @@ export default async function EventPage({ params }: PageProps) {
           <PortableText value={event.body} />
         </div>
       ) : null}
-      {event.cta ? (
+      {actions.length ? (
         <div className="cta-row">
-          <BuiLink variant="button" className="button-link" href={cleanStegaString(event.cta.href)}>
-            {event.cta.label}
-          </BuiLink>
+          {actions.map((action) => (
+            <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
+              {action.label}
+            </BuiLink>
+          ))}
         </div>
       ) : null}
     </PageShell>

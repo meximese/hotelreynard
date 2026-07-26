@@ -3,28 +3,34 @@
 import { Field } from "@base-ui/react/field";
 import { BuiLink } from "@/components/ui/actions";
 import { BuiText } from "@/components/ui/typography";
-import { cleanStegaString } from "@/lib/sanity/preview";
-import type { Cta } from "@/lib/content/types";
+import { resolveSanityLinkHref } from "@/lib/content/links";
+import type { SanityLink } from "@/lib/content/types";
 
 export function PrivateEventsInquiry({
   body = "Share the gathering size, season, setting, and any questions you already have.",
-  cta,
+  callsToAction = [],
   alignClassName = "",
 }: {
   body?: string;
-  cta?: Cta;
+  callsToAction?: SanityLink[];
   alignClassName?: string;
 }) {
+  const actions = callsToAction
+    .map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+    .filter((item): item is { href: string; label: string } => Boolean(item.href));
+
   return (
     <div className="inquiry-panel">
       <div className={`section__content ${alignClassName}`.trim()}>
         <BuiText className="lede">{body}</BuiText>
-        {cta?.label && cta.href ? (
-          <BuiText as="p">
-            <BuiLink className="text-link" href={cleanStegaString(cta.href)}>
-              {cta.label}
-            </BuiLink>
-          </BuiText>
+        {actions.length ? (
+          <div className="cta-row">
+            {actions.map((action) => (
+              <BuiLink key={action.href} className="text-link" href={action.href}>
+                {action.label}
+              </BuiLink>
+            ))}
+          </div>
         ) : null}
       </div>
 

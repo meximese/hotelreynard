@@ -30,7 +30,7 @@ export default async function GenericPage({ params }: PageProps) {
       hero={page.hero}
       eyebrow="Page"
       title={page.title}
-      intro={page.intro || ""}
+      pageIntro={page.pageIntro}
       documentId={page._id}
       documentType={page._type}
     >
