@@ -16,15 +16,10 @@ export const linkTypeOptions = [
 
 export const linkFields = [
   defineField({
-    name: 'label',
-    title: 'Label',
-    description: 'The text shown for this link when it is used as a button or call to action.',
-    type: 'string',
-  }),
-  defineField({
     name: 'linkType',
     title: 'Link type',
-    description: 'Choose whether this links to another item in Sanity, a path on this website, or another website.',
+    description:
+      'Choose whether this links to another item in Sanity, a path on this website, or another website.',
     type: 'string',
     initialValue: 'internal',
     options: {

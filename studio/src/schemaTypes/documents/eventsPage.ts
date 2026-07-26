@@ -1,4 +1,4 @@
-import {CalendarIcon} from '@sanity/icons'
+import {CalendarIcon} from '@sanity/icons/Calendar'
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
@@ -31,7 +31,8 @@ export default defineType({
     defineField({
       name: 'pageIntro',
       title: 'Page intro',
-      description: 'The introductory copy for the events page. Use the Intro style when you want larger lead text.',
+      description:
+        'The introductory copy for the events page. Use the Intro style when you want larger lead text.',
       type: 'standardPortableText',
       group: 'page',
     }),

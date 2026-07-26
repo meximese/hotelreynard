@@ -1,5 +1,5 @@
-import {CalendarIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {CalendarIcon} from '@sanity/icons/Calendar'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'event',
@@ -91,9 +91,7 @@ export default defineType({
       name: 'callsToAction',
       title: 'Calls to action',
       description: 'Add up to two calls to action for the event detail page.',
-      type: 'array',
-      of: [defineArrayMember({type: 'link'})],
-      validation: (Rule) => Rule.max(2),
+      type: 'callsToAction',
       group: 'page',
     }),
     defineField({

@@ -1,15 +1,23 @@
 import {LinkIcon} from '@sanity/icons/Link'
-import {defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {linkFields} from './shared/linkFields'
 
 export default defineType({
-  name: 'link',
-  title: 'Link',
+  name: 'button',
+  title: 'Button',
   icon: LinkIcon,
   description:
-    'A reusable link that can point to internal content, a path on this website, or an external URL.',
+    'A reusable button that can link to internal content, a path on this website, or an external URL.',
   type: 'object',
-  fields: linkFields,
+  fields: [
+    defineField({
+      name: 'label',
+      title: 'Label',
+      description: 'The button text, like a call to action.',
+      type: 'string',
+    }),
+    ...linkFields,
+  ],
   preview: {
     select: {
       label: 'label',

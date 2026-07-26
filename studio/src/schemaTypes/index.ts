@@ -7,6 +7,7 @@ import siteSettings from './documents/siteSettings'
 import artisanFeature from './objects/artisanFeature'
 import bookingButton from './objects/bookingButton'
 import bookingEmbedBlock from './objects/bookingEmbedBlock'
+import callsToAction from './objects/callsToAction'
 import eventFeedBlock from './objects/eventFeedBlock'
 import galleryBlock from './objects/galleryBlock'
 import heroBlock from './objects/heroBlock'
@@ -14,6 +15,7 @@ import imageBlock from './objects/imageBlock'
 import imageTextBlock from './objects/imageTextBlock'
 import inquiryBlock from './objects/inquiryBlock'
 import link from './objects/link'
+import button from './objects/button'
 import newsletterSignup from './objects/newsletterSignup'
 import pageSection from './objects/pageSection'
 import quoteBlock from './objects/quoteBlock'
@@ -33,6 +35,8 @@ export const schemaTypes = [
   page,
   seo,
   link,
+  button,
+  callsToAction,
   bookingButton,
   newsletterSignup,
   simplePortableText,

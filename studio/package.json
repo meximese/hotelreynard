@@ -12,11 +12,11 @@
     "seed:import": "sanity exec scripts/importSiteScaffold.mjs --with-user-token"
   },
   "dependencies": {
-    "@sanity/vision": "^4.22.0",
+    "@sanity/vision": "^6.6.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "sanity": "^4.22.0",
-    "sanity-plugin-media": "^4.3.6",
+    "sanity": "^6.6.0",
+    "sanity-plugin-media": "^6.0.7",
     "styled-components": "^6.3.12"
   },
   "devDependencies": {

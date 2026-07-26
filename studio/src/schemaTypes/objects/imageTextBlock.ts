@@ -1,5 +1,5 @@
-import {ImageIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {ImageIcon} from '@sanity/icons/Image'
+import {defineField, defineType} from 'sanity'
 import {sectionGroups} from './shared/sectionGroups'
 
 export default defineType({
@@ -46,9 +46,7 @@ export default defineType({
       name: 'callsToAction',
       title: 'Calls to action',
       description: 'Add up to two calls to action shown with the text content.',
-      type: 'array',
-      of: [defineArrayMember({type: 'link'})],
-      validation: (Rule) => Rule.max(2),
+      type: 'callsToAction',
       group: 'content',
     }),
     defineField({
