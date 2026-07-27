@@ -21,12 +21,6 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'booking',
-      title: 'Booking settings',
-      description: 'Shared booking widget settings used by booking controls across the site.',
-      type: 'bookingSettings',
-    }),
-    defineField({
       name: 'seo',
       title: 'SEO',
       description: 'Default search and social sharing details for the site.',

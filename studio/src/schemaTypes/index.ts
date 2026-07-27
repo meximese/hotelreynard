@@ -31,7 +31,6 @@ import sectionTextAlign from './objects/sectionTextAlign'
 import sectionTitle from './objects/sectionTitle'
 import simplePortableText from './objects/simplePortableText'
 import standardPortableText from './objects/standardPortableText'
-import bookingSettings from './objects/bookingSettings'
 
 export const schemaTypes = [
   siteSettings,
@@ -44,7 +43,6 @@ export const schemaTypes = [
   link,
   button,
   callsToAction,
-  bookingSettings,
   bookingButton,
   newsletterSignup,
   sectionEyebrow,
