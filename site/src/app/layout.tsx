@@ -58,7 +58,7 @@ export default async function RootLayout({
           </footer>
         </Providers>
         <Script
-          src="https://api.mews.com/distributor/distributor.min.js"
+          src="https://app.mews.com/distributor/distributor.min.js"
           strategy="afterInteractive"
         />
       </body>

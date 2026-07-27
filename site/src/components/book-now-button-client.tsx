@@ -13,16 +13,11 @@ interface MewsDistributorOptions {
   configurationIds: string[];
 }
 
-interface MewsDistributorRuntimeOptions {
-  dataBaseUrl?: string;
-}
-
 interface WindowWithMews extends Window {
   Mews?: {
     Distributor: (
       options: MewsDistributorOptions,
       callback: (api: MewsDistributorApi) => void,
-      runtimeOptions?: MewsDistributorRuntimeOptions,
     ) => void;
   };
 }
@@ -32,8 +27,6 @@ function getDistributor() {
 }
 
 const configurationId = process.env.NEXT_PUBLIC_MEWS_CONFIGURATION_ID ?? "";
-const apiUrl =
-  process.env.NEXT_PUBLIC_MEWS_API_URL ?? "https://api.mews-demo.com";
 const languageCode = process.env.NEXT_PUBLIC_MEWS_LANGUAGE_CODE ?? "en-US";
 const currencyCode = process.env.NEXT_PUBLIC_MEWS_CURRENCY_CODE ?? "USD";
 
@@ -86,7 +79,6 @@ export function BookNowButtonClient({
             setIsReady(true);
           }
         },
-        apiUrl.includes("mews-demo.com") ? { dataBaseUrl: apiUrl } : undefined,
       );
     }
 
