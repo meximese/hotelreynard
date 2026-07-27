@@ -1,5 +1,6 @@
 import {PortableText} from "@portabletext/react";
 import {ContentSeparator} from "@/components/content-separator";
+import {portableTextComponents} from "@/components/portable-text";
 import {PageSections} from "@/components/page-sections";
 import {SanityImageView} from "@/components/sanity-image";
 import {SplashLayoutScaffold} from "@/components/splash/SplashLayoutScaffold";
@@ -81,7 +82,7 @@ export default async function HomePage() {
           <section className="home-intro">
             <div className="home-intro-copy" data-sanity={introAttr}>
               <div className="home-intro-lede">
-                <PortableText value={page.pageIntro} />
+                <PortableText components={portableTextComponents} value={page.pageIntro} />
               </div>
             </div>
           </section>

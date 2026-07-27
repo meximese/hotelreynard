@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import {portableTextComponents} from "@/components/portable-text";
 import type { PageSection } from "@/lib/content/types";
 
 export function RichTextBlockSection({
@@ -8,7 +9,7 @@ export function RichTextBlockSection({
 }) {
   return (
     <div className="rich-body">
-      <PortableText value={section.content || []} />
+      <PortableText components={portableTextComponents} value={section.content || []} />
     </div>
   );
 }

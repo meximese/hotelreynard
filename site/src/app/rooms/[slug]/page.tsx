@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { PageShell } from "@/components/page-shell";
+import {portableTextComponents} from "@/components/portable-text";
 import { SanityImageView } from "@/components/sanity-image";
 import { getRoomBySlug } from "@/lib/content/loaders";
 
@@ -34,7 +35,7 @@ export default async function RoomPage({ params }: PageProps) {
       />
       {room.body?.length ? (
         <div className="rich-body">
-          <PortableText value={room.body} />
+          <PortableText components={portableTextComponents} value={room.body} />
         </div>
       ) : null}
       {room.highlights?.length ? (

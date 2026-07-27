@@ -1,6 +1,7 @@
 import type {PortableTextBlock} from "@portabletext/types";
 import {PortableText} from "@portabletext/react";
 import {ContentSeparator} from "@/components/content-separator";
+import {portableTextComponents} from "@/components/portable-text";
 import {SanityImageView} from "@/components/sanity-image";
 import {BuiLink} from "@/components/ui/actions";
 import {BuiHeadline, BuiText} from "@/components/ui/typography";
@@ -100,7 +101,7 @@ export function PageShell({
         </BuiHeadline>
         {pageIntro?.length ? (
           <div className="lede" data-sanity={introAttr}>
-            <PortableText value={pageIntro} />
+            <PortableText components={portableTextComponents} value={pageIntro} />
           </div>
         ) : null}
       </section>

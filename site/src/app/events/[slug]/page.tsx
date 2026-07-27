@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { PageShell } from "@/components/page-shell";
+import {portableTextComponents} from "@/components/portable-text";
 import { SanityImageView } from "@/components/sanity-image";
 import { BuiLink } from "@/components/ui/actions";
 import { resolveSanityLinkHref } from "@/lib/content/links";
@@ -40,7 +41,7 @@ export default async function EventPage({ params }: PageProps) {
       />
       {event.body?.length ? (
         <div className="rich-body">
-          <PortableText value={event.body} />
+          <PortableText components={portableTextComponents} value={event.body} />
         </div>
       ) : null}
       {actions.length ? (
