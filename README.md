@@ -47,6 +47,8 @@ The important split is:
 - `NEXT_PUBLIC_SANITY_STUDIO_URL` = the Studio origin
 - `SANITY_SITE_PREVIEW_URL` = the site origin that Presentation opens
 
+Both URL env vars are normalized to remove a trailing slash. Missing or invalid values now fail loudly at startup instead of falling back to localhost.
+
 ## Useful Commands
 
 ```bash

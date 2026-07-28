@@ -1,5 +1,6 @@
 import { createDataAttribute, stegaClean } from "next-sanity";
 import type { StudioPathLike } from "@sanity/client/csm";
+import { getStudioUrl } from "./client";
 
 export function getVisualEditingEnabled() {
   return process.env.NEXT_PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
@@ -18,11 +19,8 @@ export function createSanityDataAttribute({
   type: string;
   path: StudioPathLike;
 }) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "http://localhost:3333";
-
   return createDataAttribute({
-    baseUrl,
+    baseUrl: getStudioUrl(),
     id,
     type,
     path,
