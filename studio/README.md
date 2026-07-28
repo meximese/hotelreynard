@@ -24,7 +24,7 @@ Expected env vars:
 
 - `SANITY_STUDIO_PROJECT_ID`
 - `SANITY_STUDIO_DATASET`
-- `SANITY_SITE_PREVIEW_URL`
+- `SANITY_STUDIO_SITE_PREVIEW_URL`
 
 CLI config lives in [sanity.cli.ts](/Users/vinh/dev/reynard/hotelreynard/studio/sanity.cli.ts).
 Studio config lives in [sanity.config.ts](/Users/vinh/dev/reynard/hotelreynard/studio/sanity.config.ts).
