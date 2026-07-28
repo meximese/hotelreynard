@@ -7,7 +7,7 @@ import { readRequiredSanityEnv, readRequiredSanityUrlEnv } from "./src/env";
 import { schemaTypes } from "./src/schemaTypes";
 import { deskStructure } from "./src/structure";
 
-const previewUrl = readRequiredSanityUrlEnv("SANITY_SITE_PREVIEW_URL");
+const previewUrl = readRequiredSanityUrlEnv("SANITY_STUDIO_SITE_PREVIEW_URL");
 const projectId = readRequiredSanityEnv("SANITY_STUDIO_PROJECT_ID");
 const dataset = readRequiredSanityEnv("SANITY_STUDIO_DATASET");
 
