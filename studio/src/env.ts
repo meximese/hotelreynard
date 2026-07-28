@@ -1,27 +1,22 @@
-function readEnv(name: string) {
-  const value = process.env[name]?.trim();
-  return value ? value : null;
-}
+function requireEnv(name: string, value: string | undefined) {
+  const trimmed = value?.trim();
 
-export function readRequiredSanityEnv(name: string) {
-  const value = readEnv(name);
-
-  if (!value) {
+  if (!trimmed) {
     throw new Error(`Missing required Sanity environment variable: ${name}`);
   }
 
-  return value;
+  return trimmed;
 }
 
-export function readRequiredSanityUrlEnv(name: string) {
-  const value = readRequiredSanityEnv(name);
+function normalizeRequiredUrl(name: string, value: string | undefined) {
+  const raw = requireEnv(name, value);
 
   let parsed: URL;
 
   try {
-    parsed = new URL(value);
+    parsed = new URL(raw);
   } catch {
-    throw new Error(`Invalid URL in Sanity environment variable ${name}: ${value}`);
+    throw new Error(`Invalid URL in Sanity environment variable ${name}: ${raw}`);
   }
 
   if (!["http:", "https:"].includes(parsed.protocol)) {
@@ -40,3 +35,18 @@ export function readRequiredSanityUrlEnv(name: string) {
 
   return parsed.toString().replace(/\/$/, "");
 }
+
+export const studioProjectId = requireEnv(
+  "SANITY_STUDIO_PROJECT_ID",
+  process.env.SANITY_STUDIO_PROJECT_ID,
+);
+
+export const studioDataset = requireEnv(
+  "SANITY_STUDIO_DATASET",
+  process.env.SANITY_STUDIO_DATASET,
+);
+
+export const studioSitePreviewUrl = normalizeRequiredUrl(
+  "SANITY_STUDIO_SITE_PREVIEW_URL",
+  process.env.SANITY_STUDIO_SITE_PREVIEW_URL,
+);
