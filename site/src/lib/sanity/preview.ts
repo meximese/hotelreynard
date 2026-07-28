@@ -19,9 +19,7 @@ export function createSanityDataAttribute({
   path: StudioPathLike;
 }) {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SANITY_STUDIO_URL ||
-    process.env.SANITY_STUDIO_PREVIEW_URL ||
-    "http://localhost:4321";
+    process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "http://localhost:3333";
 
   return createDataAttribute({
     baseUrl,

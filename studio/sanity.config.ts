@@ -6,7 +6,7 @@ import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./src/schemaTypes";
 import { deskStructure } from "./src/structure";
 
-const previewUrl = process.env.SANITY_STUDIO_PREVIEW_URL || "http://localhost:3000";
+const previewUrl = process.env.SANITY_SITE_PREVIEW_URL || "http://localhost:3000";
 
 const singletonLocation = (title: string, href: string) =>
   defineLocations({

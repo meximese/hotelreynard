@@ -15,10 +15,10 @@ for (const envPath of [
 
 const projectId =
   process.env.SANITY_STUDIO_PROJECT_ID ||
-  process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID;
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset =
   process.env.SANITY_STUDIO_DATASET ||
-  process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET;
+  process.env.NEXT_PUBLIC_SANITY_DATASET;
 const writeToken = process.env.SANITY_API_WRITE_TOKEN || process.env.SANITY_AUTH_TOKEN;
 
 if (!projectId || !dataset || !writeToken) {

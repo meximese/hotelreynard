@@ -37,6 +37,16 @@ That starts:
 - the Next.js app at [http://localhost:3000](http://localhost:3000)
 - the Sanity Studio at [http://localhost:3333](http://localhost:3333)
 
+## Environment Templates
+
+- [site/.env.example](/Users/vinh/dev/reynard/hotelreynard/site/.env.example) defines frontend Sanity env vars.
+- [studio/.env.example](/Users/vinh/dev/reynard/hotelreynard/studio/.env.example) defines Studio Presentation env vars.
+
+The important split is:
+
+- `NEXT_PUBLIC_SANITY_STUDIO_URL` = the Studio origin
+- `SANITY_SITE_PREVIEW_URL` = the site origin that Presentation opens
+
 ## Useful Commands
 
 ```bash
