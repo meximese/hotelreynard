@@ -68,4 +68,6 @@ npm run email:dev
 - `studio` is the active Sanity workspace used alongside `site`.
 - `packages/email` contains the shared email templates used by site API routes.
 
+## NOTE:
+
 The archived Reynard wordmark morph lives in [site/src/components/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/src/components/archive/reynard-wordmark-morph) with source SVGs in [site/public/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/public/archive/reynard-wordmark-morph).
