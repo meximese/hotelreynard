@@ -1,6 +1,7 @@
 import type { ClientPerspective, QueryParams } from "@sanity/client";
 import { draftMode } from "next/headers";
-import { getSanityClient, hasSanityConfig, sanityReadToken, studioUrl, useCdn } from "./client";
+import { getSanityClient, hasSanityConfig, sanityReadToken, useCdn } from "./client";
+import { studioUrl } from "./env";
 import { getVisualEditingEnabled } from "./preview";
 
 export const DEFAULT_SANITY_REVALIDATE = 120;
