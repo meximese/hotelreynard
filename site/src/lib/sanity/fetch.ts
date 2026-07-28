@@ -1,6 +1,6 @@
 import type { ClientPerspective, QueryParams } from "@sanity/client";
 import { draftMode } from "next/headers";
-import { getSanityClient, getStudioUrl, hasSanityConfig, sanityReadToken, useCdn } from "./client";
+import { getSanityClient, hasSanityConfig, sanityReadToken, studioUrl, useCdn } from "./client";
 import { getVisualEditingEnabled } from "./preview";
 
 export const DEFAULT_SANITY_REVALIDATE = 120;
@@ -32,7 +32,7 @@ export async function sanityFetch<QueryResponse>({
   const resolvedStega = stega ?? canPreview;
   const client = getSanityClient().withConfig({
     perspective: resolvedPerspective,
-    stega: resolvedStega ? { studioUrl: getStudioUrl() } : false,
+    stega: resolvedStega ? { studioUrl: studioUrl! } : false,
     token: resolvedPerspective === "published" ? undefined : sanityReadToken,
     useCdn: resolvedPerspective === "published" ? useCdn : false,
   });

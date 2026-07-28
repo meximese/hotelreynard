@@ -1,5 +1,5 @@
 import { createClient } from "next-sanity";
-import { readRequiredSanityUrlEnv } from "./env";
+import { studioUrl } from "./env";
 
 export const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2026-07-01";
@@ -37,8 +37,4 @@ export function getSanityClient() {
     perspective: "published",
     stega: false,
   });
-}
-
-export function getStudioUrl() {
-  return readRequiredSanityUrlEnv("NEXT_PUBLIC_SANITY_STUDIO_URL");
 }

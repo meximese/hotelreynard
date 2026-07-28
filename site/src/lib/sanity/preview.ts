@@ -1,9 +1,9 @@
 import { createDataAttribute, stegaClean } from "next-sanity";
 import type { StudioPathLike } from "@sanity/client/csm";
-import { getStudioUrl } from "./client";
+import { studioUrl, visualEditingEnabled } from "./env";
 
 export function getVisualEditingEnabled() {
-  return process.env.NEXT_PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+  return visualEditingEnabled;
 }
 
 export function cleanStegaString(value: string) {
@@ -19,8 +19,12 @@ export function createSanityDataAttribute({
   type: string;
   path: StudioPathLike;
 }) {
+  if (!visualEditingEnabled) {
+    return undefined;
+  }
+
   return createDataAttribute({
-    baseUrl: getStudioUrl(),
+    baseUrl: studioUrl!,
     id,
     type,
     path,

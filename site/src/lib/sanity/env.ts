@@ -3,6 +3,9 @@ function readEnv(name: string) {
   return value ? value : null;
 }
 
+export const visualEditingEnabled =
+  process.env.NEXT_PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+
 export function readRequiredSanityEnv(name: string) {
   const value = readEnv(name);
 
@@ -40,3 +43,7 @@ export function readRequiredSanityUrlEnv(name: string) {
 
   return parsed.toString().replace(/\/$/, "");
 }
+
+export const studioUrl = visualEditingEnabled
+  ? readRequiredSanityUrlEnv("NEXT_PUBLIC_SANITY_STUDIO_URL")
+  : null;
