@@ -3,13 +3,9 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { defineDocuments, defineLocations, presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
-import { readRequiredSanityEnv, readRequiredSanityUrlEnv } from "./src/env";
+import { studioDataset, studioProjectId, studioSitePreviewUrl } from "./src/env";
 import { schemaTypes } from "./src/schemaTypes";
 import { deskStructure } from "./src/structure";
-
-const previewUrl = readRequiredSanityUrlEnv("SANITY_STUDIO_SITE_PREVIEW_URL");
-const projectId = readRequiredSanityEnv("SANITY_STUDIO_PROJECT_ID");
-const dataset = readRequiredSanityEnv("SANITY_STUDIO_DATASET");
 
 const singletonLocation = (title: string, href: string) =>
   defineLocations({
@@ -29,13 +25,13 @@ const singletonLocation = (title: string, href: string) =>
 export default defineConfig({
   name: "hotelreynard-studio",
   title: "Hotel Reynard Studio",
-  projectId,
-  dataset,
+  projectId: studioProjectId,
+  dataset: studioDataset,
   plugins: [
     structureTool({ structure: deskStructure }),
     presentationTool({
       previewUrl: {
-        initial: previewUrl,
+        initial: studioSitePreviewUrl,
         previewMode: {
           enable: "/api/draft-mode/enable",
         },
