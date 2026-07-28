@@ -4,8 +4,6 @@ Monorepo for the Hotel Reynard website and supporting content tooling.
 
 The primary frontend in this repo is the Next.js app in [site](/Users/vinh/dev/reynard/hotelreynard/site). The repo also includes a Sanity Studio workspace and a shared email package.
 
-The archived Reynard wordmark morph lives in [site/src/components/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/src/components/archive/reynard-wordmark-morph) with source SVGs in [site/public/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/public/archive/reynard-wordmark-morph).
-
 ## Workspaces
 
 - `site` - Next.js 16 App Router hotel site
@@ -59,3 +57,5 @@ npm run email:dev
 - `site` is the active frontend.
 - `studio` is the active Sanity workspace used alongside `site`.
 - `packages/email` contains the shared email templates used by site API routes.
+
+The archived Reynard wordmark morph lives in [site/src/components/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/src/components/archive/reynard-wordmark-morph) with source SVGs in [site/public/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/public/archive/reynard-wordmark-morph).
