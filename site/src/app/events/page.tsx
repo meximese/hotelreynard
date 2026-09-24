@@ -1,6 +1,13 @@
 import { PageSections } from "@/components/page-sections";
 import { PageShell } from "@/components/page-shell";
 import { getEventsPageData, getUpcomingEvents } from "@/lib/content/loaders";
+import { metadataForSeo } from "@/lib/seo/metadata";
+
+export async function generateMetadata() {
+  const page = await getEventsPageData();
+
+  return metadataForSeo(page.seo);
+}
 
 export default async function EventsPage() {
   const page = await getEventsPageData();

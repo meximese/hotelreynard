@@ -6,9 +6,17 @@ import { SanityImageView } from "@/components/sanity-image";
 import { BuiLink } from "@/components/ui/actions";
 import { resolveSanityLinkHref } from "@/lib/content/links";
 import { getEventBySlug } from "@/lib/content/loaders";
+import { metadataForSeo } from "@/lib/seo/metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const event = await getEventBySlug(slug);
+
+  return metadataForSeo(event?.seo);
 }
 
 export default async function EventPage({ params }: PageProps) {

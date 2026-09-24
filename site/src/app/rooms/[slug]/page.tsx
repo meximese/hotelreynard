@@ -4,9 +4,17 @@ import { PageShell } from "@/components/page-shell";
 import {portableTextComponents} from "@/components/portable-text";
 import { SanityImageView } from "@/components/sanity-image";
 import { getRoomBySlug } from "@/lib/content/loaders";
+import { metadataForSeo } from "@/lib/seo/metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const room = await getRoomBySlug(slug);
+
+  return metadataForSeo(room?.seo);
 }
 
 export default async function RoomPage({ params }: PageProps) {

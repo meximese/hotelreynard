@@ -9,6 +9,13 @@ import {BuiText} from "@/components/ui/typography";
 import {resolveSanityLinkHref} from "@/lib/content/links";
 import {getHomePage, getUpcomingEvents} from "@/lib/content/loaders";
 import {createSanityDataAttribute} from "@/lib/sanity/preview";
+import {metadataForSeo} from "@/lib/seo/metadata";
+
+export async function generateMetadata() {
+  const page = await getHomePage();
+
+  return metadataForSeo(page.seo);
+}
 
 export default async function HomePage() {
   const page = await getHomePage();

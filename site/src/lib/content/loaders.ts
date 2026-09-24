@@ -76,6 +76,7 @@ const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
   ${pageHeroProjection},
   title,
   pageIntro,
+  seo{noIndex},
   ${pageSectionsProjection}
 }`;
 
@@ -180,7 +181,8 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
       startDateTime,
       "body": body.content,
       heroImage,
-      "callsToAction": callsToAction[]${linkProjection}
+      "callsToAction": callsToAction[]${linkProjection},
+      seo{noIndex}
     }`,
     params: {slug},
     tags: ["event", `event:${slug}`],
@@ -204,7 +206,8 @@ export async function getRoomBySlug(slug: string): Promise<Room | null> {
       heroImage,
       gallery,
       highlights,
-      isPublicPageEnabled
+      isPublicPageEnabled,
+      seo{noIndex}
     }`,
     params: {slug},
     tags: ["room", `room:${slug}`],
@@ -225,6 +228,7 @@ export async function getGenericPageBySlug(slug: string): Promise<GenericPage | 
       title,
       pageIntro,
       slug,
+      seo{noIndex},
       ${pageSectionsProjection}
     }`,
     params: {slug},
@@ -245,6 +249,7 @@ export async function getEventsPageData(): Promise<EventsPageData> {
       ${pageHeroProjection},
       title,
       pageIntro,
+      seo{noIndex},
       ${pageSectionsProjection}
     }`,
     tags: ["eventsPage"],

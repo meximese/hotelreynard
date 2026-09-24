@@ -28,6 +28,10 @@ export interface SanityLink {
   openInNewTab?: boolean;
 }
 
+export interface SeoSettings {
+  noIndex?: boolean;
+}
+
 export interface BookingButton {
   label?: string;
 }
@@ -50,6 +54,7 @@ export interface Room {
   gallery?: SanityImage[];
   highlights?: string[];
   isPublicPageEnabled?: boolean;
+  seo?: SeoSettings;
 }
 
 export interface Event {
@@ -63,6 +68,7 @@ export interface Event {
   body?: PortableTextBlock[];
   heroImage?: SanityImage;
   callsToAction?: SanityLink[];
+  seo?: SeoSettings;
 }
 
 export interface HoursEntry {
@@ -115,6 +121,7 @@ export interface GenericPage {
   pageIntro?: PortableTextBlock[];
   slug: Slug;
   sections?: PageSection[];
+  seo?: SeoSettings;
 }
 
 export interface HomePageData extends SanityDocumentIdentity {
@@ -122,6 +129,7 @@ export interface HomePageData extends SanityDocumentIdentity {
   title: string;
   pageIntro?: PortableTextBlock[];
   sections?: PageSection[];
+  seo?: SeoSettings;
 }
 
 export interface EventsPageData extends SanityDocumentIdentity {
@@ -129,4 +137,5 @@ export interface EventsPageData extends SanityDocumentIdentity {
   title: string;
   pageIntro?: PortableTextBlock[];
   sections?: PageSection[];
+  seo?: SeoSettings;
 }
