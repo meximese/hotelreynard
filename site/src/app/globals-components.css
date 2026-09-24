@@ -216,6 +216,7 @@
 
 .splash-backdrop__logo {
   width: min(70vw, 18rem);
+  margin-bottom: 2rem;
 }
 
 .splash-backdrop__crest {

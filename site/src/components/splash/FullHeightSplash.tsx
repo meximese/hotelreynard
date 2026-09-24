@@ -8,6 +8,7 @@ import { NewsletterDialog } from "@/components/newsletter-dialog";
 import { CrestMark } from "@/components/svg/crest-mark";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiHeadline, BuiText } from "@/components/ui/typography";
+import { InstagramLink } from "../instagram-link";
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -73,10 +74,10 @@ export function FullHeightSplash({
           <>
             <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
               <BuiText as="span" className="date-desktop">
-                September 2026
+                November 2026
               </BuiText>
               <BuiText as="span" className="date-mobile">
-                Sept 2026
+                Nov 2026
               </BuiText>
             </div>
             <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
@@ -105,10 +106,10 @@ export function FullHeightSplash({
               <div className="splash-backdrop__detail-row">
                 <BuiText as="span">
                   <BuiText as="span" className="date-desktop">
-                    September 2026
+                    November 2026
                   </BuiText>
                   <BuiText as="span" className="date-mobile">
-                    Sept 2026
+                    Nov 2026
                   </BuiText>
                 </BuiText>
                 <BookNowButton />
@@ -116,8 +117,9 @@ export function FullHeightSplash({
                   handle={newsletterDialog}
                   className="ui-action ui-action--button ui-action--hover-full"
                 >
-                  Keep in Touch
+                  <BuiText as="span">Keep in Touch</BuiText>
                 </Dialog.Trigger>
+                <InstagramLink icon={true} />
               </div>
             </>
           ) : null}
@@ -132,7 +134,7 @@ export function FullHeightSplash({
                 handle={newsletterDialog}
                 className="ui-action ui-action--button ui-action--hover-full"
               >
-                Keep in Touch
+                <BuiText as="span">Keep in Touch</BuiText>
               </Dialog.Trigger>
             </div>
           </>

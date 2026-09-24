@@ -26,10 +26,10 @@ export function FloatingSplashHeader({
             aria-label="Primary navigation"
           >
             <BuiText as="span" className="toolbar-corner-label date-desktop">
-              September 2026
+              November 2026
             </BuiText>
             <BuiText as="span" className="toolbar-corner-label date-mobile">
-              Sept 2026
+              Nov 2026
             </BuiText>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">

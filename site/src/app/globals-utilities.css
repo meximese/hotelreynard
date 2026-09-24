@@ -45,3 +45,11 @@
 .cta-row.text-align-right {
   justify-content: flex-end;
 }
+
+/** ICONS **/
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-ink);
+}
