@@ -1,80 +1,73 @@
-import { draftMode } from "next/headers";
-import { redirect } from "next/navigation";
-import RichTextSection from "@/components/RichTextSection";
-import { getRoom } from "@/lib/sanity/content";
-import { urlFor } from "@/lib/sanity/image";
-import { getVisualEditingEnabled } from "@/lib/sanity/preview";
+import { notFound } from "next/navigation";
+import { PortableText } from "@portabletext/react";
+import { PageShell } from "@/components/page-shell";
+import {portableTextComponents} from "@/components/portable-text";
+import { SanityImageView } from "@/components/sanity-image";
+import { getRoomBySlug } from "@/lib/content/loaders";
+import { metadataForSeo } from "@/lib/seo/metadata";
 
 interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const room = await getRoomBySlug(slug);
+
+  return metadataForSeo(room?.seo);
 }
 
 export default async function RoomPage({ params }: PageProps) {
   const { slug } = await params;
-  const draftModeState = await draftMode();
-  const visualEditingEnabled =
-    getVisualEditingEnabled() && draftModeState.isEnabled;
-  const room = slug ? await getRoom(slug, { visualEditingEnabled }) : null;
+  const room = await getRoomBySlug(slug);
 
   if (!room) {
-    redirect("/");
+    notFound();
   }
 
   return (
-    <>
-      <section className="detail-hero">
-        <div>
-          <p className="section-eyebrow">Room</p>
-          <h1>{room.title}</h1>
-          {room.description ? <p className="lede">{room.description}</p> : null}
-          {room.amenities?.length ? (
-            <ul className="detail-tags">
-              {room.amenities.map((amenity) => (
-                <li key={amenity._id}>{amenity.title}</li>
-              ))}
-            </ul>
-          ) : null}
+    <PageShell
+      eyebrow="Room"
+      title={room.title}
+      pageIntro={[]}
+      documentId={room._id}
+      documentType={room._type || "room"}
+    >
+      <SanityImageView
+        image={room.heroImage}
+        alt={room.title}
+        width={1600}
+        height={1100}
+        sizes="100vw"
+        className="hero-image"
+      />
+      {room.body?.length ? (
+        <div className="rich-body">
+          <PortableText components={portableTextComponents} value={room.body} />
         </div>
-        {room.heroImage ? (
-          <img
-            alt={room.heroImage.alt || room.title}
-            className="detail-hero__image"
-            src={urlFor(room.heroImage).width(1400).height(1000).url()}
-          />
-        ) : null}
-      </section>
-
+      ) : null}
+      {room.highlights?.length ? (
+        <ul className="tag-list">
+          {room.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+      ) : null}
       {room.gallery?.length ? (
-        <section className="gallery-grid">
+        <div className="image-grid">
           {room.gallery.map((image, index) => (
-            <img
-              key={`${room._id}-gallery-${index}`}
-              alt={image.alt || room.title}
-              className="gallery-grid__image"
-              src={urlFor(image).width(1200).height(900).url()}
+            <SanityImageView
+              key={`${image.asset?._ref || "image"}-${index}`}
+              image={image}
+              alt={image.alt || `${room.title} gallery image ${index + 1}`}
+              width={1000}
+              height={800}
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="gallery-image"
             />
           ))}
-        </section>
+        </div>
       ) : null}
-
-      <RichTextSection
-        title="Plan your stay"
-        value={[
-          {
-            _type: "block",
-            children: [
-              {
-                _type: "span",
-                text: room.mewsRoomCategoryId
-                  ? `This room is connected to Mews category ${room.mewsRoomCategoryId}.`
-                  : "Connect this room to a Mews category to align content with booking inventory.",
-              },
-            ],
-          },
-        ]}
-      />
-    </>
+    </PageShell>
   );
 }

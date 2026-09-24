@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import Script from "next/script";
-import FooterKnockoutSvg from "@/components/FooterKnockoutSvg";
-import HeaderVisibilityController from "@/components/HeaderVisibilityController";
-import HeaderWordmark from "@/components/HeaderWordmark";
-import { LayoutAnimationProvider } from "@/components/LayoutAnimationProvider";
-import "./globals.css";
-import ReynardWordmarkMorphSvgScrollScene from "@/components/ReynardWordmarkMorphSvgScrollScene";
-import NewsletterForm from "@/components/NewsletterForm";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { NewsletterForm } from "@/components/newsletter-form";
+import { Providers } from "@/components/providers";
+import { SiteHeaderShell } from "@/components/site-header-shell";
+import { BuiText } from "@/components/ui/typography";
+import { getVisualEditingEnabled } from "@/lib/sanity/preview";
+import "lenis/dist/lenis.css";
+import "./globals-system.css";
 
 export const metadata: Metadata = {
   title: "Hotel Reynard",
-  description: "Hotel Reynard",
-  icons: {
-    icon: "/favicon.svg",
-  },
+  description: "Hotel Reynard web experience",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const draft = await draftMode();
+  const visualEditingEnabled = getVisualEditingEnabled() && draft.isEnabled;
+
   return (
     <html lang="en">
       <head>
@@ -35,66 +37,28 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
-        <LayoutAnimationProvider>
-          <HeaderVisibilityController />
-          <div className="site-shell">
-            <header className="site-header">
-              <div className="site-header__bar">
-                {/* <nav className="site-header__nav" aria-label="Primary">
-                  <a href="#rooms">Rooms</a>
-                  <a href="#stays">Stays</a>
-                </nav> */}
-                <a href="#top" className="site-header__home-link">
-                  <span className="sr-only">Hotel Reynard</span>
-                  <HeaderWordmark />
-                </a>
-                {/* <nav className="site-header__nav" aria-label="Primary">
-                  <a href="#menu">Menu</a>
-                  <a href="#events">Events</a>
-                </nav> */}
+      <body className="striped">
+        <Providers>
+          <SiteHeaderShell />
+          {children}
+          {visualEditingEnabled ? <VisualEditing /> : null}
+          <footer className="site-footer">
+            <div className="site-footer-grid">
+              <div>
+                <BuiText variant="eyebrow" className="eyebrow">
+                  Visit
+                </BuiText>
+                <BuiText as="p">302 Historic Columbia River Highway</BuiText>
+                <BuiText as="p">Troutdale, Oregon</BuiText>
               </div>
-            </header>
-            <section className="site-intro">
-              <ReynardWordmarkMorphSvgScrollScene
-                className="morph-scroll-track--footer"
-                morphClassName="poster-hero__morph"
-                direction="forward"
-                holdStart={0.0}
-                holdEnd={0.25}
-              >
-                <h2 className="poster-sub poster-hero__hotel">Hotel</h2>
-                <h2 className="poster-sub poster-hero__tavern">
-                  <span>&amp;</span> Tavern
-                </h2>
-              </ReynardWordmarkMorphSvgScrollScene>
-              <p className="tagline">
-                302 Historic Columbia River Highway
-                <br />
-                Hotel Reynard opens Summer 2026
-              </p>
-            </section>
-            {/* <div
-              className="poster-bouquet poster-bouquet--hero"
-              aria-hidden="true"
-            >
-              <img
-                src={"/site-svg/bouquet.svg"}
-                alt=""
-                className="flower-bouquet"
-              />
-            </div> */}
-
-            {/* <main className="site-main">{children}</main> */}
-            <footer className="site-footer">
-              <section className="newsletter-signup">
+              <div className="site-footer-newsletter">
                 <NewsletterForm />
-              </section>
-            </footer>
-          </div>
-        </LayoutAnimationProvider>
+              </div>
+            </div>
+          </footer>
+        </Providers>
         <Script
-          src="https://api.mews.com/distributor/distributor.min.js"
+          src="https://app.mews.com/distributor/distributor.min.js"
           strategy="afterInteractive"
         />
       </body>

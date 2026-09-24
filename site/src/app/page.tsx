@@ -1,54 +1,113 @@
-import NewsletterForm from "@/components/NewsletterForm";
-import ReynardWordmarkMorph, {
-  ReynardWordmarkMorphDemo,
-} from "@/components/ReynardWordmarkMorph";
-import ReynardWordmarkMorphScrollScene from "@/components/ReynardWordmarkMorphScrollScene";
+import {PortableText} from "@portabletext/react";
+import {ContentSeparator} from "@/components/content-separator";
+import {portableTextComponents} from "@/components/portable-text";
+import {PageSections} from "@/components/page-sections";
+import {SanityImageView} from "@/components/sanity-image";
+import {SplashLayoutScaffold} from "@/components/splash/SplashLayoutScaffold";
+import {BuiLink} from "@/components/ui/actions";
+import {BuiText} from "@/components/ui/typography";
+import {resolveSanityLinkHref} from "@/lib/content/links";
+import {getHomePage, getUpcomingEvents} from "@/lib/content/loaders";
+import {createSanityDataAttribute} from "@/lib/sanity/preview";
+import {metadataForSeo} from "@/lib/seo/metadata";
 
-const flowers = [
-  "/site-svg/orange%20flower%20a.svg",
-  "/site-svg/white%20flower%20b.svg",
-  "/site-svg/red%20flower%20c.svg",
-  "/site-svg/green%20leaf%20a.svg",
-];
+export async function generateMetadata() {
+  const page = await getHomePage();
 
-export default function Home() {
+  return metadataForSeo(page.seo);
+}
+
+export default async function HomePage() {
+  const page = await getHomePage();
+  const eventFeedLimit = Math.max(
+    0,
+    ...(page.sections
+      ?.filter((section) => section._type === "eventFeedBlock")
+      .map((section) => section.limit || 3) || [0]),
+  );
+  const introAttr = createSanityDataAttribute({
+    id: page._id,
+    type: page._type,
+    path: ["pageIntro"],
+  });
+  const heroAttr = createSanityDataAttribute({
+    id: page._id,
+    type: page._type,
+    path: ["hero"],
+  });
+  const heroActions =
+    page.hero?.callsToAction
+      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
+      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
+  const upcomingEvents = eventFeedLimit > 0 ? await getUpcomingEvents(eventFeedLimit) : [];
+
   return (
-    <section className="poster-page" id="top">
-      <section className="poster-section poster-section--rooms" id="rooms">
-        <div className="poster-copy">
-          <h3>Great food and drinks after a long day out</h3>
-          <p>
-            Hotel Reynard sits at the gateway to the Columbia River Gorge, in
-            Troutdale, Oregon. Eight rooms sit above the tavern, each built for
-            dropping bags, changing pace, and coming back late after a good
-            dinner downstairs.
-          </p>
-          <h3>A base for your next adventure.</h3>
-          <p>
-            The tavern is the anchor: aperitifs, dinner, a little ceremony, and
-            enough warmth to make the whole building feel switched on. Small
-            parties, private dinners, and the kind of gatherings that stretch a
-            meal into the rest of the evening.
-          </p>
-        </div>
-      </section>
-
-      <div className="poster-bouquet poster-bouquet--mid" aria-hidden="true">
-        {flowers.map((src, index) => (
-          <img key={src} src={src} alt="" className={`flower-${index + 1}`} />
-        ))}
-      </div>
-      <section className="poster-footer">
-        <p className="poster-date poster-date--footer">
-          Hotel Reynard opens Summer 2026
-          <br />
-          302 Historic Columbia River Highway
-        </p>
-
-        <div className="poster-newsletter">
-          <NewsletterForm />
-        </div>
-      </section>
-    </section>
+    <SplashLayoutScaffold>
+      <main className="home-shell">
+        {page.hero?.media && (
+          <section className="page-top-hero" data-sanity={heroAttr}>
+            <SanityImageView
+              image={page.hero.media}
+              mobileImage={page.hero.mobileMedia}
+              alt={page.hero.title || page.title}
+              width={1800}
+              height={1200}
+              sizes="100vw"
+              className="home-hero-image"
+            />
+            {page.hero.caption && (
+              <div className="page-top-hero__caption">
+                <BuiText as="span" className="home-hero-name">
+                  {page.hero.caption}
+                </BuiText>
+              </div>
+            )}
+            {page.hero.enableContent && (
+              <div className="page-top-hero__caption">
+                <BuiText as="span" className="home-hero-name">
+                  {page.hero.title}
+                </BuiText>
+                {page.hero.body ? (
+                  <BuiText as="span" className="home-hero-meta">
+                    {page.hero.body}
+                  </BuiText>
+                ) : null}
+                {heroActions.length ? (
+                  <div className="cta-row">
+                    {heroActions.map((action) => (
+                      <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
+                        {action.label}
+                      </BuiLink>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            )}
+          </section>
+        )}
+        {page.pageIntro?.length ? (
+          <section className="home-intro">
+            <div className="home-intro-copy" data-sanity={introAttr}>
+              <div className="home-intro-lede">
+                <PortableText components={portableTextComponents} value={page.pageIntro} />
+              </div>
+            </div>
+          </section>
+        ) : null}
+        {page.sections?.length ? (
+          <>
+            <ContentSeparator />
+            <section className="home-section home-section--stacked">
+              <PageSections
+                sections={page.sections}
+                documentId={page._id}
+                documentType={page._type}
+                upcomingEvents={upcomingEvents}
+              />
+            </section>
+          </>
+        ) : null}
+      </main>
+    </SplashLayoutScaffold>
   );
 }

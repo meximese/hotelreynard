@@ -6,9 +6,9 @@ The primary frontend in this repo is the Next.js app in [site](/Users/vinh/dev/r
 
 ## Workspaces
 
-- `site` - Next.js 16 App Router marketing site
+- `site` - Next.js 16 App Router hotel site
 - `studio` - Sanity Studio for editorial content
-- `packages/email` - shared React email templates used by site API routes
+- `packages/email` - shared React email templates used by app API routes
 
 ## Getting Started
 
@@ -18,15 +18,15 @@ Install dependencies from the repo root:
 npm install
 ```
 
-Run the Next.js site:
+Run the Next.js app:
 
 ```bash
-npm run dev --workspace=site
+npm run dev --workspace=@hotelreynard/site
 ```
 
-The site runs at [http://localhost:3000](http://localhost:3000).
+The web app runs at [http://localhost:3000](http://localhost:3000).
 
-Run the site and Sanity Studio together:
+Run the web app and Sanity Studio together:
 
 ```bash
 npm run dev
@@ -34,26 +34,42 @@ npm run dev
 
 That starts:
 
-- the Next.js site at [http://localhost:3000](http://localhost:3000)
+- the Next.js app at [http://localhost:3000](http://localhost:3000)
 - the Sanity Studio at [http://localhost:3333](http://localhost:3333)
 
-## Next.js Site
+## Environment Templates
 
-See the workspace README for full setup details:
+- [site/.env.example](/Users/vinh/dev/reynard/hotelreynard/site/.env.example) defines frontend Sanity env vars.
+- [studio/.env.example](/Users/vinh/dev/reynard/hotelreynard/studio/.env.example) defines Studio Presentation env vars.
 
-- [site/README.md](/Users/vinh/dev/reynard/hotelreynard/site/README.md)
+The important split is:
+
+- `NEXT_PUBLIC_SANITY_STUDIO_URL` = the Studio origin
+- `SANITY_STUDIO_SITE_PREVIEW_URL` = the site origin that Presentation opens
+
+Both URL env vars are normalized to remove a trailing slash. Missing or invalid values now fail loudly at startup instead of falling back to localhost.
 
 ## Useful Commands
 
 ```bash
-# Next.js site
-npm run dev --workspace=site
-npm run build --workspace=site
-npm run lint --workspace=site
+# Next.js app
+npm run dev --workspace=@hotelreynard/site
+npm run build --workspace=@hotelreynard/site
+npm run lint --workspace=@hotelreynard/site
 
 # Sanity Studio
-npm run dev --workspace=studio
+npm run dev --workspace=@hotelreynard/studio
 
 # Email previews
 npm run email:dev
 ```
+
+## Workspace Notes
+
+- `site` is the active frontend.
+- `studio` is the active Sanity workspace used alongside `site`.
+- `packages/email` contains the shared email templates used by site API routes.
+
+## NOTE:
+
+The archived Reynard wordmark morph lives in [site/src/components/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/src/components/archive/reynard-wordmark-morph) with source SVGs in [site/public/archive/reynard-wordmark-morph](/Users/vinh/dev/reynard/hotelreynard/site/public/archive/reynard-wordmark-morph).

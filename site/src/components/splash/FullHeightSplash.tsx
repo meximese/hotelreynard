@@ -1,0 +1,148 @@
+"use client";
+
+import { Dialog } from "@base-ui/react/dialog";
+import { useEffect, useMemo, useRef } from "react";
+import { useLenis } from "lenis/react";
+import { BookNowButton } from "@/components/book-now-button";
+import { NewsletterDialog } from "@/components/newsletter-dialog";
+import { CrestMark } from "@/components/svg/crest-mark";
+import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
+import { BuiHeadline, BuiText } from "@/components/ui/typography";
+import { InstagramLink } from "../instagram-link";
+
+function clamp(value: number, min = 0, max = 1) {
+  return Math.min(Math.max(value, min), max);
+}
+
+export function FullHeightSplash({
+  layout = "corners",
+}: {
+  layout?: "corners" | "row";
+}) {
+  const splashRef = useRef<HTMLElement | null>(null);
+  const isRowLayout = layout === "row";
+  const newsletterDialog = useMemo(() => Dialog.createHandle(), []);
+
+  const updateSplashState = () => {
+    const splash = splashRef.current;
+
+    if (!splash) {
+      return;
+    }
+
+    const rect = splash.getBoundingClientRect();
+    const scrolledPast = Math.max(-rect.top, 0);
+    const fadeDistance = Math.max(rect.height * 0.62, 1);
+    const colorProgress = clamp(scrolledPast / Math.max(window.innerHeight, 1));
+    const contentProgress = clamp(scrolledPast / fadeDistance);
+
+    splash.style.setProperty("--splash-cool-opacity", `${colorProgress}`);
+    splash.style.setProperty(
+      "--splash-content-opacity",
+      `${1 - contentProgress}`,
+    );
+  };
+
+  useLenis((lenis) => {
+    void lenis;
+    updateSplashState();
+  });
+
+  useEffect(() => {
+    updateSplashState();
+
+    function handleScroll() {
+      updateSplashState();
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <section
+        ref={splashRef}
+        className={`splash-backdrop splash-backdrop--${layout}`}
+      >
+        {!isRowLayout ? (
+          <>
+            <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
+              <BuiText as="span" className="date-desktop">
+                November 2026
+              </BuiText>
+              <BuiText as="span" className="date-mobile">
+                Nov 2026
+              </BuiText>
+            </div>
+            <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
+              <BookNowButton />
+            </div>
+          </>
+        ) : null}
+        <div className="splash-backdrop__center">
+          <h1 className="splash-backdrop__composite">
+            <LogoSolidMark
+              className="splash-backdrop__logo"
+              color="var(--color-accent)"
+              aria-label="Hotel Reynard"
+            />
+            <CrestMark
+              className="splash-backdrop__crest"
+              color="var(--color-accent)"
+              aria-label="In Flumine Columbia"
+            />
+          </h1>
+          {isRowLayout ? (
+            <>
+              <BuiHeadline as="h2" className="splash-backdrop__headline">
+                Rooms and Tavern
+              </BuiHeadline>
+              <div className="splash-backdrop__detail-row">
+                <BuiText as="span">
+                  <BuiText as="span" className="date-desktop">
+                    November 2026
+                  </BuiText>
+                  <BuiText as="span" className="date-mobile">
+                    Nov 2026
+                  </BuiText>
+                </BuiText>
+                <BookNowButton />
+                <Dialog.Trigger
+                  handle={newsletterDialog}
+                  className="ui-action ui-action--button ui-action--hover-full"
+                >
+                  <BuiText as="span">Keep in Touch</BuiText>
+                </Dialog.Trigger>
+                <InstagramLink icon={true} />
+              </div>
+            </>
+          ) : null}
+        </div>
+        {!isRowLayout ? (
+          <>
+            <div className="splash-backdrop__corner splash-backdrop__corner--bottom-left">
+              <BuiText as="span">Hotel and Tavern</BuiText>
+            </div>
+            <div className="splash-backdrop__corner splash-backdrop__corner--bottom-right">
+              <Dialog.Trigger
+                handle={newsletterDialog}
+                className="ui-action ui-action--button ui-action--hover-full"
+              >
+                <BuiText as="span">Keep in Touch</BuiText>
+              </Dialog.Trigger>
+            </div>
+          </>
+        ) : null}
+      </section>
+      <Dialog.Root handle={newsletterDialog}>
+        <NewsletterDialog />
+      </Dialog.Root>
+    </>
+  );
+}

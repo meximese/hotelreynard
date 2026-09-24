@@ -1,0 +1,53 @@
+.reynard-morph {
+  width: 100%;
+}
+
+.reynard-morph__viewport {
+  position: relative;
+  width: 628px;
+  height: 508px;
+  aspect-ratio: 628 / 508;
+}
+
+.reynard-morph__letter {
+  position: absolute;
+  left: var(--letter-x);
+  top: var(--letter-y);
+  width: calc(var(--letter-width) * 1px);
+  height: calc(var(--letter-height) * 1px);
+  background: var(--letter-color);
+  mask-image: var(--letter-mask);
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  -webkit-mask-image: var(--letter-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  transform: translate(-50%, -50%) rotate(var(--letter-rotate))
+    scale(var(--letter-scale));
+  transform-origin: center;
+}
+
+.reynard-morph-svg__letter {
+  position: absolute;
+  left: var(--letter-x);
+  top: var(--letter-y);
+  width: calc(var(--letter-width) * 1px);
+  height: calc(var(--letter-height) * 1px);
+  color: var(--letter-color);
+  overflow: visible;
+  transform: translate(-50%, -50%) rotate(var(--letter-rotate))
+    scale(var(--letter-scale));
+  transform-origin: center;
+}
+
+.reynard-morph-svg__letter path {
+  fill: currentColor;
+}
+
+.reynard-demo {
+  width: min(100%, 64rem);
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}

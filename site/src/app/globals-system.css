@@ -1,0 +1,4 @@
+@import "./normalize.css";
+@import "./globals-base.css";
+@import "./globals-components.css";
+@import "./globals-utilities.css";

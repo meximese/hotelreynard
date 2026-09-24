@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
-import { captureResendContact, hasResendContactConfig } from "@/lib/resendContacts";
+import {
+  captureResendContact,
+  hasResendContactConfig,
+} from "@/lib/resendContacts";
 
 export async function POST(request: Request) {
   if (!hasResendContactConfig()) {

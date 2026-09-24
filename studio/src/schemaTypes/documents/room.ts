@@ -1,89 +1,157 @@
-import { defineField, defineType } from 'sanity'
+import {HomeIcon} from '@sanity/icons/Home'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'room',
   title: 'Room',
+  icon: HomeIcon,
+  description: 'A room content type used for room pages and curated room lists.',
   type: 'document',
+  groups: [
+    {name: 'page', title: 'Page', default: true},
+    {name: 'details', title: 'Details'},
+    {name: 'media', title: 'Media'},
+    {name: 'seo', title: 'SEO'},
+  ],
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
+      description: 'The room name shown in the editor and on the website.',
       type: 'string',
+      group: 'page',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
+      description: 'The path used for this room in the website URL.',
       type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      group: 'page',
+      options: {source: 'title', maxLength: 96},
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
+      name: 'status',
+      title: 'Status',
+      description: 'Controls whether this room is hidden, featured, or generally published.',
+      type: 'string',
+      group: 'page',
+      options: {list: ['hidden', 'featured', 'published']},
+      initialValue: 'published',
+    }),
+    defineField({
+      name: 'publiclyNamed',
+      title: 'Publicly named',
+      description: 'Turn this on if this room should be referred to by name on the public site.',
+      type: 'boolean',
+      initialValue: true,
+      group: 'page',
+    }),
+    defineField({
+      name: 'shortDescription',
+      title: 'Short description',
+      description: 'A short summary used in listings and headers.',
       type: 'text',
-      rows: 5,
+      rows: 3,
+      group: 'page',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      description: 'Longer formatted content for the room page.',
+      type: 'richTextBlock',
+      group: 'page',
     }),
     defineField({
       name: 'heroImage',
       title: 'Hero image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alternative text',
-          type: 'string',
-        }),
-      ],
+      description: 'The main image used for this room.',
+      type: 'sectionImage',
+      group: 'media',
     }),
     defineField({
       name: 'gallery',
       title: 'Gallery',
+      description: 'Additional images for the room page.',
       type: 'array',
+      group: 'media',
       of: [
-        {
-          type: 'image',
-          fields: [
-            {
-              name: 'alt',
-              title: 'Alternative text',
-              type: 'string',
-            },
-          ],
-          options: {
-            hotspot: true,
-          },
-        },
+        defineArrayMember({
+          type: 'sectionImage',
+        }),
       ],
     }),
     defineField({
-      name: 'amenities',
-      title: 'Amenities',
+      name: 'highlights',
+      title: 'Highlights',
+      description: 'Short callouts for the most important room details.',
       type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{ type: 'amenity' }],
-        },
-      ],
+      group: 'details',
+      of: [defineArrayMember({type: 'string'})],
     }),
     defineField({
-      name: 'mewsRoomCategoryId',
-      title: 'Mews room category ID',
-      type: 'string',
+      name: 'artisanFeatures',
+      title: 'Artisan features',
+      description: 'Special crafted elements or details worth highlighting.',
+      type: 'array',
+      group: 'details',
+      of: [defineArrayMember({type: 'artisanFeature'})],
+    }),
+    defineField({name: 'occupancy', title: 'Occupancy', description: 'How many guests the room can sleep comfortably.', type: 'string', group: 'details'}),
+    defineField({name: 'bedType', title: 'Bed type', description: 'The bed setup for the room.', type: 'string', group: 'details'}),
+    defineField({name: 'bathroomType', title: 'Bathroom type', description: 'A short summary of the bathroom setup.', type: 'string', group: 'details'}),
+    defineField({
+      name: 'accessibilityNotes',
+      title: 'Accessibility notes',
+      description: 'Important accessibility details for the room.',
+      type: 'text',
+      rows: 3,
+      group: 'details',
+    }),
+    defineField({
+      name: 'petPolicy',
+      title: 'Pet policy',
+      description: 'Whether pets are allowed and any related notes.',
+      type: 'text',
+      rows: 3,
+      group: 'details',
+    }),
+    defineField({name: 'roomSize', title: 'Room size', description: 'The room size, if you want to show it.', type: 'string', group: 'details'}),
+    defineField({name: 'sortOrder', title: 'Sort order', description: 'Controls the manual ordering of rooms in curated lists.', type: 'number', group: 'details'}),
+    defineField({name: 'bookingLabel', title: 'Booking label', description: 'Optional custom text for room-specific booking buttons.', type: 'string', group: 'details'}),
+    defineField({name: 'bookingCategoryKey', title: 'Booking category key', description: 'Optional booking system key for this room category.', type: 'string', group: 'details'}),
+    defineField({
+      name: 'isPublicPageEnabled',
+      title: 'Public page enabled',
+      description: 'Turn this off if the room should not have its own public room page.',
+      type: 'boolean',
+      initialValue: true,
+      group: 'page',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      description: 'Search and social sharing details for this room.',
+      type: 'seo',
+      group: 'seo',
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'mewsRoomCategoryId',
+      status: 'status',
+      publiclyNamed: 'publiclyNamed',
       media: 'heroImage',
+    },
+    prepare({media, publiclyNamed, status, title}) {
+      const parts = [status, publiclyNamed === false ? 'Unnamed publicly' : null].filter(Boolean)
+
+      return {
+        title: title || 'Room',
+        subtitle: parts.join(' • ') || 'Room',
+        media,
+      }
     },
   },
 })

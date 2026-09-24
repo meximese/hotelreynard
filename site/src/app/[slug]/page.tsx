@@ -1,38 +1,50 @@
-import { draftMode } from "next/headers";
-import { redirect } from "next/navigation";
-import { PortableText } from "@portabletext/react";
-import { getPageBySlug } from "@/lib/sanity/content";
-import { getVisualEditingEnabled } from "@/lib/sanity/preview";
+import { notFound } from "next/navigation";
+import { PageSections } from "@/components/page-sections";
+import { PageShell } from "@/components/page-shell";
+import { getGenericPageBySlug } from "@/lib/content/loaders";
+import { metadataForSeo } from "@/lib/seo/metadata";
 
 interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 }
 
-export default async function ContentPage({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const draftModeState = await draftMode();
-  const visualEditingEnabled =
-    getVisualEditingEnabled() && draftModeState.isEnabled;
+  const page = await getGenericPageBySlug(slug);
 
-  if (!slug || slug === "api") {
-    redirect("/");
+  return metadataForSeo(page?.seo);
+}
+
+const reservedSlugs = new Set([
+  "events",
+  "rooms",
+]);
+
+export default async function GenericPage({ params }: PageProps) {
+  const { slug } = await params;
+
+  if (!slug || reservedSlugs.has(slug)) {
+    notFound();
   }
 
-  const page = await getPageBySlug(slug, { visualEditingEnabled });
+  const page = await getGenericPageBySlug(slug);
 
   if (!page) {
-    redirect("/");
+    notFound();
   }
 
   return (
-    <section className="rich-text-section">
-      <p className="section-eyebrow">Page</p>
-      <h1>{page.title}</h1>
-      <div className="rich-text-section__body">
-        <PortableText value={page.body || []} />
-      </div>
-    </section>
+    <PageShell
+      hero={page.hero}
+      eyebrow="Page"
+      title={page.title}
+      pageIntro={page.pageIntro}
+      documentId={page._id}
+      documentType={page._type}
+    >
+      {page.sections?.length ? (
+        <PageSections sections={page.sections} documentId={page._id} documentType={page._type} />
+      ) : null}
+    </PageShell>
   );
 }
