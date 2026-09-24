@@ -1,5 +1,11 @@
 function readEnv(name: string) {
-  const value = process.env[name]?.trim();
+  // Next.js only inlines public environment variables in client bundles when
+  // they are referenced statically. Keep the lookup dynamic for callers while
+  // making the public value available to browser code.
+  const values: Record<string, string | undefined> = {
+    NEXT_PUBLIC_SANITY_STUDIO_URL: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL,
+  };
+  const value = values[name]?.trim();
   return value ? value : null;
 }
 

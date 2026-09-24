@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BuiButton } from "@/components/ui/actions";
+import { BuiText } from "./ui/typography";
 
 interface MewsDistributorApi {
   open: () => void;
@@ -109,7 +110,7 @@ export function BookNowButtonClient({
       type="button"
       variant="plain"
     >
-      {label}
+      <BuiText as="span">{label}</BuiText>
     </BuiButton>
   );
 }
