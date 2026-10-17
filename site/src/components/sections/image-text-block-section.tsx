@@ -1,7 +1,6 @@
 import { SanityImageView } from "@/components/sanity-image";
-import { BuiLink } from "@/components/ui/actions";
+import { CtaActions } from "@/components/cta-actions";
 import { BuiText } from "@/components/ui/typography";
-import { resolveSanityLinkHref } from "@/lib/content/links";
 import type { PageSection } from "@/lib/content/types";
 
 function getSplitFeatureClassName(section: PageSection) {
@@ -21,10 +20,6 @@ export function ImageTextBlockSection({
   section: PageSection;
   textAlignClass: string;
 }) {
-  const actions = (section.callsToAction || [])
-    .map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
-    .filter((item): item is { href: string; label: string } => Boolean(item.href));
-
   return (
     <div className={getSplitFeatureClassName(section)}>
       {section.media ? (
@@ -39,15 +34,7 @@ export function ImageTextBlockSection({
       ) : null}
       <div className={`section__content split-feature__copy ${textAlignClass}`.trim()}>
         {section.body ? <BuiText>{section.body}</BuiText> : null}
-        {actions.length ? (
-          <div className="cta-row">
-            {actions.map((action) => (
-              <BuiLink key={action.href} className="text-link" href={action.href}>
-                {action.label}
-              </BuiLink>
-            ))}
-          </div>
-        ) : null}
+        <CtaActions actions={section.callsToAction} variant="inline" />
       </div>
     </div>
   );

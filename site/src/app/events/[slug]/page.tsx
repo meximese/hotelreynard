@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { PageShell } from "@/components/page-shell";
+import { CtaActions } from "@/components/cta-actions";
 import {portableTextComponents} from "@/components/portable-text";
 import { SanityImageView } from "@/components/sanity-image";
-import { BuiLink } from "@/components/ui/actions";
-import { resolveSanityLinkHref } from "@/lib/content/links";
 import { getEventBySlug } from "@/lib/content/loaders";
 import { metadataForSeo } from "@/lib/seo/metadata";
 
@@ -22,11 +21,6 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function EventPage({ params }: PageProps) {
   const { slug } = await params;
   const event = await getEventBySlug(slug);
-  const actions =
-    event?.callsToAction
-      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
-      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
-
   if (!event) {
     notFound();
   }
@@ -52,15 +46,7 @@ export default async function EventPage({ params }: PageProps) {
           <PortableText components={portableTextComponents} value={event.body} />
         </div>
       ) : null}
-      {actions.length ? (
-        <div className="cta-row">
-          {actions.map((action) => (
-            <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
-              {action.label}
-            </BuiLink>
-          ))}
-        </div>
-      ) : null}
+      <CtaActions actions={event.callsToAction} />
     </PageShell>
   );
 }

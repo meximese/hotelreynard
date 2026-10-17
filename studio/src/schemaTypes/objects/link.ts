@@ -16,9 +16,18 @@ export default defineType({
       linkType: 'linkType',
       internalTitle: 'reference.title',
       href: 'href',
+      specialAction: 'specialAction',
     },
-    prepare({href, internalTitle, label, linkType}) {
-      const destination = label || internalTitle || href || 'Choose a destination'
+    prepare({href, internalTitle, label, linkType, specialAction}) {
+      const destination =
+        label ||
+        internalTitle ||
+        href ||
+        (specialAction === 'bookingWidget'
+          ? 'Booking widget'
+          : specialAction === 'openTableWidget'
+            ? 'OpenTable widget'
+            : 'Choose a destination')
 
       const typeLabel =
         linkType === 'internal'
@@ -27,6 +36,8 @@ export default defineType({
             ? 'Relative'
             : linkType === 'external'
               ? 'External'
+              : linkType === 'special'
+                ? 'Special action'
               : 'Link'
 
       return {

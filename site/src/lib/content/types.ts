@@ -22,9 +22,10 @@ export interface InternalLinkReference extends SanityDocumentIdentity {
 
 export interface SanityLink {
   label?: string;
-  linkType: "internal" | "relative" | "external";
+  linkType: "internal" | "relative" | "external" | "special";
   reference?: InternalLinkReference;
   href?: string;
+  specialAction?: "bookingWidget" | "openTableWidget";
   openInNewTab?: boolean;
 }
 

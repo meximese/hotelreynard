@@ -7,6 +7,7 @@ const linkProjection = groq`
   {
     label,
     linkType,
+    specialAction,
     href,
     openInNewTab,
     "reference": reference->{

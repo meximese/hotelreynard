@@ -1,11 +1,10 @@
 import type {PortableTextBlock} from "@portabletext/types";
 import {PortableText} from "@portabletext/react";
 import {ContentSeparator} from "@/components/content-separator";
+import {CtaActions} from "@/components/cta-actions";
 import {portableTextComponents} from "@/components/portable-text";
 import {SanityImageView} from "@/components/sanity-image";
-import {BuiLink} from "@/components/ui/actions";
 import {BuiHeadline, BuiText} from "@/components/ui/typography";
-import {resolveSanityLinkHref} from "@/lib/content/links";
 import type {PageHero} from "@/lib/content/types";
 import {createSanityDataAttribute} from "@/lib/sanity/preview";
 
@@ -26,11 +25,6 @@ export function PageShell({
   documentType?: string;
   children?: React.ReactNode;
 }) {
-  const heroActions =
-    hero?.callsToAction
-      ?.map((link) => ({ href: resolveSanityLinkHref(link), label: link.label || "Learn more" }))
-      .filter((item): item is { href: string; label: string } => Boolean(item.href)) || [];
-
   const titleAttr =
     documentId && documentType
       ? createSanityDataAttribute({
@@ -81,15 +75,7 @@ export function PageShell({
                   {hero.body}
                 </BuiText>
               ) : null}
-              {heroActions.length ? (
-                <div className="cta-row">
-                  {heroActions.map((action) => (
-                    <BuiLink key={action.href} variant="button" className="button-link" href={action.href}>
-                      {action.label}
-                    </BuiLink>
-                  ))}
-                </div>
-              ) : null}
+              <CtaActions actions={hero.callsToAction} />
             </div>
           ) : null}
         </section>
