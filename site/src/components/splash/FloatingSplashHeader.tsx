@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
 import { BookNowButton } from "@/components/book-now-button";
+import { OpenTableButton } from "@/components/opentable-button";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiText } from "@/components/ui/typography";
-import OpenTableWidget from "../opentable-widget";
 
 export function FloatingSplashHeader({
   isVisible,
@@ -44,7 +44,7 @@ export function FloatingSplashHeader({
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
             <BookNowButton />
-            <OpenTableWidget />
+            <OpenTableButton label="Reserve a table" />
           </Toolbar.Group>
         </Toolbar.Root>
       </header>
