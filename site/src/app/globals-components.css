@@ -98,6 +98,38 @@
   justify-self: start;
 }
 
+.opentable-native-trigger {
+  position: relative;
+  display: inline-flex;
+}
+
+.opentable-native-trigger__label {
+  padding: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.opentable-native-trigger:hover .opentable-native-trigger__label {
+  font-weight: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+  cursor: pointer;
+}
+
+.opentable-native-trigger__widget {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.opentable-native-trigger__widget .opentable-container,
+.opentable-native-trigger__widget iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
 .site-header-shell {
   position: fixed;
   inset: 0 0 auto;
@@ -243,8 +275,14 @@
   align-items: center;
   gap: var(--space-sm) var(--space-md);
   width: min(100%, 24rem);
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
   text-align: center;
+}
+
+.splash-backdrop__detail-row
+  > :where(.ui-action--inline, .ui-action--button, .button-link) {
+  cursor: pointer;
+  padding: 0;
 }
 
 .splash-backdrop__corner {

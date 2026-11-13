@@ -9,6 +9,7 @@ import { CrestMark } from "@/components/svg/crest-mark";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import { InstagramLink } from "../instagram-link";
+import { OpenTableButton } from "../opentable-button";
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -73,12 +74,7 @@ export function FullHeightSplash({
         {!isRowLayout ? (
           <>
             <div className="splash-backdrop__corner splash-backdrop__corner--top-left">
-              <BuiText as="span" className="date-desktop">
-                November 2026
-              </BuiText>
-              <BuiText as="span" className="date-mobile">
-                Nov 2026
-              </BuiText>
+              <OpenTableButton label="Book a Table" />
             </div>
             <div className="splash-backdrop__corner splash-backdrop__corner--top-right">
               <BookNowButton />
@@ -104,15 +100,10 @@ export function FullHeightSplash({
                 Rooms and Tavern
               </BuiHeadline>
               <div className="splash-backdrop__detail-row">
-                <BuiText as="span">
-                  <BuiText as="span" className="date-desktop">
-                    November 2026
-                  </BuiText>
-                  <BuiText as="span" className="date-mobile">
-                    Nov 2026
-                  </BuiText>
-                </BuiText>
-                <BookNowButton />
+                <BookNowButton label="Book a Room" />
+                <OpenTableButton label="Book a Table" />
+              </div>
+              <div className="splash-backdrop__detail-row">
                 <Dialog.Trigger
                   handle={newsletterDialog}
                   className="ui-action ui-action--button ui-action--hover-full"

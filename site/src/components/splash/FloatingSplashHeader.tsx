@@ -26,12 +26,13 @@ export function FloatingSplashHeader({
             className="toolbar-group"
             aria-label="Primary navigation"
           >
-            <BuiText as="span" className="toolbar-corner-label date-desktop">
-              Open Now
+            <BookNowButton label="Book a Room" />
+            {/* <BuiText as="span" className="toolbar-corner-label date-desktop">
+              Now Open
             </BuiText>
             <BuiText as="span" className="toolbar-corner-label date-mobile">
-              Open Now
-            </BuiText>
+              Now Open
+            </BuiText> */}
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">
             <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
@@ -43,8 +44,7 @@ export function FloatingSplashHeader({
             </Toolbar.Link>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
-            <BookNowButton />
-            <OpenTableButton label="Reserve a table" />
+            <OpenTableButton label="Book a Table" />
           </Toolbar.Group>
         </Toolbar.Root>
       </header>

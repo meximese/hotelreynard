@@ -23,49 +23,24 @@ export function OpenTableButton({
     script.async = true;
     script.dataset.opentableWidget = "true";
     script.src =
-      `https://www.opentable.com/widget/reservation/loader?rid=${openTableRestaurantId}&type=button&theme=standard&color=1&dark=false&iframe=false&overlay=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website`;
+      `https://www.opentable.com/widget/reservation/loader?rid=${openTableRestaurantId}&type=button&theme=standard&color=1&dark=false&iframe=true&overlay=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website`;
     container.appendChild(script);
   }, []);
 
-  function handleOpen(attempt = 0) {
-    const trigger = widgetContainerRef.current?.querySelector<HTMLElement>(
-      "button, a",
-    );
-
-    if (trigger) {
-      trigger.click();
-      return;
-    }
-
-    if (attempt < 20) {
-      window.setTimeout(() => handleOpen(attempt + 1), 100);
-    }
-  }
-
   return (
-    <>
+    <span className="opentable-native-trigger">
       <BuiLink
         href="#"
-        onClick={(event) => {
-          event.preventDefault();
-          handleOpen();
-        }}
+        className="opentable-native-trigger__label"
         variant="inline"
       >
         {label}
       </BuiLink>
       <div
         ref={widgetContainerRef}
+        className="opentable-native-trigger__widget"
         aria-hidden="true"
-        style={{
-          position: "absolute",
-          width: 0,
-          height: 0,
-          overflow: "hidden",
-          opacity: 0,
-          pointerEvents: "none",
-        }}
       />
-    </>
+    </span>
   );
 }
