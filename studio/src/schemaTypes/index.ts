@@ -9,6 +9,7 @@ import siteSettings from './documents/siteSettings'
 import artisanFeature from './objects/artisanFeature'
 import bookingButton from './objects/bookingButton'
 import bookingEmbedBlock from './objects/bookingEmbedBlock'
+import openTableEmbedBlock from './objects/openTableEmbedBlock'
 import businessDetails from './objects/businessDetails'
 import businessHours from './objects/businessHours'
 import callsToAction from './objects/callsToAction'
@@ -77,6 +78,7 @@ export const schemaTypes = [
   quoteBlock,
   roomFeedBlock,
   bookingEmbedBlock,
+  openTableEmbedBlock,
   eventFeedBlock,
   inquiryBlock,
   artisanFeature,

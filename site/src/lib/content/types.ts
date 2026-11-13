@@ -130,6 +130,7 @@ export interface PageSection {
   limit?: number;
   callsToAction?: SanityLink[];
   bookingButton?: BookingButton;
+  buttonLabel?: string;
   showLabel?: boolean;
   thankYouMessage?: string;
   successRedirect?: SanityLink;
