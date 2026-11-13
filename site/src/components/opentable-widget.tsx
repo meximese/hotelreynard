@@ -18,10 +18,6 @@ export default function OpenTableWidget() {
     script.src =
       "https://www.opentable.com/widget/reservation/loader?rid=1497553&type=standard&theme=standard&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website&cfe=true";
     container.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
   }, []);
 
   return (
