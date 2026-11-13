@@ -103,7 +103,7 @@ export function BookNowButtonClient({
 
   return (
     <BuiButton
-      className={`book-now-button${className ? ` ${className}` : ""}`}
+      className={`mews-book-now-button${className ? ` ${className}` : ""}`}
       disabled={!enabled}
       onClick={() => apiRef.current?.open()}
       title={title}

@@ -98,36 +98,27 @@
   justify-self: start;
 }
 
-.opentable-native-trigger {
-  position: relative;
-  display: inline-flex;
+/* OpenTable's iframe=false widget loads global styles. Keep Mews controls isolated. */
+body .mews-book-now-button {
+  appearance: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--space-xs) !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--type-action) !important;
+  letter-spacing: var(--tracking-ui) !important;
+  line-height: 1.2 !important;
+  padding: 0.85rem 0 !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
 }
 
-.opentable-native-trigger__label {
-  padding: 0 !important;
-  border-bottom: 0 !important;
-}
-
-.opentable-native-trigger:hover .opentable-native-trigger__label {
-  font-weight: inherit;
-  text-decoration: underline;
-  text-underline-offset: 0.4em;
-  cursor: pointer;
-}
-
-.opentable-native-trigger__widget {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
-  opacity: 0;
-}
-
-.opentable-native-trigger__widget .opentable-container,
-.opentable-native-trigger__widget iframe {
-  width: 100% !important;
-  height: 100% !important;
-  border: 0;
+body .mews-book-now-button:disabled {
+  cursor: wait !important;
+  color: var(--color-muted) !important;
 }
 
 .site-header-shell {

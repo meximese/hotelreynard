@@ -1,5 +1,5 @@
 import { BookNowButton } from "@/components/book-now-button";
-import OpenTableWidget from "@/components/opentable-widget";
+import { OpenTableButton } from "@/components/opentable-button";
 import { BuiLink } from "@/components/ui/actions";
 import { resolveSanityLinkHref } from "@/lib/content/links";
 import type { SanityLink } from "@/lib/content/types";
@@ -28,7 +28,12 @@ export function CtaActions({
           }
 
           if (action.specialAction === "openTableWidget") {
-            return <OpenTableWidget key={key} />;
+            return (
+              <OpenTableButton
+                key={key}
+                label={action.label || "Reserve a table"}
+              />
+            );
           }
 
           return null;
