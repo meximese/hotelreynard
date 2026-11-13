@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 const reservedSlugs = new Set([
   "events",
+  "menus",
   "rooms",
 ]);
 

@@ -1,7 +1,7 @@
 import groq from "groq";
 import {hasSanityConfig} from "@/lib/sanity/client";
 import {DEFAULT_SANITY_REVALIDATE, sanityFetch} from "@/lib/sanity/fetch";
-import type {Event, EventsPageData, GenericPage, HomePageData, Room} from "./types";
+import type {Event, EventsPageData, GenericPage, HomePageData, Menu, Room} from "./types";
 
 const linkProjection = groq`
   {
@@ -212,6 +212,39 @@ export async function getRoomBySlug(slug: string): Promise<Room | null> {
     }`,
     params: {slug},
     tags: ["room", `room:${slug}`],
+    revalidate: DEFAULT_SANITY_REVALIDATE,
+  });
+}
+
+export async function getMenuBySlug(slug: string): Promise<Menu | null> {
+  if (!hasSanityConfig()) {
+    return null;
+  }
+
+  return sanityFetch<Menu | null>({
+    query: groq`*[_type == "menu" && slug.current == $slug][0]{
+      _id,
+      _type,
+      title,
+      slug,
+      intro,
+      sections[]{
+        _key,
+        title,
+        description,
+        items[]{
+          _key,
+          name,
+          description,
+          multiplePrices,
+          price{amount, label},
+          prices[]{amount, label}
+        }
+      },
+      seo{noIndex}
+    }`,
+    params: {slug},
+    tags: ["menu", `menu:${slug}`],
     revalidate: DEFAULT_SANITY_REVALIDATE,
   });
 }
