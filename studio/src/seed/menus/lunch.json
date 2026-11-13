@@ -1,0 +1,57 @@
+{
+  "_id": "menu-lunch",
+  "_type": "menu",
+  "title": "Lunch",
+  "slug": {
+    "_type": "slug",
+    "current": "lunch"
+  },
+  "sections": [
+    {
+      "_type": "menuSection",
+      "_key": "cocktails",
+      "title": "Cocktails",
+      "items": [
+        {"_type": "menuItem", "_key": "bloody-mary", "name": "Bloody Mary", "description": "vodka, tomato, lemon, seasonings, spices", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "little-prince", "name": "Little Prince", "description": "grapefruit, blanco tequila, aperitivo", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "corpse-reviver-no-blue", "name": "Corpse Reviver No. Blue", "description": "gin, lemon, quinquina, curaçao", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "pimms-cup", "name": "Pimm's Cup", "description": "our Pimm's, ginger, citrus, bubbles", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "air-mail", "name": "Air Mail", "description": "rum, lime, honey, bubbles", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}}
+      ]
+    },
+    {
+      "_type": "menuSection",
+      "_key": "to-begin",
+      "title": "To Begin",
+      "items": [
+        {"_type": "menuItem", "_key": "little-oysters", "name": "Little Oysters*", "description": "lemon, fresh horseradish, mignonette", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 19, "label": "half dozen"}},
+        {"_type": "menuItem", "_key": "white-cheese-pickled-vegetables", "name": "White Cheese & Pickled Vegetables", "description": "olive oil, toasted sourdough", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 12}},
+        {"_type": "menuItem", "_key": "salad-greens-beets", "name": "Salad of Greens with Beets", "description": "celery, fresh horseradish", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 15}},
+        {"_type": "menuItem", "_key": "crisp-greens-roasted-almonds", "name": "Crisp Greens & Roasted Almonds", "description": "frisée, quince dressing, Spanish cheese", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 15}},
+        {"_type": "menuItem", "_key": "smoked-fish-spread", "name": "Smoked Fish Spread", "description": "crudités and herbs", "multiplePrices": false},
+        {"_type": "menuItem", "_key": "chanterelles-soft-leeks-toast", "name": "Chanterelles & Soft Leeks on Toast", "description": "arugula salad, honey vinegar", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 15}}
+      ]
+    },
+    {
+      "_type": "menuSection",
+      "_key": "sandwiches",
+      "title": "Sandwiches",
+      "items": [
+        {"_type": "menuItem", "_key": "country-club", "name": "“Country Club”", "description": "turkey, smoked ham, lettuce and aioli", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 22}},
+        {"_type": "menuItem", "_key": "avocado-cheddar", "name": "Avocado & Cheddar", "description": "sprouts, pickled vegetables, sourdough", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 23}},
+        {"_type": "menuItem", "_key": "the-eagle", "name": "The Eagle", "description": "grilled beef, red-wine onions, aioli, a warm roll", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 26}}
+      ]
+    },
+    {
+      "_type": "menuSection",
+      "_key": "and-more",
+      "title": "And More",
+      "items": [
+        {"_type": "menuItem", "_key": "mussel-stew", "name": "Mussel Stew", "description": "tomato, anchovy, spicy piri piri, grilled sourdough", "multiplePrices": false},
+        {"_type": "menuItem", "_key": "chicken-paillard", "name": "Chicken Paillard", "description": "frisée, fennel, radishes and herbs", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 30}},
+        {"_type": "menuItem", "_key": "fusilloni-fennel-pesto", "name": "Fusilloni Pasta with Fennel Pesto", "description": "toasted walnuts, ricotta salata", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 25}},
+        {"_type": "menuItem", "_key": "cold-sesame-noodles", "name": "Cold Sesame Noodles", "description": "celery, carrots, scallions, tahini. Add Dungeness crab for $6", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 24}}
+      ]
+    }
+  ]
+}

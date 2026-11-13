@@ -5,6 +5,7 @@ import { Toolbar } from "@base-ui/react/toolbar";
 import { BookNowButton } from "@/components/book-now-button";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiText } from "@/components/ui/typography";
+import OpenTableWidget from "../opentable-widget";
 
 export function FloatingSplashHeader({
   isVisible,
@@ -26,10 +27,10 @@ export function FloatingSplashHeader({
             aria-label="Primary navigation"
           >
             <BuiText as="span" className="toolbar-corner-label date-desktop">
-              November 2026
+              Open Now
             </BuiText>
             <BuiText as="span" className="toolbar-corner-label date-mobile">
-              Nov 2026
+              Open Now
             </BuiText>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">
@@ -43,6 +44,7 @@ export function FloatingSplashHeader({
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
             <BookNowButton />
+            <OpenTableWidget />
           </Toolbar.Group>
         </Toolbar.Root>
       </header>
