@@ -24,7 +24,10 @@ function HomePageHeaderShell() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
+        setIsVisible(
+          !entry.isIntersecting &&
+            entry.boundingClientRect.top < (entry.rootBounds?.top ?? 20),
+        );
       },
       {
         rootMargin: "-20px 0px 0px 0px",
