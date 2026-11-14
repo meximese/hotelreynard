@@ -6,7 +6,7 @@ export default defineType({
   name: 'openTableEmbedBlock',
   title: 'OpenTable widget block',
   icon: CalendarIcon,
-  description: 'A section with copy and a button that opens the OpenTable reservation widget.',
+  description: 'A section with copy and an inline OpenTable widget or reservation button.',
   type: 'object',
   groups: sectionGroups,
   fields: [
@@ -30,8 +30,23 @@ export default defineType({
       group: 'content',
     }),
     defineField({
+      name: 'openTableDisplay',
+      title: 'Reservation display',
+      type: 'string',
+      initialValue: 'widget',
+      options: {
+        layout: 'radio',
+        list: [
+          {title: 'Inline widget', value: 'widget'},
+          {title: 'Button that opens the reservation modal', value: 'button'},
+        ],
+      },
+      group: 'content',
+    }),
+    defineField({
       name: 'buttonLabel',
       title: 'Button label',
+      hidden: ({parent}) => parent?.openTableDisplay !== 'button',
       type: 'string',
       initialValue: 'Reserve a table',
       group: 'content',
@@ -47,12 +62,14 @@ export default defineType({
     select: {
       title: 'title',
       eyebrow: 'eyebrow',
-      buttonLabel: 'buttonLabel',
+      openTableDisplay: 'openTableDisplay',
     },
-    prepare({buttonLabel, eyebrow, title}) {
+    prepare({eyebrow, title, openTableDisplay}) {
       return {
         title: title || eyebrow || 'OpenTable widget',
-        subtitle: buttonLabel || 'OpenTable reservation control',
+        subtitle: openTableDisplay === 'button'
+          ? 'OpenTable reservation button'
+          : 'Inline OpenTable reservation widget',
       }
     },
   },

@@ -26,8 +26,10 @@ export default defineType({
         (specialAction === 'bookingWidget'
           ? 'Booking widget'
           : specialAction === 'openTableWidget'
-            ? 'OpenTable widget'
-            : 'Choose a destination')
+            ? 'OpenTable inline widget'
+            : specialAction === 'openTableButton'
+              ? 'OpenTable reservation button'
+              : 'Choose a destination')
 
       const typeLabel =
         linkType === 'internal'

@@ -17,7 +17,8 @@ export const linkTypeOptions = [
 
 export const specialActionOptions = [
   {title: 'Booking widget', value: 'bookingWidget'},
-  {title: 'OpenTable widget', value: 'openTableWidget'},
+  {title: 'OpenTable inline widget', value: 'openTableWidget'},
+  {title: 'OpenTable reservation button', value: 'openTableButton'},
 ]
 
 export const linkFields = [
@@ -25,7 +26,7 @@ export const linkFields = [
     name: 'linkType',
     title: 'Link type',
     description:
-      'Choose a link destination or a special action widget.',
+      'Choose a link destination or a special action.',
     type: 'string',
     initialValue: 'internal',
     options: {
@@ -53,7 +54,7 @@ export const linkFields = [
   defineField({
     name: 'specialAction',
     title: 'Special action',
-    description: 'Choose an interactive widget to render instead of a link.',
+    description: 'Choose an inline widget or a reservation button.',
     type: 'string',
     options: {
       list: specialActionOptions,

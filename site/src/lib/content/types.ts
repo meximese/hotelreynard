@@ -25,7 +25,7 @@ export interface SanityLink {
   linkType: "internal" | "relative" | "external" | "special";
   reference?: InternalLinkReference;
   href?: string;
-  specialAction?: "bookingWidget" | "openTableWidget";
+  specialAction?: "bookingWidget" | "openTableWidget" | "openTableButton";
   openInNewTab?: boolean;
 }
 
@@ -131,6 +131,7 @@ export interface PageSection {
   callsToAction?: SanityLink[];
   bookingButton?: BookingButton;
   buttonLabel?: string;
+  openTableDisplay?: "widget" | "button";
   showLabel?: boolean;
   thankYouMessage?: string;
   successRedirect?: SanityLink;
