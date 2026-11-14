@@ -33,6 +33,37 @@ export interface SeoSettings {
   noIndex?: boolean;
 }
 
+export interface MenuPrice {
+  amount: number;
+  label?: string;
+}
+
+export interface MenuItem {
+  _key?: string;
+  name: string;
+  description?: string;
+  multiplePrices?: boolean;
+  price?: MenuPrice;
+  prices?: MenuPrice[];
+}
+
+export interface MenuSection {
+  _key?: string;
+  title: string;
+  description?: string;
+  items: MenuItem[];
+}
+
+export interface Menu {
+  _id: string;
+  _type?: string;
+  title: string;
+  slug: Slug;
+  intro?: string;
+  sections: MenuSection[];
+  seo?: SeoSettings;
+}
+
 export interface BookingButton {
   label?: string;
 }
@@ -99,6 +130,7 @@ export interface PageSection {
   limit?: number;
   callsToAction?: SanityLink[];
   bookingButton?: BookingButton;
+  buttonLabel?: string;
   showLabel?: boolean;
   thankYouMessage?: string;
   successRedirect?: SanityLink;

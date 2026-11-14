@@ -6,6 +6,7 @@ import { GalleryBlockSection } from "@/components/sections/gallery-block-section
 import { ImageBlockSection } from "@/components/sections/image-block-section";
 import { ImageTextBlockSection } from "@/components/sections/image-text-block-section";
 import { NewsletterSignupSection } from "@/components/sections/newsletter-signup-section";
+import { OpenTableEmbedBlockSection } from "@/components/sections/open-table-embed-block-section";
 import { QuoteBlockSection } from "@/components/sections/quote-block-section";
 import { RichTextBlockSection } from "@/components/sections/rich-text-block-section";
 import { RoomFeedSection } from "@/components/sections/room-feed-section";
@@ -102,6 +103,14 @@ export function SectionSwitcher({
     return (
       <SectionBody alignClassName={textAlignClass}>
         <BookingEmbedBlockSection section={section} />
+      </SectionBody>
+    );
+  }
+
+  if (section._type === "openTableEmbedBlock") {
+    return (
+      <SectionBody alignClassName={textAlignClass}>
+        <OpenTableEmbedBlockSection section={section} />
       </SectionBody>
     );
   }

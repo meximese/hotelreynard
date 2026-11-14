@@ -1,0 +1,64 @@
+{
+  "_id": "menu-dinner",
+  "_type": "menu",
+  "title": "Dinner",
+  "slug": {
+    "_type": "slug",
+    "current": "dinner"
+  },
+  "sections": [
+    {
+      "_type": "menuSection",
+      "_key": "cocktails",
+      "title": "Cocktails",
+      "items": [
+        {"_type": "menuItem", "_key": "girl-next-door", "name": "Girl Next Door", "description": "vodka, passion fruit, aperitivo, lime, vanilla", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "bramble", "name": "Bramble", "description": "gin, lemon, crème de mûre", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "pineapple-queens-park-swizzle", "name": "Pineapple Queen's Park Swizzle", "description": "white rum, mint, pineapple, lime, bitters", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "granny-mamie-taylor", "name": "Granny Mamie Taylor", "description": "applejack, scotch, ginger, lemon, soda", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "infante", "name": "Infante", "description": "blanco tequila, lime, orgeat", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "towanda", "name": "Towanda!", "description": "vodka, dry vermouth, pickled green tomato", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "white-negroni", "name": "White Negroni", "description": "gin, blanc vermouth, gentian liqueur", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "husband", "name": "Husband", "description": "blanco tequila, strawberry aperitif, aperitivo", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "red-hook", "name": "Red Hook", "description": "rye, sweet vermouth, maraschino", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}},
+        {"_type": "menuItem", "_key": "fox-river", "name": "Fox River", "description": "Bourbon, cacao, peach bitters", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}}
+      ]
+    },
+    {
+      "_type": "menuSection",
+      "_key": "first",
+      "title": "First",
+      "items": [
+        {"_type": "menuItem", "_key": "little-oysters", "name": "Little Oysters*", "description": "lemon, fresh horseradish, mignonette", "multiplePrices": true, "prices": [{"_type": "menuPrice", "amount": 19, "label": "half"}, {"_type": "menuPrice", "amount": 38, "label": "whole"}]},
+        {"_type": "menuItem", "_key": "bread-herb-butter", "name": "Bread & Herb Butter", "description": "Fressen sourdough, hôtel butter", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 7}},
+        {"_type": "menuItem", "_key": "chanterelles-soft-leeks-toast", "name": "Chanterelles & Soft Leeks on Toast", "description": "arugula salad, honey vinegar", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 15}},
+        {"_type": "menuItem", "_key": "corn-crumpets-deviled-crab", "name": "Corn Crumpets with Deviled Crab", "description": "Dungeness crab, mustard, chives", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 17}}
+      ]
+    },
+    {
+      "_type": "menuSection",
+      "_key": "vegetables-and-salads",
+      "title": "Vegetables and Salads",
+      "items": [
+        {"_type": "menuItem", "_key": "tomato-braised-winter-squash", "name": "Tomato-Braised Winter Squash", "description": "leeks and olive oil", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 13}},
+        {"_type": "menuItem", "_key": "white-beans-winter-greens", "name": "White Beans & Winter Greens", "description": "great northern, lemon, olive oil", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 15}},
+        {"_type": "menuItem", "_key": "crisp-greens-roasted-almonds", "name": "Crisp Greens & Roasted Almonds", "description": "frisée, quince dressing, Spanish cheese", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 17}},
+        {"_type": "menuItem", "_key": "salad-greens-beets", "name": "Salad of Greens with Beets", "description": "local lettuces, fresh horseradish", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 15}},
+        {"_type": "menuItem", "_key": "lemon-roasted-potatoes", "name": "Lemon-Roasted Potatoes", "description": "garlic and chicken stock", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 14}}
+      ]
+    },
+    {
+      "_type": "menuSection",
+      "_key": "fish-pasta-supper",
+      "title": "Fish, Pasta and Supper",
+      "items": [
+        {"_type": "menuItem", "_key": "mussel-stew", "name": "Mussel Stew", "description": "tomato, anchovy, spicy piri piri, grilled sourdough", "multiplePrices": false},
+        {"_type": "menuItem", "_key": "squid-ink-fideos", "name": "Squid Ink Fideos", "description": "fresh squid, fennel sausage, aioli", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 21}},
+        {"_type": "menuItem", "_key": "fusilloni-fennel-pesto", "name": "Fusilloni Pasta with Fennel Pesto", "description": "walnuts, ricotta salata", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 25}},
+        {"_type": "menuItem", "_key": "roast-chicken-warm-bread-salad", "name": "Roast Chicken with Warm Bread Salad", "description": "mustard greens, plumped currants", "multiplePrices": true, "prices": [{"_type": "menuPrice", "amount": 27, "label": "half"}, {"_type": "menuPrice", "amount": 42, "label": "whole"}]},
+        {"_type": "menuItem", "_key": "whole-trout-charcoal", "name": "Whole Trout over Charcoal", "description": "crazy water, garlic, oregano and parsley", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 34}},
+        {"_type": "menuItem", "_key": "grilled-beef-crisp-potatoes", "name": "Grilled Beef & Crisp Potatoes", "description": "chuck flap, little smashed fried potatoes", "multiplePrices": false, "price": {"_type": "menuPrice", "amount": 36}}
+      ]
+    }
+  ]
+}

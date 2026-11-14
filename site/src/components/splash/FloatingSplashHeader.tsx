@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Toolbar } from "@base-ui/react/toolbar";
 import { BookNowButton } from "@/components/book-now-button";
+import { OpenTableButton } from "@/components/opentable-button";
 import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiText } from "@/components/ui/typography";
 
@@ -25,12 +26,13 @@ export function FloatingSplashHeader({
             className="toolbar-group"
             aria-label="Primary navigation"
           >
-            <BuiText as="span" className="toolbar-corner-label date-desktop">
-              November 2026
+            <BookNowButton label="Book a Room" />
+            {/* <BuiText as="span" className="toolbar-corner-label date-desktop">
+              Now Open
             </BuiText>
             <BuiText as="span" className="toolbar-corner-label date-mobile">
-              Nov 2026
-            </BuiText>
+              Now Open
+            </BuiText> */}
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-nav" aria-label="Brand">
             <Toolbar.Link render={<Link href="/" />} className="toolbar-brand">
@@ -42,7 +44,7 @@ export function FloatingSplashHeader({
             </Toolbar.Link>
           </Toolbar.Group>
           <Toolbar.Group className="toolbar-group" aria-label="Booking">
-            <BookNowButton />
+            <OpenTableButton label="Book a Table" />
           </Toolbar.Group>
         </Toolbar.Root>
       </header>

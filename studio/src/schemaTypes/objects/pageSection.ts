@@ -12,6 +12,7 @@ export default defineType({
     defineArrayMember({type: 'quoteBlock'}),
     defineArrayMember({type: 'roomFeedBlock'}),
     defineArrayMember({type: 'bookingEmbedBlock'}),
+    defineArrayMember({type: 'openTableEmbedBlock'}),
     defineArrayMember({type: 'newsletterSignup'}),
     defineArrayMember({type: 'eventFeedBlock'}),
     defineArrayMember({type: 'inquiryBlock'}),

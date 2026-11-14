@@ -9,6 +9,7 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
+    "menu:import": "sanity exec scripts/importMenu.mjs --with-user-token --",
     "seed:import": "sanity exec scripts/importSiteScaffold.mjs --with-user-token"
   },
   "dependencies": {

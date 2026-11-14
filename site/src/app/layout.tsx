@@ -3,6 +3,7 @@ import { draftMode } from "next/headers";
 import Script from "next/script";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { NewsletterForm } from "@/components/newsletter-form";
+import { OpenTableProvider } from "@/components/opentable-provider";
 import { Providers } from "@/components/providers";
 import { SiteHeaderShell } from "@/components/site-header-shell";
 import { BuiText } from "@/components/ui/typography";
@@ -39,23 +40,25 @@ export default async function RootLayout({
       </head>
       <body className="striped">
         <Providers>
-          <SiteHeaderShell />
-          {children}
-          {visualEditingEnabled ? <VisualEditing /> : null}
-          <footer className="site-footer">
-            <div className="site-footer-grid">
-              <div>
-                <BuiText variant="eyebrow" className="eyebrow">
-                  Visit
-                </BuiText>
-                <BuiText as="p">302 Historic Columbia River Highway</BuiText>
-                <BuiText as="p">Troutdale, Oregon</BuiText>
+          <OpenTableProvider>
+            <SiteHeaderShell />
+            {children}
+            {visualEditingEnabled ? <VisualEditing /> : null}
+            <footer className="site-footer">
+              <div className="site-footer-grid">
+                <div>
+                  <BuiText variant="eyebrow" className="eyebrow">
+                    Visit
+                  </BuiText>
+                  <BuiText as="p">302 Historic Columbia River Highway</BuiText>
+                  <BuiText as="p">Troutdale, Oregon</BuiText>
+                </div>
+                <div className="site-footer-newsletter">
+                  <NewsletterForm />
+                </div>
               </div>
-              <div className="site-footer-newsletter">
-                <NewsletterForm />
-              </div>
-            </div>
-          </footer>
+            </footer>
+          </OpenTableProvider>
         </Providers>
         <Script
           src="https://app.mews.com/distributor/distributor.min.js"
