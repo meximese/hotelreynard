@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 
 const openTableRestaurantId = "1497553";
 
@@ -9,6 +10,45 @@ const OpenTableContext = createContext<OpenTableContextValue | null>(null);
 
 export function OpenTableProvider({ children }: { children: React.ReactNode }) {
   const widgetContainerRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    let modal: HTMLElement | null = null;
+    let scrollPosition = 0;
+    let wasStopped = false;
+
+    function syncModal() {
+      const nextModal = document.getElementById("ot-cfe-modal");
+
+      if (nextModal && !modal) {
+        modal = nextModal;
+        // OpenTable has already fixed the body and stored its scroll offset in top.
+        scrollPosition = Math.max(
+          0,
+          -Number.parseFloat(document.body.style.top) || window.scrollY,
+        );
+        wasStopped = lenis?.isStopped ?? false;
+        lenis?.stop();
+      } else if (!nextModal && modal) {
+        modal = null;
+        // OpenTable restores body.scrollTop, but this page scrolls on the window.
+        // Restore instantly, then refresh Lenis and the scroll-driven splash fade.
+        window.scrollTo({ top: scrollPosition, behavior: "instant" });
+        lenis?.resize();
+        if (!wasStopped) lenis?.start();
+        if (!lenis) window.dispatchEvent(new Event("scroll"));
+      }
+    }
+
+    const observer = new MutationObserver(syncModal);
+    observer.observe(document.body, { childList: true });
+    syncModal();
+
+    return () => {
+      observer.disconnect();
+      if (modal && !wasStopped) lenis?.start();
+    };
+  }, [lenis]);
 
   useEffect(() => {
     const container = widgetContainerRef.current;

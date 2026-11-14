@@ -59,6 +59,15 @@
   text-underline-offset: 0.24rem;
 }
 
+/* OpenTable supplies viewport dimensions but leaves native dialog limits in place. */
+#ot-cfe-modal {
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 .dialog-backdrop {
   position: fixed;
   inset: 0;
