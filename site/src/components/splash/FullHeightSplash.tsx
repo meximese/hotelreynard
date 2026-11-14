@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { BookNowButton } from "@/components/book-now-button";
 import { NewsletterDialog } from "@/components/newsletter-dialog";
@@ -10,6 +10,7 @@ import { LogoSolidMark } from "@/components/svg/logo-solid-mark";
 import { BuiHeadline, BuiText } from "@/components/ui/typography";
 import { InstagramLink } from "../instagram-link";
 import { OpenTableButton } from "../opentable-button";
+import { FloatingSplashHeader } from "./FloatingSplashHeader";
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -21,6 +22,7 @@ export function FullHeightSplash({
   layout?: "corners" | "row";
 }) {
   const splashRef = useRef<HTMLElement | null>(null);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const isRowLayout = layout === "row";
   const newsletterDialog = useMemo(() => Dialog.createHandle(), []);
 
@@ -52,6 +54,14 @@ export function FullHeightSplash({
   useEffect(() => {
     updateSplashState();
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeaderVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { rootMargin: "-20px 0px 0px 0px" },
+    );
+    if (splashRef.current) observer.observe(splashRef.current);
+
     function handleScroll() {
       updateSplashState();
     }
@@ -60,6 +70,7 @@ export function FullHeightSplash({
     window.addEventListener("resize", handleScroll);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
@@ -131,6 +142,7 @@ export function FullHeightSplash({
           </>
         ) : null}
       </section>
+      <FloatingSplashHeader isVisible={isHeaderVisible} isCompact />
       <Dialog.Root handle={newsletterDialog}>
         <NewsletterDialog />
       </Dialog.Root>
