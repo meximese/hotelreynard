@@ -144,6 +144,16 @@ body .mews-book-now-button:disabled {
   pointer-events: auto;
 }
 
+.site-header-shell .site-toolbar {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.site-header-shell--visible .site-toolbar {
+  opacity: 1;
+  transition-delay: 80ms;
+}
+
 .site-header {
   padding: 0.35rem 0;
   background: var(--color-bg);
