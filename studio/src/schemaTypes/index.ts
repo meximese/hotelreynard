@@ -14,6 +14,8 @@ import businessDetails from './objects/businessDetails'
 import businessHours from './objects/businessHours'
 import callsToAction from './objects/callsToAction'
 import eventFeedBlock from './objects/eventFeedBlock'
+import faqBlock from './objects/faqBlock'
+import faqItem from './objects/faqItem'
 import galleryBlock from './objects/galleryBlock'
 import heroBlock from './objects/heroBlock'
 import imageBlock from './objects/imageBlock'
@@ -80,6 +82,8 @@ export const schemaTypes = [
   bookingEmbedBlock,
   openTableEmbedBlock,
   eventFeedBlock,
+  faqBlock,
+  faqItem,
   inquiryBlock,
   artisanFeature,
   richTextBlock,

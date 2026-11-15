@@ -108,6 +108,12 @@ export interface HoursEntry {
   hours: string;
 }
 
+export interface FaqItem {
+  _key?: string;
+  question?: string;
+  answer?: PortableTextBlock[];
+}
+
 export interface PageSection {
   _key?: string;
   _type: string;
@@ -124,6 +130,7 @@ export interface PageSection {
   media?: SanityImage;
   images?: GalleryImage[];
   items?: string[];
+  questions?: FaqItem[];
   rooms?: Room[];
   content?: PortableTextBlock[];
   entries?: HoursEntry[];

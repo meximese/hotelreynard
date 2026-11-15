@@ -779,6 +779,33 @@ body .mews-book-now-button:disabled {
   transform: rotate(45deg);
 }
 
+.faq-list {
+  width: 100%;
+  max-width: 42rem;
+  text-align: left;
+}
+
+.faq-question {
+  gap: var(--space-lg);
+  cursor: pointer;
+}
+
+.faq-question .accordion-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.faq-answer {
+  padding-right: calc(1rem + var(--space-lg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-list .accordion-panel,
+  .faq-list .accordion-icon {
+    transition: none;
+  }
+}
+
 .site-footer {
   padding: 4rem 0 var(--space-2xl);
   border-top: var(--border-subtle);

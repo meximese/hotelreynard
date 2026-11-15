@@ -17,5 +17,6 @@ export default defineType({
     defineArrayMember({type: 'eventFeedBlock'}),
     defineArrayMember({type: 'inquiryBlock'}),
     defineArrayMember({type: 'richTextBlock'}),
+    defineArrayMember({type: 'faqBlock'}),
   ],
 })

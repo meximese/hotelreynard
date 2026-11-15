@@ -2,6 +2,7 @@ import { PrivateEventsInquiry } from "@/components/private-events-inquiry";
 import { SectionBody } from "@/components/section-body";
 import { BookingEmbedBlockSection } from "@/components/sections/booking-embed-block-section";
 import { EventFeedSection } from "@/components/sections/event-feed-section";
+import { FaqBlockSection } from "@/components/sections/faq-block-section";
 import { GalleryBlockSection } from "@/components/sections/gallery-block-section";
 import { ImageBlockSection } from "@/components/sections/image-block-section";
 import { ImageTextBlockSection } from "@/components/sections/image-text-block-section";
@@ -77,6 +78,14 @@ export function SectionSwitcher({
     return (
       <SectionBody alignClassName={textAlignClass}>
         <RichTextBlockSection section={section} />
+      </SectionBody>
+    );
+  }
+
+  if (section._type === "faqBlock") {
+    return (
+      <SectionBody alignClassName={textAlignClass}>
+        <FaqBlockSection section={section} />
       </SectionBody>
     );
   }

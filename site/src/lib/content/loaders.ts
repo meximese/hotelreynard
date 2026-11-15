@@ -40,6 +40,18 @@ const pageSectionsProjection = groq`
       ...,
       content
     },
+    _type == "faqBlock" => {
+      questions[]{
+        ...,
+        answer[]{
+          ...,
+          "markDefs": markDefs[]{
+            ...,
+            _type == "link" => ${linkProjection}
+          }
+        }
+      }
+    },
     _type == "imageTextBlock" => {
       ...,
       "callsToAction": callsToAction[]${linkProjection}
