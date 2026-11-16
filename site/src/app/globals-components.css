@@ -741,10 +741,6 @@ body .mews-book-now-button:disabled {
 
 .accordion-item {
   border-bottom: var(--border-subtle);
-  width: 80vw;
-  @media (min-width: 1024px) {
-    width: 32rem;
-  }
 }
 
 .accordion-trigger {
@@ -784,9 +780,12 @@ body .mews-book-now-button:disabled {
 }
 
 .faq-list {
-  width: 100%;
-  max-width: 42rem;
+  width: 100vw;
+  max-width: 80vw;
   text-align: left;
+  @media (min-width: 1024px) {
+    width: 40rem;
+  }
 }
 
 .faq-question {
