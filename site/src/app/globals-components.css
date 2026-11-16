@@ -741,6 +741,10 @@ body .mews-book-now-button:disabled {
 
 .accordion-item {
   border-bottom: var(--border-subtle);
+  width: 80vw;
+  @media (min-width: 1024px) {
+    width: 32rem;
+  }
 }
 
 .accordion-trigger {
